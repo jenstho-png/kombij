@@ -17,6 +17,7 @@
 		"positie": { "type": "string", "default": "50% 50%" },
 		"knop": { "type": "boolean", "default": true },
 		"plek": { "type": "string", "default": "" },
+		"illustratie": { "type": "string", "default": "raam" },
 		"align": { "type": "string", "default": "full" }
 	}
 }

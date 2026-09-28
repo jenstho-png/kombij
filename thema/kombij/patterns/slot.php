@@ -7,7 +7,7 @@
  */
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	'<!-- wp:kbj/raamlijn /-->' . "\n"
+	'<!-- wp:kbj/illustratie {"naam":"koffie","className":"kbj-tekening-slot"} /-->' . "\n"
 	. kbj_groep(
 		kbj_kop( 2, 'KomBij ons langs. De koffie staat klaar.', 'kbj-schuif', true )
 		. kbj_p( 'Zien is ervaren. Plan een rondleiding en voel zelf hoe het bij ons is.', 'kbj-intro', true )

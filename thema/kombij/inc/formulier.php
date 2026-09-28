@@ -44,10 +44,10 @@ function kbj_contact_ontvanger() {
  */
 function kbj_contact_velden() {
 	return array(
-		array( 'naam', __( 'Je naam', 'kombij' ), 'text', true, 'name' ),
+		array( 'naam', __( 'Uw naam', 'kombij' ), 'text', true, 'name' ),
 		array( 'email', __( 'E-mailadres', 'kombij' ), 'email', true, 'email' ),
 		array( 'telefoon', __( 'Telefoonnummer', 'kombij' ), 'tel', false, 'tel' ),
-		array( 'bedrijf', __( 'Bedrijf', 'kombij' ), 'text', false, 'organization' ),
+		array( 'bedrijf', __( 'Organisatie (als u namens een organisatie schrijft)', 'kombij' ), 'text', false, 'organization' ),
 	);
 }
 
@@ -61,8 +61,8 @@ function kbj_render_contactformulier( $attrs ) {
 	$fout = isset( $_GET['kbj-fout'] ) ? sanitize_key( wp_unslash( $_GET['kbj-fout'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
 	$meldingen = array(
-		'velden' => __( 'Vul nog even je naam, een e-mailadres en een bericht in.', 'kombij' ),
-		'email'  => __( 'Dat e-mailadres klopt niet helemaal, wil je het nog een keer proberen?', 'kombij' ),
+		'velden' => __( 'Vul nog even uw naam, een e-mailadres en een bericht in.', 'kombij' ),
+		'email'  => __( 'Dat e-mailadres klopt niet helemaal, wilt u het nog een keer proberen?', 'kombij' ),
 		'mail'   => __( 'Het versturen lukte niet. Mail gerust rechtstreeks, dan komt het alsnog goed.', 'kombij' ),
 	);
 
@@ -116,8 +116,8 @@ function kbj_render_contactformulier( $attrs ) {
 		esc_html__( 'Waar gaat het over?', 'kombij' ),
 		esc_html__( 'Laat dit veld leeg', 'kombij' ),
 		esc_html__( 'Versturen', 'kombij' ),
-		esc_html__( 'Deze heb ik nodig, de rest mag je overslaan.', 'kombij' ),
-		esc_html__( 'Wat je hier invult gebruik ik alleen om te antwoorden. Ik deel het met niemand.', 'kombij' )
+		esc_html__( 'Deze hebben we nodig, de rest mag u overslaan.', 'kombij' ),
+		esc_html__( 'Wat u hier invult, gebruiken we alleen om te antwoorden. We delen het met niemand.', 'kombij' )
 	);
 }
 

@@ -478,6 +478,14 @@ function kbj_jsonld_bedrijf() {
 			'@type' => 'Person',
 			'name'  => 'Corrie Roelofsen',
 		),
+		array(
+			'@type' => 'Person',
+			'name'  => 'Chantal',
+		),
+		array(
+			'@type' => 'Person',
+			'name'  => 'Edwin',
+		),
 	);
 
 	$breedte = kbj_optie( 'breedtegraad' );

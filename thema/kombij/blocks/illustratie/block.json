@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "kbj/illustratie",
+	"title": "Tekening",
+	"category": "kombij",
+	"description": "Een lijntekening uit het gebouw of de omgeving, die zich zet als hij in beeld komt: het raam, de toren, de gewelven, een kopje koffie of de Maas.",
+	"textdomain": "kombij",
+	"supports": { "html": false, "className": true },
+	"attributes": {
+		"naam": { "type": "string", "default": "toren", "enum": [ "raam", "toren", "gewelf", "koffie", "maas" ] }
+	}
+}

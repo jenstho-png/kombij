@@ -39,6 +39,7 @@ function kbj_register_blocks() {
 		'plek'             => 'kbj_render_plek',
 		'vacaturestrook'   => 'kbj_render_vacaturestrook',
 		'credit'           => 'kbj_render_credit',
+		'illustratie'      => 'kbj_render_illustratie',
 	);
 
 	foreach ( $blokken as $naam => $functie ) {
@@ -245,7 +246,7 @@ function kbj_render_paginakop( $attrs ) {
 	return sprintf(
 		'<header %1$s>%2$s<div class="kbj-paginakop__binnen"><div class="kbj-paginakop__tekst"><h1 class="kbj-paginakop__titel kbj-schuif">%3$s</h1>%4$s%7$s%5$s</div>%6$s</div></header>',
 		get_block_wrapper_attributes( array( 'class' => 'kbj-paginakop' . ( '' !== $beeld ? ' kbj-paginakop--beeld' : '' ) ) ),
-		kbj_raamlijn(),
+		kbj_render_illustratie( array( 'naam' => ! empty( $attrs['illustratie'] ) ? $attrs['illustratie'] : 'raam' ) ),
 		kbj_kombij( esc_html( $titel ) ),
 		'' !== $intro ? '<p class="kbj-paginakop__intro">' . wp_kses( $intro, array( 'strong' => array(), 'br' => array() ) ) . '</p>' : '',
 		$acties,
@@ -744,4 +745,139 @@ function kbj_render_credit( $attrs ) {
 		esc_html__( 'Gerealiseerd door', 'kombij' ),
 		$svg
 	);
+}
+
+/**
+ * De andere tekeningen: uit het gebouw en de omgeving.
+ *
+ * Dezelfde lijnstijl als het raam, en dezelfde beweging: de lijnen zetten zich
+ * als ze in beeld komen. Bewust zonder kerkelijke tekens: een toren met een
+ * spits en een windvaan, de gewelven van het schip, een kopje koffie, en de
+ * Maas met de dijk.
+ *
+ * @param string $naam   toren, gewelf, koffie of maas.
+ * @param string $klasse Extra klasse.
+ * @return string
+ */
+function kbj_illustratie( $naam, $klasse = '' ) {
+	$tekeningen = array(
+		'toren'  => array(
+			'vak'    => '0 0 200 360',
+			'lijnen' => array(
+				'M0 352H200',
+				'M100 10L78 120H122Z',
+				'M100 10V120',
+				'M70 120L74 100L78 120M122 120L126 100L130 120',
+				'M72 120V200H128V120',
+				'M81 188V156C81 148 85 143 88 141C91 143 95 148 95 156V188',
+				'M105 188V156C105 148 109 143 112 141C115 143 119 148 119 156V188',
+				'M81 166H95M81 174H95M81 182H95M105 166H119M105 174H119M105 182H119',
+				'M68 200V352M132 200V352',
+				'M64 200H136M64 238H136M64 292H136',
+				'M58 352V246L68 238M142 352V246L132 238',
+				'M90 352V322C90 312 95 306 100 304C105 306 110 312 110 322V352',
+				'M16 352V272L62 250M184 352V272L138 250',
+				'M100 10V2M96 5H104',
+			),
+			'rondjes' => array( array( 100, 218, 11 ), array( 100, 264, 13 ), array( 100, 264, 6 ) ),
+		),
+		'gewelf' => array(
+			'vak'    => '0 0 420 260',
+			'lijnen' => array(
+				'M0 256H420',
+				'M14 256V128M146 256V128M274 256V128M406 256V128',
+				'M8 128H20M140 128H152M268 128H280M400 128H412',
+				'M14 128C14 76 44 38 80 22C116 38 146 76 146 128',
+				'M146 128C146 76 174 38 210 22C246 38 274 76 274 128',
+				'M274 128C274 76 304 38 340 22C376 38 406 76 406 128',
+				'M26 128C26 82 52 50 80 36C108 50 134 82 134 128',
+				'M158 128C158 82 184 50 210 36C236 50 262 82 262 128',
+				'M286 128C286 82 312 50 340 36C368 50 394 82 394 128',
+				'M14 128C60 70 120 40 210 22M406 128C360 70 300 40 210 22',
+				'M46 256V178C46 164 52 156 58 152C64 156 70 164 70 178V256M90 256V178C90 164 96 156 102 152C108 156 114 164 114 178V256',
+				'M178 256V178C178 164 184 156 190 152C196 156 202 164 202 178V256M218 256V178C218 164 224 156 230 152C236 156 242 164 242 178V256',
+				'M306 256V178C306 164 312 156 318 152C324 156 330 164 330 178V256M350 256V178C350 164 356 156 362 152C368 156 374 164 374 178V256',
+			),
+			'rondjes' => array( array( 80, 92, 9 ), array( 210, 92, 9 ), array( 340, 92, 9 ) ),
+		),
+		'koffie' => array(
+			'vak'    => '0 0 220 200',
+			'lijnen' => array(
+				'M60 102H160C160 138 142 160 110 160C78 160 60 138 60 102Z',
+				'M160 114C182 112 186 138 164 144',
+				'M36 164C36 176 184 176 184 164',
+				'M92 86C82 72 102 62 92 46',
+				'M110 88C100 72 120 60 110 38',
+				'M128 86C118 72 138 62 128 46',
+			),
+			'rondjes' => array( array( 110, 126, 4 ), array( 104, 132, 4 ), array( 116, 132, 4 ), array( 110, 138, 4 ) ),
+			'ovalen'  => array( array( 110, 102, 50, 7 ), array( 110, 164, 74, 10 ) ),
+			'stoom'   => array( 3, 4, 5 ),
+		),
+		'maas'   => array(
+			'vak'    => '0 0 420 170',
+			'lijnen' => array(
+				'M0 112C80 102 140 98 210 100C270 102 340 106 420 102',
+				'M0 132Q15 127 30 132T60 132T90 132T120 132T150 132T180 132T210 132T240 132T270 132T300 132T330 132T360 132T390 132T420 132',
+				'M40 148Q55 143 70 148T100 148T130 148T160 148T190 148T220 148T250 148T280 148T310 148T340 148T370 148T400 148',
+				'M318 22L308 62H328Z',
+				'M308 62V100M328 62V100M328 82L364 74V102',
+				'M318 22V14M314 17H322',
+				'M60 99V84M84 101V90M242 99V86',
+				'M150 44q6-6 12 0q6-6 12 0M178 32q5-5 10 0q5-5 10 0',
+			),
+			'rondjes' => array( array( 60, 76, 12 ), array( 84, 84, 9 ), array( 242, 78, 10 ), array( 120, 56, 15 ) ),
+		),
+	);
+
+	if ( ! isset( $tekeningen[ $naam ] ) ) {
+		return '';
+	}
+
+	$t    = $tekeningen[ $naam ];
+	$html = '';
+	$i    = 0;
+
+	foreach ( $t['lijnen'] as $nummer => $d ) {
+		$stoom = ! empty( $t['stoom'] ) && in_array( $nummer, $t['stoom'], true );
+
+		$html .= sprintf(
+			'<path class="kbj-raam-lijn%1$s" d="%2$s" pathLength="1" style="--i:%3$d"/>',
+			$stoom ? ' kbj-stoom' : '',
+			$d,
+			$i++
+		);
+	}
+
+	foreach ( isset( $t['rondjes'] ) ? $t['rondjes'] : array() as $c ) {
+		$html .= sprintf( '<circle class="kbj-raam-lijn" cx="%1$s" cy="%2$s" r="%3$s" pathLength="1" style="--i:%4$d"/>', $c[0], $c[1], $c[2], $i++ );
+	}
+
+	foreach ( isset( $t['ovalen'] ) ? $t['ovalen'] : array() as $e ) {
+		$html .= sprintf( '<ellipse class="kbj-raam-lijn" cx="%1$s" cy="%2$s" rx="%3$s" ry="%4$s" pathLength="1" style="--i:%5$d"/>', $e[0], $e[1], $e[2], $e[3], $i++ );
+	}
+
+	return sprintf(
+		'<svg class="kbj-raamlijn kbj-illustratie kbj-illustratie--%1$s %2$s" viewBox="%3$s" aria-hidden="true" focusable="false"><g class="kbj-raam-lijnen">%4$s</g></svg>',
+		esc_attr( $naam ),
+		esc_attr( $klasse ),
+		esc_attr( $t['vak'] ),
+		$html
+	);
+}
+
+/**
+ * Een tekening als blok.
+ *
+ * @param array $attrs Blokinstellingen.
+ * @return string
+ */
+function kbj_render_illustratie( $attrs ) {
+	$naam = isset( $attrs['naam'] ) ? (string) $attrs['naam'] : 'toren';
+
+	if ( 'raam' === $naam ) {
+		return kbj_raamlijn( isset( $attrs['className'] ) ? (string) $attrs['className'] : '' );
+	}
+
+	return kbj_illustratie( $naam, isset( $attrs['className'] ) ? (string) $attrs['className'] : '' );
 }

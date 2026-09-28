@@ -34,6 +34,7 @@ function kbj_paginas() {
 	return array(
 		array(
 			'slug'     => 'wonen-met-zorg',
+			'tekening' => 'raam',
 			'plek'     => 'wonen',
 			'seo'      => 'Wonen met zorg in Maasbommel, kleinschalig en huiselijk',
 			'titel'    => 'Wonen met zorg',
@@ -48,6 +49,7 @@ function kbj_paginas() {
 		),
 		array(
 			'slug'     => 'logeren-met-zorg',
+			'tekening' => 'maas',
 			'plek'     => 'logeren',
 			'seo'      => 'Logeren met zorg in Maasbommel, respijtzorg voor mantelzorgers',
 			'titel'    => 'Logeren met zorg',
@@ -62,6 +64,7 @@ function kbj_paginas() {
 		),
 		array(
 			'slug'     => 'dagbesteding',
+			'tekening' => 'koffie',
 			'plek'     => 'dagbesteding',
 			'seo'      => 'Dagbesteding voor ouderen in Maasbommel',
 			'titel'    => 'Dagbesteding',
@@ -76,6 +79,7 @@ function kbj_paginas() {
 		),
 		array(
 			'slug'     => 'kosten-en-financiering',
+			'tekening' => 'gewelf',
 			'voet'     => 'Kosten',
 			'seo'      => 'Kosten en financiering: WLZ, WMO, PGB of particulier',
 			'titel'    => 'Kosten en financiering',
@@ -90,6 +94,7 @@ function kbj_paginas() {
 		),
 		array(
 			'slug'     => 'over-ons',
+			'tekening' => 'toren',
 			'seo'      => 'Over KomBij en de Lambertuskerk in Maasbommel',
 			'titel'    => 'Over ons',
 			'menu'     => 'Over ons',
@@ -103,6 +108,7 @@ function kbj_paginas() {
 		),
 		array(
 			'slug'     => 'contact',
+			'tekening' => 'koffie',
 			'seo'      => 'Contact, adres en rondleiding',
 			'titel'    => 'Contact',
 			'menu'     => 'Contact',
@@ -117,6 +123,7 @@ function kbj_paginas() {
 		),
 		array(
 			'slug'     => 'werken-bij',
+			'tekening' => 'toren',
 			'voet'     => 'Werken bij',
 			'seo'      => 'Werken in de zorg bij KomBij in Maasbommel',
 			'titel'    => 'Werken bij KomBij',
@@ -132,6 +139,7 @@ function kbj_paginas() {
 		),
 		array(
 			'slug'     => 'zoutkamer',
+			'tekening' => 'gewelf',
 			'seo'      => 'Zoutkamer in Maasbommel, tarieven en reserveren',
 			'titel'    => 'Zoutkamer',
 			'menu'     => '',
@@ -153,6 +161,7 @@ function kbj_paginas() {
 		),
 		array(
 			'slug'     => 'voorwaarden',
+			'tekening' => 'gewelf',
 			'voet'     => 'Voorwaarden',
 			'seo'      => 'Voorwaarden, huisregels en privacyreglement',
 			'titel'    => 'Voorwaarden en reglementen',
@@ -289,6 +298,10 @@ function kbj_pagina_inhoud( $pagina ) {
 
 		if ( ! empty( $pagina['plek'] ) ) {
 			$attrs['plek'] = $pagina['plek'];
+		}
+
+		if ( ! empty( $pagina['tekening'] ) ) {
+			$attrs['illustratie'] = $pagina['tekening'];
 		}
 
 		if ( isset( $pagina['knop'] ) && ! $pagina['knop'] ) {
