@@ -4465,3 +4465,247 @@ body {
 		padding-bottom: 7.5rem;
 	}
 }
+
+
+/* ================================================================
+ * Drie ontwerpen in plaats van de schuivende woorden.
+ * ================================================================ */
+
+/* 1. Eén zin die oplicht terwijl u scrolt. */
+.kbj-strook-zin .kbj-oplicht {
+	max-width: 22ch;
+	margin-inline: auto;
+	font-size: clamp(1.9rem, 1.1rem + 3.4vw, 3.9rem);
+	font-weight: 700;
+	line-height: 1.12;
+	letter-spacing: -0.025em;
+	text-align: center;
+	color: var(--kbj-nacht);
+	text-wrap: balance;
+}
+
+.kbj-oplicht .kbj-oplicht__nadruk {
+	font-weight: 300;
+	color: var(--kbj-kerk);
+}
+
+@supports (animation-timeline: view()) {
+	@media (prefers-reduced-motion: no-preference) {
+		.kbj-oplicht span {
+			opacity: 0.16;
+			animation: kbj-oplicht linear both;
+			animation-timeline: view();
+			animation-range: cover calc(18% + var(--w, 0) * 1.2%) cover calc(34% + var(--w, 0) * 1.2%);
+		}
+	}
+}
+
+@keyframes kbj-oplicht {
+	to {
+		opacity: 1;
+	}
+}
+
+/* 2. Even binnenkijken: vier foto's, verspringend naast elkaar. */
+.kbj-strook-binnen h2 {
+	margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+	text-align: center;
+}
+
+.kbj-binnen__rij {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: clamp(1rem, 2vw, 1.5rem);
+	align-items: start;
+}
+
+.kbj-binnen__plek:nth-child(even) {
+	margin-top: clamp(2rem, 5vw, 4rem);
+}
+
+.kbj-binnen__plek .kbj-beeld {
+	margin: 0;
+}
+
+.kbj-binnen__plek .kbj-beeld__kader {
+	border-radius: var(--kbj-rand);
+	overflow: hidden;
+}
+
+.kbj-binnen__plek img {
+	transition: transform 0.9s var(--kbj-ease);
+}
+
+.kbj-binnen__plek:hover img {
+	transform: scale(1.04);
+}
+
+.kbj-binnen__tekst {
+	margin: 0.9rem 0 0;
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--kbj-leisteen);
+}
+
+.kbj-binnen__tekst strong {
+	display: block;
+	font-size: var(--wp--preset--font-size--medium);
+	color: var(--kbj-nacht);
+}
+
+@media (max-width: 781px) {
+	.kbj-binnen__rij {
+		display: flex;
+		gap: 0.9rem;
+		margin-inline: calc(var(--kbj-zijkant) * -1);
+		padding: 0 var(--kbj-zijkant) 0.5rem;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-padding-inline: var(--kbj-zijkant);
+		scrollbar-width: none;
+	}
+
+	.kbj-binnen__rij::-webkit-scrollbar {
+		display: none;
+	}
+
+	.kbj-binnen__plek {
+		flex: 0 0 68%;
+		scroll-snap-align: start;
+	}
+
+	.kbj-binnen__plek:nth-child(even) {
+		margin-top: 0;
+	}
+}
+
+/* 3. Zo gaat een dag: vijf momenten aan één lijn. */
+.kbj-strook-dag h2 {
+	margin-bottom: clamp(2rem, 4vw, 3rem);
+	text-align: center;
+}
+
+.kbj-dagstrook {
+	display: grid;
+	grid-template-columns: repeat(5, minmax(0, 1fr));
+	gap: 1.25rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.kbj-dagstrook__moment {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.3rem;
+	text-align: center;
+}
+
+.kbj-dagstrook__moment::before {
+	content: "";
+	width: 64px;
+	height: 64px;
+	margin-bottom: 0.9rem;
+	background-color: var(--kbj-kerk);
+	-webkit-mask-size: 30px 30px;
+	mask-size: 30px 30px;
+	-webkit-mask-position: center;
+	mask-position: center;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	position: relative;
+	z-index: 1;
+}
+
+/* De cirkel achter het icoon, en de lijn naar het volgende moment. */
+.kbj-dagstrook__moment::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 64px;
+	height: 64px;
+	transform: translateX(-50%);
+	border-radius: 50%;
+	background: var(--kbj-wit);
+	box-shadow: 0 0 0 1px rgba(27, 83, 129, 0.12), 0 10px 24px -14px rgba(10, 36, 68, 0.35);
+}
+
+.kbj-dagstrook {
+	position: relative;
+	background: linear-gradient(var(--kbj-zee), var(--kbj-zee)) no-repeat center 31px / calc(80% + 1rem) 1.5px;
+}
+
+.kbj-dagstrook__moment strong {
+	font-size: var(--wp--preset--font-size--medium);
+	color: var(--kbj-nacht);
+}
+
+.kbj-dagstrook__moment span {
+	max-width: 18ch;
+	font-size: var(--wp--preset--font-size--small);
+	line-height: 1.5;
+	color: var(--kbj-leisteen);
+}
+
+.kbj-dagstrook__moment--ochtend::before {
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 18h18M6.5 18a5.5 5.5 0 0 1 11 0M12 5v3M5.2 9.7l1.8 1.8M18.8 9.7 17 11.5M9 21h6'/%3E%3C/svg%3E");
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 18h18M6.5 18a5.5 5.5 0 0 1 11 0M12 5v3M5.2 9.7l1.8 1.8M18.8 9.7 17 11.5M9 21h6'/%3E%3C/svg%3E");
+}
+
+.kbj-dagstrook__moment--koffie::before {
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 11h1.5a2.5 2.5 0 0 1 0 5H16M9 3.5c0 1.5-1 1.5-1 3M12.5 3.5c0 1.5-1 1.5-1 3'/%3E%3C/svg%3E");
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 9h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5zM16 11h1.5a2.5 2.5 0 0 1 0 5H16M9 3.5c0 1.5-1 1.5-1 3M12.5 3.5c0 1.5-1 1.5-1 3'/%3E%3C/svg%3E");
+}
+
+.kbj-dagstrook__moment--lunch::before {
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 11h18a9 8 0 0 1-18 0zM8 20h8M9 7.5c0-1.5 1.5-1.5 1.5-3M13.5 7.5c0-1.5 1.5-1.5 1.5-3'/%3E%3C/svg%3E");
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 11h18a9 8 0 0 1-18 0zM8 20h8M9 7.5c0-1.5 1.5-1.5 1.5-3M13.5 7.5c0-1.5 1.5-1.5 1.5-3'/%3E%3C/svg%3E");
+}
+
+.kbj-dagstrook__moment--middag::before {
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2 0-1.4-1.2-1.6-1.2-2.8 0-1 .8-1.7 2-1.7H17a4 4 0 0 0 4-4C21 6.4 17 3 12 3z'/%3E%3Ccircle cx='7.5' cy='11' r='1.2'/%3E%3Ccircle cx='10.5' cy='7' r='1.2'/%3E%3Ccircle cx='15.5' cy='7.5' r='1.2'/%3E%3C/svg%3E");
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3a9 9 0 1 0 0 18c1.4 0 2-1 2-2 0-1.4-1.2-1.6-1.2-2.8 0-1 .8-1.7 2-1.7H17a4 4 0 0 0 4-4C21 6.4 17 3 12 3z'/%3E%3Ccircle cx='7.5' cy='11' r='1.2'/%3E%3Ccircle cx='10.5' cy='7' r='1.2'/%3E%3Ccircle cx='15.5' cy='7.5' r='1.2'/%3E%3C/svg%3E");
+}
+
+.kbj-dagstrook__moment--avond::before {
+	-webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19.5 14.5A7.5 7.5 0 1 1 9.5 4.5a6 6 0 0 0 10 10z'/%3E%3Cpath d='M17 3.5v3M15.5 5h3'/%3E%3C/svg%3E");
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19.5 14.5A7.5 7.5 0 1 1 9.5 4.5a6 6 0 0 0 10 10z'/%3E%3Cpath d='M17 3.5v3M15.5 5h3'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 781px) {
+	.kbj-dagstrook {
+		display: flex;
+		gap: 0.75rem;
+		margin-inline: calc(var(--kbj-zijkant) * -1);
+		padding: 0 var(--kbj-zijkant) 0.5rem;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-padding-inline: var(--kbj-zijkant);
+		scrollbar-width: none;
+		background-position: 0 31px;
+		background-size: 100% 1.5px;
+	}
+
+	.kbj-dagstrook::-webkit-scrollbar {
+		display: none;
+	}
+
+	.kbj-dagstrook__moment {
+		flex: 0 0 42%;
+		scroll-snap-align: start;
+	}
+}
+
+@media (max-width: 781px) {
+	/* De veegrijen lopen door tot de rand van het scherm. */
+	.kbj-sectie > .kbj-binnen__rij,
+	.kbj-sectie > .kbj-dagstrook,
+	.kbj-sectie .kbj-binnen__rij,
+	.kbj-sectie .kbj-dagstrook {
+		max-width: none !important;
+		margin-left: calc(var(--kbj-zijkant) * -1) !important;
+		margin-right: calc(var(--kbj-zijkant) * -1) !important;
+	}
+}
