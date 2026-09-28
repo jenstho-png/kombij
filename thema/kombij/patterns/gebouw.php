@@ -3,11 +3,11 @@
  * Title: Het gebouw
  * Slug: kombij/gebouw
  * Categories: kombij
- * Description: Het monumentale gebouw op een nachtblauw vlak, met de lijntekening van het raam over de foto.
+ * Description: Het monumentale gebouw op een nachtblauw vlak: een grote, brede foto met de tekst eronder.
  */
 
-$tekst = kbj_kop( 2, 'Gebouwd in 1869. Nu weer vol leven.', 'kbj-schuif' )
-	. kbj_p( 'Waar het dorp vroeger samenkwam, wonen, logeren en lachen mensen nu samen. De hoge ramen en de gewelven bleven. De warmte kwam erbij.' )
+$kop   = kbj_kop( 2, 'Gebouwd in 1869. Nu weer vol leven.', 'kbj-schuif' );
+$tekst = kbj_p( 'Waar het dorp vroeger samenkwam, wonen, logeren en lachen mensen nu samen. De hoge ramen en de gewelven bleven. De warmte kwam erbij.' )
 	. kbj_lijst(
 		array(
 			'<strong>1869</strong>gebouwd',
@@ -18,14 +18,11 @@ $tekst = kbj_kop( 2, 'Gebouwd in 1869. Nu weer vol leven.', 'kbj-schuif' )
 	)
 	. kbj_p( '<a href="/over-ons/">Ons verhaal</a>', 'kbj-verder' );
 
-$beeld = kbj_groep(
-	kbj_foto( 'kerk-interieur.webp', 'De lichte, witte gewelven van het gebouw met hoge ramen', array( 'vorm' => 'recht', 'positie' => '62% 50%' ) )
-	. '<!-- wp:kbj/raamlijn /-->',
-	'kbj-gebouw__beeld'
-);
+// De foto groot en breed bovenaan, de tekst eronder in twee kolommen.
+$beeld = kbj_foto( 'kerk-luchtfoto.webp', 'Het monumentale gebouw van KomBij in Maasbommel, van bovenaf gezien', array( 'vorm' => 'recht', 'verhouding' => '21/9', 'positie' => '50% 30%' ) );
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	kbj_groep( kbj_groep( $tekst, 'kbj-gebouw__tekst' ) . $beeld, 'kbj-gebouw__binnen' ),
+	$beeld . kbj_groep( $kop . kbj_groep( $tekst, 'kbj-gebouw__tekst' ), 'kbj-gebouw__binnen kbj-gebouw__binnen--breed' ),
 	array(
 		'achtergrond' => 'nachtblauw',
 		'klasse'      => 'kbj-gebouw kbj-lood',

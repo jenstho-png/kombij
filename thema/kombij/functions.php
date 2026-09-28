@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'KBJ_VERSION', '1.5.3' );
+define( 'KBJ_VERSION', '1.5.4' );
 define( 'KBJ_DIR', get_theme_file_path() );
 define( 'KBJ_URI', get_theme_file_uri() );
 
