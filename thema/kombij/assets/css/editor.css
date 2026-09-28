@@ -1,0 +1,31 @@
+/*
+ * Alleen voor de blok-editor.
+ *
+ * Op de site komt bijna alles pas in beeld als je gaat scrollen. In de editor
+ * scrollt niemand door een preview, dus zou je naar een lege pagina kijken.
+ * Hier zetten we alle beginstanden terug op zichtbaar.
+ */
+
+.editor-styles-wrapper .kbj-reveal,
+.editor-styles-wrapper .kbj-reveal[data-reveal] {
+	opacity: 1 !important;
+	transform: none !important;
+}
+
+/* De vaste balk hoort in de editor gewoon mee te scrollen. */
+.editor-styles-wrapper .kbj-header {
+	position: static;
+}
+
+/* In de editor staan alle foto's, lijnen en lijsten meteen goed. */
+.editor-styles-wrapper .kbj-beeld__kader,
+.editor-styles-wrapper .kbj-beeld img,
+.editor-styles-wrapper .kbj-beeld--boog::before,
+.editor-styles-wrapper .kbj-dag li::before,
+.editor-styles-wrapper .kbj-dag li::after,
+.editor-styles-wrapper li {
+	clip-path: none !important;
+	transform: none !important;
+	opacity: 1 !important;
+	animation: none !important;
+}

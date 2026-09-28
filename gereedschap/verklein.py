@@ -21,7 +21,7 @@ import subprocess
 import sys
 
 WORTEL = pathlib.Path(__file__).resolve().parent.parent
-THEMA = WORTEL / 'thema' / 'creajt-starter'
+THEMA = WORTEL / 'thema' / 'kombij'
 
 
 def css_verkleinen(bron: str) -> str:

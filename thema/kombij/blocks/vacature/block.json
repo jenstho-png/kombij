@@ -1,0 +1,11 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "kbj/vacature",
+	"title": "Vacature",
+	"category": "kombij",
+	"description": "De inhoud van één vacature, zoals die in het formulier is ingevuld.",
+	"textdomain": "kombij",
+	"supports": { "html": false, "multiple": false, "inserter": false },
+	"attributes": {}
+}

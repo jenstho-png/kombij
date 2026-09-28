@@ -1,0 +1,11 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "kbj/contactgegevens",
+	"title": "Contactgegevens",
+	"category": "kombij",
+	"description": "E-mail, telefoon, adres en de socials, zoals ze onder Gegevens staan.",
+	"textdomain": "kombij",
+	"supports": { "html": false },
+	"attributes": {}
+}

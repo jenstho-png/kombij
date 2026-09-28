@@ -1,0 +1,23 @@
+/*
+Theme Name: KomBij Maasbommel
+Theme URI: https://kombijmaasbommel.nl
+Author: CREAjt
+Author URI: https://www.creajt.com
+Description: Het thema van KomBij Maasbommel: wonen, logeren en dagbesteding met zorg in de voormalige Lambertuskerk. Gebouwd op het startpakket van CREAjt. De vormgeving zit vast in het thema; teksten, foto's en bedrijfsgegevens beheert KomBij zelf.
+Version: 1.0.0
+Requires at least: 6.7
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: kombij
+Tags: block-theme, full-site-editing, one-column, custom-colors, custom-menu
+*/
+
+/*
+ * Bijna alle opmaak staat in theme.json. Dat is wat de blok-editor leest, en
+ * daardoor ziet de klant in de editor precies wat er op de site komt.
+ *
+ * Wat theme.json niet kan (eigen componenten, scroll-reveal, de header met het
+ * logo in het midden) staat in assets/css/thema.css. Dat bestand wordt apart
+ * ingeladen, zodat dit bestand alleen de themakop hoeft te bevatten.
+ */

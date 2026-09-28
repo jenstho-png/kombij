@@ -1,0 +1,11 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "kbj/footermenu",
+	"title": "Menu in de voet",
+	"category": "kombij",
+	"description": "Alle pagina's, inclusief de voorwaarden en de privacyverklaring.",
+	"textdomain": "kombij",
+	"supports": { "html": false },
+	"attributes": {}
+}

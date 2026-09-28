@@ -1,0 +1,11 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "kbj/contactformulier",
+	"title": "Contactformulier",
+	"category": "kombij",
+	"description": "Het formulier waarmee bezoekers een bericht sturen. Komt binnen op het adres onder Gegevens.",
+	"textdomain": "kombij",
+	"supports": { "html": false, "multiple": false },
+	"attributes": {}
+}

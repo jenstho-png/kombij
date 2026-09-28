@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "kbj/logo",
+	"title": "Logo",
+	"category": "kombij",
+	"description": "Het logo, in de kleur van de tekst eromheen.",
+	"textdomain": "kombij",
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"breedte": {
+			"type": "number",
+			"default": 160
+		},
+		"licht": {
+			"type": "boolean",
+			"default": false
+		}
+	}
+}

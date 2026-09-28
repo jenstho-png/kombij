@@ -1,0 +1,11 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "kbj/vacatures",
+	"title": "Open vacatures",
+	"category": "kombij",
+	"description": "Het overzicht van de vacatures die open staan. Beheer ze onder Vacatures in de zijbalk.",
+	"textdomain": "kombij",
+	"supports": { "html": false, "multiple": false },
+	"attributes": {}
+}

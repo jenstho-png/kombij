@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "kbj/paginakop",
+	"title": "Paginakop",
+	"category": "kombij",
+	"description": "De opening van een binnenpagina: een regel erboven, de titel, een intro en een foto in kerkvorm.",
+	"textdomain": "kombij",
+	"supports": { "html": false, "multiple": false, "align": [ "full" ] },
+	"attributes": {
+		"boven": { "type": "string", "default": "", "role": "content" },
+		"titel": { "type": "string", "default": "", "role": "content" },
+		"intro": { "type": "string", "default": "", "role": "content" },
+		"bestand": { "type": "string", "default": "" },
+		"url": { "type": "string", "default": "", "role": "content" },
+		"alt": { "type": "string", "default": "", "role": "content" },
+		"positie": { "type": "string", "default": "50% 50%" },
+		"knop": { "type": "boolean", "default": true },
+		"align": { "type": "string", "default": "full" }
+	}
+}

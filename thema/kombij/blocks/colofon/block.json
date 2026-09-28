@@ -1,0 +1,11 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "kbj/colofon",
+	"title": "Colofon",
+	"category": "kombij",
+	"description": "De regel onderaan met naam, jaartal, KvK en btw.",
+	"textdomain": "kombij",
+	"supports": { "html": false },
+	"attributes": {}
+}

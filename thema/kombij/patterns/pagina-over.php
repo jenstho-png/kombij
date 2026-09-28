@@ -1,0 +1,96 @@
+<?php
+/**
+ * Title: Pagina over ons
+ * Slug: kombij/pagina-over
+ * Categories: kombij
+ * Description: Alle secties onder de kop van de pagina Over ons.
+ */
+
+$verhaal = kbj_p( 'Hoe het begon', 'kbj-boven' )
+	. kbj_kop( 2, 'Waarom KomBij?' )
+	. kbj_p( 'Een plek waar ouderen zich thuis voelen. Geen instelling met lange gangen, maar een klein huis waar iedereen elkaar kent. Dat wilden Corrie, Chantal en Edwin maken.' )
+	. kbj_p( 'Toen de H. Lambertuskerk in Maasbommel vrijkwam, zagen ze het voor zich. Een gebouw waar het dorp altijd samenkwam, met veel licht en ruimte. Edwin verbouwde de kerk zelf. De glas-in-loodramen, de gewelven en de pilaren bleven bewaard.' )
+	. kbj_p( 'Geen instelling, maar een plek waar u uzelf kunt zijn.', 'kbj-nadruk' );
+
+echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	kbj_kolommen(
+		array(
+			array(
+				'inhoud'  => $verhaal,
+				'breedte' => '55%',
+			),
+			array(
+				'inhoud'  => kbj_foto( 'samen-aan-tafel.webp', 'Gasten en medewerkers aan de lange tafel in de kerk', array( 'positie' => '45% 50%' ) ),
+				'breedte' => '45%',
+			),
+		),
+		'kbj-duo kbj-duo--omgekeerd',
+		true
+	),
+	array( 'klasse' => 'kbj-reveal' )
+);
+
+echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	kbj_sectiekop( 'Onze waarden', 'Waar wij voor staan', '', false )
+	. kbj_lijst(
+		array(
+			'<strong>Persoonlijke aandacht</strong><span>We kennen iedereen bij naam, en weten wat iemand fijn vindt.</span>',
+			'<strong>Huiselijkheid</strong><span>Samen koffie, samen eten, samen aan tafel. Zoals thuis.</span>',
+			'<strong>Zelf bepalen</strong><span>U bepaalt hoe uw dag eruitziet. Wij kijken wat daarbij nodig is.</span>',
+			'<strong>Rust en veiligheid</strong><span>Een vaste dag, vaste gezichten en 24 uur per dag zorg dichtbij.</span>',
+			'<strong>Samen kijken wat past</strong><span>Met u en uw familie zoeken we wat bij u past. Nu, en als het verandert.</span>',
+		),
+		'kbj-regelingen kbj-regelingen--vrij'
+	),
+	array(
+		'achtergrond' => 'ijs',
+		'klasse'      => 'kbj-reveal',
+	)
+);
+
+$gebouw = kbj_p( 'Het gebouw', 'kbj-boven' )
+	. kbj_kop( 2, 'De H. Lambertuskerk' )
+	. kbj_p( 'De kerk aan de Raadhuisdijk werd gebouwd in 1868 en 1869, in neogotische stijl. Het is een rijksmonument. Ruim 150 jaar kwam het dorp hier samen.' )
+	. kbj_p( 'Bij de verbouwing kwam er een tussenverdieping in het schip, met lichte kamers. Beneden zijn de huiskamer, het atelier en de ruimte voor de dagbesteding. De ramen, de gewelven en de pilaren zijn gebleven.' );
+
+echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	kbj_kolommen(
+		array(
+			array(
+				'inhoud'  => kbj_groep(
+					kbj_foto( 'vanaf-orgel.webp', 'Het schip van de kerk, gezien vanaf het orgel, met gewelven en pilaren', array( 'vorm' => 'recht', 'verhouding' => '4/3', 'positie' => '50% 40%' ) )
+					. kbj_foto( 'altaar.webp', 'De glas-in-loodramen in het koor', array( 'verhouding' => '3/4' ) ),
+					'kbj-huis__beelden'
+				),
+				'breedte' => '52%',
+			),
+			array(
+				'inhoud'  => $gebouw,
+				'breedte' => '48%',
+			),
+		),
+		'kbj-duo',
+		true
+	),
+	array(
+		'achtergrond' => 'nachtblauw',
+		'klasse'      => 'kbj-huis kbj-lood kbj-reveal',
+		'ornament'    => true,
+	)
+);
+
+echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	kbj_sectiekop( 'De mensen', 'De familie achter KomBij', 'Samen met een team van verzorgenden, verpleegkundigen, activiteitenbegeleiders en vrijwilligers.', false )
+	. kbj_lijst(
+		array(
+			'<strong>Corrie Roelofsen</strong><em>Oprichter</em><span>Voor vragen, aanmeldingen en rondleidingen spreekt u meestal eerst Corrie.</span>',
+			'<strong>Chantal</strong><em>Oprichter</em><span>Samen met haar moeder en haar man begon Chantal KomBij.</span>',
+			'<strong>Edwin</strong><em>Oprichter</em><span>Edwin verbouwde de kerk zelf, van stof en puin tot een warm huis.</span>',
+		),
+		'kbj-regelingen kbj-regelingen--vrij kbj-mensen'
+	)
+	. kbj_p( '<a href="/werken-bij/">Komt u ons team versterken?</a>', 'kbj-verder' ),
+	array( 'klasse' => 'kbj-reveal' )
+);
+?>
+<!-- wp:pattern {"slug":"kombij/slot"} /-->
