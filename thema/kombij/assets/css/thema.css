@@ -4778,3 +4778,252 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn {
 		gap: 1rem;
 	}
 }
+
+/* ================================================================
+ * Geen foto naast tekst meer.
+ *
+ * Overal waar een foto naast een stuk tekst stond, staat nu één grote,
+ * brede foto. De tekst ligt er in een kaart overheen, half op de foto,
+ * afwisselend links en rechts. Dat leest als een tijdschrift, niet als
+ * een standaard sjabloon.
+ * ================================================================ */
+
+.kbj-duo .kbj-beeld,
+.kbj-familie2 > .kbj-beeld,
+.kbj-werken__binnen > .kbj-beeld {
+	max-width: none;
+	margin: 0;
+}
+
+.kbj-duo .kbj-beeld__kader,
+.kbj-familie2 > .kbj-beeld .kbj-beeld__kader,
+.kbj-werken__binnen > .kbj-beeld .kbj-beeld__kader {
+	aspect-ratio: 21 / 9 !important;
+	border-radius: clamp(20px, 2.6vw, 34px);
+	overflow: hidden;
+}
+
+/* De kaart met de tekst. */
+.kbj-duo > .wp-block-column:not(:has(.kbj-beeld)),
+.kbj-familie2 > .wp-block-group,
+.kbj-werken__binnen > div:not(.kbj-beeld) {
+	position: relative;
+	z-index: 1;
+	padding: clamp(1.5rem, 3.5vw, 3rem);
+	border-radius: clamp(20px, 2.4vw, 30px);
+	background: var(--kbj-wit);
+	box-shadow: 0 40px 80px -40px rgba(10, 36, 68, 0.35), 0 2px 6px rgba(10, 36, 68, 0.05);
+}
+
+.kbj-duo > .wp-block-column:not(:has(.kbj-beeld)) > :first-child,
+.kbj-familie2 > .wp-block-group > :first-child {
+	margin-top: 0;
+}
+
+.kbj-duo > .wp-block-column:not(:has(.kbj-beeld)) > :last-child,
+.kbj-familie2 > .wp-block-group > :last-child {
+	margin-bottom: 0;
+}
+
+/* Op een donker vlak een donkere kaart. */
+.has-nachtblauw-background-color .kbj-duo > .wp-block-column:not(:has(.kbj-beeld)) {
+	background: rgba(10, 36, 68, 0.94);
+	box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(176, 225, 241, 0.18);
+}
+
+/* Twee foto's (zoals bij de kerk op Over ons): breed naast elkaar. */
+.kbj-duo .kbj-huis__beelden {
+	display: grid;
+	grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+	gap: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+
+.kbj-duo .kbj-huis__beelden .kbj-beeld__kader {
+	aspect-ratio: auto !important;
+	height: clamp(260px, 34vw, 460px);
+}
+
+.kbj-duo .kbj-huis__beelden {
+	padding-bottom: 0;
+}
+
+.kbj-duo .kbj-huis__beelden .kbj-beeld {
+	position: static !important;
+	width: auto !important;
+	transform: none !important;
+	margin: 0 !important;
+}
+
+.kbj-duo .kbj-huis__beelden .kbj-beeld__kader {
+	border-radius: clamp(20px, 2.6vw, 34px);
+}
+
+.kbj-werken__binnen {
+	background: transparent;
+	padding: 0;
+	border-radius: 0;
+}
+
+@media (min-width: 782px) {
+	.kbj-duo.wp-block-columns,
+	.kbj-familie2,
+	.kbj-werken__binnen {
+		display: grid !important;
+		grid-template-columns: repeat(12, minmax(0, 1fr));
+		gap: 0 !important;
+		align-items: start;
+	}
+
+	.kbj-duo > .wp-block-column {
+		flex-basis: auto !important;
+		min-width: 0;
+	}
+
+	.kbj-duo > .wp-block-column:has(.kbj-beeld),
+	.kbj-familie2 > .kbj-beeld,
+	.kbj-werken__binnen > .kbj-beeld {
+		grid-column: 1 / -1;
+		grid-row: 1;
+	}
+
+	.kbj-duo > .wp-block-column:not(:has(.kbj-beeld)),
+	.kbj-familie2 > .wp-block-group,
+	.kbj-werken__binnen > div:not(.kbj-beeld) {
+		grid-row: 2;
+		grid-column: 6 / -2;
+		margin-top: calc(clamp(5rem, 11vw, 10rem) * -1);
+	}
+
+	/* Afwisselend: de kaart links. */
+	.kbj-duo--omgekeerd > .wp-block-column:not(:has(.kbj-beeld)),
+	.kbj-werken__binnen > div:not(.kbj-beeld) {
+		grid-column: 2 / span 7;
+	}
+}
+
+@media (max-width: 781px) {
+	.kbj-duo.wp-block-columns,
+	.kbj-duo--omgekeerd.wp-block-columns,
+	.kbj-familie2,
+	.kbj-werken__binnen {
+		display: flex !important;
+		flex-direction: column !important;
+		gap: 0 !important;
+	}
+
+	.kbj-duo > .wp-block-column:has(.kbj-beeld),
+	.kbj-familie2 > .kbj-beeld,
+	.kbj-werken__binnen > .kbj-beeld {
+		order: -1;
+	}
+
+	.kbj-duo .kbj-beeld__kader,
+	.kbj-familie2 > .kbj-beeld .kbj-beeld__kader,
+	.kbj-werken__binnen > .kbj-beeld .kbj-beeld__kader {
+		aspect-ratio: 4 / 3 !important;
+	}
+
+	.kbj-duo > .wp-block-column:not(:has(.kbj-beeld)),
+	.kbj-familie2 > .wp-block-group,
+	.kbj-werken__binnen > div:not(.kbj-beeld) {
+		margin: -3rem 0.75rem 0;
+		padding: 1.5rem 1.35rem;
+	}
+
+	.kbj-duo .kbj-huis__beelden {
+		grid-template-columns: 1.4fr 1fr;
+	}
+
+	.kbj-duo .kbj-huis__beelden .kbj-beeld__kader {
+		height: 220px;
+	}
+}
+
+/* ------------------------------------------------ de paginakop */
+
+/* De titel groot bovenaan, de foto er breed onder. */
+.kbj-paginakop--beeld .kbj-paginakop__binnen {
+	grid-template-columns: 1fr !important;
+	gap: clamp(1.75rem, 4vw, 3rem);
+}
+
+.kbj-paginakop__tekst {
+	max-width: 46rem;
+}
+
+.kbj-paginakop__beeld .kbj-beeld {
+	max-width: none !important;
+	margin: 0 !important;
+}
+
+.kbj-paginakop__beeld .kbj-beeld__kader {
+	aspect-ratio: 21 / 9 !important;
+	border-radius: clamp(20px, 2.6vw, 34px);
+	overflow: hidden;
+}
+
+body:not(.home) .kbj-paginakop .kbj-raamlijn,
+.kbj-paginakop .kbj-illustratie {
+	left: auto !important;
+	right: 4% !important;
+	top: clamp(1rem, 3vw, 2.5rem) !important;
+	bottom: auto !important;
+	height: clamp(180px, 26vw, 340px) !important;
+	width: auto !important;
+}
+
+.kbj-paginakop .kbj-illustratie--maas,
+.kbj-paginakop .kbj-illustratie--gewelf {
+	width: min(420px, 40%) !important;
+	height: auto !important;
+}
+
+@media (max-width: 781px) {
+	.kbj-paginakop__beeld .kbj-beeld__kader {
+		aspect-ratio: 4 / 3 !important;
+	}
+
+	body:not(.home) .kbj-paginakop .kbj-raamlijn,
+	.kbj-paginakop .kbj-illustratie {
+		height: 150px !important;
+		right: -4% !important;
+		opacity: 0.3;
+	}
+}
+
+@media (max-width: 781px) {
+	/* De kaart en de foto vullen precies de breedte, zonder verschuiving. */
+	.kbj-duo > .wp-block-column {
+		align-self: stretch !important;
+		width: auto !important;
+		flex-basis: auto !important;
+	}
+
+	/* Het label "plek vrij" staat boven de kop, niet eroverheen. */
+	.kbj-kaart3 {
+		grid-template-rows: auto 1fr;
+	}
+
+	.kbj-kaart3 > .kbj-beeld {
+		grid-column: 1;
+		grid-row: 1 / span 2;
+	}
+
+	.kbj-kaart3 > .kbj-plek {
+		position: static;
+		grid-column: 2;
+		grid-row: 1;
+		justify-self: start;
+		margin: 1.1rem 1.1rem 0 !important;
+		font-size: 0.8125rem;
+	}
+
+	.kbj-kaart3 > .kbj-kaart3__inhoud {
+		grid-column: 2;
+		grid-row: 2;
+	}
+
+	.kbj-kaart3 > .kbj-plek + .kbj-kaart3__inhoud {
+		padding-top: 0.6rem;
+	}
+}
