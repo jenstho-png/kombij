@@ -291,6 +291,7 @@ function kbj_allowed_blocks( $toegestaan, $context ) {
 		'kbj/vacatures',
 		'kbj/opening',
 		'kbj/raamlijn',
+		'kbj/plek',
 	);
 }
 add_filter( 'allowed_block_types_all', 'kbj_allowed_blocks', 10, 2 );

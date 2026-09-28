@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "kbj/plek",
+	"title": "Plek vrij",
+	"category": "kombij",
+	"description": "Een label 'Nu een plek vrij' of 'Wachtlijst', zoals ingesteld onder Gegevens. Staat er niets ingesteld, dan is het label onzichtbaar.",
+	"textdomain": "kombij",
+	"supports": { "html": false },
+	"attributes": {
+		"soort": { "type": "string", "default": "wonen", "enum": [ "wonen", "logeren", "dagbesteding" ] }
+	}
+}

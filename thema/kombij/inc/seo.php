@@ -862,7 +862,7 @@ function kbj_llms_feiten() {
 	return array(
 		'KomBij Maasbommel biedt wonen met zorg, logeren met zorg (respijtzorg) en dagbesteding voor ouderen en volwassenen met een zorgvraag, onder meer bij dementie.',
 		'Gevestigd in een monumentaal gebouw uit 1869, de voormalige Lambertuskerk (rijksmonument), aan de Raadhuisdijk 44 in Maasbommel, gemeente West Maas en Waal, Gelderland.',
-		'Wonen: 6 plekken voor bewoners met een WLZ-indicatie, eigen zit-slaapkamer, 24 uur per dag zorg en toezicht.',
+		'Wonen: 6 plekken voor bewoners met een WLZ-indicatie, eigen zit-slaapkamer, 24 uur per dag zorg en toezicht. Woonkosten vanaf € 985 per maand, exclusief servicekosten en zorg.',
 		'Logeren: minimaal 2 nachten, vaste blokken (maandag tot woensdag, woensdag tot vrijdag, vrijdag tot maandag). Te betalen via WLZ, WMO, PGB (tot 156 etmalen per jaar) of particulier.',
 		'Dagbesteding: maandag tot en met vrijdag van 10:30 tot 16:30, minimaal 2 dagen per week, via WMO, WLZ of particulier.',
 		'Opgericht door Corrie Roelofsen, haar dochter Chantal en schoonzoon Edwin. Een familiebedrijf, zonder religieuze grondslag: iedereen is welkom.',

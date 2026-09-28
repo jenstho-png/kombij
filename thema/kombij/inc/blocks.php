@@ -36,6 +36,9 @@ function kbj_register_blocks() {
 		'vacature'         => 'kbj_render_vacature',
 		'opening'          => 'kbj_render_opening',
 		'raamlijn'         => 'kbj_render_raamlijn',
+		'plek'             => 'kbj_render_plek',
+		'vacaturestrook'   => 'kbj_render_vacaturestrook',
+		'credit'           => 'kbj_render_credit',
 	);
 
 	foreach ( $blokken as $naam => $functie ) {
@@ -217,6 +220,17 @@ function kbj_render_paginakop( $attrs ) {
 
 	$contact = get_page_by_path( 'contact' );
 	$acties  = '';
+	$plek    = '';
+
+	if ( ! empty( $attrs['plek'] ) ) {
+		$stand = kbj_plek( (string) $attrs['plek'] );
+
+		if ( 'vrij' === $stand ) {
+			$plek = '<p class="kbj-plek kbj-plek--vrij">' . esc_html__( 'Er is nu een plek vrij. Bel of mail ons, dan kijken we samen of het past.', 'kombij' ) . '</p>';
+		} elseif ( 'wachtlijst' === $stand ) {
+			$plek = '<p class="kbj-plek kbj-plek--wachtlijst">' . esc_html__( 'Er is op dit moment een wachtlijst. Bel ons gerust: vaak kan er in de tussentijd al iets.', 'kombij' ) . '</p>';
+		}
+	}
 
 	if ( $knop ) {
 		$acties = sprintf(
@@ -229,13 +243,14 @@ function kbj_render_paginakop( $attrs ) {
 	}
 
 	return sprintf(
-		'<header %1$s>%2$s<div class="kbj-paginakop__binnen"><div class="kbj-paginakop__tekst"><h1 class="kbj-paginakop__titel kbj-schuif">%3$s</h1>%4$s%5$s</div>%6$s</div></header>',
+		'<header %1$s>%2$s<div class="kbj-paginakop__binnen"><div class="kbj-paginakop__tekst"><h1 class="kbj-paginakop__titel kbj-schuif">%3$s</h1>%4$s%7$s%5$s</div>%6$s</div></header>',
 		get_block_wrapper_attributes( array( 'class' => 'kbj-paginakop' . ( '' !== $beeld ? ' kbj-paginakop--beeld' : '' ) ) ),
 		kbj_raamlijn(),
-		esc_html( $titel ),
+		kbj_kombij( esc_html( $titel ) ),
 		'' !== $intro ? '<p class="kbj-paginakop__intro">' . wp_kses( $intro, array( 'strong' => array(), 'br' => array() ) ) . '</p>' : '',
 		$acties,
-		'' !== $beeld ? '<div class="kbj-paginakop__beeld">' . $beeld . '</div>' : ''
+		'' !== $beeld ? '<div class="kbj-paginakop__beeld">' . $beeld . '</div>' : '',
+		$plek
 	);
 }
 
@@ -384,12 +399,7 @@ function kbj_render_contactgegevens( $attrs ) {
  * @return string
  */
 function kbj_render_footermenu( $attrs ) {
-	$items = array(
-		array(
-			'label' => __( 'Home', 'kombij' ),
-			'url'   => home_url( '/' ),
-		),
-	);
+	$items = array();
 
 	foreach ( kbj_paginas() as $pagina ) {
 		if ( 'bedankt' === $pagina['slug'] ) {
@@ -402,7 +412,7 @@ function kbj_render_footermenu( $attrs ) {
 			continue;
 		}
 
-		$label = $pagina['titel'];
+		$label = ! empty( $pagina['voet'] ) ? $pagina['voet'] : $pagina['titel'];
 
 		// Staan er vacatures open, dan zie je dat al in de voet.
 		if ( 'werken-bij' === $pagina['slug'] && function_exists( 'kbj_vacatures_open' ) ) {
@@ -410,7 +420,7 @@ function kbj_render_footermenu( $attrs ) {
 
 			if ( $aantal ) {
 				/* translators: %d: aantal open vacatures. */
-				$label .= ' ' . sprintf( _n( '(%d vacature)', '(%d vacatures)', $aantal, 'kombij' ), $aantal );
+				$label .= ' ' . sprintf( '(%d)', $aantal );
 			}
 		}
 
@@ -690,5 +700,48 @@ function kbj_render_opening( $attrs ) {
 		esc_url( $contact ? get_permalink( $contact ) : home_url( '/contact/' ) ),
 		esc_html__( 'Plan een rondleiding', 'kombij' ),
 		esc_html__( 'Bekijk wat we doen', 'kombij' )
+	);
+}
+
+/**
+ * Het label met de plekken: "Nu een plek vrij" of "Wachtlijst".
+ *
+ * @param array $attrs Blokinstellingen.
+ * @return string
+ */
+function kbj_render_plek( $attrs ) {
+	$soort = isset( $attrs['soort'] ) ? (string) $attrs['soort'] : 'wonen';
+	$stand = kbj_plek( $soort );
+
+	if ( '' === $stand ) {
+		return '';
+	}
+
+	return sprintf(
+		'<p %1$s>%2$s</p>',
+		get_block_wrapper_attributes( array( 'class' => 'kbj-plek kbj-plek--' . $stand ) ),
+		'vrij' === $stand ? esc_html__( 'Nu een plek vrij', 'kombij' ) : esc_html__( 'Wachtlijst', 'kombij' )
+	);
+}
+
+/**
+ * Gerealiseerd door CREAjt: het regeltje met het logo onderaan de voet.
+ *
+ * Een blok en geen los stukje HTML, anders filtert WordPress de SVG eruit
+ * zodra iemand de voet in de site-editor opslaat. De tekening staat op
+ * currentColor en kleurt mee met de voet.
+ *
+ * @param array $attrs Blokinstellingen.
+ * @return string
+ */
+function kbj_render_credit( $attrs ) {
+	$svg = '<svg viewBox="109 316 633 218" role="img" aria-label="CREAJT" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M720.67,450.27c-4.82,2.57-8.81,6-13.04,9.45-13.58,11.07-31.64,22.87-48.31,28.07-6.4,1.99-15.21,3.19-20.5-.52-7.08-4.96-6.46-17.94-3.65-25.18l9.61-24.76s.03-.06.04-.09l9-18.55s.02-.04.03-.06l12.87-23.15s.02-.04.03-.06l6.74-10.72c.23-.37.65-.6,1.09-.58,4.46.12,8.56.68,13.04,1.42,11.48,1.87,22.51,5.02,32.74,10.55,1.75.94,3.91,1.71,5.6.28,3.85-3.27,5.66-11.05.96-13.54-4.81-2.53-9.47-4.85-14.67-6.58-6.82-2.25-13.66-3.95-20.76-5.04-2.45-.39-4.43-.64-6.77-1.49-.72-.26-1.04-1.12-.65-1.79l1.76-3.08,6.98-10.97,9.39-14.44c1.62-2.47,1.81-4.98.34-7.58-.9-1.54-2.03-3.37-4.13-3.61-3.85-.44-7.02,1.67-9.23,4.94l-16.69,24.52-2.55,3.75-3.82,5.2c-.3.41-.83.6-1.33.46l-4.22-1.15c-5.92-1.62-10.97-5.76-14.16-10.95-1.91-3.09-5.36-4.94-8.93-4.15-3.89.9-5.9,4.98-4.73,8.77,2.13,6.96,8.75,13.76,15.23,17.15l7.8,4.07c.32.16.64.69.85,1.15.16.35.13.75-.05,1.09l-4.45,8.17-15.7,28.95c-.2.36-.56.6-.97.64h0c-1.78.17-3.54.51-5.25,1.01l-10.88,3.19-11.9,3.72c-.67.21-1.39-.18-1.57-.87l-.93-3.52s-.01-.05-.02-.07l-3.16-15.34c-1.24-6.08-3.04-11.8-5.33-17.52-.06-.16-.16-.31-.28-.43-2.06-2.12-4.63-2.99-7.68-2.62-2.81.3-6.12,1.52-7.72,4.13l-8.95,14.61-6.94,10.21-1.85,2.69s-.02.02-.04.04c-4.92,6.3-11.54,10.99-17.92,15.95-9.43,7.35-21.29,13.35-32.61,18.86-.66.32-1.45,0-1.7-.68l-24.44-65.31c-.18-.48-.65-.81-1.16-.81l-20.67.02c-.52,0-.98.32-1.16.81l-42.68,114.68c-.3.81.3,1.67,1.16,1.67l23,.02c.53,0,1.01-.34,1.18-.85l7.51-22.45c.17-.51.64-.85,1.18-.85l40.51.02c.53,0,1.01.34,1.17.84l7.55,22.42c.17.5.64.84,1.18.84h23.02c.87,0,1.47-.86,1.16-1.68l-10.75-28.72c-.21-.57.02-1.2.55-1.5,12.41-7.08,24.6-16.5,35.55-24.98,11.74-9.13,21.9-19.92,31.84-30.92.69-.77,1.97-.39,2.13.63v.03s2.57,15.92,2.57,15.92c.08.49-.14.98-.56,1.24l-6.17,3.95c-14.2,8.11-35.15,20.36-42.75,34.63-3.13,5.88-5.36,12.56-5.48,19.4-.16,8.57,3.93,17.17,10.21,22.87,5.86,5.32,14,6.78,21.59,5.62,8.25-1.28,15.31-5.72,20.72-12.16,2.67-3.21,5.38-6.06,7.06-9.77,4.41-9.73,7.8-19.76,9.87-30.31,1.56-7.9,1.48-15.61,1.85-23.68.02-.51.36-.95.84-1.12l17.38-6.04c.99-.34,1.93.62,1.57,1.6l-4.99,13.5s-.02.06-.03.09c-1.69,5.94-3.2,11.73-3.66,17.9-.76,5.98.48,11.44,2.85,16.85,1.71,3.89,3.75,7.32,7.38,9.83,2.53,1.75,5.64,2.67,8.53,3.91,4.35,1.87,8.89,2.61,13.56,1.89l10.33-1.64c.05,0,.1-.02.15-.03,7.43-2.07,14.32-4.78,21.16-8.49,11.54-6.3,22.37-13.36,32.84-21.27,4.47-3.37,8.47-6.88,12.1-11.03,2.25-2.59,2.89-5.76,1.06-8.67-1.46-2.29-4.98-4.43-7.86-2.89ZM460.8,460.01l12.82-38.54c.38-1.13,1.97-1.13,2.35,0l13,38.54c.27.8-.33,1.64-1.18,1.64h-25.82c-.85,0-1.44-.83-1.18-1.63ZM586.5,484.29c-3.65,10.11-11.64,23.67-23.29,23.23-6.52-.24-10.97-5.34-12.02-11.31-1.73-9.73,4.37-17.65,11.25-24.27,8.31-7.42,17.37-13.5,27.42-18.36.44-.08,1.59-.2,1.77.12l.61,1.01c.13.22.2.49.18.75-.79,9.91-2.43,19.48-5.91,28.83Z"/><path d="M406.47,454.56h-43.85c-.68,0-1.24.55-1.24,1.24l-.02,28.89c0,.69.55,1.24,1.24,1.24h51.9c.68,0,1.24.56,1.24,1.24l.03,16.93c0,.69-.55,1.24-1.24,1.24h-76.07c-.69,0-1.24-.56-1.24-1.24v-114.67c0-.68.55-1.24,1.24-1.24l75.9-.02c.69,0,1.24.55,1.24,1.24v17.13c0,.69-.55,1.24-1.24,1.24h-51.76c-.69,0-1.24.55-1.24,1.24v25.41c0,.69.55,1.24,1.24,1.24h43.87c.69,0,1.24.55,1.24,1.24v16.42c0,.69-.56,1.24-1.24,1.24Z"/><path d="M323.04,503.69l-24.46-46.19c-.33-.62-.07-1.38.55-1.69,3.43-1.72,6.35-3.52,9.04-5.9,4.57-4.03,7.66-8.97,9.29-14.89,4.98-21.95-3.15-39.52-25.58-45.14-5.08-1.02-9.99-1.71-15.25-1.71h-43.34c-.69,0-1.24.56-1.24,1.24v114.7c0,.69.56,1.24,1.24,1.24l21.66-.02c.68,0,1.24-.56,1.24-1.24v-40.41c0-.69.56-1.24,1.24-1.24l17.22.02c.47,0,.89.26,1.1.68l21.26,41.54c.21.41.64.68,1.11.68l25.08-.02c.06-.34.02-1.28-.16-1.63ZM284.28,441.56c-2.53.76-5.06,1.34-7.76,1.34l-19.1.02c-.69,0-1.24-.55-1.24-1.24v-32.63c0-.69.56-1.24,1.24-1.24h19.81c3,0,5.81.76,8.5,1.79.05.02.09.04.14.06,3.4,1.64,5.96,4.22,7.37,7.78,3.61,9.11.96,20.58-8.97,24.13Z"/><path d="M149.14,475.24c5.4,12.1,18.24,13.89,30.26,10.52.04-.01.08-.02.12-.04,8.41-2.9,11.5-9.91,12.42-18.29.07-.63.59-1.12,1.23-1.12h21.66c.72,0,1.3.62,1.24,1.34-1.44,17.18-11.61,31.14-28.25,36.49-10.24,3.29-21.23,3.7-31.73,1.35-17.01-3.8-28.17-17.13-32.75-33.59-2.24-8.04-2.73-16.07-2.7-24.43.02-5.86.05-11.41.94-17.16,1.05-6.8,2.94-13.09,6.04-19.18,6.2-12.18,17.14-20.79,30.65-23.46,9.21-1.82,18.6-1.46,27.62,1.06,12.56,3.51,22.42,12.39,27.09,24.48,1.63,4.33,2.63,8.49,3.21,13.36.09.73-.49,1.38-1.23,1.38l-21.63.02c-.64,0-1.16-.48-1.23-1.12-.96-8.74-3.74-15.94-12.37-19.01-5.19-1.55-10.55-1.96-15.9-.96-10.94,2.06-15.77,11.31-17.59,21.79-.98,5.66-1.31,11.21-1.11,16.98l.53,15.44c.17,4.95,1.49,9.67,3.49,14.14Z"/><path d="M589.29,366.9c-.44,2.75-1.92,5.28-4.24,6.82-.65.43-1.34.75-2.09.9-4.16.83-8.79-1.56-10.4-5.34-1.19-2.78-1.74-6.19.08-8.62,1.82-2.44,4.62-4.51,7.46-5.62,2.51-.98,5.77.11,7.57,1.87,2.25,2.21,2.24,6.15,1.62,9.99Z"/></svg>';
+
+	return sprintf(
+		'<p %1$s><a class="creajt-credit" href="%2$s" target="_blank" rel="noopener"><span>%3$s</span>%4$s</a></p>',
+		get_block_wrapper_attributes( array( 'class' => 'kbj-credit' ) ),
+		esc_url( 'https://www.creajt.nl' ),
+		esc_html__( 'Gerealiseerd door', 'kombij' ),
+		$svg
 	);
 }

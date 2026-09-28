@@ -22,7 +22,7 @@ $aanbod = kbj_kolommen(
 		array(
 			'inhoud' => kbj_kader(
 				kbj_kop( 3, 'Wonen' )
-				. kbj_p( 'Met een WLZ-indicatie. U betaalt een eigen bijdrage aan het CAK, en een vast bedrag per maand voor de kamer en de service.' )
+				. kbj_p( 'Met een WLZ-indicatie. De kamer kost vanaf € 985 per maand, exclusief servicekosten en zorg. Voor de zorg betaalt u een eigen bijdrage aan het CAK.' )
 				. kbj_p( '<a href="/wonen-met-zorg/">Meer over wonen</a>', 'kbj-verder' )
 			),
 		),

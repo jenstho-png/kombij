@@ -115,6 +115,36 @@ function kbj_optie_velden() {
 			'hulp'  => __( 'Het reserveringssysteem van de zoutkamer, of later de eigen site van de zoutkamer.', 'kombij' ),
 			'type'  => 'url',
 		),
+		'plek_wonen'         => array(
+			'label'  => __( 'Plek vrij: wonen', 'kombij' ),
+			'hulp'   => __( 'Staat dit op "Plek vrij", dan ziet iedereen dat op de site. Na 45 dagen zonder bijwerken verdwijnt het vanzelf, zodat er nooit oude informatie blijft staan.', 'kombij' ),
+			'type'   => 'select',
+			'keuzes' => array(
+				''          => __( 'Niet tonen', 'kombij' ),
+				'vrij'      => __( 'Plek vrij', 'kombij' ),
+				'wachtlijst' => __( 'Wachtlijst', 'kombij' ),
+			),
+		),
+		'plek_logeren'       => array(
+			'label'  => __( 'Plek vrij: logeren', 'kombij' ),
+			'hulp'   => '',
+			'type'   => 'select',
+			'keuzes' => array(
+				''          => __( 'Niet tonen', 'kombij' ),
+				'vrij'      => __( 'Plek vrij', 'kombij' ),
+				'wachtlijst' => __( 'Wachtlijst', 'kombij' ),
+			),
+		),
+		'plek_dagbesteding'  => array(
+			'label'  => __( 'Plek vrij: dagbesteding', 'kombij' ),
+			'hulp'   => '',
+			'type'   => 'select',
+			'keuzes' => array(
+				''          => __( 'Niet tonen', 'kombij' ),
+				'vrij'      => __( 'Plek vrij', 'kombij' ),
+				'wachtlijst' => __( 'Wachtlijst', 'kombij' ),
+			),
+		),
 		'melding_aan'        => array(
 			'label' => __( 'Melding tonen', 'kombij' ),
 			'hulp'  => __( 'Een klein kaartje rechtsonder, bijvoorbeeld: nog plekken vrij in de zoutkamer, of het café is open. Elke bezoeker ziet hem één keer.', 'kombij' ),
@@ -262,6 +292,15 @@ function kbj_optie_schoonmaken( $ruw ) {
 		return $schoon;
 	}
 
+	/*
+	 * Wanneer de vrije plekken voor het laatst zijn opgeslagen. Zo kan de site
+	 * een oude melding vanzelf weghalen. Een datum van vandaag blijft vandaag,
+	 * dus een tweede ronde opschonen verandert niets.
+	 */
+	if ( isset( $ruw['plek_wonen'] ) || isset( $ruw['plek_logeren'] ) || isset( $ruw['plek_dagbesteding'] ) ) {
+		$schoon['plek_datum'] = isset( $ruw['plek_datum'] ) && preg_match( '/^\d{4}-\d{2}-\d{2}$/', (string) $ruw['plek_datum'] ) && ! isset( $_POST['option_page'] ) ? (string) $ruw['plek_datum'] : wp_date( 'Y-m-d' ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+	}
+
 	foreach ( kbj_optie_velden() as $sleutel => $veld ) {
 		if ( ! isset( $ruw[ $sleutel ] ) ) {
 			continue;
@@ -286,6 +325,10 @@ function kbj_optie_schoonmaken( $ruw ) {
 			 */
 			case 'checkbox':
 				$schoon[ $sleutel ] = 'aan' === $waarde ? 'aan' : 'uit';
+				break;
+
+			case 'select':
+				$schoon[ $sleutel ] = array_key_exists( $waarde, $veld['keuzes'] ) ? $waarde : '';
 				break;
 
 			default:
@@ -373,4 +416,29 @@ function kbj_optie_waarschuwingen() {
 			esc_html__( 'Naar die instelling', 'kombij' )
 		);
 	}
+}
+
+/**
+ * Of er een plek vrij is, voor wonen, logeren of dagbesteding.
+ *
+ * Geeft 'vrij', 'wachtlijst' of een lege tekst. Een melding die langer dan 45
+ * dagen niet is bijgewerkt telt niet meer: liever niets dan iets wat niet klopt.
+ *
+ * @param string $soort wonen, logeren of dagbesteding.
+ * @return string
+ */
+function kbj_plek( $soort ) {
+	$stand = kbj_optie( 'plek_' . $soort );
+
+	if ( '' === $stand ) {
+		return '';
+	}
+
+	$datum = kbj_optie( 'plek_datum' );
+
+	if ( '' === $datum || strtotime( $datum ) < strtotime( '-45 days' ) ) {
+		return '';
+	}
+
+	return $stand;
 }

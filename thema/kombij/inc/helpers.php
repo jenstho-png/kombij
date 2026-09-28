@@ -308,3 +308,17 @@ function kbj_inkorten( $tekst, $lengte = 160 ) {
 
 	return rtrim( $kort, " ,.;:-" ) . '...';
 }
+
+/**
+ * De woordgrap van het merk in een kop: "KomBij ons wonen".
+ *
+ * Het stukje "KomBij" voor "ons" krijgt een eigen stijl, zodat je de dubbele
+ * betekenis ziet: de naam, en de uitnodiging. De rest van de kop blijft zoals
+ * hij is. Werkt op tekst die al veilig is gemaakt.
+ *
+ * @param string $html De kop, al ontsmet.
+ * @return string
+ */
+function kbj_kombij( $html ) {
+	return (string) preg_replace( '/\bKom ?[Bb]ij(?= ons\b)/u', '<span class="kbj-kombij">$0</span>', $html );
+}

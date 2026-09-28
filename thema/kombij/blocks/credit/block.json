@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "kbj/credit",
+	"title": "Gerealiseerd door CREAjt",
+	"category": "kombij",
+	"icon": "external",
+	"description": "Het regeltje onderaan de voet, met het logo van CREAjt.",
+	"textdomain": "kombij",
+	"keywords": [ "creajt", "credit", "footer" ],
+	"supports": {
+		"html": false,
+		"spacing": { "margin": true }
+	},
+	"attributes": {}
+}

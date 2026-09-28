@@ -34,6 +34,7 @@ function kbj_paginas() {
 	return array(
 		array(
 			'slug'     => 'wonen-met-zorg',
+			'plek'     => 'wonen',
 			'seo'      => 'Wonen met zorg in Maasbommel, kleinschalig en huiselijk',
 			'titel'    => 'Wonen met zorg',
 			'menu'     => 'Wonen',
@@ -47,6 +48,7 @@ function kbj_paginas() {
 		),
 		array(
 			'slug'     => 'logeren-met-zorg',
+			'plek'     => 'logeren',
 			'seo'      => 'Logeren met zorg in Maasbommel, respijtzorg voor mantelzorgers',
 			'titel'    => 'Logeren met zorg',
 			'menu'     => 'Logeren',
@@ -60,6 +62,7 @@ function kbj_paginas() {
 		),
 		array(
 			'slug'     => 'dagbesteding',
+			'plek'     => 'dagbesteding',
 			'seo'      => 'Dagbesteding voor ouderen in Maasbommel',
 			'titel'    => 'Dagbesteding',
 			'menu'     => 'Dagbesteding',
@@ -73,6 +76,7 @@ function kbj_paginas() {
 		),
 		array(
 			'slug'     => 'kosten-en-financiering',
+			'voet'     => 'Kosten',
 			'seo'      => 'Kosten en financiering: WLZ, WMO, PGB of particulier',
 			'titel'    => 'Kosten en financiering',
 			'menu'     => 'Kosten',
@@ -113,11 +117,12 @@ function kbj_paginas() {
 		),
 		array(
 			'slug'     => 'werken-bij',
+			'voet'     => 'Werken bij',
 			'seo'      => 'Werken in de zorg bij KomBij in Maasbommel',
 			'titel'    => 'Werken bij KomBij',
 			'menu'     => '',
 			'boven'    => 'Werken bij KomBij',
-			'kop'      => 'Zorg in een klein team, in een bijzonder huis',
+			'kop'      => 'KomBij ons werken',
 			'intro'    => 'We zoeken collega’s en vrijwilligers voor wie persoonlijke aandacht vanzelf spreekt. In een warm team, in een monumentaal gebouw aan de Maas.',
 			'zoek'     => 'Vacatures voor verzorgende IG, verpleegkundige, helpende plus en nachtdienst bij KomBij in Maasbommel. Ook vrijwilligers welkom.',
 			'bestand'  => 'schip.webp',
@@ -148,6 +153,7 @@ function kbj_paginas() {
 		),
 		array(
 			'slug'     => 'voorwaarden',
+			'voet'     => 'Voorwaarden',
 			'seo'      => 'Voorwaarden, huisregels en privacyreglement',
 			'titel'    => 'Voorwaarden en reglementen',
 			'menu'     => '',
@@ -279,6 +285,10 @@ function kbj_pagina_inhoud( $pagina ) {
 		if ( ! empty( $pagina['bestand'] ) ) {
 			$attrs['bestand'] = $pagina['bestand'];
 			$attrs['alt']     = isset( $pagina['alt'] ) ? $pagina['alt'] : '';
+		}
+
+		if ( ! empty( $pagina['plek'] ) ) {
+			$attrs['plek'] = $pagina['plek'];
 		}
 
 		if ( isset( $pagina['knop'] ) && ! $pagina['knop'] ) {

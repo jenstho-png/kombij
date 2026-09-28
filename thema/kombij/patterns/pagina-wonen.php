@@ -70,7 +70,8 @@ $voor_wie = kbj_kop( 2, 'Voor wie is wonen bij KomBij?' )
 
 $kosten = kbj_kader(
 	kbj_kop( 3, 'Wat kost wonen?' )
-	. kbj_p( 'De zorg wordt betaald vanuit de WLZ. U betaalt daarnaast een eigen bijdrage aan het CAK. Hoe hoog die is, hangt af van uw inkomen. Voor de kamer en de service betaalt u een vast bedrag per maand.' )
+	. kbj_p( 'Wonen vanaf € 985 per maand', 'kbj-prijs' )
+	. kbj_p( 'Dat is voor de kamer, exclusief servicekosten en zorg. De zorg wordt betaald vanuit de WLZ. Daarnaast betaalt u een eigen bijdrage aan het CAK, die hangt af van uw inkomen.' )
 	. kbj_p( 'We rekenen het graag samen met u uit, zodat u vooraf weet waar u aan toe bent.' )
 	. kbj_p( '<a href="/kosten-en-financiering/">Meer over kosten en financiering</a>', 'kbj-verder' )
 );

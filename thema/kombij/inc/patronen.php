@@ -152,7 +152,7 @@ function kbj_kop( $niveau, $tekst, $klasse = '', $midden = false ) {
 		kbj_blok_attrs( 'heading', $attrs ),
 		$niveau,
 		esc_attr( $klassen ),
-		$tekst
+		kbj_kombij( $tekst )
 	);
 }
 

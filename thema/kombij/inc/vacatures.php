@@ -695,3 +695,55 @@ function kbj_vacature_omschrijving( $omschrijving ) {
 	return '' !== $intro ? kbj_inkorten( 'Vacature bij KomBij in Maasbommel. ' . $intro, 160 ) : $omschrijving;
 }
 add_filter( 'kbj_omschrijving', 'kbj_vacature_omschrijving' );
+
+/**
+ * De strook boven de voet: "Kom jij ons team versterken?"
+ *
+ * Alleen als er vacatures open staan, en niet op de pagina Werken bij zelf of
+ * op een vacature, want daar weet je het al.
+ *
+ * @param array $attrs Blokinstellingen.
+ * @return string
+ */
+function kbj_render_vacaturestrook( $attrs ) {
+	$sectie = isset( $attrs['vorm'] ) && 'sectie' === $attrs['vorm'];
+
+	// De strook boven de voet niet op de startpagina: daar staat de sectie al.
+	if ( is_page( 'werken-bij' ) || is_singular( KBJ_VACATURE ) || ( ! $sectie && is_front_page() ) ) {
+		return '';
+	}
+
+	$vacatures = kbj_vacatures_open();
+
+	if ( ! $vacatures ) {
+		return '';
+	}
+
+	$namen = array_map( 'get_the_title', $vacatures );
+	$laatste = array_pop( $namen );
+	$zin     = 'Nu open: ' . ( $namen ? implode( ', ', $namen ) . ' en ' : '' ) . $laatste;
+
+	if ( $sectie ) {
+		return sprintf(
+			'<section %1$s><div class="kbj-werken__binnen"><div><h2 class="kbj-schuif">Hart voor zorg? <span class="kbj-kombij">KomBij</span> ons werken.</h2><p>%2$s. Een klein team, korte lijnen en een werkplek die je nergens anders vindt: een monument aan de Maas.</p><div class="kbj-acties"><a class="kbj-knop" href="%3$s">Bekijk de vacatures</a><a class="kbj-knop kbj-knop--rand" href="mailto:werkenbij@kombijmaasbommel.nl">Stuur een open sollicitatie</a></div></div>%4$s</div></section>',
+			get_block_wrapper_attributes( array( 'class' => 'kbj-werken alignwide' ) ),
+			esc_html( $zin ),
+			esc_url( home_url( '/werken-bij/' ) ),
+			kbj_render_beeld(
+				array(
+					'bestand'    => 'schip.webp',
+					'alt'        => 'De lichte ruimte met de nieuwe tussenverdieping',
+					'vorm'       => 'recht',
+					'verhouding' => '4/3',
+				)
+			)
+		);
+	}
+
+	return sprintf(
+		'<aside %1$s><div class="kbj-vacaturestrook__binnen"><p class="kbj-vacaturestrook__kop">Zin in ander werk? <span class="kbj-kombij">KomBij</span> ons werken.</p><p class="kbj-vacaturestrook__tekst">%2$s. In een klein team, in een bijzonder gebouw aan de Maas.</p><a class="kbj-knop kbj-knop--wit" href="%3$s">Bekijk de vacatures</a></div></aside>',
+		get_block_wrapper_attributes( array( 'class' => 'kbj-vacaturestrook' ) ),
+		esc_html( $zin ),
+		esc_url( home_url( '/werken-bij/' ) )
+	);
+}

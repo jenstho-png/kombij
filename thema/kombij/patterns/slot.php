@@ -9,8 +9,8 @@
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	'<!-- wp:kbj/raamlijn /-->' . "\n"
 	. kbj_groep(
-		kbj_kop( 2, 'Kom een kop koffie drinken.', 'kbj-schuif', true )
-		. kbj_p( 'Zien is ervaren. Plan een rondleiding en voel zelf hoe het is bij KomBij. Liever eerst even bellen? Dat kan natuurlijk ook.', 'kbj-intro', true )
+		kbj_kop( 2, 'KomBij ons langs. De koffie staat klaar.', 'kbj-schuif', true )
+		. kbj_p( 'Zien is ervaren. Plan een rondleiding en voel zelf hoe het bij ons is.', 'kbj-intro', true )
 		. kbj_knoppen(
 			array(
 				array(
@@ -20,7 +20,8 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 				kbj_tel_knop(),
 			),
 			true
-		),
+		)
+		. kbj_p( 'Liever eerst even bellen? Dat kan altijd: <a href="' . esc_attr( kbj_tel_url() ) . '">' . esc_html( kbj_tel_tekst() ) . '</a>. U krijgt meteen iemand aan de lijn.', 'kbj-bellen', true ),
 		'kbj-slot__binnen'
 	),
 	array(

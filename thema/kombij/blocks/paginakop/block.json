@@ -16,6 +16,7 @@
 		"alt": { "type": "string", "default": "", "role": "content" },
 		"positie": { "type": "string", "default": "50% 50%" },
 		"knop": { "type": "boolean", "default": true },
+		"plek": { "type": "string", "default": "" },
 		"align": { "type": "string", "default": "full" }
 	}
 }

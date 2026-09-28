@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "kbj/vacaturestrook",
+	"title": "Strook: we zoeken collega's",
+	"category": "kombij",
+	"description": "Een vriendelijke strook met de open vacatures. Staat er niets open, dan is hij onzichtbaar.",
+	"textdomain": "kombij",
+	"supports": { "html": false, "multiple": true },
+	"attributes": {
+		"vorm": { "type": "string", "default": "strook", "enum": [ "strook", "sectie" ] }
+	}
+}
