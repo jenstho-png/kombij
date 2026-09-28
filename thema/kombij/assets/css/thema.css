@@ -4709,3 +4709,86 @@ body {
 		margin-right: calc(var(--kbj-zijkant) * -1) !important;
 	}
 }
+
+/* ================================================================
+ * De andere pagina's als één geheel.
+ *
+ * Geen losse blauwe blokken meer onder elkaar: de pagina loopt wit door.
+ * De kop vloeit zacht over in de tekst, de lichtblauwe secties verliezen
+ * hun doos en de kaders worden rustige vlakken zonder rand. Alleen de
+ * afsluiting en een donker vlak blijven een eigen blok, als accent.
+ * ================================================================ */
+
+body:not(.home) .kbj-paginakop.alignfull {
+	margin-top: 0 !important;
+	margin-left: calc(var(--wp--style--root--padding-left, 0px) * -1) !important;
+	margin-right: calc(var(--wp--style--root--padding-right, 0px) * -1) !important;
+	border-radius: 0;
+	background-color: transparent;
+	background-image:
+		radial-gradient(55% 70% at 85% 0%, rgba(176, 225, 241, 0.55), transparent 70%),
+		linear-gradient(180deg, var(--kbj-ijs) 0%, rgba(241, 248, 251, 0.6) 55%, var(--kbj-wit) 100%);
+}
+
+body:not(.home) .wp-block-post-content > .kbj-paneel.has-ijs-background-color,
+body:not(.home) .wp-block-post-content > .kbj-paneel.has-wit-background-color {
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+	border-radius: 0;
+	background: transparent !important;
+}
+
+/* Eén ritme: elke sectie evenveel ruimte, zonder gaten tussen de vlakken. */
+body:not(.home) .wp-block-post-content > .kbj-sectie {
+	padding-top: clamp(2.5rem, 5vw, 4.5rem) !important;
+	padding-bottom: clamp(2.5rem, 5vw, 4.5rem) !important;
+	margin-top: 0 !important;
+}
+
+body:not(.home) .kbj-paginakop + .kbj-sectie {
+	padding-top: clamp(1.5rem, 3vw, 2.5rem) !important;
+}
+
+/* Kaders: een zacht vlak in plaats van een doos met een rand. */
+body:not(.home) .kbj-kader {
+	background: var(--kbj-ijs);
+	border-color: transparent;
+}
+
+/* Kaartjes (zoals de regelingen): geen streep en rand, wel een zacht vlak. */
+body:not(.home) .kbj-regelingen li,
+body:not(.home) .kbj-vacatures__link {
+	border: 0;
+	background: var(--kbj-ijs);
+}
+
+/* Een gecentreerde sectiekop centreert ook zijn inleiding. */
+.kbj-sectiekop.kbj-midden > p {
+	margin-inline: auto;
+	text-align: center;
+}
+
+/* De afsluiting en de donkere vlakken blijven een eigen blok, als accent. */
+body:not(.home) .wp-block-post-content > .kbj-paneel.has-nachtblauw-background-color,
+body:not(.home) .wp-block-post-content > .kbj-paneel.has-glasblauw-background-color {
+	margin-top: clamp(1.5rem, 3vw, 2.5rem) !important;
+}
+
+body:not(.home) .kbj-stappen li {
+	border: 0;
+	background: var(--kbj-ijs);
+}
+
+/* Alle secties op dezelfde lijn: de vlakken zonder doos vallen terug op de gewone marges. */
+body:not(.home) .wp-block-post-content > .wp-block-group.alignfull.kbj-paneel.has-ijs-background-color,
+body:not(.home) .wp-block-post-content > .wp-block-group.alignfull.kbj-paneel.has-wit-background-color {
+	margin-left: calc(var(--wp--style--root--padding-left, 0px) * -1) !important;
+	margin-right: calc(var(--wp--style--root--padding-right, 0px) * -1) !important;
+	overflow: visible;
+}
+
+/* De tekening in de kop vervaagt naar onder, zodat hij niet hard afbreekt. */
+body:not(.home) .kbj-paginakop .kbj-raamlijn {
+	-webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+	mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+}

@@ -43,7 +43,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 			'Schilderen, tekenen en kleuren',
 			'Handwerken en kaarten maken',
 			'Geheugentraining',
-			'Gezelschapsspellen',
+			'Gezelschaps&shy;spellen',
 			'Samen aan tafel voor de lunch',
 		),
 		'kbj-lijst kbj-lijst--twee'
