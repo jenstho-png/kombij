@@ -68,6 +68,15 @@ function kbj_standaardzin() {
  * @return string
  */
 function kbj_omschrijving() {
+	return (string) apply_filters( 'kbj_omschrijving', kbj_omschrijving_basis() );
+}
+
+/**
+ * De omschrijving zonder filter.
+ *
+ * @return string
+ */
+function kbj_omschrijving_basis() {
 	if ( is_front_page() ) {
 		return kbj_inkorten( kbj_standaardzin(), 160 );
 	}
@@ -784,8 +793,19 @@ function kbj_llms_txt() {
 		$regels[] = '';
 
 		foreach ( $vacatures as $vacature ) {
-			$regels[] = sprintf( '- [%s](%s): %s', get_the_title( $vacature ), get_permalink( $vacature ), kbj_vacature_veld( $vacature->ID, 'uren' ) );
+			$kenmerken = array_filter(
+				array(
+					kbj_vacature_veld( $vacature->ID, 'uren' ),
+					kbj_vacature_veld( $vacature->ID, 'opleiding' ),
+					kbj_vacature_veld( $vacature->ID, 'salaris' ),
+				)
+			);
+
+			$regels[] = sprintf( '- [%s](%s): %s', get_the_title( $vacature ), get_permalink( $vacature ), implode( ', ', $kenmerken ) );
 		}
+
+		$regels[] = '';
+		$regels[] = 'Solliciteren: werkenbij@kombijmaasbommel.nl. Alle vacatures: ' . home_url( '/werken-bij/' );
 	}
 
 	$voorpagina = (int) get_option( 'page_on_front' );
@@ -841,11 +861,11 @@ add_action( 'template_redirect', 'kbj_llms_txt', 1 );
 function kbj_llms_feiten() {
 	return array(
 		'KomBij Maasbommel biedt wonen met zorg, logeren met zorg (respijtzorg) en dagbesteding voor ouderen en volwassenen met een zorgvraag, onder meer bij dementie.',
-		'Gevestigd in de voormalige H. Lambertuskerk (1868-1869, rijksmonument) aan de Raadhuisdijk 44 in Maasbommel, gemeente West Maas en Waal, Gelderland.',
+		'Gevestigd in een monumentaal gebouw uit 1869, de voormalige Lambertuskerk (rijksmonument), aan de Raadhuisdijk 44 in Maasbommel, gemeente West Maas en Waal, Gelderland.',
 		'Wonen: 6 plekken voor bewoners met een WLZ-indicatie, eigen zit-slaapkamer, 24 uur per dag zorg en toezicht.',
 		'Logeren: minimaal 2 nachten, vaste blokken (maandag tot woensdag, woensdag tot vrijdag, vrijdag tot maandag). Te betalen via WLZ, WMO, PGB (tot 156 etmalen per jaar) of particulier.',
 		'Dagbesteding: maandag tot en met vrijdag van 10:30 tot 16:30, minimaal 2 dagen per week, via WMO, WLZ of particulier.',
-		'Opgericht door Corrie Roelofsen, haar dochter Chantal en schoonzoon Edwin. Een familiebedrijf.',
+		'Opgericht door Corrie Roelofsen, haar dochter Chantal en schoonzoon Edwin. Een familiebedrijf, zonder religieuze grondslag: iedereen is welkom.',
 		'Rondleiding of kennismaking op afspraak, telefonisch of per e-mail.',
 	);
 }

@@ -1,0 +1,11 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "kbj/raamlijn",
+	"title": "Tekening van het raam",
+	"category": "kombij",
+	"description": "Het raam van het gebouw als tekening, die zich zet en oplicht als hij in beeld komt.",
+	"textdomain": "kombij",
+	"supports": { "html": false, "className": true },
+	"attributes": {}
+}

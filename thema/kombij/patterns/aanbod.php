@@ -1,67 +1,47 @@
 <?php
 /**
- * Title: Wonen, logeren en dagbesteding
+ * Title: Wat zoekt u?
  * Slug: kombij/aanbod
  * Categories: kombij
- * Description: De drie manieren om bij KomBij te zijn, elk met een foto in kerkvorm. Op de telefoon een strook om opzij te vegen.
+ * Description: Wonen, logeren en dagbesteding als drie kaarten met een foto, een pakkende kop, één zin en een knop.
  */
 
-$kaart = function ( $bestand, $alt, $label, $titel, $tekst, $link, $linktekst ) {
-	return kbj_foto( $bestand, $alt )
-		. kbj_p( $label, 'kbj-label' )
-		. kbj_kop( 3, $titel )
-		. kbj_p( $tekst )
-		. kbj_p( '<a href="' . esc_url( $link ) . '">' . esc_html( $linktekst ) . '</a>', 'kbj-verder' );
+$kaart = function ( $bestand, $alt, $kop, $tekst, $link, $knop ) {
+	return kbj_groep(
+		kbj_foto( $bestand, $alt, array( 'vorm' => 'recht', 'verhouding' => '4/3' ) )
+		. kbj_groep(
+			kbj_kop( 3, $kop )
+			. kbj_p( $tekst )
+			. kbj_knoppen(
+				array(
+					array(
+						'tekst' => $knop,
+						'url'   => $link,
+					),
+				)
+			),
+			'kbj-kaart3__inhoud'
+		),
+		'kbj-kaart3'
+	);
 };
 
-$kaarten = kbj_kolommen(
-	array(
-		array(
-			'klasse' => 'kbj-kaart',
-			'inhoud' => $kaart(
-				'slaapkamer.webp',
-				'Een lichte zit-slaapkamer met een glas-in-loodraam en een gewelfd plafond',
-				'Met een WLZ-indicatie',
-				'KomBij ons wonen',
-				'Een eigen kamer in een kleine groep van zes bewoners. Met 24 uur per dag zorg, ook bij dementie of intensieve verpleging.',
-				'/wonen-met-zorg/',
-				'Meer over wonen'
-			),
-		),
-		array(
-			'klasse' => 'kbj-kaart',
-			'inhoud' => $kaart(
-				'zitplek.webp',
-				'Een fauteuil en een ronde tafel met bloemen in een logeerkamer',
-				'Vanaf 2 nachten',
-				'KomBij ons logeren',
-				'Uw naaste logeert een paar nachten bij ons, met dezelfde zorg als thuis. U heeft even tijd voor uzelf.',
-				'/logeren-met-zorg/',
-				'Meer over logeren'
-			),
-		),
-		array(
-			'klasse' => 'kbj-kaart',
-			'inhoud' => $kaart(
-				'dagbesteding.webp',
-				'Gasten en een begeleider aan de lange tafel in de kerk',
-				'Maandag tot en met vrijdag',
-				'KomBij ons de dag doorbrengen',
-				'Samen koffie drinken, bewegen, schilderen of de krant lezen. Met een warme lunch. U kiest zelf de dagen.',
-				'/dagbesteding/',
-				'Meer over dagbesteding'
-			),
-		),
-	),
-	'kbj-kaarten'
-);
-
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	kbj_sectiekop(
-		'Wat wij bieden',
-		'Drie manieren om bij ons te zijn',
-		'Zoekt u een nieuw thuis, een paar nachten logeren of gezelschap overdag? U komt in hetzelfde huis, bij hetzelfde team.'
+	kbj_groep(
+		kbj_kop( 2, 'Wat zoekt u voor uw vader of moeder?', 'kbj-schuif' )
+		. kbj_p( 'Drie manieren om bij ons te zijn. Hetzelfde huis, hetzelfde vertrouwde team.' ),
+		'kbj-kop-groot'
 	)
-	. $kaarten,
-	array( 'klasse' => 'kbj-aanbod kbj-reveal' )
+	. kbj_groep(
+		$kaart( 'slaapkamer.webp', 'Een lichte kamer met een hoog glas-in-loodraam', 'Een nieuw thuis', 'Een eigen kamer in een huis voor zes bewoners, met dag en nacht zorg dichtbij.', '/wonen-met-zorg/', 'Wonen met zorg' )
+		. $kaart( 'zitplek.webp', 'Een fauteuil en een tafeltje met bloemen in een logeerkamer', 'Even op adem komen', 'Uw naaste logeert een paar nachten bij ons. U rust uit, wij zorgen.', '/logeren-met-zorg/', 'Logeren met zorg' )
+		. $kaart( 'dagbesteding.webp', 'Gasten en een begeleider lachen samen aan tafel', 'Nooit meer de hele dag alleen', 'Koffie, bewegen, schilderen en samen lunchen. Maandag tot en met vrijdag.', '/dagbesteding/', 'Dagbesteding' ),
+		'kbj-kaarten3'
+	),
+	array(
+		'klasse' => 'kbj-aanbod',
+		'anker'  => 'aanbod',
+		'boven'  => '60',
+		'onder'  => '50',
+	)
 );

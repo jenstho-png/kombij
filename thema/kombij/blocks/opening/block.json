@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "kbj/opening",
+	"title": "Opening met foto",
+	"category": "kombij",
+	"description": "De opening van de startpagina: een grote foto met licht door gekleurd glas, de kop, twee knoppen en vier feiten.",
+	"textdomain": "kombij",
+	"supports": { "html": false, "multiple": false, "align": [ "full" ] },
+	"attributes": {
+		"kop": { "type": "string", "default": "", "role": "content" },
+		"glans": { "type": "string", "default": "", "role": "content" },
+		"tekst": { "type": "string", "default": "", "role": "content" },
+		"bestand": { "type": "string", "default": "samen-aan-tafel.webp" },
+		"alt": { "type": "string", "default": "", "role": "content" },
+		"positie": { "type": "string", "default": "50% 50%" },
+		"align": { "type": "string", "default": "full" }
+	}
+}

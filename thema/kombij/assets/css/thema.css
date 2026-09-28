@@ -145,13 +145,6 @@ main > .wp-block-post-content > * {
 	color: var(--kbj-kerk);
 }
 
-.kbj-boven::before {
-	content: "";
-	flex: 0 0 auto;
-	width: 18px;
-	height: 18px;
-	background: var(--kbj-ornament-kleur) center / contain no-repeat;
-}
 
 .has-text-align-center.kbj-boven,
 .kbj-midden .kbj-boven {
@@ -789,78 +782,6 @@ a.kbj-verder:hover::after {
 	}
 }
 
-/* -------------------------------------------------------- kerncijfers */
-
-.kbj-cijfers {
-	display: grid;
-	grid-template-columns: repeat(4, minmax(0, 1fr));
-	gap: 0;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-.kbj-cijfers li {
-	padding: 1.5rem clamp(1rem, 2vw, 1.75rem);
-	border-left: 1px solid var(--kbj-lijn);
-}
-
-.kbj-cijfers li:first-child {
-	border-left: 0;
-	padding-left: 0;
-}
-
-.kbj-cijfers strong {
-	display: block;
-	font-size: var(--wp--preset--font-size--x-large);
-	font-weight: 700;
-	line-height: 1.1;
-	color: var(--kbj-kerk);
-}
-
-.kbj-cijfers span {
-	display: block;
-	margin-top: 0.35rem;
-	font-size: var(--wp--preset--font-size--small);
-	color: var(--kbj-leisteen);
-}
-
-.has-nachtblauw-background-color .kbj-cijfers li {
-	border-color: var(--wp--custom--line-licht);
-}
-
-.has-nachtblauw-background-color .kbj-cijfers strong {
-	color: var(--kbj-glas);
-}
-
-.has-nachtblauw-background-color .kbj-cijfers span {
-	color: var(--kbj-wit);
-}
-
-@media (max-width: 781px) {
-	.kbj-cijfers {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-
-	.kbj-cijfers li {
-		padding: 1.1rem 1rem;
-		border-left: 0;
-		border-top: 1px solid var(--kbj-lijn);
-	}
-
-	.kbj-cijfers li:nth-child(odd) {
-		padding-left: 0;
-	}
-
-	.kbj-cijfers li:nth-child(even) {
-		border-left: 1px solid var(--kbj-lijn);
-	}
-
-	.has-nachtblauw-background-color .kbj-cijfers li {
-		border-color: var(--wp--custom--line-licht);
-	}
-}
-
 /* ------------------------------------------------------------ paginakop */
 
 .kbj-paginakop {
@@ -950,169 +871,6 @@ a.kbj-verder:hover::after {
 	font-size: var(--wp--preset--font-size--large);
 	line-height: 1.6;
 }
-
-/* -------------------------------------------------------- herkenning */
-
-/*
- * De vragen die een mantelzorger zichzelf stelt, groot en rustig. Zo begint
- * elk verhaal op de site: eerst herkenning, dan pas het aanbod.
- */
-.kbj-herkenning__vragen {
-	display: grid;
-	gap: 1rem;
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
-.kbj-herkenning__vragen li {
-	position: relative;
-	padding: 1.25rem 1.5rem 1.25rem 3.75rem;
-	background: var(--kbj-wit);
-	border-radius: var(--kbj-rand);
-	font-size: var(--wp--preset--font-size--large);
-	font-weight: 600;
-	line-height: 1.4;
-	box-shadow: 0 1px 0 var(--kbj-lijn);
-}
-
-.kbj-herkenning__vragen li::before {
-	content: "";
-	position: absolute;
-	left: 1.25rem;
-	top: 1.35rem;
-	width: 24px;
-	height: 24px;
-	background: var(--kbj-ornament-kleur) center / contain no-repeat;
-}
-
-.kbj-herkenning .wp-block-columns {
-	gap: clamp(2rem, 6vw, 5rem);
-}
-
-/* -------------------------------------------------------------- aanbod */
-
-/*
- * De drie manieren om bij KomBij te zijn. Naast elkaar op een groot scherm;
- * op de telefoon een rij die je opzij veegt, nooit drie foto's onder elkaar.
- */
-.kbj-kaarten.wp-block-columns {
-	gap: clamp(1.25rem, 3vw, 2.5rem);
-	margin: 0;
-}
-
-.kbj-kaart {
-	display: flex;
-	flex-direction: column;
-}
-
-.kbj-kaart > .kbj-beeld {
-	margin-bottom: 1.5rem;
-}
-
-.kbj-kaart h3 {
-	margin: 0 0 0.6rem;
-	font-size: var(--wp--preset--font-size--large);
-	font-weight: 700;
-}
-
-.kbj-kaart p {
-	margin: 0 0 0.75rem;
-}
-
-.kbj-kaart .kbj-label {
-	align-self: flex-start;
-	margin: 0 0 0.6rem;
-}
-
-.kbj-kaart .kbj-verder {
-	margin-top: auto;
-}
-
-.kbj-label {
-	display: inline-block;
-	padding: 0.3rem 0.75rem;
-	border-radius: 999px;
-	background: var(--kbj-ijs);
-	color: var(--kbj-kerk);
-	font-size: var(--wp--preset--font-size--x-small);
-	font-weight: 700;
-	letter-spacing: 0.02em;
-}
-
-.has-ijs-background-color .kbj-label {
-	background: var(--kbj-wit);
-}
-
-/*
- * Op de telefoon geen strook om opzij te vegen: veel bezoekers zijn ouder en
- * zien niet dat er meer is. Elke kaart wordt een rij, met een kleine boogfoto
- * links en de tekst rechts. Zo staat alles in beeld, zonder drie grote foto's
- * onder elkaar.
- */
-@media (max-width: 781px) {
-	.kbj-kaarten.wp-block-columns {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1.25rem;
-	}
-
-	.kbj-kaarten > .wp-block-column {
-		flex-basis: auto !important;
-	}
-
-	.kbj-kaart {
-		display: grid;
-		grid-template-columns: minmax(96px, 34%) 1fr;
-		column-gap: 1.1rem;
-		align-items: start;
-		padding: 1rem;
-		background: var(--kbj-ijs);
-		border-radius: var(--kbj-rand);
-	}
-
-	.kbj-kaart > * {
-		grid-column: 2;
-	}
-
-	.kbj-kaart > .kbj-beeld {
-		grid-column: 1;
-		grid-row: 1 / span 4;
-		margin: 0;
-		padding: 0 6px 6px 0;
-	}
-
-	.kbj-kaart > .kbj-beeld::before {
-		inset: 6px 0 0 6px;
-	}
-
-	.kbj-kaart > .kbj-beeld .kbj-beeld__kader {
-		aspect-ratio: 3 / 4 !important;
-	}
-
-	.kbj-kaart .kbj-label {
-		background: var(--kbj-wit);
-		font-size: 0.8125rem;
-	}
-
-	.kbj-kaart h3 {
-		font-size: 1.2rem;
-	}
-
-	.kbj-kaart p:not(.kbj-label):not(.kbj-verder) {
-		font-size: 1rem;
-		line-height: 1.55;
-	}
-}
-
-@media (max-width: 400px) {
-	.kbj-kaart {
-		grid-template-columns: 88px 1fr;
-		column-gap: 0.9rem;
-	}
-}
-
-
 
 /* ---------------------------------------------------------------- duo */
 
@@ -1210,56 +968,6 @@ a.kbj-verder:hover::after {
 
 .has-nachtblauw-background-color .kbj-citaat cite {
 	color: var(--kbj-glas);
-}
-
-/* --------------------------------------------------------------- huis */
-
-/*
- * Het verhaal van de kerk, op een nachtblauw vlak. Twee foto's die over
- * elkaar vallen: het schip breed, het koor met de ramen in een spitsboog.
- */
-.kbj-huis {
-	color: var(--kbj-wit);
-}
-
-.kbj-huis h2,
-.kbj-huis h3 {
-	color: var(--kbj-wit);
-}
-
-.kbj-huis__beelden {
-	position: relative;
-	padding-bottom: 12%;
-}
-
-.kbj-huis__beelden > .kbj-beeld--recht .kbj-beeld__kader {
-	aspect-ratio: 4 / 3 !important;
-}
-
-.kbj-huis__beelden > .kbj-beeld--boog {
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	width: 40%;
-}
-
-@media (max-width: 781px) {
-	.kbj-huis__beelden {
-		padding-bottom: 0;
-		display: grid;
-		grid-template-columns: 1.4fr 1fr;
-		gap: 0.75rem;
-		align-items: end;
-	}
-
-	.kbj-huis__beelden > .kbj-beeld--boog {
-		position: static;
-		width: auto;
-	}
-
-	.kbj-huis__beelden > .kbj-beeld--recht .kbj-beeld__kader {
-		aspect-ratio: 3 / 4 !important;
-	}
 }
 
 /* ------------------------------------------------------------ een dag */
@@ -2027,10 +1735,6 @@ kbj-video-facade {
 
 /* ------------------------------------------------------ aanvullingen */
 
-.kbj-hero__cijfers {
-	margin-top: clamp(2.5rem, 5vw, 4rem);
-	border-top: 1px solid var(--kbj-lijn);
-}
 
 .has-nachtblauw-background-color .kbj-verder a,
 .has-nachtblauw-background-color a.kbj-verder,
@@ -2436,127 +2140,6 @@ kbj-video-facade {
 	}
 }
 
-/* ------------------------------------------------------------ panorama */
-
-/*
- * Het grote beeldmoment: het schip van de kerk over de volle breedte. Tijdens
- * het scrollen gaat het open als een raam: eerst smal met een ronde boog
- * erboven, daarna rand tot rand. Zonder ondersteuning voor scroll-animaties
- * staat de foto er gewoon helemaal.
- */
-.kbj-panorama {
-	position: relative;
-	margin: 0;
-	padding: 0;
-	background: var(--kbj-wit);
-}
-
-.kbj-panorama__raam {
-	position: relative;
-	height: clamp(420px, 88vh, 860px);
-	overflow: hidden;
-}
-
-.kbj-panorama__raam img {
-	position: absolute;
-	inset: 0;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-.kbj-panorama__raam::after {
-	content: "";
-	position: absolute;
-	inset: 0;
-	background: linear-gradient(180deg, rgba(10, 36, 68, 0) 40%, rgba(10, 36, 68, 0.72) 100%);
-}
-
-.kbj-panorama__tekst {
-	position: absolute;
-	z-index: 1;
-	left: 0;
-	right: 0;
-	bottom: clamp(2rem, 6vw, 4.5rem);
-	max-width: var(--kbj-breed);
-	margin: 0 auto;
-	padding: 0 var(--kbj-zijkant);
-	color: var(--kbj-wit);
-}
-
-.kbj-panorama__tekst p {
-	margin: 0;
-	max-width: 40rem;
-	font-size: var(--wp--preset--font-size--xx-large);
-	font-weight: 700;
-	line-height: 1.15;
-	letter-spacing: -0.015em;
-	text-wrap: balance;
-}
-
-.kbj-panorama__tekst span {
-	display: block;
-	margin-top: 0.75rem;
-	font-size: var(--wp--preset--font-size--medium);
-	font-weight: 500;
-	letter-spacing: 0;
-	color: var(--kbj-glas);
-}
-
-@supports (animation-timeline: view()) {
-	@media (prefers-reduced-motion: no-preference) {
-		.kbj-panorama__raam {
-			animation: kbj-raam-breed linear both;
-			animation-timeline: view();
-			animation-range: entry 0% cover 45%;
-		}
-
-		.kbj-panorama__raam img {
-			animation: kbj-raam-zoom linear both;
-			animation-timeline: view();
-			animation-range: entry 0% exit 100%;
-		}
-
-		.kbj-panorama__tekst {
-			animation: kbj-raam-tekst linear both;
-			animation-timeline: view();
-			animation-range: cover 25% cover 50%;
-		}
-
-		@keyframes kbj-raam-breed {
-			from {
-				clip-path: inset(0 min(16vw, 220px) 0 min(16vw, 220px) round 50vw 50vw 0 0);
-			}
-
-			to {
-				clip-path: inset(0 0 0 0 round 0 0 0 0);
-			}
-		}
-
-		@keyframes kbj-raam-zoom {
-			from {
-				transform: scale(1.18);
-			}
-
-			to {
-				transform: scale(1);
-			}
-		}
-
-		@keyframes kbj-raam-tekst {
-			from {
-				opacity: 0;
-				transform: translateY(30px);
-			}
-
-			to {
-				opacity: 1;
-				transform: none;
-			}
-		}
-	}
-}
-
 /* ------------------------------------------------------------ vacatures */
 
 .kbj-vacatures {
@@ -2737,4 +2320,1214 @@ kbj-video-facade {
 .kbj-melding__sluit:hover {
 	background: var(--kbj-ijs);
 	color: var(--kbj-nacht);
+}
+
+/* ------------------------------------------------ het huis (over ons) */
+
+.kbj-huis h2,
+.kbj-huis h3 {
+	color: var(--kbj-wit);
+}
+
+.kbj-huis__beelden {
+	position: relative;
+	padding-bottom: 12%;
+}
+
+.kbj-huis__beelden > .kbj-beeld--recht .kbj-beeld__kader {
+	aspect-ratio: 4 / 3 !important;
+}
+
+.kbj-huis__beelden > .kbj-beeld--boog {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 40%;
+}
+
+@media (max-width: 781px) {
+	.kbj-huis__beelden {
+		padding-bottom: 0;
+		display: grid;
+		grid-template-columns: 1.4fr 1fr;
+		gap: 0.75rem;
+		align-items: end;
+	}
+
+	.kbj-huis__beelden > .kbj-beeld--boog {
+		position: static;
+		width: auto;
+	}
+}
+
+/* --------------------------------------------------------------- bordje */
+
+/*
+ * Het bordje hangt aan twee koordjes onder de balk, rechts, en schommelt heel
+ * licht. Klikken gaat erdoorheen, behalve op het bordje zelf. Op de telefoon
+ * is er geen plek naast het menu; daar staat het niet.
+ */
+.kbj-header {
+	position: sticky;
+}
+
+.kbj-bordje {
+	position: absolute;
+	top: 100%;
+	right: max(var(--kbj-zijkant), calc((100vw - var(--kbj-breed)) / 2 + var(--kbj-zijkant)));
+	z-index: 1;
+	padding-top: 22px;
+	pointer-events: none;
+	transform-origin: 50% 0;
+	animation: kbj-schommel 6s ease-in-out infinite;
+}
+
+.kbj-bordje__koord {
+	position: absolute;
+	top: 0;
+	width: 2px;
+	height: 26px;
+	background: var(--kbj-zee);
+}
+
+.kbj-bordje__koord--links {
+	left: 26%;
+}
+
+.kbj-bordje__koord--rechts {
+	right: 26%;
+}
+
+.kbj-bordje__plaat {
+	position: relative;
+	display: grid;
+	justify-items: center;
+	gap: 0.1rem;
+	min-width: 132px;
+	margin: 0;
+	padding: 2.4rem 1.1rem 0.85rem;
+	background: var(--kbj-nacht);
+	color: var(--kbj-wit);
+	text-align: center;
+	pointer-events: auto;
+	-webkit-mask: var(--kbj-boog) center / 100% 100% no-repeat;
+	mask: var(--kbj-boog) center / 100% 100% no-repeat;
+	filter: drop-shadow(0 8px 14px rgba(10, 36, 68, 0.25));
+}
+
+/* De vierpas bovenin de boog, en een dunne binnenrand zoals een oud bordje. */
+.kbj-bordje__plaat::before {
+	content: "";
+	position: absolute;
+	top: 0.65rem;
+	left: 50%;
+	width: 22px;
+	height: 22px;
+	transform: translateX(-50%);
+	background: var(--kbj-ornament-wit) center / contain no-repeat;
+	opacity: 0.9;
+}
+
+.kbj-bordje__plaat::after {
+	content: "";
+	position: absolute;
+	inset: 4px;
+	border: 1px solid rgba(176, 225, 241, 0.55);
+	-webkit-mask: var(--kbj-boog) center / 100% 100% no-repeat;
+	mask: var(--kbj-boog) center / 100% 100% no-repeat;
+	pointer-events: none;
+}
+
+.kbj-bordje__wat {
+	font-size: 0.8125rem;
+	font-weight: 600;
+	color: var(--kbj-glas);
+}
+
+.kbj-bordje__stand {
+	font-size: 1rem;
+	font-weight: 800;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+}
+
+.kbj-bordje__stand::before {
+	content: none;
+	display: none;
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	margin: 0 0.45rem 0.12rem 0;
+	border-radius: 50%;
+	background: var(--kbj-leisteen);
+	vertical-align: middle;
+}
+
+.kbj-bordje.is-open .kbj-bordje__stand::before {
+	background: #7ee0a1;
+	box-shadow: 0 0 0 3px rgba(126, 224, 161, 0.25);
+}
+
+.kbj-bordje__wanneer {
+	font-size: 0.8125rem;
+	color: var(--kbj-wit);
+}
+
+@keyframes kbj-schommel {
+	0%,
+	100% {
+		transform: rotate(-1.6deg);
+	}
+
+	50% {
+		transform: rotate(1.6deg);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.kbj-bordje {
+		animation: none;
+	}
+}
+
+@media (max-width: 1199px) {
+	.kbj-bordje {
+		display: none;
+	}
+}
+
+/* ================================================================
+ * Ronde 3: modern, met de kerk als licht en lijn.
+ *
+ * Geen regeltjes boven de koppen, geen bogen als fotovorm en geen linkjes met
+ * pijltjes. Wel: secties als vlakken met ronde hoeken, echte knoppen, en het
+ * gebouw terug als lijntekening van het raam en als licht door gekleurd glas.
+ * ================================================================ */
+
+/* Nergens meer een regeltje boven een kop. */
+.kbj-boven,
+.kbj-hero__boven,
+.kbj-hoofdstuk__nummer {
+	display: none !important;
+}
+
+/* Foto's: strak, met ronde hoeken. De boog is weg, ook als hij nog is ingesteld. */
+.kbj-beeld--boog {
+	padding: 0;
+}
+
+.kbj-beeld--boog::before {
+	display: none;
+}
+
+.kbj-beeld--boog .kbj-beeld__kader,
+.kbj-beeld__kader {
+	-webkit-mask: none;
+	mask: none;
+	border-radius: var(--kbj-rand);
+}
+
+/* ----------------------------------------------------------- knoppen */
+
+/* Een "lees verder" is voortaan gewoon een knop. */
+.kbj-verder a,
+a.kbj-verder {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 50px;
+	padding: 0.8rem 1.6rem;
+	border: 2px solid var(--kbj-kerk);
+	border-radius: 999px;
+	background: transparent;
+	color: var(--kbj-kerk);
+	font-weight: 600;
+	font-size: 1rem;
+	line-height: 1.2;
+	text-decoration: none;
+	transition: background-color var(--kbj-duur) var(--kbj-ease), color var(--kbj-duur) var(--kbj-ease), transform var(--kbj-duur) var(--kbj-ease);
+}
+
+.kbj-verder a::after,
+a.kbj-verder::after {
+	content: none;
+}
+
+.kbj-verder a:hover,
+a.kbj-verder:hover {
+	background: var(--kbj-kerk);
+	color: var(--kbj-wit);
+}
+
+.has-nachtblauw-background-color .kbj-verder a,
+.kbj-huis .kbj-verder a {
+	border-color: var(--kbj-wit);
+	color: var(--kbj-wit);
+}
+
+.has-nachtblauw-background-color .kbj-verder a:hover,
+.kbj-huis .kbj-verder a:hover {
+	background: var(--kbj-wit);
+	color: var(--kbj-nacht);
+}
+
+.kbj-knop:active,
+.wp-block-button__link:active,
+.kbj-verder a:active {
+	transform: scale(0.97);
+}
+
+/* Een knop in het wit, voor op een foto of een donker vlak. */
+.kbj-knop--wit {
+	background: var(--kbj-wit);
+	border-color: var(--kbj-wit);
+	color: var(--kbj-nacht);
+}
+
+.kbj-knop--wit:hover,
+.kbj-knop--wit:focus-visible {
+	background: var(--kbj-glas);
+	border-color: var(--kbj-glas);
+	color: var(--kbj-nacht);
+}
+
+.kbj-knop--glas {
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(255, 255, 255, 0.7);
+	color: var(--kbj-wit);
+	backdrop-filter: blur(8px);
+}
+
+.kbj-knop--glas:hover,
+.kbj-knop--glas:focus-visible {
+	background: var(--kbj-wit);
+	border-color: var(--kbj-wit);
+	color: var(--kbj-nacht);
+}
+
+/* ----------------------------------------------------------- vlakken */
+
+/*
+ * Een sectie met een kleur is een vlak met ronde hoeken, met een smalle rand
+ * wit eromheen. Zo zie je in één oogopslag waar een onderwerp begint en
+ * eindigt, zoals bij Apple.
+ */
+.wp-block-group.alignfull.kbj-paneel,
+.kbj-opening.alignfull,
+.kbj-paginakop.alignfull {
+	margin-left: calc(var(--wp--style--root--padding-left, 0px) * -1 + clamp(8px, 1.2vw, 16px)) !important;
+	margin-right: calc(var(--wp--style--root--padding-right, 0px) * -1 + clamp(8px, 1.2vw, 16px)) !important;
+	border-radius: clamp(22px, 3vw, 40px);
+	overflow: hidden;
+}
+
+.kbj-paneel + .kbj-paneel,
+.kbj-paginakop + .kbj-paneel {
+	margin-top: clamp(8px, 1.2vw, 16px) !important;
+}
+
+.kbj-paginakop.alignfull {
+	margin-top: clamp(8px, 1.2vw, 16px);
+}
+
+.wp-block-post-content > .kbj-paneel:last-child {
+	margin-bottom: clamp(8px, 1.2vw, 16px) !important;
+}
+
+/* ----------------------------------------------------------- de header */
+
+/* Het telefoonnummer is een klein icoon, niet een groot nummer. */
+.kbj-menu__bel {
+	display: none;
+}
+
+.kbj-menu__snel {
+	display: flex;
+	order: 2;
+}
+
+.kbj-menu__bel-icoon {
+	width: 46px;
+	height: 46px;
+	transition: background-color var(--kbj-duur) var(--kbj-ease), color var(--kbj-duur) var(--kbj-ease);
+}
+
+.kbj-menu__bel-icoon:hover {
+	background: var(--kbj-kerk);
+	color: var(--kbj-wit);
+}
+
+@media (min-width: 1200px) {
+	.kbj-menu__knop {
+		display: none;
+	}
+
+	.kbj-menu__binnen {
+		order: 1;
+	}
+
+	.kbj-menu__snel {
+		order: 3;
+		margin-left: 0;
+	}
+}
+
+@media (max-width: 1199px) {
+	.kbj-menu__bel {
+		display: inline-flex;
+	}
+}
+
+/* ------------------------------------------------------- teksteffecten */
+
+/*
+ * Een kop komt regel voor regel omhoog, alsof hij achter een rand vandaan
+ * schuift. Het script zet om elk woord een spanwijdte; zonder script staat de
+ * kop er gewoon.
+ */
+.kbj-schuif {
+	word-spacing: 0.06em;
+}
+
+.kbj-schuif .kbj-woord {
+	display: inline-block;
+	overflow: hidden;
+	vertical-align: top;
+	padding-bottom: 0.08em;
+	margin-bottom: -0.08em;
+}
+
+.kbj-schuif .kbj-woord > span {
+	display: inline-block;
+}
+
+.kbj-js .kbj-schuif .kbj-woord > span {
+	transform: translateY(105%);
+	transition: transform 1.1s var(--kbj-ease);
+	transition-delay: calc(var(--i, 0) * 45ms);
+}
+
+.kbj-js .kbj-schuif.is-in .kbj-woord > span {
+	transform: none;
+}
+
+/* Een woord dat glanst in de kleuren van het glas-in-lood. */
+.kbj-glastekst {
+	background: linear-gradient(100deg, var(--kbj-helder) 0%, var(--kbj-zee) 30%, var(--kbj-glas) 50%, var(--kbj-zee) 70%, var(--kbj-helder) 100%);
+	background-size: 250% 100%;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	animation: kbj-glans 8s ease-in-out infinite;
+}
+
+.kbj-glastekst * {
+	background: inherit;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+@keyframes kbj-glans {
+	0%,
+	100% {
+		background-position: 0% 50%;
+	}
+
+	50% {
+		background-position: 100% 50%;
+	}
+}
+
+/* ---------------------------------------------------------------- hero */
+
+.kbj-opening {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	min-height: min(88vh, 860px);
+	padding: clamp(6rem, 12vw, 9rem) clamp(1.5rem, 5vw, 4.5rem) clamp(1.5rem, 3vw, 2.5rem);
+	background: var(--kbj-nacht);
+	color: var(--kbj-wit);
+}
+
+.kbj-opening__foto {
+	position: absolute;
+	inset: 0;
+	z-index: -3;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* Een donkere laag van onder naar boven, zodat de tekst altijd leesbaar is. */
+.kbj-opening::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: -2;
+	background:
+		linear-gradient(90deg, rgba(10, 36, 68, 0.85) 0%, rgba(10, 36, 68, 0.55) 45%, rgba(10, 36, 68, 0.1) 75%),
+		linear-gradient(0deg, rgba(10, 36, 68, 0.8) 0%, rgba(10, 36, 68, 0) 45%);
+}
+
+/*
+ * Licht door gekleurd glas: zachte vlekken in de kleuren van het raam die
+ * heel langzaam over het beeld schuiven, zoals zonlicht dat in de loop van de
+ * dag door de ramen van het gebouw valt.
+ */
+.kbj-glaslicht {
+	position: absolute;
+	inset: -20%;
+	z-index: -1;
+	background:
+		radial-gradient(28% 34% at 72% 30%, rgba(30, 124, 178, 0.55), transparent 70%),
+		radial-gradient(22% 28% at 86% 62%, rgba(114, 182, 191, 0.5), transparent 70%),
+		radial-gradient(18% 22% at 60% 70%, rgba(176, 225, 241, 0.35), transparent 70%);
+	mix-blend-mode: screen;
+	filter: blur(10px);
+	animation: kbj-licht-schuift 26s ease-in-out infinite alternate;
+	pointer-events: none;
+}
+
+@keyframes kbj-licht-schuift {
+	from {
+		transform: translate3d(-4%, -3%, 0) rotate(-3deg);
+	}
+
+	to {
+		transform: translate3d(5%, 4%, 0) rotate(4deg);
+	}
+}
+
+.kbj-opening__binnen {
+	position: relative;
+	max-width: 44rem;
+}
+
+.kbj-opening h1 {
+	margin: 0;
+	color: var(--kbj-wit);
+	font-size: clamp(2.5rem, 1.4rem + 4.6vw, 5.6rem);
+	font-weight: 700;
+	line-height: 1.02;
+	letter-spacing: -0.03em;
+}
+
+.kbj-opening__tekst {
+	margin: 1.5rem 0 0;
+	max-width: 30rem;
+	font-size: var(--wp--preset--font-size--large);
+	line-height: 1.55;
+	color: rgba(255, 255, 255, 0.88);
+}
+
+.kbj-opening .kbj-acties {
+	margin-top: 2.25rem;
+}
+
+/* De feiten onderin, op een strook van mat glas. */
+.kbj-opening__feiten {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 1px;
+	margin: clamp(3rem, 7vw, 5rem) 0 0;
+	padding: 0;
+	list-style: none;
+	border-radius: 18px;
+	overflow: hidden;
+	background: rgba(255, 255, 255, 0.18);
+	backdrop-filter: blur(14px) saturate(1.3);
+}
+
+.kbj-opening__feiten li {
+	padding: 1.1rem 1.25rem;
+	background: rgba(10, 36, 68, 0.35);
+	font-size: var(--wp--preset--font-size--small);
+	line-height: 1.4;
+}
+
+.kbj-opening__feiten strong {
+	display: block;
+	font-size: var(--wp--preset--font-size--large);
+	font-weight: 700;
+	color: var(--kbj-wit);
+}
+
+@media (max-width: 781px) {
+	.kbj-opening {
+		min-height: 0;
+		padding-top: 42vh;
+	}
+
+	.kbj-opening::before {
+		background: linear-gradient(0deg, rgba(10, 36, 68, 0.92) 0%, rgba(10, 36, 68, 0.7) 45%, rgba(10, 36, 68, 0.1) 80%);
+	}
+
+	.kbj-opening__feiten {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+/* ------------------------------------------------ de lijn van het raam */
+
+/*
+ * Het raam van het gebouw als lijntekening: de spitsboog, twee smalle vensters
+ * en de vierpas. Geen foto van een kerk, maar een tekening die zich zet als je
+ * erlangs scrolt. Zo zit het gebouw in de site zonder dat het ouderwets wordt.
+ */
+.kbj-raamlijn {
+	position: absolute;
+	z-index: -1;
+	pointer-events: none;
+	color: var(--kbj-glas);
+}
+
+.kbj-raamlijn .kbj-raam-lijn {
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 0.6;
+	stroke-linecap: round;
+	stroke-dasharray: 1;
+	stroke-dashoffset: 0;
+}
+
+.kbj-js .kbj-raamlijn .kbj-raam-lijn {
+	stroke-dashoffset: 1;
+	transition: stroke-dashoffset 2.6s var(--kbj-ease);
+	transition-delay: calc(var(--i, 0) * 90ms);
+}
+
+.kbj-js .kbj-raamlijn.is-getekend .kbj-raam-lijn {
+	stroke-dashoffset: 0;
+}
+
+.kbj-opening .kbj-raamlijn {
+	right: clamp(-2rem, 1vw, 2rem);
+	top: 20%;
+	height: 72%;
+	width: auto;
+	aspect-ratio: 200 / 360;
+	opacity: 0.55;
+}
+
+@media (max-width: 781px) {
+	.kbj-opening .kbj-raamlijn {
+		top: 3%;
+		right: -12%;
+		height: 50%;
+		opacity: 0.4;
+	}
+}
+
+/* ------------------------------------------------------ grote kop */
+
+.kbj-kop-groot {
+	max-width: 46rem;
+	margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+	text-align: center;
+}
+
+.kbj-kop-groot h2 {
+	margin: 0;
+	font-size: clamp(2rem, 1.3rem + 2.8vw, 3.75rem);
+	letter-spacing: -0.025em;
+	line-height: 1.04;
+}
+
+.kbj-kop-groot p {
+	margin: 1rem auto 0;
+	max-width: 32rem;
+	font-size: var(--wp--preset--font-size--large);
+	color: var(--kbj-leisteen);
+}
+
+/* ------------------------------------------------------------- kaarten */
+
+.kbj-kaarten3 {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.kbj-kaart3 {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	background: var(--kbj-ijs);
+	border-radius: clamp(20px, 2.4vw, 30px);
+	overflow: hidden;
+	transition: transform 0.5s var(--kbj-ease), box-shadow 0.5s var(--kbj-ease);
+}
+
+.kbj-kaart3 > .kbj-beeld .kbj-beeld__kader {
+	border-radius: 0;
+	aspect-ratio: 4 / 3 !important;
+}
+
+.kbj-kaart3__inhoud {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	padding: clamp(1.4rem, 2.5vw, 2rem);
+}
+
+.kbj-kaart3 h3 {
+	margin: 0 0 0.5rem;
+	font-size: clamp(1.4rem, 1.1rem + 0.9vw, 1.85rem);
+	font-weight: 700;
+	letter-spacing: -0.025em;
+}
+
+.kbj-kaart3 p {
+	margin: 0 0 1.5rem;
+	color: var(--kbj-leisteen);
+}
+
+.kbj-kaart3 .kbj-acties {
+	margin-top: auto;
+}
+
+@media (hover: hover) {
+	.kbj-kaart3:hover {
+		transform: translateY(-6px);
+		box-shadow: 0 30px 50px -30px rgba(10, 36, 68, 0.45);
+	}
+
+	.kbj-kaart3 img {
+		transition: transform 1.2s var(--kbj-ease);
+	}
+
+	.kbj-kaart3:hover img {
+		transform: scale(1.06);
+	}
+}
+
+@media (max-width: 900px) {
+	.kbj-kaarten3 {
+		grid-template-columns: 1fr;
+	}
+
+	.kbj-kaart3 {
+		display: grid;
+		grid-template-columns: 38% 1fr;
+	}
+
+	.kbj-kaart3 > .kbj-beeld .kbj-beeld__kader {
+		height: 100%;
+		aspect-ratio: auto !important;
+	}
+}
+
+@media (max-width: 480px) {
+	.kbj-kaart3 {
+		grid-template-columns: 34% 1fr;
+	}
+
+	.kbj-kaart3__inhoud {
+		padding: 1.1rem;
+	}
+
+	.kbj-kaart3 p {
+		font-size: var(--wp--preset--font-size--small);
+		margin-bottom: 1rem;
+	}
+
+	.kbj-kaart3 .kbj-knop {
+		min-height: 44px;
+		padding: 0.6rem 1.1rem;
+		font-size: 0.9375rem;
+	}
+}
+
+/* -------------------------------------------------------- tekstband */
+
+/*
+ * Een band met grote woorden die meeschuift als je scrolt. Afwisselend als
+ * lijn en in de glaskleuren. Het is versiering: schermlezers slaan hem over.
+ */
+.kbj-band {
+	overflow: hidden;
+	padding-block: clamp(1.5rem, 4vw, 3rem);
+	white-space: nowrap;
+	user-select: none;
+}
+
+.kbj-band__rij {
+	display: inline-flex;
+	gap: 0.35em;
+	font-size: clamp(3rem, 1.5rem + 7vw, 8.5rem);
+	font-weight: 800;
+	line-height: 1;
+	letter-spacing: -0.045em;
+}
+
+.kbj-band__rij span:nth-child(odd) {
+	color: transparent;
+	-webkit-text-stroke: 1.5px var(--kbj-kerk);
+}
+
+.kbj-band__rij span:nth-child(even) {
+	background: linear-gradient(100deg, var(--kbj-helder), var(--kbj-zee), var(--kbj-glas));
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+}
+
+@supports (animation-timeline: view()) {
+	@media (prefers-reduced-motion: no-preference) {
+		.kbj-band__rij {
+			animation: kbj-band-schuif linear both;
+			animation-timeline: view();
+		}
+
+		@keyframes kbj-band-schuif {
+			from {
+				transform: translateX(0);
+			}
+
+			to {
+				transform: translateX(-38%);
+			}
+		}
+	}
+}
+
+/* ------------------------------------------------------------ het gebouw */
+
+.kbj-gebouw {
+	position: relative;
+	isolation: isolate;
+}
+
+.kbj-gebouw__binnen {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+	gap: clamp(2rem, 6vw, 5rem);
+	align-items: center;
+}
+
+.kbj-gebouw h2 {
+	margin: 0 0 1.25rem;
+	color: var(--kbj-wit);
+	font-size: clamp(2rem, 1.3rem + 2.6vw, 3.5rem);
+	line-height: 1.04;
+	letter-spacing: -0.025em;
+}
+
+.kbj-gebouw p {
+	color: rgba(255, 255, 255, 0.82);
+}
+
+.kbj-gebouw__beeld {
+	position: relative;
+}
+
+.kbj-gebouw__beeld .kbj-beeld__kader {
+	aspect-ratio: 4 / 5 !important;
+}
+
+.kbj-gebouw__beeld .kbj-raamlijn {
+	z-index: 1;
+	left: 50%;
+	top: 50%;
+	height: 86%;
+	width: auto;
+	aspect-ratio: 200 / 360;
+	transform: translate(-50%, -50%);
+	color: var(--kbj-wit);
+	filter: drop-shadow(0 2px 6px rgba(10, 36, 68, 0.35));
+}
+
+.kbj-gebouw__feiten {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1rem;
+	margin: 2.5rem 0 2rem;
+	padding: 0;
+	list-style: none;
+}
+
+.kbj-gebouw__feiten li {
+	padding-top: 1rem;
+	border-top: 1px solid rgba(176, 225, 241, 0.35);
+	font-size: var(--wp--preset--font-size--small);
+	color: rgba(255, 255, 255, 0.75);
+}
+
+.kbj-gebouw__feiten strong {
+	display: block;
+	font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.4rem);
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	color: var(--kbj-glas);
+}
+
+@media (max-width: 900px) {
+	.kbj-gebouw__binnen {
+		grid-template-columns: 1fr;
+	}
+
+	.kbj-gebouw__beeld {
+		order: -1;
+		max-width: 420px;
+	}
+
+	.kbj-gebouw__beeld .kbj-beeld__kader {
+		aspect-ratio: 4 / 3 !important;
+	}
+}
+
+/* ------------------------------------------------------------ vergoed */
+
+.kbj-vergoed__binnen {
+	display: grid;
+	grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+	gap: clamp(2rem, 5vw, 4rem);
+	align-items: center;
+}
+
+.kbj-vergoed h2 {
+	margin: 0 0 1rem;
+	font-size: clamp(1.9rem, 1.3rem + 2.2vw, 3.1rem);
+	letter-spacing: -0.025em;
+	line-height: 1.06;
+}
+
+.kbj-vergoed p {
+	color: var(--kbj-leisteen);
+	font-size: var(--wp--preset--font-size--large);
+}
+
+.kbj-regels {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 0.75rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.kbj-regels li {
+	padding: 1.25rem;
+	background: var(--kbj-wit);
+	border-radius: 18px;
+	box-shadow: 0 1px 0 var(--kbj-lijn);
+}
+
+.kbj-regels strong {
+	display: block;
+	font-size: clamp(1.4rem, 1.1rem + 1vw, 1.9rem);
+	font-weight: 800;
+	letter-spacing: -0.03em;
+	color: var(--kbj-kerk);
+}
+
+.kbj-regels span {
+	display: block;
+	margin-top: 0.2rem;
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--kbj-leisteen);
+}
+
+@media (max-width: 900px) {
+	.kbj-vergoed__binnen {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ------------------------------------------------------------- familie */
+
+.kbj-familie2 {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	gap: clamp(2rem, 6vw, 5rem);
+	align-items: center;
+}
+
+.kbj-familie2 h2 {
+	margin: 0 0 1rem;
+	font-size: clamp(1.9rem, 1.3rem + 2.2vw, 3.1rem);
+	letter-spacing: -0.025em;
+	line-height: 1.06;
+}
+
+.kbj-familie2 p {
+	color: var(--kbj-leisteen);
+	font-size: var(--wp--preset--font-size--large);
+}
+
+@media (max-width: 900px) {
+	.kbj-familie2 {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ------------------------------------------------------------- slot */
+
+.kbj-slot {
+	position: relative;
+	isolation: isolate;
+}
+
+.kbj-slot .kbj-raamlijn {
+	left: 50%;
+	top: 50%;
+	height: 150%;
+	width: auto;
+	aspect-ratio: 200 / 360;
+	transform: translate(-50%, -50%);
+	color: var(--kbj-wit);
+	opacity: 0.9;
+}
+
+.kbj-slot h2 {
+	font-size: clamp(2rem, 1.3rem + 2.8vw, 3.75rem);
+	letter-spacing: -0.025em;
+	line-height: 1.04;
+}
+
+/* --------------------------------------------------------------- bordje */
+
+/* Het bordje: een geëmailleerd plaatje met ronde hoeken en de vierpas. */
+.kbj-bordje__plaat {
+	grid-template-columns: auto auto;
+	grid-template-areas: "roos stand" "roos wanneer";
+	justify-items: start;
+	align-items: center;
+	column-gap: 0.65rem;
+	row-gap: 0;
+	min-width: 0;
+	padding: 0.6rem 1rem 0.6rem 0.75rem;
+	border-radius: 14px;
+	-webkit-mask: none;
+	mask: none;
+	text-align: left;
+}
+
+.kbj-bordje__plaat::before {
+	grid-area: roos;
+	position: static;
+	width: 28px;
+	height: 28px;
+	transform: none;
+}
+
+.kbj-bordje__plaat::after {
+	-webkit-mask: none;
+	mask: none;
+	border-radius: 10px;
+}
+
+.kbj-bordje__wat {
+	display: none;
+}
+
+.kbj-bordje__stand {
+	grid-area: stand;
+	font-size: 0.875rem;
+	letter-spacing: 0.12em;
+}
+
+.kbj-bordje__wanneer {
+	grid-area: wanneer;
+}
+
+.kbj-bordje__koord {
+	height: 24px;
+}
+
+/* ------------------------------------------------------ paginakop, ronde 3 */
+
+.kbj-paginakop {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+	background-color: var(--kbj-ijs);
+}
+
+.kbj-paginakop .kbj-raamlijn {
+	right: auto;
+	left: 44%;
+	top: -6%;
+	height: 118%;
+	width: auto;
+	aspect-ratio: 200 / 360;
+	color: var(--kbj-zee);
+	opacity: 0.35;
+}
+
+.kbj-paginakop__titel {
+	font-size: clamp(2.2rem, 1.4rem + 3.2vw, 4.2rem);
+	line-height: 1.04;
+	letter-spacing: -0.03em;
+}
+
+.kbj-paginakop__intro {
+	color: var(--kbj-leisteen);
+}
+
+.kbj-paginakop__beeld .kbj-beeld__kader {
+	border-radius: clamp(20px, 2.4vw, 30px);
+}
+
+@media (max-width: 781px) {
+	.kbj-paginakop .kbj-raamlijn {
+		left: auto;
+		right: -18%;
+		top: -4%;
+		height: 60%;
+	}
+}
+
+/* Grote koppen in de secties: groot, strak en dicht op elkaar. */
+.kbj-sectie h2.wp-block-heading {
+	font-size: clamp(1.9rem, 1.3rem + 2.2vw, 3.1rem);
+	letter-spacing: -0.025em;
+	line-height: 1.06;
+}
+
+.kbj-sectie h3.wp-block-heading {
+	letter-spacing: -0.02em;
+}
+
+/* ------------------------------------------------ het raam: glas en licht */
+
+/*
+ * Na de lijnen licht het glas op: licht glasblauw in de vensters, het lood
+ * erdoorheen, en de blauwe stroken en bogen zoals in het echte raam. Daarna
+ * trekt er af en toe een streep zonlicht over het glas.
+ */
+.kbj-raam-glas {
+	fill: var(--kbj-glas);
+	fill-opacity: 0.2;
+	stroke: none;
+}
+
+.kbj-raam-lood {
+	opacity: 0.55;
+	stroke: none;
+}
+
+.kbj-raam-blauw {
+	fill: var(--kbj-helder);
+	fill-opacity: 0.75;
+	stroke: none;
+}
+
+.kbj-raam-zon {
+	opacity: 0;
+}
+
+/* De blauwe stroken langs de vensters, in stukjes glas zoals in het echt. */
+.kbj-raam-strook {
+	fill: none;
+	stroke: var(--kbj-helder);
+	stroke-width: 2.6;
+	stroke-dasharray: 7 1.4;
+	stroke-opacity: 0.8;
+}
+
+.kbj-raamlijn .kbj-raam-lijn:nth-child(n + 9) {
+	stroke-width: 0.4;
+}
+
+.kbj-js .kbj-raamlijn .kbj-raam-glas,
+.kbj-js .kbj-raamlijn .kbj-raam-lood,
+.kbj-js .kbj-raamlijn .kbj-raam-strook,
+.kbj-js .kbj-raamlijn .kbj-raam-blauw {
+	opacity: 0;
+	transition: opacity 1.4s ease;
+	transition-delay: calc(1.8s + var(--i, 0) * 120ms);
+}
+
+.kbj-js .kbj-raamlijn.is-getekend .kbj-raam-glas,
+.kbj-js .kbj-raamlijn.is-getekend .kbj-raam-strook,
+.kbj-js .kbj-raamlijn.is-getekend .kbj-raam-blauw {
+	opacity: 1;
+}
+
+.kbj-js .kbj-raamlijn.is-getekend .kbj-raam-lood {
+	opacity: 0.55;
+}
+
+@keyframes kbj-zon {
+	0% {
+		opacity: 0;
+		transform: translateX(0) skewX(-18deg);
+	}
+
+	8% {
+		opacity: 1;
+	}
+
+	40% {
+		opacity: 1;
+		transform: translateX(340px) skewX(-18deg);
+	}
+
+	45%,
+	100% {
+		opacity: 0;
+		transform: translateX(340px) skewX(-18deg);
+	}
+}
+
+.kbj-raamlijn.is-getekend .kbj-raam-zon {
+	animation: kbj-zon 9s ease-in-out 3.5s infinite;
+}
+
+/* Over een foto: witte lijnen, en het glas iets sterker zodat het leest. */
+.kbj-opening .kbj-raamlijn,
+.kbj-gebouw__beeld .kbj-raamlijn {
+	color: var(--kbj-wit);
+}
+
+.kbj-opening .kbj-raam-glas,
+.kbj-gebouw__beeld .kbj-raam-glas {
+	fill-opacity: 0.16;
+}
+
+.kbj-opening .kbj-raamlijn {
+	opacity: 0.8;
+}
+
+/* In de afsluiting en de paginakop: zeegroen op licht. */
+.kbj-slot .kbj-raamlijn,
+.kbj-paginakop .kbj-raamlijn {
+	color: var(--kbj-kerk);
+	opacity: 0.35;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.kbj-js .kbj-raamlijn .kbj-raam-lijn {
+		stroke-dashoffset: 0 !important;
+		transition: none !important;
+	}
+
+	.kbj-js .kbj-raamlijn .kbj-raam-glas,
+	.kbj-js .kbj-raamlijn .kbj-raam-strook,
+	.kbj-js .kbj-raamlijn .kbj-raam-blauw {
+		opacity: 1 !important;
+		transition: none !important;
+	}
+
+	.kbj-raamlijn .kbj-raam-zon {
+		animation: none !important;
+	}
+}
+
+/* Een vlak direct in een sjabloon (zoals bij een vacature) staat niet in de
+ * inhoud van de pagina, dus zonder de negatieve marges van WordPress. */
+.wp-site-blocks main > .wp-block-group.alignfull.kbj-paneel {
+	margin-left: clamp(8px, 1.2vw, 16px) !important;
+	margin-right: clamp(8px, 1.2vw, 16px) !important;
+	margin-bottom: clamp(8px, 1.2vw, 16px);
+}
+
+.kbj-bordje.is-open .kbj-bordje__stand::before {
+	content: none;
 }

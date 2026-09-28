@@ -103,7 +103,7 @@ add_action( 'wp_head', 'kbj_versiemerk', 1 );
  * @return string[]
  */
 function kbj_scripts() {
-	return array( 'reveal', 'koptekst', 'teller', 'melding', 'video-facade', 'lichtbak' );
+	return array( 'reveal', 'koptekst', 'effecten', 'bordje', 'melding', 'video-facade', 'lichtbak' );
 }
 
 /**
@@ -170,7 +170,7 @@ function kbj_beweging_klasse() {
 		return;
 	}
 
-	echo "<script>(function(d,w){if(!w.matchMedia||w.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in w))return;d.documentElement.classList.add('kbj-js');setTimeout(function(){if(!w.kbjReveal)d.documentElement.classList.remove('kbj-js');},2500);})(document,window);</script>\n";
+	echo "<script>(function(d,w){if(!w.matchMedia||w.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in w))return;d.documentElement.classList.add('kbj-js');setTimeout(function(){if(!w.kbjReveal||!w.kbjEffecten)d.documentElement.classList.remove('kbj-js');},2500);})(document,window);</script>\n";
 }
 add_action( 'wp_head', 'kbj_beweging_klasse', 0 );
 
@@ -289,6 +289,8 @@ function kbj_allowed_blocks( $toegestaan, $context ) {
 		'kbj/logo',
 		'kbj/beeld',
 		'kbj/vacatures',
+		'kbj/opening',
+		'kbj/raamlijn',
 	);
 }
 add_filter( 'allowed_block_types_all', 'kbj_allowed_blocks', 10, 2 );

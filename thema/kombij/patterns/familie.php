@@ -1,40 +1,27 @@
 <?php
 /**
- * Title: De familie achter KomBij
+ * Title: Een familie, geen instelling
  * Slug: kombij/familie
  * Categories: kombij
- * Description: Wie er achter KomBij zit, met een foto in kerkvorm ernaast.
+ * Description: Wie er achter KomBij zitten, in twee zinnen, met een grote foto.
  */
 
-$tekst = kbj_p( 'De familie achter KomBij', 'kbj-boven' )
-	. kbj_kop( 2, 'Zorg vanuit ons hart' )
-	. kbj_p( 'KomBij is begonnen door Corrie Roelofsen, haar dochter Chantal en schoonzoon Edwin. Een familiebedrijf, en zo voelt het ook.' )
-	. kbj_p( 'U belt niet met een afdeling, maar met Corrie. U kent de mensen die voor uw vader of moeder zorgen. En wie binnenloopt, krijgt eerst een kop koffie.' )
-	. kbj_p( 'Geen instelling, maar een plek waar u uzelf kunt zijn.', 'kbj-nadruk' )
-	. kbj_p( '<a href="/over-ons/">Maak kennis met KomBij</a>', 'kbj-verder' );
-
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	kbj_kolommen(
-		array(
-			array(
-				'inhoud'  => kbj_foto(
-					'samen-aan-tafel.webp',
-					'Gasten en medewerkers aan de lange tafel in de kerk, onder de tussenverdieping',
-					array( 'positie' => '45% 50%' )
-				),
-				'breedte' => '45%',
-			),
-			array(
-				'inhoud'  => $tekst,
-				'breedte' => '55%',
-			),
+	kbj_groep(
+		kbj_foto( 'koffie.webp', 'Een kopje koffie wordt met een glimlach aangereikt', array( 'vorm' => 'recht', 'verhouding' => '4/5', 'positie' => '50% 45%' ) )
+		. kbj_groep(
+			kbj_kop( 2, 'Een familie. Geen instelling.', 'kbj-schuif' )
+			. kbj_p( 'KomBij is opgezet door een moeder, haar dochter en haar schoonzoon uit de regio. Bewust klein gehouden: hier kent iedereen elkaar bij naam.' )
+			. kbj_knoppen(
+				array(
+					array(
+						'tekst' => 'Maak kennis met KomBij',
+						'url'   => '/over-ons/',
+					),
+				)
+			)
 		),
-		'kbj-duo',
-		true
+		'kbj-familie2'
 	),
-	array(
-		'achtergrond' => 'ijs',
-		'klasse'      => 'kbj-reveal',
-		'ornament'    => true,
-	)
+	array( 'klasse' => 'kbj-reveal' )
 );

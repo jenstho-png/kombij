@@ -535,7 +535,26 @@ function kbj_jsonld_vacature() {
 			),
 		),
 		'directApply'        => false,
+		'industry'           => 'Ouderenzorg',
+		'occupationalCategory' => 'Zorg en welzijn',
+		'identifier'         => array(
+			'@type' => 'PropertyValue',
+			'name'  => kbj_bedrijfsnaam(),
+			'value' => (string) $id,
+		),
 	);
+
+	$opleiding = kbj_vacature_veld( $id, 'opleiding' );
+
+	if ( '' !== $opleiding ) {
+		$knoop['qualifications'] = $opleiding;
+	}
+
+	$uren = kbj_vacature_veld( $id, 'uren' );
+
+	if ( '' !== $uren ) {
+		$knoop['workHours'] = $uren;
+	}
 
 	$sluit = kbj_vacature_veld( $id, 'sluitdatum' );
 
@@ -630,3 +649,49 @@ function kbj_installatie_vacatures() {
 		}
 	}
 }
+
+/**
+ * De titel van een vacaturepagina, zoals mensen zoeken.
+ *
+ * "Verzorgende IG" zegt in Google weinig. "Vacature Verzorgende IG in
+ * Maasbommel, 24 tot 32 uur" is precies waar iemand op zoekt en klikt.
+ *
+ * @param array $delen De delen van de titel.
+ * @return array
+ */
+function kbj_vacature_titel( $delen ) {
+	if ( ! is_singular( KBJ_VACATURE ) || kbj_seo_plugin_actief() ) {
+		return $delen;
+	}
+
+	$id   = get_queried_object_id();
+	$uren = kbj_vacature_veld( $id, 'uren' );
+
+	$delen['title'] = sprintf(
+		'Vacature %1$s in %2$s%3$s',
+		get_the_title( $id ),
+		kbj_optie( 'plaats', 'Maasbommel' ),
+		'' !== $uren ? ', ' . $uren : ''
+	);
+
+	return $delen;
+}
+add_filter( 'document_title_parts', 'kbj_vacature_titel', 20 );
+
+/**
+ * De omschrijving van een vacaturepagina voor Google: het stukje "Over de
+ * functie", met de plaats erbij.
+ *
+ * @param string $omschrijving De omschrijving die het thema maakte.
+ * @return string
+ */
+function kbj_vacature_omschrijving( $omschrijving ) {
+	if ( ! is_singular( KBJ_VACATURE ) ) {
+		return $omschrijving;
+	}
+
+	$intro = kbj_vacature_veld( get_queried_object_id(), 'intro' );
+
+	return '' !== $intro ? kbj_inkorten( 'Vacature bij KomBij in Maasbommel. ' . $intro, 160 ) : $omschrijving;
+}
+add_filter( 'kbj_omschrijving', 'kbj_vacature_omschrijving' );

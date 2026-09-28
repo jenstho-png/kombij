@@ -203,7 +203,7 @@ function kbj_render_header() {
 				. '%6$s'
 				. '<div class="kbj-menu__rechts">%7$s%8$s</div>'
 			. '</div>'
-		. '</nav></div>',
+		. '</nav>%9$s</div>',
 		get_block_wrapper_attributes( array( 'class' => 'kbj-header' ) ),
 		esc_attr__( 'Hoofdmenu', 'kombij' ),
 		kbj_header_logo(),
@@ -211,6 +211,7 @@ function kbj_render_header() {
 		esc_html__( 'Menu', 'kombij' ),
 		kbj_menu_lijst( $items, 'hoofd' ),
 		kbj_bel_link( 'kbj-menu__bel' ),
-		$oproep
+		$oproep,
+		kbj_bordje()
 	);
 }

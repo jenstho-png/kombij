@@ -3,34 +3,29 @@
  * Title: Slotsectie
  * Slug: kombij/slot
  * Categories: kombij
- * Description: De laatste stap onderaan elke pagina: bellen of een bericht sturen.
+ * Description: De laatste stap onderaan elke pagina: een rondleiding plannen of bellen.
  */
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	kbj_groep(
-		kbj_kop( 2, 'KomBij ons langs', '', true )
-		. kbj_p( 'De koffie staat klaar. Bel of mail ons voor een rondleiding, of stel gewoon uw vraag. U spreekt meteen iemand die u verder helpt.', 'kbj-intro', true )
+	'<!-- wp:kbj/raamlijn /-->' . "\n"
+	. kbj_groep(
+		kbj_kop( 2, 'Kom een kop koffie drinken.', 'kbj-schuif', true )
+		. kbj_p( 'Zien is ervaren. Plan een rondleiding en voel zelf hoe het is bij KomBij. Liever eerst even bellen? Dat kan natuurlijk ook.', 'kbj-intro', true )
 		. kbj_knoppen(
 			array(
 				array(
-					'tekst' => 'Bel ' . kbj_tel_tekst(),
-					'url'   => kbj_tel_url(),
-				),
-				array(
-					'tekst' => 'Stuur een bericht',
+					'tekst' => 'Plan een rondleiding',
 					'url'   => '/contact/',
-					'rand'  => true,
 				),
+				kbj_tel_knop(),
 			),
 			true
-		)
-		. kbj_p( 'Of mail naar ' . kbj_mail_link(), 'kbj-klein', true ),
+		),
 		'kbj-slot__binnen'
 	),
 	array(
 		'achtergrond' => 'glasblauw',
 		'klasse'      => 'kbj-slot kbj-lood',
 		'breed'       => false,
-		'ornament'    => true,
 	)
 );

@@ -34,6 +34,8 @@ function kbj_register_blocks() {
 		'beeld'            => 'kbj_render_beeld',
 		'vacatures'        => 'kbj_render_vacatures',
 		'vacature'         => 'kbj_render_vacature',
+		'opening'          => 'kbj_render_opening',
+		'raamlijn'         => 'kbj_render_raamlijn',
 	);
 
 	foreach ( $blokken as $naam => $functie ) {
@@ -191,7 +193,6 @@ function kbj_render_beeld( $attrs ) {
 function kbj_render_paginakop( $attrs ) {
 	$titel = isset( $attrs['titel'] ) ? (string) $attrs['titel'] : '';
 	$intro = isset( $attrs['intro'] ) ? (string) $attrs['intro'] : '';
-	$boven = isset( $attrs['boven'] ) ? (string) $attrs['boven'] : '';
 	$knop  = ! isset( $attrs['knop'] ) || ! empty( $attrs['knop'] );
 
 	if ( '' === $titel ) {
@@ -207,7 +208,7 @@ function kbj_render_paginakop( $attrs ) {
 				'bestand'    => isset( $attrs['bestand'] ) ? $attrs['bestand'] : '',
 				'alt'        => isset( $attrs['alt'] ) ? $attrs['alt'] : '',
 				'positie'    => isset( $attrs['positie'] ) ? $attrs['positie'] : '50% 50%',
-				'vorm'       => 'boog',
+				'vorm'       => 'recht',
 				'verhouding' => '4/5',
 				'eerst'      => true,
 			)
@@ -219,17 +220,18 @@ function kbj_render_paginakop( $attrs ) {
 
 	if ( $knop ) {
 		$acties = sprintf(
-			'<div class="kbj-acties"><a class="kbj-knop" href="%1$s">%2$s</a>%3$s</div>',
+			'<div class="kbj-acties"><a class="kbj-knop" href="%1$s">%2$s</a><a class="kbj-knop kbj-knop--rand" href="%3$s">%4$s</a></div>',
 			esc_url( $contact ? get_permalink( $contact ) : home_url( '/contact/' ) ),
-			esc_html__( 'Plan een kennismaking', 'kombij' ),
-			kbj_bel_link( 'kbj-knop kbj-knop--rand' )
+			esc_html__( 'Plan een rondleiding', 'kombij' ),
+			esc_attr( kbj_tel_url() ),
+			esc_html__( 'Bel ons', 'kombij' )
 		);
 	}
 
 	return sprintf(
-		'<header %1$s><div class="kbj-paginakop__binnen"><div class="kbj-paginakop__tekst">%2$s<h1 class="kbj-paginakop__titel">%3$s</h1>%4$s%5$s</div>%6$s</div></header>',
-		get_block_wrapper_attributes( array( 'class' => 'kbj-paginakop kbj-ornament' . ( '' !== $beeld ? ' kbj-paginakop--beeld' : '' ) ) ),
-		'' !== $boven ? '<p class="kbj-boven">' . esc_html( $boven ) . '</p>' : '',
+		'<header %1$s>%2$s<div class="kbj-paginakop__binnen"><div class="kbj-paginakop__tekst"><h1 class="kbj-paginakop__titel kbj-schuif">%3$s</h1>%4$s%5$s</div>%6$s</div></header>',
+		get_block_wrapper_attributes( array( 'class' => 'kbj-paginakop' . ( '' !== $beeld ? ' kbj-paginakop--beeld' : '' ) ) ),
+		kbj_raamlijn(),
 		esc_html( $titel ),
 		'' !== $intro ? '<p class="kbj-paginakop__intro">' . wp_kses( $intro, array( 'strong' => array(), 'br' => array() ) ) . '</p>' : '',
 		$acties,
@@ -400,8 +402,20 @@ function kbj_render_footermenu( $attrs ) {
 			continue;
 		}
 
+		$label = $pagina['titel'];
+
+		// Staan er vacatures open, dan zie je dat al in de voet.
+		if ( 'werken-bij' === $pagina['slug'] && function_exists( 'kbj_vacatures_open' ) ) {
+			$aantal = count( kbj_vacatures_open() );
+
+			if ( $aantal ) {
+				/* translators: %d: aantal open vacatures. */
+				$label .= ' ' . sprintf( _n( '(%d vacature)', '(%d vacatures)', $aantal, 'kombij' ), $aantal );
+			}
+		}
+
 		$items[] = array(
-			'label' => $pagina['titel'],
+			'label' => $label,
 			'url'   => (string) get_permalink( $object ),
 		);
 	}
@@ -487,5 +501,194 @@ function kbj_render_logo( $attrs ) {
 		$breedte,
 		esc_url( KBJ_URI . '/assets/beeld/' . ( $licht ? 'logo-staand-wit.svg' : 'logo-staand.svg' ) ),
 		esc_attr( kbj_optie( 'bedrijf', (string) get_bloginfo( 'name' ) ) )
+	);
+}
+
+/**
+ * Het raam van het gebouw als tekening, nagetekend van een van de ramen.
+ *
+ * Een spitsboog met een dubbele lijst, twee smalle vensters met een kop van
+ * drie bogen, een ijzeren stang om de zoveel rijen, lood in achthoeken, een
+ * blauwe strook langs de randen, en bovenin de vierpas met een ruit in het
+ * midden en twee kleine lichten ernaast. Precies zoals het echte raam.
+ *
+ * Eerst zetten de lijnen zich, dan licht het glas op in de kleuren van het
+ * raam, en daarna trekt er af en toe een streep zonlicht overheen.
+ *
+ * @param string $klasse Extra klasse.
+ * @return string
+ */
+function kbj_raamlijn( $klasse = '' ) {
+	static $nummer = 0;
+	++$nummer;
+
+	$id = 'kbj-raam-' . $nummer;
+
+	// Het glas van één venster: recht omhoog, dan de kop van drie bogen.
+	$venster = function ( $links ) {
+		$rechts = $links + 56;
+		$midden = $links + 28;
+
+		return sprintf(
+			'M%1$d 350V166A11 11 0 0 1 %2$s 150A34 34 0 0 1 %3$d 127A34 34 0 0 1 %4$s 150A11 11 0 0 1 %5$d 166V350Z',
+			$links,
+			$links + 9,
+			$midden,
+			$rechts - 9,
+			$rechts
+		);
+	};
+
+	$glas_links  = $venster( 34 );
+	$glas_rechts = $venster( 110 );
+	$roos        = 'M83.1 61.1A17 17 0 1 1 116.9 61.1A17 17 0 1 1 116.9 94.9A17 17 0 1 1 83.1 94.9A17 17 0 1 1 83.1 61.1Z';
+	$licht_links  = 'M25 150C27 126 38 106 57 92C57 110 50 124 38 140Z';
+	$licht_rechts = 'M175 150C173 126 162 106 143 92C143 110 150 124 162 140Z';
+	$licht_midden = 'M91 127Q100 123 109 127Q102 136 100 150Q98 136 91 127Z';
+
+	$lijnen = array(
+		// De lijst om het raam, dubbel.
+		'M10 352V150A150 150 0 0 1 100 12.5A150 150 0 0 1 190 150V352',
+		'M18 352V150A142 142 0 0 1 100 21.3A142 142 0 0 1 182 150V352',
+		// De twee vensters.
+		$glas_links,
+		$glas_rechts,
+		// De stenen stijl ertussen en de lijst om de vensters.
+		'M30 352V170A64 64 0 0 1 62 114.6A64 64 0 0 1 94 170V352',
+		'M106 352V170A64 64 0 0 1 138 114.6A64 64 0 0 1 170 170V352',
+		// De vierpas met zijn lijst.
+		'M79.1 57.1A21 21 0 1 1 120.9 57.1A21 21 0 1 1 120.9 98.9A21 21 0 1 1 79.1 98.9A21 21 0 1 1 79.1 57.1Z',
+		$roos,
+		// Het lood in de vierpas: een ruit in het midden, lijnen naar de lobben,
+		// en een boog in elke lob.
+		'M100 66L112 78L100 90L88 78Z',
+		'M100 42V66M100 90V114M64 78H88M112 78H136',
+		'M89.2 60A11 11 0 0 1 110.8 60M120 67.2A11 11 0 0 1 120 88.8M110.8 96A11 11 0 0 1 89.2 96M80 88.8A11 11 0 0 1 80 67.2',
+		// De kleine lichten naast en onder de vierpas.
+		$licht_links,
+		$licht_rechts,
+		$licht_midden,
+		// De ijzeren stangen dwars door het glas.
+		'M34 196H90M110 196H166',
+		'M34 240H90M110 240H166',
+		'M34 284H90M110 284H166',
+		'M34 328H90M110 328H166',
+		// De vensterbank.
+		'M2 352H198M6 358H194',
+	);
+
+	$html = '';
+
+	foreach ( $lijnen as $i => $d ) {
+		$html .= sprintf( '<path class="kbj-raam-lijn" d="%1$s" pathLength="1" style="--i:%2$d"/>', $d, $i );
+	}
+
+	// Het glas, dat na de lijnen oplicht.
+	$glas = '';
+
+	foreach ( array( $glas_links, $glas_rechts, $roos, $licht_links, $licht_rechts, $licht_midden ) as $i => $d ) {
+		$glas .= sprintf( '<path class="kbj-raam-glas" d="%1$s" style="--i:%2$d"/>', $d, $i );
+		$glas .= sprintf( '<path class="kbj-raam-lood" d="%1$s" fill="url(#%2$s-lood)" style="--i:%3$d"/>', $d, $id, $i );
+	}
+
+	// De blauwe stroken langs de randen van de vensters, en blauw in de lobben.
+	$blauw = '';
+
+	foreach ( array( 36, 88, 112, 164 ) as $i => $x ) {
+		$blauw .= sprintf( '<path class="kbj-raam-strook" d="M%1$d 172V350" style="--i:%2$d"/>', $x, $i );
+	}
+
+	$blauw .= '<path class="kbj-raam-blauw" d="M89.2 60A11 11 0 0 1 110.8 60L106 60A6 6 0 0 0 94 60ZM120 67.2A11 11 0 0 1 120 88.8L120 84A6 6 0 0 0 120 72ZM110.8 96A11 11 0 0 1 89.2 96L94 96A6 6 0 0 0 106 96ZM80 88.8A11 11 0 0 1 80 67.2L80 72A6 6 0 0 0 80 84Z" style="--i:4"/>';
+
+	// Een streep zonlicht die af en toe over het glas trekt.
+	$glans = sprintf(
+		'<g clip-path="url(#%1$s-glas)"><rect class="kbj-raam-zon" x="-80" y="0" width="70" height="360" fill="url(#%1$s-zon)"/></g>',
+		$id
+	);
+
+	$defs = sprintf(
+		'<defs>'
+			. '<pattern id="%1$s-lood" width="9" height="9" patternUnits="userSpaceOnUse"><path d="M2.64 0h3.72L9 2.64v3.72L6.36 9H2.64L0 6.36V2.64z" fill="none" stroke="currentColor" stroke-width=".25"/></pattern>'
+			. '<linearGradient id="%1$s-zon" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>'
+			. '<clipPath id="%1$s-glas"><path d="%2$s"/><path d="%3$s"/><path d="%4$s"/></clipPath>'
+		. '</defs>',
+		$id,
+		$glas_links,
+		$glas_rechts,
+		$roos
+	);
+
+	return sprintf(
+		'<svg class="kbj-raamlijn %1$s" viewBox="0 0 200 360" aria-hidden="true" focusable="false">%2$s<g class="kbj-raam-vulling">%3$s%4$s</g>%5$s<g class="kbj-raam-lijnen">%6$s</g></svg>',
+		esc_attr( $klasse ),
+		$defs,
+		$glas,
+		$blauw,
+		$glans,
+		$html
+	);
+}
+
+/**
+ * Het raam als los blok, zodat het in een pagina kan staan zonder dat
+ * WordPress de tekening bij het opslaan wegfiltert.
+ *
+ * @param array $attrs Blokinstellingen.
+ * @return string
+ */
+function kbj_render_raamlijn( $attrs ) {
+	return kbj_raamlijn( isset( $attrs['className'] ) ? (string) $attrs['className'] : '' );
+}
+
+/**
+ * De opening van de startpagina.
+ *
+ * Een grote foto, daarover licht in de kleuren van het glas dat langzaam
+ * verschuift, en de lijntekening van het raam die zich zet. De kop komt woord
+ * voor woord omhoog; het laatste stuk glanst in de kleuren van het glas.
+ *
+ * @param array $attrs Blokinstellingen.
+ * @return string
+ */
+function kbj_render_opening( $attrs ) {
+	$kop     = isset( $attrs['kop'] ) ? (string) $attrs['kop'] : '';
+	$glans   = isset( $attrs['glans'] ) ? (string) $attrs['glans'] : '';
+	$tekst   = isset( $attrs['tekst'] ) ? (string) $attrs['tekst'] : '';
+	$url     = kbj_foto_url( $attrs );
+	$contact = get_page_by_path( 'contact' );
+
+	list( $breedte, $hoogte ) = kbj_foto_maat( $attrs );
+
+	$foto = '' !== $url ? sprintf(
+		'<img class="kbj-opening__foto" src="%1$s" alt="%2$s"%3$s style="object-position:%4$s" fetchpriority="high" decoding="async">',
+		esc_url( $url ),
+		esc_attr( isset( $attrs['alt'] ) ? $attrs['alt'] : '' ),
+		$breedte ? sprintf( ' width="%d" height="%d"', $breedte, $hoogte ) : '',
+		esc_attr( isset( $attrs['positie'] ) ? preg_replace( '#[^0-9% a-z.]#', '', $attrs['positie'] ) : '50% 50%' )
+	) : '';
+
+	return sprintf(
+		'<section %1$s>%2$s<div class="kbj-glaslicht" aria-hidden="true"></div>%3$s'
+			. '<div class="kbj-opening__binnen">'
+				. '<h1 class="kbj-schuif">%4$s%5$s</h1>'
+				. '%6$s'
+				. '<div class="kbj-acties"><a class="kbj-knop kbj-knop--wit" href="%7$s">%8$s</a><a class="kbj-knop kbj-knop--glas" href="#aanbod">%9$s</a></div>'
+			. '</div>'
+			. '<ul class="kbj-opening__feiten">'
+				. '<li><strong>24 uur</strong>zorg, dag en nacht</li>'
+				. '<li><strong>6 plekken</strong>om te wonen</li>'
+				. '<li><strong>5 dagen</strong>dagbesteding per week</li>'
+				. '<li><strong>Vaak vergoed</strong>via WLZ, WMO of PGB</li>'
+			. '</ul>'
+		. '</section>',
+		get_block_wrapper_attributes( array( 'class' => 'kbj-opening kbj-paneel' ) ),
+		$foto,
+		kbj_raamlijn( 'is-getekend-bij-laden' ),
+		esc_html( $kop ),
+		'' !== $glans ? ' <span class="kbj-glastekst">' . esc_html( $glans ) . '</span>' : '',
+		'' !== $tekst ? '<p class="kbj-opening__tekst">' . esc_html( $tekst ) . '</p>' : '',
+		esc_url( $contact ? get_permalink( $contact ) : home_url( '/contact/' ) ),
+		esc_html__( 'Plan een rondleiding', 'kombij' ),
+		esc_html__( 'Bekijk wat we doen', 'kombij' )
 	);
 }

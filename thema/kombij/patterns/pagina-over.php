@@ -6,10 +6,9 @@
  * Description: Alle secties onder de kop van de pagina Over ons.
  */
 
-$verhaal = kbj_p( 'Hoe het begon', 'kbj-boven' )
-	. kbj_kop( 2, 'Waarom KomBij?' )
+$verhaal = kbj_kop( 2, 'Waarom KomBij?' )
 	. kbj_p( 'Een plek waar ouderen zich thuis voelen. Geen instelling met lange gangen, maar een klein huis waar iedereen elkaar kent. Dat wilden Corrie, Chantal en Edwin maken.' )
-	. kbj_p( 'Toen de H. Lambertuskerk in Maasbommel vrijkwam, zagen ze het voor zich. Een gebouw waar het dorp altijd samenkwam, met veel licht en ruimte. Edwin verbouwde de kerk zelf. De glas-in-loodramen, de gewelven en de pilaren bleven bewaard.' )
+	. kbj_p( 'Toen de Lambertuskerk in Maasbommel vrijkwam, zagen ze het voor zich. Een gebouw waar het dorp altijd samenkwam, met veel licht en ruimte. Edwin verbouwde de kerk zelf. De glas-in-loodramen, de gewelven en de pilaren bleven bewaard.' )
 	. kbj_p( 'Geen instelling, maar een plek waar u uzelf kunt zijn.', 'kbj-nadruk' );
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -48,8 +47,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	)
 );
 
-$gebouw = kbj_p( 'Het gebouw', 'kbj-boven' )
-	. kbj_kop( 2, 'De H. Lambertuskerk' )
+$gebouw = kbj_kop( 2, 'De Lambertuskerk' )
 	. kbj_p( 'De kerk aan de Raadhuisdijk werd gebouwd in 1868 en 1869, in neogotische stijl. Het is een rijksmonument. Ruim 150 jaar kwam het dorp hier samen.' )
 	. kbj_p( 'Bij de verbouwing kwam er een tussenverdieping in het schip, met lichte kamers. Beneden zijn de huiskamer, het atelier en de ruimte voor de dagbesteding. De ramen, de gewelven en de pilaren zijn gebleven.' );
 
@@ -59,7 +57,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 			array(
 				'inhoud'  => kbj_groep(
 					kbj_foto( 'vanaf-orgel.webp', 'Het schip van de kerk, gezien vanaf het orgel, met gewelven en pilaren', array( 'vorm' => 'recht', 'verhouding' => '4/3', 'positie' => '50% 40%' ) )
-					. kbj_foto( 'altaar.webp', 'De glas-in-loodramen in het koor', array( 'verhouding' => '3/4' ) ),
+					. kbj_foto( 'schip.webp', 'Het lichte schip met de nieuwe tussenverdieping', array( 'verhouding' => '3/4' ) ),
 					'kbj-huis__beelden'
 				),
 				'breedte' => '52%',

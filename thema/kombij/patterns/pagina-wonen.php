@@ -6,8 +6,7 @@
  * Description: Alle secties onder de kop van de pagina Wonen met zorg.
  */
 
-$verhaal = kbj_p( 'Gewoon leven, met zorg dichtbij', 'kbj-boven' )
-	. kbj_kop( 2, 'Leven zoals u gewend bent' )
+$verhaal = kbj_kop( 2, 'Leven zoals u gewend bent' )
 	. kbj_p( 'U wilt zelf bepalen hoe uw dag eruitziet. Maar wat als dat steeds lastiger wordt? Als u de weg kwijtraakt, woorden niet meer vindt of het alleen zijn te zwaar wordt?' )
 	. kbj_p( 'Dan is het fijn als er iemand met u meekijkt. Iemand die regelt wat niet meer lukt, zonder het ingewikkelder te maken dan nodig.' )
 	. kbj_p( 'U mag meedoen, u mag rust nemen, en u mag uzelf zijn.', 'kbj-nadruk' );

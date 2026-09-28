@@ -6,8 +6,7 @@
  * Description: Alle secties onder de kop van de pagina Dagbesteding.
  */
 
-$verhaal = kbj_p( 'Samen de dag doorbrengen', 'kbj-boven' )
-	. kbj_kop( 2, 'Wat kunt u nog, en wat vindt u leuk?' )
+$verhaal = kbj_kop( 2, 'Wat kunt u nog, en wat vindt u leuk?' )
 	. kbj_p( 'Misschien heeft u altijd hard gewerkt en kwam het er nooit van om hobby’s te hebben. Of misschien lukt wat u altijd deed niet meer. Samen zoeken we wat past bij wat u nog kunt en wat u fijn vindt.' )
 	. kbj_p( 'U ontmoet nieuwe mensen, ontdekt misschien een nieuwe hobby en krijgt aandacht voor uw verhaal. Wie even rust nodig heeft, zit heerlijk in een van onze relaxstoelen.' );
 

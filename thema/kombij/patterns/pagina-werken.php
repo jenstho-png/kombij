@@ -19,8 +19,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	kbj_kolommen(
 		array(
 			array(
-				'inhoud'  => kbj_p( 'Vrijwilligers', 'kbj-boven' )
-					. kbj_kop( 2, 'Een paar uur per week, veel betekenen' )
+				'inhoud'  => kbj_kop( 2, 'Een paar uur per week, veel betekenen' )
 					. kbj_p( 'Vrijwilligers maken het verschil bij KomBij. Een wandeling, een spelletje, samen koken of gewoon een praatje. Heb je een paar uur per week over? Dan horen we graag van je.' )
 					. kbj_p( 'Aanmelden kan via ' . $mail . '.' ),
 				'breedte' => '55%',

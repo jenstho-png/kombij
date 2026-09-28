@@ -27,15 +27,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function kbj_font_bestanden() {
 	/*
-	 * KomBij gebruikt alleen Montserrat: koppen in 700 en 600, tekst in 500.
-	 * Eén variabel bestand van 38 kB bevat al die gewichten, dat is kleiner dan
-	 * drie losse bestanden en het scheelt twee verzoeken.
+	 * Plus Jakarta Sans: familie van Montserrat uit het merkboek, geometrisch en
+	 * helder, maar verfijnder en rustiger in lange tekst. Eén variabel bestand
+	 * bevat alle gewichten van 200 tot 800.
 	 */
 	return array(
 		array(
-			'bestand' => 'montserrat.woff2',
-			'familie' => 'Montserrat',
-			'gewicht' => '100 900',
+			'bestand' => 'jakarta.woff2',
+			'familie' => 'Plus Jakarta Sans',
+			'gewicht' => '200 800',
 			'stijl'   => 'normal',
 		),
 	);
@@ -47,7 +47,7 @@ function kbj_font_bestanden() {
  * @return string[]
  */
 function kbj_fonts_eerst() {
-	return array( 'montserrat.woff2' );
+	return array( 'jakarta.woff2' );
 }
 
 /**

@@ -51,7 +51,7 @@ function kbj_sectie( $inhoud, $opties = array() ) {
 		)
 	);
 
-	$klassen = trim( 'kbj-sectie ' . $opties['klasse'] . ( $opties['ornament'] ? ' kbj-ornament' : '' ) );
+	$klassen = trim( 'kbj-sectie ' . $opties['klasse'] . ( $opties['ornament'] ? ' kbj-ornament' : '' ) . ( '' !== $opties['achtergrond'] ? ' kbj-paneel' : '' ) );
 
 	$attrs = array(
 		'align'     => 'full',
@@ -197,13 +197,10 @@ function kbj_p( $tekst, $klasse = '', $midden = false ) {
  * @return string
  */
 function kbj_sectiekop( $boven, $titel, $intro = '', $midden = true, $niveau = 2 ) {
-	$inhoud = '';
+	// Het regeltje boven de kop is vervallen; de parameter blijft voor oude patronen.
+	unset( $boven );
 
-	if ( '' !== $boven ) {
-		$inhoud .= kbj_p( $boven, 'kbj-boven' );
-	}
-
-	$inhoud .= kbj_kop( $niveau, $titel );
+	$inhoud = kbj_kop( $niveau, $titel, 'kbj-schuif' );
 
 	if ( '' !== $intro ) {
 		$inhoud .= kbj_p( $intro );
@@ -433,6 +430,19 @@ function kbj_kader( $inhoud, $extra = '' ) {
 }
 
 /**
+ * Een knop "Bel ons", zonder het hele nummer erop.
+ *
+ * @return array
+ */
+function kbj_tel_knop() {
+	return array(
+		'tekst' => 'Bel ons',
+		'url'   => kbj_tel_url(),
+		'rand'  => true,
+	);
+}
+
+/**
  * Het telefoonnummer zoals het in de tekst staat.
  *
  * @return string
@@ -482,5 +492,50 @@ function kbj_regelingen() {
 		'<strong>WMO</strong><em>Wet maatschappelijke ondersteuning</em><span>Via uw gemeente, voor wie nog thuis woont. Vaak voor dagbesteding, soms voor logeren.</span>',
 		'<strong>PGB</strong><em>Persoonsgebonden budget</em><span>U krijgt zelf een budget voor zorg en kiest waar u die inkoopt. Dat kan ook bij KomBij.</span>',
 		'<strong>Particulier</strong><em>Zelf betalen</em><span>Zonder indicatie kan het ook. U betaalt dan zelf, en we spreken vooraf een duidelijke prijs af.</span>',
+	);
+}
+
+/**
+ * Een hoofdstuk op de startpagina: een grote foto, een kleine die eroverheen
+ * valt, een Romeins cijfer, een kop en één zin.
+ *
+ * @param array $h nummer, kop, tekst, link, linktekst, groot, altgroot,
+ *                 klein, altklein, onder (bijschrift), omgekeerd.
+ * @return string
+ */
+function kbj_hoofdstuk( $h ) {
+	$beelden = kbj_groep(
+		kbj_foto(
+			$h['groot'],
+			$h['altgroot'],
+			array(
+				'vorm'       => 'recht',
+				'verhouding' => '4/5',
+				'positie'    => isset( $h['positie'] ) ? $h['positie'] : '50% 50%',
+				'bijschrift' => isset( $h['onder'] ) ? $h['onder'] : '',
+			)
+		)
+		. kbj_foto(
+			$h['klein'],
+			$h['altklein'],
+			array(
+				'verhouding' => '3/4',
+			)
+		),
+		'kbj-hoofdstuk__beelden'
+	);
+
+	$tekst = kbj_p( $h['nummer'], 'kbj-hoofdstuk__nummer' )
+		. kbj_kop( 2, $h['kop'], 'kbj-hoofdstuk__kop' )
+		. kbj_p( $h['tekst'], 'kbj-hoofdstuk__tekst' )
+		. kbj_p( '<a href="' . esc_url( $h['link'] ) . '">' . esc_html( $h['linktekst'] ) . '</a>', 'kbj-verder' );
+
+	return kbj_sectie(
+		kbj_groep( $beelden . kbj_groep( $tekst, 'kbj-hoofdstuk__tekstblok' ), 'kbj-hoofdstuk__binnen' ),
+		array(
+			'klasse' => 'kbj-hoofdstuk' . ( ! empty( $h['omgekeerd'] ) ? ' kbj-hoofdstuk--omgekeerd' : '' ),
+			'boven'  => '50',
+			'onder'  => '50',
+		)
 	);
 }

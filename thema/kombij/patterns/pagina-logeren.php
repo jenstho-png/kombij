@@ -6,10 +6,9 @@
  * Description: Alle secties onder de kop van de pagina Logeren met zorg.
  */
 
-$verhaal = kbj_p( 'Voor mantelzorgers', 'kbj-boven' )
-	. kbj_kop( 2, 'Zorgen voor een ander is mooi, maar ook zwaar' )
+$verhaal = kbj_kop( 2, 'Zorgen voor een ander is mooi, maar ook zwaar' )
 	. kbj_p( 'Veel mantelzorgers gaan lang door. Tot het eigenlijk niet meer gaat. Logeren met zorg, ook wel respijtzorg genoemd, geeft u even ruimte. Om te slapen, om op vakantie te gaan, of om gewoon even niets te hoeven.' )
-	. kbj_p( 'Voor uw naaste is het vaak een drempel. Dat snappen we. Maar eenmaal hier merken de meeste gasten dat KomBij een warme plek is. Met goede zorg, aandacht voor wie ze zijn, en genoeg te doen.' );
+	. kbj_p( 'De zorg even uit handen geven voelt vaak lastig, alsof u tekortschiet. Dat is het niet. Voor uw naaste is het ook een drempel, dat snappen we. Maar eenmaal hier merken de meeste gasten dat KomBij een warme plek is. Met goede zorg, aandacht voor wie ze zijn, en genoeg te doen.' );
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_kolommen(

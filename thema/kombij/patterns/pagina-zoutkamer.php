@@ -12,8 +12,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	kbj_kolommen(
 		array(
 			array(
-				'inhoud'  => kbj_p( 'Zo gaat een sessie', 'kbj-boven' )
-					. kbj_kop( 2, 'Even op adem komen' )
+				'inhoud'  => kbj_kop( 2, 'Even op adem komen' )
 					. kbj_p( 'Een zoutkamer bootst de lucht van een zoutgrot na. Een apparaat verdeelt heel fijn zout door de ruimte. U zit met uw kleding aan in een relaxstoel, met een plaid als u wilt, en luistert naar rustige muziek.' )
 					. kbj_p( 'Een sessie duurt 50 minuten, voor kinderen 25 minuten. Voor bewoners, logés en gasten van de dagbesteding hoort de zoutkamer erbij. Iedereen anders kan een sessie reserveren.' )
 					. kbj_knoppen(
