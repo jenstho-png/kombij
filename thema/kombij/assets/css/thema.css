@@ -4443,3 +4443,25 @@ body {
 	hyphens: auto;
 	overflow-wrap: break-word;
 }
+
+/* De Maas in "Hart voor zorg" loopt onder de tekst door, nooit door de knoppen. */
+.kbj-werken .kbj-tekening-maas {
+	left: clamp(1.25rem, 3vw, 2.25rem);
+	right: auto;
+	bottom: 0.75rem;
+	width: clamp(220px, 30%, 360px);
+}
+
+.kbj-werken__binnen {
+	padding-bottom: clamp(8rem, 13vw, 11rem);
+}
+
+@media (max-width: 781px) {
+	.kbj-werken .kbj-tekening-maas {
+		width: 62%;
+	}
+
+	.kbj-werken__binnen {
+		padding-bottom: 7.5rem;
+	}
+}
