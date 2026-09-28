@@ -8,7 +8,7 @@
 ?>
 <!-- wp:pattern {"slug":"kombij/opening"} /-->
 <!-- wp:pattern {"slug":"kombij/aanbod"} /-->
-<!-- wp:pattern {"slug":"kombij/band"} /-->
+<!-- wp:pattern {"slug":"kombij/strook-zin"} /-->
 <!-- wp:pattern {"slug":"kombij/gebouw"} /-->
 <!-- wp:pattern {"slug":"kombij/vergoed"} /-->
 <!-- wp:pattern {"slug":"kombij/familie"} /-->
