@@ -1,0 +1,11 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cjt/contactgegevens",
+	"title": "Contactgegevens",
+	"category": "creajt-starter",
+	"description": "E-mail, telefoon, adres en de socials, zoals ze onder Gegevens staan.",
+	"textdomain": "creajt-starter",
+	"supports": { "html": false },
+	"attributes": {}
+}

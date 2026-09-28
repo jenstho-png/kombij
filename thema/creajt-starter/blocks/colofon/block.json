@@ -1,0 +1,11 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cjt/colofon",
+	"title": "Colofon",
+	"category": "creajt-starter",
+	"description": "De regel onderaan met naam, jaartal, KvK en btw.",
+	"textdomain": "creajt-starter",
+	"supports": { "html": false },
+	"attributes": {}
+}

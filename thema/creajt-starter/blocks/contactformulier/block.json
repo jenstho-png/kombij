@@ -1,0 +1,11 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cjt/contactformulier",
+	"title": "Contactformulier",
+	"category": "creajt-starter",
+	"description": "Het formulier waarmee bezoekers een bericht sturen. Komt binnen op het adres onder Gegevens.",
+	"textdomain": "creajt-starter",
+	"supports": { "html": false, "multiple": false },
+	"attributes": {}
+}

@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "cjt/video-facade",
+	"title": "Video",
+	"category": "creajt-starter",
+	"description": "Een video van YouTube of Vimeo die pas laadt als iemand hem aanzet. Plak gewoon de link.",
+	"textdomain": "creajt-starter",
+	"supports": { "html": false, "align": [ "wide", "full" ] },
+	"attributes": {
+		"video": { "type": "string", "default": "", "role": "content" },
+		"poster": { "type": "string", "default": "", "role": "content" },
+		"titel": { "type": "string", "default": "", "role": "content" }
+	}
+}
