@@ -5027,3 +5027,609 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 		padding-top: 0.6rem;
 	}
 }
+
+/* ================================================================
+ * Ontwerp levendig: meer beeld, foto's met een zachte laag merkkleur.
+ * ================================================================ */
+
+.kbj-hl-foto {
+	position: relative;
+	isolation: isolate;
+}
+
+.kbj-hl-foto .kbj-beeld {
+	margin: 0;
+}
+
+.kbj-hl-foto .kbj-beeld__kader {
+	position: relative;
+	border-radius: clamp(18px, 2.4vw, 30px);
+	overflow: hidden;
+}
+
+/* De laag kleur over een foto: rustig, maar met leven eronder. */
+.kbj-hl-tint .kbj-beeld__kader::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	transition: opacity 0.8s var(--kbj-ease);
+}
+
+.kbj-hl-tint--nacht .kbj-beeld__kader::after {
+	background: linear-gradient(100deg, rgba(10, 36, 68, 0.92) 0%, rgba(10, 36, 68, 0.72) 45%, rgba(27, 83, 129, 0.35) 100%);
+}
+
+.kbj-hl-tint--kerk .kbj-beeld__kader::after {
+	background: linear-gradient(180deg, rgba(27, 83, 129, 0.2) 0%, rgba(27, 83, 129, 0.85) 100%);
+	mix-blend-mode: multiply;
+}
+
+.kbj-hl-tint--zee .kbj-beeld__kader::after {
+	background: rgba(114, 182, 191, 0.55);
+	mix-blend-mode: multiply;
+}
+
+.kbj-hl-tint--helder .kbj-beeld__kader::after {
+	background: linear-gradient(180deg, rgba(30, 124, 178, 0.15) 0%, rgba(30, 124, 178, 0.85) 100%);
+	mix-blend-mode: multiply;
+}
+
+.kbj-hl-tint--glas .kbj-beeld__kader::after {
+	background: rgba(176, 225, 241, 0.6);
+	mix-blend-mode: color;
+}
+
+/* 1. De opening. */
+.kbj-hl-open {
+	position: relative;
+	isolation: isolate;
+}
+
+.kbj-hl-open__achter {
+	position: relative;
+	z-index: 0;
+}
+
+.kbj-hl-open__achter .kbj-beeld__kader {
+	aspect-ratio: auto !important;
+	height: clamp(560px, 78vh, 760px);
+	border-radius: clamp(24px, 3vw, 40px);
+}
+
+.kbj-hl-open__raam {
+	z-index: 1 !important;
+	right: 30%;
+	top: 8%;
+	height: 70%;
+	width: auto;
+	aspect-ratio: 200 / 360;
+	color: var(--kbj-wit);
+	opacity: 0.5;
+}
+
+.kbj-hl-open__tekst {
+	position: absolute;
+	z-index: 2;
+	left: clamp(1.5rem, 5vw, 4.5rem);
+	bottom: clamp(2rem, 6vw, 5rem);
+	max-width: min(40rem, 58%);
+	color: var(--kbj-wit);
+}
+
+.kbj-hl-open h1 {
+	margin: 0 0 1rem;
+	font-size: clamp(2.4rem, 1.2rem + 4.4vw, 5rem);
+	line-height: 1.02;
+	letter-spacing: -0.035em;
+	color: var(--kbj-wit);
+}
+
+.kbj-hl-open .kbj-intro {
+	color: rgba(255, 255, 255, 0.86) !important;
+	max-width: 32ch;
+}
+
+.kbj-hl .wp-block-button.is-style-outline .wp-block-button__link {
+	border-color: currentColor;
+}
+
+.kbj-hl-open .wp-block-button:not(.is-style-outline) .wp-block-button__link,
+.kbj-hl-vlak .wp-block-button .wp-block-button__link {
+	background: var(--kbj-wit);
+	color: var(--kbj-nacht);
+}
+
+.kbj-hl-open .wp-block-button.is-style-outline .wp-block-button__link {
+	color: var(--kbj-wit);
+}
+
+.kbj-hl-open__zweef {
+	position: absolute;
+	z-index: 2;
+	right: clamp(1.5rem, 4vw, 3.5rem);
+	bottom: clamp(-2.5rem, -3vw, -1rem);
+	width: min(34%, 380px);
+	height: 72%;
+}
+
+.kbj-hl-zweef {
+	position: absolute;
+	box-shadow: 0 40px 70px -30px rgba(10, 36, 68, 0.6);
+	border-radius: clamp(18px, 2.4vw, 30px);
+}
+
+.kbj-hl-zweef--twee {
+	right: 0;
+	top: 0;
+	width: 62%;
+	transform: rotate(3deg);
+	animation: kbj-zweef 9s ease-in-out infinite;
+}
+
+.kbj-hl-zweef--een {
+	left: 0;
+	bottom: 0;
+	width: 52%;
+	transform: rotate(-4deg);
+	border: 6px solid var(--kbj-wit);
+	border-radius: clamp(22px, 2.6vw, 34px);
+	animation: kbj-zweef 11s ease-in-out -3s infinite;
+}
+
+@keyframes kbj-zweef {
+	0%,
+	100% {
+		translate: 0 0;
+	}
+
+	50% {
+		translate: 0 -10px;
+	}
+}
+
+/* 2. Het aanbod: drie foto's met elk een eigen kleur. */
+.kbj-hl-aanbod .kbj-intro {
+	margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
+}
+
+.kbj-hl-kaarten {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: clamp(0.9rem, 2vw, 1.5rem);
+}
+
+.kbj-hl-kaart {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+	border-radius: clamp(20px, 2.6vw, 32px);
+}
+
+.kbj-hl-kaart:nth-child(2) {
+	transform: translateY(clamp(1rem, 3vw, 2.5rem));
+}
+
+.kbj-hl-kaart .kbj-beeld__kader {
+	border-radius: 0;
+}
+
+.kbj-hl-kaart img {
+	transition: transform 1.2s var(--kbj-ease);
+}
+
+.kbj-hl-kaart:hover img {
+	transform: scale(1.06);
+}
+
+.kbj-hl-kaart:hover .kbj-beeld__kader::after {
+	opacity: 0.8;
+}
+
+.kbj-hl-kaart .kbj-plek {
+	position: absolute;
+	z-index: 3;
+	top: 1rem;
+	left: 1rem;
+}
+
+.kbj-hl-kaart__tekst {
+	position: absolute;
+	z-index: 2;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: clamp(1.25rem, 2.5vw, 2rem);
+	color: var(--kbj-wit);
+}
+
+.kbj-hl-kaart__tekst h3 {
+	margin: 0 0 0.4rem;
+	font-size: var(--wp--preset--font-size--x-large);
+	color: var(--kbj-wit);
+}
+
+.kbj-hl-kaart__tekst p {
+	margin: 0 0 1rem;
+	color: rgba(255, 255, 255, 0.88);
+}
+
+.kbj-hl-kaart__tekst .kbj-acties {
+	margin: 0;
+}
+
+.kbj-hl-kaart .wp-block-button__link {
+	background: var(--kbj-wit);
+	color: var(--kbj-nacht);
+}
+
+/* 3. De zin over een foto. */
+.kbj-hl-band {
+	position: relative;
+	isolation: isolate;
+}
+
+.kbj-hl-band__beeld .kbj-beeld__kader {
+	aspect-ratio: auto !important;
+	height: clamp(340px, 42vw, 520px);
+}
+
+.kbj-hl-band__zin {
+	position: absolute;
+	z-index: 2;
+	left: 50%;
+	top: 50%;
+	width: min(88%, 22ch);
+	margin: 0;
+	transform: translate(-50%, -50%);
+	font-size: clamp(1.8rem, 1rem + 3.2vw, 3.6rem);
+	font-weight: 700;
+	line-height: 1.12;
+	letter-spacing: -0.025em;
+	text-align: center;
+	text-wrap: balance;
+	color: var(--kbj-wit);
+}
+
+.kbj-hl-licht {
+	font-weight: 300;
+	color: var(--kbj-glas);
+}
+
+/* 4. De collage. */
+.kbj-hl-collage {
+	display: grid;
+	grid-template-columns: repeat(12, minmax(0, 1fr));
+	grid-auto-rows: minmax(0, auto);
+	gap: clamp(0.75rem, 1.6vw, 1.25rem);
+	align-items: start;
+}
+
+.kbj-hl-collage__tekst {
+	grid-column: 1 / span 5;
+	grid-row: 1;
+	align-self: center;
+	padding-right: clamp(0rem, 2vw, 2rem);
+}
+
+.kbj-hl-collage__tekst h2 {
+	margin-top: 0;
+}
+
+.kbj-hl-c1 {
+	grid-column: 6 / span 7;
+	grid-row: 1;
+}
+
+.kbj-hl-c2 {
+	grid-column: 1 / span 3;
+	grid-row: 2;
+}
+
+.kbj-hl-c3 {
+	grid-column: 4 / span 3;
+	grid-row: 2;
+	margin-top: clamp(2rem, 6vw, 5rem);
+}
+
+.kbj-hl-c4 {
+	grid-column: 7 / span 4;
+	grid-row: 2;
+}
+
+.kbj-hl-cijfers {
+	grid-column: 11 / span 2;
+	grid-row: 2;
+	align-self: end;
+	display: grid;
+	gap: 1rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.kbj-hl-cijfers li {
+	display: flex;
+	flex-direction: column;
+	padding: 1.1rem;
+	border-radius: 20px;
+	background: var(--kbj-glas);
+}
+
+.kbj-hl-cijfers li:last-child {
+	background: var(--kbj-nacht);
+}
+
+.kbj-hl-cijfers strong {
+	font-size: clamp(1.8rem, 1.2rem + 1.6vw, 2.6rem);
+	line-height: 1;
+	letter-spacing: -0.03em;
+	color: var(--kbj-nacht);
+}
+
+.kbj-hl-cijfers span {
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--kbj-nacht);
+}
+
+.kbj-hl-cijfers li:last-child strong,
+.kbj-hl-cijfers li:last-child span {
+	color: var(--kbj-wit);
+}
+
+/* 5. Vergoed op een foto met een laag kerkblauw. */
+.kbj-hl-vlak {
+	position: relative;
+	isolation: isolate;
+}
+
+.kbj-hl-vlak__beeld .kbj-beeld__kader {
+	aspect-ratio: auto !important;
+	height: clamp(380px, 40vw, 500px);
+}
+
+.kbj-hl-vlak__tekst {
+	position: absolute;
+	z-index: 2;
+	left: clamp(1.5rem, 5vw, 4.5rem);
+	bottom: clamp(1.75rem, 5vw, 4rem);
+	max-width: min(36rem, 70%);
+	color: var(--kbj-wit);
+}
+
+.kbj-hl-vlak__tekst h2 {
+	margin-top: 0;
+	color: var(--kbj-wit);
+}
+
+.kbj-hl-vlak__tekst p {
+	color: rgba(255, 255, 255, 0.9);
+}
+
+/* 6. De familie: twee foto's over elkaar heen. */
+.kbj-hl-familie {
+	display: grid;
+	grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+	gap: clamp(2rem, 6vw, 5rem);
+	align-items: center;
+}
+
+.kbj-hl-familie__beelden {
+	position: relative;
+	padding: 0 18% 14% 0;
+}
+
+.kbj-hl-f2 {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	width: 46%;
+	border: 8px solid var(--kbj-wit);
+	border-radius: clamp(24px, 2.8vw, 36px);
+	box-shadow: 0 30px 60px -30px rgba(10, 36, 68, 0.45);
+}
+
+.kbj-hl-familie__tekst h2 {
+	margin-top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.kbj-hl-zweef {
+		animation: none !important;
+	}
+}
+
+@media (max-width: 900px) {
+	.kbj-hl-open__tekst {
+		max-width: 80%;
+	}
+
+	.kbj-hl-open__zweef {
+		display: none;
+	}
+
+	.kbj-hl-collage__tekst {
+		grid-column: 1 / -1;
+	}
+
+	.kbj-hl-c1 {
+		grid-column: 1 / -1;
+		grid-row: 2;
+	}
+
+	.kbj-hl-c2 {
+		grid-column: 1 / span 6;
+		grid-row: 3;
+	}
+
+	.kbj-hl-c3 {
+		grid-column: 7 / span 6;
+		grid-row: 3;
+		margin-top: 2rem;
+	}
+
+	.kbj-hl-c4 {
+		display: none;
+	}
+
+	.kbj-hl-cijfers {
+		grid-column: 1 / -1;
+		grid-row: 4;
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media (max-width: 781px) {
+	.kbj-hl-open__achter .kbj-beeld__kader {
+		height: 640px;
+	}
+
+	.kbj-hl-open__achter .kbj-beeld__kader::after {
+		background: linear-gradient(180deg, rgba(10, 36, 68, 0.35) 0%, rgba(10, 36, 68, 0.9) 60%, rgba(10, 36, 68, 0.95) 100%);
+	}
+
+	.kbj-hl-open__raam {
+		right: 50%;
+		transform: translateX(50%);
+		top: 4%;
+		height: 40%;
+	}
+
+	.kbj-hl-open__tekst {
+		left: 1.25rem;
+		right: 1.25rem;
+		bottom: 1.5rem;
+		max-width: none;
+	}
+
+	.kbj-hl-kaarten {
+		display: flex;
+		gap: 0.75rem;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+		margin-left: calc(var(--kbj-zijkant) * -1) !important;
+		margin-right: calc(var(--kbj-zijkant) * -1) !important;
+		max-width: none !important;
+		padding: 0 var(--kbj-zijkant);
+		scroll-padding-inline: var(--kbj-zijkant);
+	}
+
+	.kbj-hl-kaarten::-webkit-scrollbar {
+		display: none;
+	}
+
+	.kbj-hl-kaart {
+		flex: 0 0 80%;
+		scroll-snap-align: start;
+	}
+
+	.kbj-hl-kaart:nth-child(2) {
+		transform: none;
+	}
+
+	.kbj-hl-band__beeld .kbj-beeld__kader {
+		height: 380px;
+	}
+
+	.kbj-hl-vlak__beeld .kbj-beeld__kader {
+		height: 480px;
+	}
+
+	.kbj-hl-vlak__tekst {
+		left: 1.25rem;
+		right: 1.25rem;
+		bottom: 1.5rem;
+		max-width: none;
+	}
+
+	.kbj-hl-familie {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* Levendig: tekst op een foto houdt altijd ruimte tot de rand van de foto. */
+.kbj-hl-open__tekst,
+.kbj-hl-vlak__tekst {
+	left: calc(var(--kbj-zijkant) + clamp(1.5rem, 4.5vw, 4rem));
+}
+
+.kbj-hl-band .kbj-hl-band__zin {
+	font-size: clamp(1.75rem, 1rem + 3.2vw, 3.6rem) !important;
+	line-height: 1.12;
+}
+
+.kbj-hl-kaart .kbj-beeld__kader,
+.kbj-hl-kaart .kbj-beeld {
+	border-radius: inherit;
+}
+
+@media (max-width: 781px) {
+	.kbj-hl-open__achter .kbj-beeld__kader {
+		height: 740px;
+	}
+
+	.kbj-hl-open__tekst,
+	.kbj-hl-vlak__tekst {
+		left: calc(var(--kbj-zijkant) + 1.25rem);
+		right: calc(var(--kbj-zijkant) + 1.25rem);
+		bottom: 2.25rem;
+	}
+
+	.kbj-hl-open h1 {
+		font-size: clamp(2.1rem, 1.3rem + 4vw, 2.6rem);
+	}
+
+	.kbj-hl-vlak__beeld .kbj-beeld__kader {
+		height: 560px;
+	}
+
+	.kbj-hl-vlak__tekst h2 {
+		font-size: clamp(1.7rem, 1.2rem + 3vw, 2.1rem);
+	}
+
+	.kbj-hl-band__zin {
+		width: calc(100% - 2 * var(--kbj-zijkant) - 2.5rem);
+	}
+}
+
+/* Levendig: de sectie eindigt precies bij de foto, zodat tekst onderaan nooit wordt afgesneden. */
+.kbj-hl-open.kbj-sectie,
+.kbj-hl-band.kbj-sectie,
+.kbj-hl-vlak.kbj-sectie {
+	padding-bottom: 0 !important;
+	margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.kbj-hl-band .kbj-hl-band__zin {
+	top: calc(50% + var(--wp--preset--spacing--30) / 2);
+}
+
+.kbj-hl-kaart {
+	clip-path: inset(0 round clamp(20px, 2.6vw, 32px));
+}
+
+/* De foto vult de hele kaart, zodat de ronde hoeken altijd op de foto vallen. */
+.kbj-hl-kaart {
+	aspect-ratio: 3 / 4;
+	align-self: start;
+}
+
+.kbj-hl-kaart > .kbj-hl-foto,
+.kbj-hl-kaart > .kbj-hl-foto .kbj-beeld {
+	position: absolute;
+	inset: 0;
+	height: 100%;
+	margin: 0;
+}
+
+.kbj-hl-kaart > .kbj-hl-foto .kbj-beeld__kader {
+	height: 100%;
+	aspect-ratio: auto !important;
+}
+
+.kbj-hl-kaart > .kbj-hl-foto img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
