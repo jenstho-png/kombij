@@ -106,6 +106,10 @@ function kbj_installatie_startpagina() {
 				'post_content' => kbj_startpagina_inhoud(),
 			)
 		);
+
+		if ( $pagina_id && ! is_wp_error( $pagina_id ) ) {
+			kbj_afdruk_zetten( $pagina_id );
+		}
 	}
 
 	if ( is_wp_error( $pagina_id ) || ! $pagina_id ) {

@@ -353,7 +353,7 @@ function kbj_installatie_paginas() {
 			continue;
 		}
 
-		wp_insert_post(
+		$id = wp_insert_post(
 			array(
 				'post_title'   => $pagina['titel'],
 				'post_name'    => $pagina['slug'],
@@ -362,6 +362,10 @@ function kbj_installatie_paginas() {
 				'post_content' => kbj_pagina_inhoud( $pagina ),
 			)
 		);
+
+		if ( $id && ! is_wp_error( $id ) ) {
+			kbj_afdruk_zetten( $id );
+		}
 	}
 }
 

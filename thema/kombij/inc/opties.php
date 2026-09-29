@@ -783,6 +783,12 @@ function kbj_beheer_stijl() {
 		.kbj-knoppen a::after{content:"\2192";color:#1b5381}
 		.kbj-knoppen button{width:100%;text-align:left;min-height:40px;border-radius:10px!important}
 		.kbj-tegel--breed{grid-column:1/-1}
+		.kbj-herbouw{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:.4rem}
+		.kbj-herbouw__rij{display:flex;align-items:center;gap:.6rem;border:1px solid #e0e6ec;background:#f6f9fc;border-radius:10px;padding:.55rem .8rem;min-height:28px;cursor:pointer}
+		.kbj-herbouw__rij span{font-weight:600;color:#0a2444}
+		.kbj-herbouw__stand{margin-left:auto;text-align:right;color:#646970}
+		.kbj-herbouw__stand--aangepast{color:#996800}
+		.kbj-herbouw__knop{margin:.9rem 0 0}
 		.kbj-pagina-knoppen{display:grid;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));gap:.4rem}
 	</style>
 	<?php
@@ -859,7 +865,7 @@ function kbj_overzicht_scherm() {
 		</div>
 
 		<?php if ( isset( $_GET['kbj-herbouwd'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
-			<div class="notice notice-success inline"><p><?php esc_html_e( 'Klaar: de pagina\'s zijn opnieuw opgebouwd met de nieuwste versie van het thema.', 'kombij' ); ?></p></div>
+			<div class="notice notice-success inline"><p><?php echo esc_html( sprintf( /* translators: %d: aantal pagina's */ _n( 'Klaar: %d pagina is opnieuw opgebouwd. De vorige versie staat in de revisies.', 'Klaar: %d pagina\'s zijn opnieuw opgebouwd. De vorige versies staan in de revisies.', absint( $_GET['kbj-herbouwd'] ), 'kombij' ), absint( $_GET['kbj-herbouwd'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?></p></div>
 		<?php endif; ?>
 
 		<?php if ( $punten ) : ?>
@@ -933,13 +939,33 @@ function kbj_overzicht_scherm() {
 
 			if ( current_user_can( 'manage_options' ) ) :
 				?>
-				<section class="kbj-tegel">
+				<section class="kbj-tegel kbj-tegel--breed">
 					<h2><span class="dashicons dashicons-update" aria-hidden="true"></span><?php esc_html_e( 'Na een nieuwe versie van het thema', 'kombij' ); ?></h2>
-					<p><?php esc_html_e( 'Een nieuwe versie verandert pagina\'s die al bestaan niet. Met deze knop krijgen alle vaste pagina\'s de nieuwste opmaak. Let op: wat u zelf in die pagina\'s heeft veranderd, gaat dan verloren. Vacatures en gegevens blijven staan.', 'kombij' ); ?></p>
-					<form class="kbj-knoppen" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" onsubmit="return confirm('<?php echo esc_js( __( 'Weet u het zeker? Eigen aanpassingen in de pagina\'s gaan verloren.', 'kombij' ) ); ?>');">
+					<p><?php esc_html_e( 'Een nieuwe versie van het thema verandert pagina\'s die al bestaan niet. Hier kiest u welke pagina\'s de nieuwste opmaak krijgen. Pagina\'s die u zelf heeft aangepast staan standaard uit, zodat uw werk blijft staan. De vorige versie van elke pagina wordt altijd eerst bewaard: terugzetten kan via Revisies in de editor.', 'kombij' ); ?></p>
+					<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 						<input type="hidden" name="action" value="kbj_herbouw">
 						<?php wp_nonce_field( 'kbj_herbouw' ); ?>
-						<button type="submit" class="button button-secondary"><?php esc_html_e( 'Pagina\'s opnieuw opbouwen', 'kombij' ); ?></button>
+						<div class="kbj-herbouw">
+							<?php foreach ( kbj_herbouw_paginas() as $id => $naam ) : ?>
+								<?php $stand = kbj_pagina_stand( $id ); ?>
+								<label class="kbj-herbouw__rij">
+									<input type="checkbox" name="kbj_paginas[]" value="<?php echo esc_attr( $id ); ?>" <?php checked( 'origineel', $stand ); ?>>
+									<span><?php echo esc_html( $naam ); ?></span>
+									<small class="kbj-herbouw__stand kbj-herbouw__stand--<?php echo esc_attr( $stand ); ?>">
+										<?php
+										if ( 'origineel' === $stand ) {
+											esc_html_e( 'niet aangepast', 'kombij' );
+										} elseif ( 'aangepast' === $stand ) {
+											esc_html_e( 'door u aangepast', 'kombij' );
+										} else {
+											esc_html_e( 'onbekend, misschien aangepast', 'kombij' );
+										}
+										?>
+									</small>
+								</label>
+							<?php endforeach; ?>
+						</div>
+						<p class="kbj-herbouw__knop"><button type="submit" class="button button-secondary"><?php esc_html_e( 'Gekozen pagina\'s opnieuw opbouwen', 'kombij' ); ?></button></p>
 					</form>
 				</section>
 				<?php
@@ -950,8 +976,67 @@ function kbj_overzicht_scherm() {
 	<?php
 }
 
+/** Onder welke naam een pagina onthoudt hoe het thema hem heeft opgebouwd. */
+const KBJ_AFDRUK_META = '_kbj_afdruk';
+
 /**
- * Bouwt de startpagina en de vaste pagina's opnieuw op uit de patronen.
+ * Onthoudt hoe een pagina eruitziet zoals het thema hem net heeft opgebouwd.
+ *
+ * @param int $id Pagina.
+ */
+function kbj_afdruk_zetten( $id ) {
+	update_post_meta( $id, KBJ_AFDRUK_META, md5( (string) get_post_field( 'post_content', $id, 'raw' ) ) );
+}
+
+/**
+ * Of iemand een pagina zelf heeft aangepast sinds het thema hem opbouwde.
+ *
+ * Zonder afdruk (pagina's van voor deze versie) kijken we naar de revisies:
+ * wie in de editor opslaat, maakt een revisie. Geen revisies is dus nooit
+ * aangepast.
+ *
+ * @param int $id Pagina.
+ * @return string origineel, aangepast of onbekend.
+ */
+function kbj_pagina_stand( $id ) {
+	$afdruk = (string) get_post_meta( $id, KBJ_AFDRUK_META, true );
+
+	if ( '' !== $afdruk ) {
+		return md5( (string) get_post_field( 'post_content', $id, 'raw' ) ) === $afdruk ? 'origineel' : 'aangepast';
+	}
+
+	return wp_get_post_revisions( $id, array( 'fields' => 'ids', 'posts_per_page' => 1 ) ) ? 'onbekend' : 'origineel';
+}
+
+/**
+ * De pagina's die het thema kan opbouwen: de startpagina en de vaste pagina's.
+ *
+ * @return array ID => naam.
+ */
+function kbj_herbouw_paginas() {
+	$lijst = array();
+	$voor  = (int) get_option( 'page_on_front' );
+
+	if ( $voor ) {
+		$lijst[ $voor ] = __( 'Home', 'kombij' );
+	}
+
+	foreach ( kbj_paginas() as $pagina ) {
+		$object = get_page_by_path( $pagina['slug'] );
+
+		if ( $object ) {
+			$lijst[ $object->ID ] = $pagina['titel'];
+		}
+	}
+
+	return $lijst;
+}
+
+/**
+ * Bouwt de gekozen pagina's opnieuw op uit de patronen.
+ *
+ * Alleen wat is aangevinkt. Van elke pagina gaat eerst de huidige versie de
+ * revisies in, zodat niets echt kwijt kan raken.
  */
 function kbj_herbouw() {
 	if ( ! current_user_can( 'manage_options' ) ) {
@@ -960,35 +1045,50 @@ function kbj_herbouw() {
 
 	check_admin_referer( 'kbj_herbouw' );
 
-	$voor = (int) get_option( 'page_on_front' );
-
-	if ( $voor ) {
-		wp_update_post(
-			array(
-				'ID'           => $voor,
-				'post_content' => kbj_startpagina_inhoud(),
-			)
-		);
-	}
+	$gekozen = isset( $_POST['kbj_paginas'] ) ? array_map( 'absint', (array) wp_unslash( $_POST['kbj_paginas'] ) ) : array();
+	$bekend  = kbj_herbouw_paginas();
+	$voor    = (int) get_option( 'page_on_front' );
+	$slugs   = array();
+	$aantal  = 0;
 
 	foreach ( kbj_paginas() as $pagina ) {
-		$object = get_page_by_path( $pagina['slug'] );
+		$slugs[ $pagina['slug'] ] = $pagina;
+	}
 
-		if ( $object ) {
-			wp_update_post(
-				array(
-					'ID'           => $object->ID,
-					'post_content' => kbj_pagina_inhoud( $pagina ),
-				)
-			);
+	foreach ( $gekozen as $id ) {
+		if ( ! isset( $bekend[ $id ] ) ) {
+			continue;
 		}
+
+		if ( $id === $voor ) {
+			$inhoud = kbj_startpagina_inhoud();
+		} else {
+			$slug = get_post_field( 'post_name', $id );
+
+			if ( ! isset( $slugs[ $slug ] ) ) {
+				continue;
+			}
+
+			$inhoud = kbj_pagina_inhoud( $slugs[ $slug ] );
+		}
+
+		// Eerst de huidige versie bewaren, dan pas vervangen.
+		wp_save_post_revision( $id );
+		wp_update_post(
+			array(
+				'ID'           => $id,
+				'post_content' => $inhoud,
+			)
+		);
+		kbj_afdruk_zetten( $id );
+		++$aantal;
 	}
 
 	// Ontbrekende pagina's en het menu er meteen bij.
 	kbj_installatie_paginas();
 	kbj_installatie_menu();
 
-	wp_safe_redirect( admin_url( 'admin.php?page=kbj-gegevens&kbj-herbouwd=1' ) );
+	wp_safe_redirect( admin_url( 'admin.php?page=kbj-gegevens&kbj-herbouwd=' . $aantal ) );
 	exit;
 }
 add_action( 'admin_post_kbj_herbouw', 'kbj_herbouw' );
