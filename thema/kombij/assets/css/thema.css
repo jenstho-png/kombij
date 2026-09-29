@@ -6549,3 +6549,325 @@ body:not(.home) .wp-block-post-content > .kbj-kort-sectie.kbj-sectie {
 		object-fit: cover;
 	}
 }
+
+/* ================================================================
+ * Telefoon: minder scrollen.
+ *
+ * Wat onder elkaar stond, staat nu naast elkaar of veeg je opzij.
+ * Vlakken worden lager, ruimte tussen secties kleiner.
+ * ================================================================ */
+
+@media (max-width: 781px) {
+	/* Minder lucht tussen de secties. */
+	body:not(.home) .wp-block-post-content > .kbj-sectie {
+		padding-top: 1.75rem !important;
+		padding-bottom: 1.75rem !important;
+	}
+
+	/* De fotokop en de beeldband lager. */
+	.kbj-paginakop--beeld .kbj-paginakop__binnen {
+		min-height: 360px;
+	}
+
+	.kbj-paginakop--beeld .kbj-paginakop__intro {
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+
+	.kbj-hl-band__beeld .kbj-beeld__kader {
+		height: 280px !important;
+	}
+
+	.kbj-hl-open__achter .kbj-beeld__kader {
+		height: 600px;
+	}
+
+	.kbj-hl-open .kbj-intro {
+		font-size: 1rem;
+	}
+
+	/* Veegrijen: kaarten naast elkaar, opzij te vegen. */
+	.kbj-stappen,
+	.kbj-drie.wp-block-columns,
+	.kbj-mensen {
+		display: flex !important;
+		flex-direction: row !important;
+		flex-wrap: nowrap !important;
+		gap: 0.75rem !important;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+		margin-left: calc(var(--kbj-zijkant) * -1) !important;
+		margin-right: calc(var(--kbj-zijkant) * -1) !important;
+		max-width: none !important;
+		padding: 0 var(--kbj-zijkant) 0.25rem !important;
+		scroll-padding-inline: var(--kbj-zijkant);
+	}
+
+	.kbj-stappen::-webkit-scrollbar,
+	.kbj-drie.wp-block-columns::-webkit-scrollbar,
+	.kbj-mensen::-webkit-scrollbar {
+		display: none;
+	}
+
+	.kbj-stappen > li,
+	.kbj-drie > .wp-block-column,
+	.kbj-mensen > li {
+		flex: 0 0 76% !important;
+		scroll-snap-align: start;
+		margin: 0 !important;
+	}
+
+	body:not(.home) .kbj-stappen li {
+		background: var(--kbj-ijs);
+		padding: 1.1rem 1.1rem 1.1rem 3.6rem;
+		border-radius: 18px;
+	}
+
+	body:not(.home) .kbj-stappen li::before {
+		left: 1rem;
+	}
+
+	.kbj-drie > .wp-block-column > .kbj-kader {
+		height: 100%;
+	}
+
+	/* De foto's bij Wonen: vier kleine naast elkaar in plaats van groot. */
+	.kbj-strook {
+		display: grid !important;
+		grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+		gap: 0.4rem !important;
+		overflow: visible !important;
+		margin: 1.25rem 0 0 !important;
+		padding: 0 !important;
+	}
+
+	.kbj-strook > .kbj-beeld {
+		flex: none !important;
+		width: auto !important;
+		margin: 0 !important;
+	}
+
+	.kbj-strook > .kbj-beeld .kbj-beeld__kader {
+		aspect-ratio: 3 / 4 !important;
+		border-radius: 12px;
+		transform: none !important;
+	}
+
+	/* Het album: drie foto's naast elkaar. */
+	.kbj-album {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 0.4rem;
+	}
+
+	.kbj-album .kbj-beeld__kader {
+		aspect-ratio: 1 / 1 !important;
+		border-radius: 10px;
+	}
+
+	.kbj-album .kbj-beeld:nth-child(1) {
+		grid-column: span 3;
+		grid-row: auto;
+	}
+
+	.kbj-album .kbj-beeld:nth-child(1) .kbj-beeld__kader {
+		aspect-ratio: 16 / 9 !important;
+		height: auto;
+	}
+
+	/* De tijdlijn: de foto klein naast de tekst. */
+	.kbj-tijd {
+		padding-top: 0.6rem;
+		padding-bottom: 0.6rem;
+	}
+
+	.kbj-tijd__inhoud {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 86px;
+		column-gap: 0.9rem;
+		align-items: start;
+	}
+
+	.kbj-tijd__inhoud > h3,
+	.kbj-tijd__inhoud > p {
+		grid-column: 1;
+	}
+
+	.kbj-tijd__inhoud > .kbj-beeld {
+		grid-column: 2;
+		grid-row: 1 / span 2;
+		margin: 0.35rem 0 0;
+	}
+
+	.kbj-tijd__inhoud .kbj-beeld__kader {
+		aspect-ratio: 1 / 1 !important;
+		border-radius: 12px;
+	}
+
+	.kbj-tijd__inhoud p {
+		font-size: 0.9375rem;
+		line-height: 1.5;
+	}
+
+	.kbj-tijd__jaar {
+		font-size: 1.35rem !important;
+	}
+
+	/* De afsluiting: knoppen naast elkaar, minder hoog. */
+	.kbj-slot.kbj-sectie {
+		padding-top: 2.25rem !important;
+		padding-bottom: 2.25rem !important;
+	}
+
+	.kbj-slot .kbj-acties {
+		flex-direction: row !important;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.6rem;
+	}
+
+	.kbj-slot .wp-block-button__link {
+		padding: 0.8rem 1.2rem;
+		font-size: 0.9375rem;
+	}
+
+	/* De vacatures in de voet: alleen de kop en de knop. */
+	.kbj-vacaturestrook__tekst {
+		display: none;
+	}
+
+	.kbj-vacaturestrook {
+		padding: 1rem 1.1rem;
+	}
+
+	.kbj-vacaturestrook__binnen {
+		grid-template-columns: 1fr auto !important;
+		align-items: center;
+		gap: 0.75rem !important;
+	}
+
+	.kbj-vacaturestrook__kop {
+		font-size: 1.05rem !important;
+		line-height: 1.3;
+	}
+
+	.kbj-vacaturestrook .kbj-knop {
+		margin-top: 0 !important;
+		padding: 0.7rem 1rem;
+		font-size: 0.875rem;
+	}
+
+	/* Vragen: kleiner en compacter. */
+	.kbj-vragen__lijst .kbj-vraag > summary {
+		padding-top: 0.85rem;
+		padding-bottom: 0.85rem;
+		font-size: 1rem;
+	}
+
+	/* De kaart op de foto: minder binnenruimte. */
+	.kbj-duo > .wp-block-column:not(:has(.kbj-beeld)),
+	.kbj-familie2 > .wp-block-group,
+	.kbj-werken__binnen > div:not(.kbj-beeld) {
+		padding: 1.25rem 1.15rem;
+	}
+
+	.kbj-duo .kbj-beeld__kader,
+	.kbj-familie2 > .kbj-beeld .kbj-beeld__kader,
+	.kbj-werken__binnen > .kbj-beeld .kbj-beeld__kader {
+		aspect-ratio: 16 / 10 !important;
+	}
+}
+
+/* ------------------------------------------ geschiedenis: oude beelden */
+
+.kbj-tijd__inhoud .kbj-beeld__onder {
+	margin-top: 0.5rem;
+	font-size: 0.8125rem;
+	line-height: 1.45;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.kbj-album__kop {
+	margin: clamp(1.75rem, 3vw, 2.5rem) 0 0;
+	font-size: var(--wp--preset--font-size--large);
+}
+
+.kbj-album + .kbj-album__kop {
+	margin-top: clamp(2rem, 4vw, 3rem);
+}
+
+/* Oude foto's zijn zwart-wit; bij het aanwijzen komt er een vleug glasblauw bij. */
+.kbj-album .kbj-beeld img[src*="historie-"] {
+	filter: sepia(0.15);
+}
+
+.kbj-bronnen-sectie h3 {
+	margin-bottom: 0.5rem;
+	font-size: var(--wp--preset--font-size--medium);
+}
+
+.kbj-bronnen {
+	display: grid;
+	gap: 0.4rem;
+	margin: 0;
+	padding: 0 0 0 1.1rem;
+	font-size: 0.875rem;
+	line-height: 1.55;
+	color: var(--kbj-leisteen);
+}
+
+.kbj-bronnen a {
+	color: var(--kbj-kerk);
+}
+
+@media (max-width: 781px) {
+	.kbj-tijd__inhoud .kbj-beeld__onder {
+		display: none;
+	}
+}
+
+/* De tijdlijn: jaartal en kop dicht bij elkaar. */
+.kbj-tijd__inhoud h3 {
+	margin-top: 0.15rem !important;
+}
+
+.kbj-tijd__jaar {
+	margin-bottom: 0 !important;
+}
+
+/* Albums van vijf foto's sluiten netjes aan. */
+.kbj-album:has(> .kbj-beeld:nth-child(5):last-child) > .kbj-beeld:nth-child(5) {
+	grid-column: span 2;
+}
+
+.kbj-album:has(> .kbj-beeld:nth-child(5):last-child) > .kbj-beeld:nth-child(5) .kbj-beeld__kader {
+	aspect-ratio: 8 / 3 !important;
+}
+
+@media (max-width: 781px) {
+	.kbj-album:has(> .kbj-beeld:nth-child(5):last-child) {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.kbj-album:has(> .kbj-beeld:nth-child(5):last-child) > .kbj-beeld:nth-child(1) {
+		grid-column: span 2;
+	}
+
+	.kbj-album:has(> .kbj-beeld:nth-child(5):last-child) > .kbj-beeld:nth-child(5) {
+		grid-column: auto;
+	}
+
+	.kbj-album:has(> .kbj-beeld:nth-child(5):last-child) > .kbj-beeld:nth-child(5) .kbj-beeld__kader {
+		aspect-ratio: 1 / 1 !important;
+		height: auto;
+	}
+
+	.kbj-album:has(> .kbj-beeld:nth-child(6):last-child) > .kbj-beeld:nth-child(6) {
+		grid-column: span 2;
+	}
+
+	.kbj-album:has(> .kbj-beeld:nth-child(6):last-child) > .kbj-beeld:nth-child(6) .kbj-beeld__kader {
+		aspect-ratio: auto !important;
+		height: 100%;
+	}
+}
