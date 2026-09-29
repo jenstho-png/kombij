@@ -892,3 +892,31 @@ function kbj_render_illustratie( $attrs ) {
 
 	return kbj_illustratie( $naam, isset( $attrs['className'] ) ? (string) $attrs['className'] : '' );
 }
+
+/**
+ * De eigen blokken zichtbaar en aanpasbaar maken in de blok-editor.
+ *
+ * Zonder dit script zegt de editor bij elk van onze blokken dat hij ze niet
+ * kent. Nu tonen ze een voorbeeld zoals op de site, met de instellingen in het
+ * zijpaneel.
+ */
+function kbj_editor_blokken() {
+	$namen = array();
+
+	foreach ( WP_Block_Type_Registry::get_instance()->get_all_registered() as $naam => $type ) {
+		if ( 0 === strpos( $naam, 'kbj/' ) ) {
+			$namen[] = $naam;
+		}
+	}
+
+	wp_enqueue_script(
+		'kbj-editor',
+		KBJ_URI . '/assets/js/editor.js',
+		array( 'wp-blocks', 'wp-element', 'wp-block-editor', 'wp-components', 'wp-server-side-render', 'wp-data' ),
+		KBJ_VERSION,
+		true
+	);
+
+	wp_add_inline_script( 'kbj-editor', 'window.kbjBlokken = ' . wp_json_encode( $namen ) . ';', 'before' );
+}
+add_action( 'enqueue_block_editor_assets', 'kbj_editor_blokken' );

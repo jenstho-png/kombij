@@ -29,3 +29,17 @@
 	opacity: 1 !important;
 	animation: none !important;
 }
+
+/* Tekst die woord voor woord inschuift, staat in de editor meteen goed. */
+.editor-styles-wrapper .kbj-schuif,
+.editor-styles-wrapper .kbj-schuif * ,
+.editor-styles-wrapper .kbj-oplicht span {
+	opacity: 1 !important;
+	transform: none !important;
+	animation: none !important;
+}
+
+/* Een voorbeeld van de server is niet klikbaar, maar wel te selecteren. */
+.editor-styles-wrapper .components-disabled {
+	pointer-events: none;
+}
