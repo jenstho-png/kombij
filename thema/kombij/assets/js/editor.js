@@ -49,7 +49,26 @@
 	};
 
 	// Deze velden regelen we zelf of horen niet in het paneel.
-	var OVERSLAAN = [ 'align', 'url', 'className', 'lock', 'metadata', 'style' ];
+	var OVERSLAAN = [ 'align', 'url', 'className', 'lock', 'metadata', 'style', 'boven', 'bestand' ];
+
+	// Technische velden: in een apart, dichtgeklapt paneel.
+	var MEER = [ 'verhouding', 'positie', 'eerst', 'vorm', 'illustratie', 'naam', 'breedte', 'licht', 'hoogte' ];
+
+	// Nette namen voor keuzes.
+	var KEUZES = {
+		boog: 'Spitsboog',
+		recht: 'Recht',
+		wonen: 'Wonen',
+		logeren: 'Logeren',
+		dagbesteding: 'Dagbesteding',
+		raam: 'Raam',
+		toren: 'Toren',
+		gewelf: 'Gewelven',
+		koffie: 'Koffiekopje',
+		maas: 'De Maas',
+		sectie: 'Grote sectie',
+		strook: 'Smalle strook'
+	};
 
 	function veld( naam, schema, waarde, zet ) {
 		var label = NAMEN[ naam ] || naam;
@@ -60,7 +79,7 @@
 				label: label,
 				value: waarde,
 				options: schema.enum.map( function ( w ) {
-					return { label: w || '(geen)', value: w };
+					return { label: KEUZES[ w ] || w || '(geen)', value: w };
 				} ),
 				onChange: zet
 			} );
@@ -135,13 +154,14 @@
 			var type = wp.blocks.getBlockType( naam );
 			var schema = ( type && type.attributes ) || {};
 			var velden = [];
+			var meer = [];
 
 			Object.keys( schema ).forEach( function ( sleutel ) {
 				if ( OVERSLAAN.indexOf( sleutel ) !== -1 ) {
 					return;
 				}
 
-				velden.push( veld( sleutel, schema[ sleutel ], props.attributes[ sleutel ], function ( w ) {
+				( MEER.indexOf( sleutel ) !== -1 ? meer : velden ).push( veld( sleutel, schema[ sleutel ], props.attributes[ sleutel ], function ( w ) {
 					var nieuw = {};
 					nieuw[ sleutel ] = w;
 					props.setAttributes( nieuw );
@@ -152,11 +172,12 @@
 			var blockProps = be.useBlockProps ? be.useBlockProps() : {};
 
 			return el( Fragment, {},
-				( velden.length || heeftFoto ) ? el( be.InspectorControls, {},
+				( velden.length || meer.length || heeftFoto ) ? el( be.InspectorControls, {},
 					el( c.PanelBody, { title: 'Instellingen', initialOpen: true },
 						heeftFoto ? fotoKiezer( props ) : null,
 						velden
-					)
+					),
+					meer.length ? el( c.PanelBody, { title: 'Meer instellingen', initialOpen: false }, meer ) : null
 				) : null,
 				el( 'div', blockProps,
 					el( c.Disabled, {},

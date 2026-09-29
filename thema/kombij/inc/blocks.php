@@ -730,6 +730,11 @@ function kbj_render_plek( $attrs ) {
 	$stand = kbj_plek( $soort );
 
 	if ( '' === $stand ) {
+		// In de editor een uitleg, zodat niemand naar een leeg vlak kijkt.
+		if ( kbj_in_editor() ) {
+			return '<p class="kbj-editor-uitleg">' . esc_html__( 'Label "plek vrij" staat nu uit. Aanzetten onder Gegevens, bij "Plek vrij of wachtlijst".', 'kombij' ) . '</p>';
+		}
+
 		return '';
 	}
 
@@ -977,4 +982,13 @@ function kbj_render_afsluiter() {
 		esc_html( kbj_tekst( 'afsluiter_bellen' ) ),
 		esc_html( kbj_tel_tekst() )
 	);
+}
+
+/**
+ * Wordt dit blok nu voor de editor opgebouwd?
+ *
+ * @return bool
+ */
+function kbj_in_editor() {
+	return defined( 'REST_REQUEST' ) && REST_REQUEST && is_user_logged_in();
 }

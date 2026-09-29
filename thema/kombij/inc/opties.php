@@ -23,7 +23,7 @@ const KBJ_OPTIE = 'kbj_bedrijfsgegevens';
  *
  * @return array[]
  */
-function kbj_optie_velden() {
+function kbj_optie_velden_los() {
 	return array(
 		'bedrijf'    => array(
 			'label' => __( 'Bedrijfsnaam', 'kombij' ),
@@ -115,11 +115,6 @@ function kbj_optie_velden() {
 			'hulp'  => __( 'Het reserveringssysteem van de zoutkamer, of later de eigen site van de zoutkamer.', 'kombij' ),
 			'type'  => 'url',
 		),
-		'kop_teksten'        => array(
-			'label' => __( 'Teksten op elke pagina', 'kombij' ),
-			'hulp'  => '',
-			'type'  => 'kop',
-		),
 		'afsluiter_kop'      => array(
 			'label' => __( 'Afsluiter onderaan: kop', 'kombij' ),
 			'hulp'  => __( 'Het blok onderaan elke pagina. "KomBij ons" krijgt vanzelf de lichte letter.', 'kombij' ),
@@ -149,11 +144,6 @@ function kbj_optie_velden() {
 			'label' => __( 'Vacatures: e-mailadres voor open sollicitaties', 'kombij' ),
 			'hulp'  => '',
 			'type'  => 'email',
-		),
-		'kop_overig'         => array(
-			'label' => __( 'Overige instellingen', 'kombij' ),
-			'hulp'  => '',
-			'type'  => 'kop',
 		),
 		'zoutkamer_site'     => array(
 			'label' => __( 'Website van de zoutkamer', 'kombij' ),
@@ -423,12 +413,27 @@ function kbj_optie_scherm() {
 			</ul>
 		</div>
 
+		<p style="margin:1.25rem 0 0">
+			<strong><?php esc_html_e( 'Ga naar:', 'kombij' ); ?></strong>
+			<?php
+			$eerste = true;
+			foreach ( kbj_optie_velden() as $sleutel => $veld ) {
+				if ( 'kop' !== $veld['type'] ) {
+					continue;
+				}
+				echo $eerste ? ' ' : ' &middot; ';
+				printf( '<a href="#%s">%s</a>', esc_attr( $sleutel ), esc_html( $veld['label'] ) );
+				$eerste = false;
+			}
+			?>
+		</p>
+
 		<form method="post" action="options.php">
 			<?php settings_fields( 'kbj_gegevens' ); ?>
 			<table class="form-table" role="presentation">
 				<?php foreach ( kbj_optie_velden() as $sleutel => $veld ) : ?>
 					<?php if ( 'kop' === $veld['type'] ) : ?>
-						<tr><th colspan="2" style="padding-top:2rem"><h2 style="margin:0"><?php echo esc_html( $veld['label'] ); ?></h2></th></tr>
+						<tr id="<?php echo esc_attr( $sleutel ); ?>"><th colspan="2" style="padding-top:2.25rem;border-bottom:1px solid #dcdcde"><h2 style="margin:0"><?php echo esc_html( $veld['label'] ); ?></h2></th></tr>
 						<?php continue; ?>
 					<?php endif; ?>
 					<tr>
@@ -438,6 +443,12 @@ function kbj_optie_scherm() {
 						<td>
 							<?php if ( 'textarea' === $veld['type'] ) : ?>
 								<textarea id="kbj-<?php echo esc_attr( $sleutel ); ?>" name="<?php echo esc_attr( KBJ_OPTIE . '[' . $sleutel . ']' ); ?>" rows="3" class="large-text"><?php echo esc_textarea( kbj_optie( $sleutel ) ); ?></textarea>
+							<?php elseif ( 'select' === $veld['type'] ) : ?>
+								<select id="kbj-<?php echo esc_attr( $sleutel ); ?>" name="<?php echo esc_attr( KBJ_OPTIE . '[' . $sleutel . ']' ); ?>">
+									<?php foreach ( $veld['keuzes'] as $waarde => $naam ) : ?>
+										<option value="<?php echo esc_attr( $waarde ); ?>" <?php selected( $waarde, kbj_optie( $sleutel ) ); ?>><?php echo esc_html( $naam ); ?></option>
+									<?php endforeach; ?>
+								</select>
 							<?php elseif ( 'checkbox' === $veld['type'] ) : ?>
 								<input type="hidden" name="<?php echo esc_attr( KBJ_OPTIE . '[' . $sleutel . ']' ); ?>" value="uit">
 								<input type="checkbox" id="kbj-<?php echo esc_attr( $sleutel ); ?>" name="<?php echo esc_attr( KBJ_OPTIE . '[' . $sleutel . ']' ); ?>" value="aan" <?php checked( 'aan', kbj_optie( $sleutel, 'aan' ) ); ?>>
@@ -573,6 +584,44 @@ function kbj_plek( $soort ) {
 	}
 
 	return $stand;
+}
+
+/**
+ * De velden in blokken met een kopje, in een logische volgorde.
+ *
+ * @return array
+ */
+function kbj_optie_velden() {
+	$los    = kbj_optie_velden_los();
+	$blokken = array(
+		'bedrijf'   => array( __( 'Bedrijf en contact', 'kombij' ), array( 'bedrijf', 'zin', 'email', 'telefoon', 'straat', 'postcode', 'plaats', 'werkgebied', 'kvk', 'btw' ) ),
+		'tijden'    => array( __( 'Openingstijden dagbesteding', 'kombij' ), array( 'dagbesteding_open', 'dagbesteding_tijd' ) ),
+		'plek'      => array( __( 'Plek vrij of wachtlijst', 'kombij' ), array( 'plek_wonen', 'plek_logeren', 'plek_dagbesteding' ) ),
+		'melding'   => array( __( 'Melding rechtsonder', 'kombij' ), array( 'melding_aan', 'melding_titel', 'melding_tekst', 'melding_knop', 'melding_link', 'melding_seconden' ) ),
+		'teksten'   => array( __( 'Teksten op elke pagina', 'kombij' ), array( 'afsluiter_kop', 'afsluiter_tekst', 'afsluiter_bellen', 'werken_kop', 'werken_tekst', 'werken_mail' ) ),
+		'zoutkamer' => array( __( 'Zoutkamer', 'kombij' ), array( 'zoutkamer_site', 'zoutkamer_link' ) ),
+		'online'    => array( __( 'Sociale media en reviews', 'kombij' ), array( 'instagram', 'facebook', 'linkedin', 'youtube', 'review' ) ),
+		'kaart'     => array( __( 'Plek op de kaart (voor Google)', 'kombij' ), array( 'breedtegraad', 'lengtegraad' ) ),
+	);
+	$velden = array();
+
+	foreach ( $blokken as $sleutel => $blok ) {
+		$velden[ 'kop_' . $sleutel ] = array(
+			'label' => $blok[0],
+			'hulp'  => '',
+			'type'  => 'kop',
+		);
+
+		foreach ( $blok[1] as $veld ) {
+			if ( isset( $los[ $veld ] ) ) {
+				$velden[ $veld ] = $los[ $veld ];
+				unset( $los[ $veld ] );
+			}
+		}
+	}
+
+	// Wat nergens is ingedeeld, komt onderaan zodat het nooit verdwijnt.
+	return array_merge( $velden, $los );
 }
 
 /**

@@ -2,19 +2,56 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "kbj/beeld",
-	"title": "Foto in kerkvorm",
+	"title": "Foto",
 	"category": "kombij",
-	"description": "Een foto, recht of in de vorm van een spitsboog zoals de ramen van de kerk.",
+	"description": "Een foto. Kies rechts met \"Foto kiezen\" een foto uit de mediabibliotheek, en vul de beschrijving in.",
 	"textdomain": "kombij",
-	"supports": { "html": false, "align": [ "wide", "full" ] },
+	"supports": {
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		]
+	},
 	"attributes": {
-		"bestand": { "type": "string", "default": "" },
-		"url": { "type": "string", "default": "", "role": "content" },
-		"alt": { "type": "string", "default": "", "role": "content" },
-		"bijschrift": { "type": "string", "default": "", "role": "content" },
-		"vorm": { "type": "string", "default": "boog", "enum": [ "boog", "recht" ] },
-		"verhouding": { "type": "string", "default": "4/5" },
-		"positie": { "type": "string", "default": "50% 50%" },
-		"eerst": { "type": "boolean", "default": false }
+		"bestand": {
+			"type": "string",
+			"default": ""
+		},
+		"url": {
+			"type": "string",
+			"default": "",
+			"role": "content"
+		},
+		"alt": {
+			"type": "string",
+			"default": "",
+			"role": "content"
+		},
+		"bijschrift": {
+			"type": "string",
+			"default": "",
+			"role": "content"
+		},
+		"vorm": {
+			"type": "string",
+			"default": "boog",
+			"enum": [
+				"boog",
+				"recht"
+			]
+		},
+		"verhouding": {
+			"type": "string",
+			"default": "4/5"
+		},
+		"positie": {
+			"type": "string",
+			"default": "50% 50%"
+		},
+		"eerst": {
+			"type": "boolean",
+			"default": false
+		}
 	}
 }

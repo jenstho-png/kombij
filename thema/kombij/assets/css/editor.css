@@ -43,3 +43,14 @@
 .editor-styles-wrapper .components-disabled {
 	pointer-events: none;
 }
+
+/* Uitleg in de editor bij een blok dat op de site (nog) niets toont. */
+.editor-styles-wrapper .kbj-editor-uitleg {
+	margin: 0.5rem 0;
+	padding: 0.6rem 0.9rem;
+	border: 1px dashed #72b6bf;
+	border-radius: 10px;
+	background: #f1f8fb;
+	color: #44566e;
+	font-size: 14px;
+}
