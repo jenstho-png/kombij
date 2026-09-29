@@ -28,6 +28,8 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	array( 'klasse' => 'kbj-reveal' )
 );
 
+echo kbj_beeldband( 'samen-aan-tafel.webp', 'Samen koffie. Samen lunchen. <span class="kbj-hl-licht">Samen de dag door.</span>', 'nacht', '55% 50%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_sectiekop(
 		'Het programma',

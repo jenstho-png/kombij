@@ -41,6 +41,8 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	array( 'klasse' => 'kbj-reveal' )
 );
 
+echo kbj_beeldband( 'kerk-groen.webp', 'Even rustig ademhalen. <span class="kbj-hl-licht">Midden in Maasbommel.</span>', 'zee', '50% 50%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_sectiekop( 'Tarieven', 'Wat kost een sessie?', 'Open van maandag tot en met vrijdag, van 9:00 tot 18:00. Een sessie voor kinderen reserveert u telefonisch.', false )
 	. kbj_lijst(

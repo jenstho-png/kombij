@@ -15,6 +15,8 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	array( 'klasse' => 'kbj-reveal' )
 );
 
+echo kbj_beeldband( 'dagbesteding.webp', 'Werken waar je <span class="kbj-hl-licht">iedereen bij naam kent.</span>', 'nacht', '50% 40%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_kolommen(
 		array(

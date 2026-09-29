@@ -29,6 +29,8 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	array( 'klasse' => 'kbj-reveal' )
 );
 
+echo kbj_beeldband( 'kerk-bloesem.webp', 'Uw eigen plek in een monument. <span class="kbj-hl-licht">Met zorg die dag en nacht dichtbij is.</span>', 'nacht', '50% 40%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_sectiekop(
 		'Wonen bij KomBij',

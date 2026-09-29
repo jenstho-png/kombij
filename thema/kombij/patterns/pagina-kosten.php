@@ -44,6 +44,8 @@ $aanbod = kbj_kolommen(
 	'kbj-drie'
 );
 
+echo kbj_beeldband( 'schip.webp', 'Zorg bij KomBij wordt meestal vergoed. <span class="kbj-hl-licht">Wij helpen u met de aanvraag.</span>', 'kerk', '50% 60%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_sectiekop( 'Per onderdeel', 'Wat geldt voor wonen, logeren en dagbesteding?', '', false )
 	. $aanbod,

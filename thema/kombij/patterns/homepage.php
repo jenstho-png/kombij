@@ -3,15 +3,7 @@
  * Title: Startpagina, alle secties
  * Slug: kombij/homepage
  * Categories: kombij
- * Description: De volledige startpagina. Korte, pakkende stukken; de details staan op de losse pagina's.
+ * Description: De volledige startpagina, in het levendige ontwerp: veel beeld en foto's met een laag merkkleur.
  */
 ?>
-<!-- wp:pattern {"slug":"kombij/opening"} /-->
-<!-- wp:pattern {"slug":"kombij/aanbod"} /-->
-<!-- wp:pattern {"slug":"kombij/strook-zin"} /-->
-<!-- wp:pattern {"slug":"kombij/gebouw"} /-->
-<!-- wp:pattern {"slug":"kombij/vergoed"} /-->
-<!-- wp:pattern {"slug":"kombij/familie"} /-->
-<!-- wp:pattern {"slug":"kombij/werken-teaser"} /-->
-<!-- wp:pattern {"slug":"kombij/vragen"} /-->
-<!-- wp:pattern {"slug":"kombij/slot"} /-->
+<!-- wp:pattern {"slug":"kombij/home-levendig"} /-->

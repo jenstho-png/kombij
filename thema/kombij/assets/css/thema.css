@@ -5633,3 +5633,217 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 	height: 100%;
 	object-fit: cover;
 }
+
+/* ================================================================
+ * Het levendige gevoel op alle pagina's.
+ * ================================================================ */
+
+/* --- De paginakop: een grote foto met een laag nachtblauw, de tekst in wit erop. */
+body:not(.home) .kbj-paginakop--beeld.alignfull {
+	padding-top: clamp(0.5rem, 1.2vw, 1rem);
+	padding-bottom: clamp(1rem, 2vw, 1.5rem);
+	background: var(--kbj-wit) !important;
+}
+
+.kbj-paginakop--beeld .kbj-paginakop__binnen {
+	position: relative;
+	isolation: isolate;
+	display: grid !important;
+	grid-template-columns: 1fr !important;
+	align-items: end;
+	min-height: clamp(460px, 64vh, 640px);
+	max-width: none;
+	padding: clamp(1.75rem, 5vw, 4.5rem);
+	border-radius: clamp(24px, 3vw, 40px);
+	overflow: hidden;
+}
+
+.kbj-paginakop--beeld .kbj-paginakop__beeld {
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+}
+
+.kbj-paginakop--beeld .kbj-paginakop__beeld .kbj-beeld,
+.kbj-paginakop--beeld .kbj-paginakop__beeld .kbj-beeld__kader {
+	height: 100%;
+	margin: 0 !important;
+	border-radius: 0 !important;
+	aspect-ratio: auto !important;
+}
+
+.kbj-paginakop--beeld .kbj-paginakop__beeld img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.kbj-paginakop--beeld .kbj-paginakop__beeld .kbj-beeld__kader::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(100deg, rgba(10, 36, 68, 0.9) 0%, rgba(10, 36, 68, 0.66) 45%, rgba(27, 83, 129, 0.25) 100%);
+}
+
+.kbj-paginakop--beeld .kbj-paginakop__tekst {
+	max-width: 40rem;
+	color: var(--kbj-wit);
+}
+
+.kbj-paginakop--beeld .kbj-paginakop__titel,
+.kbj-paginakop--beeld .kbj-paginakop__titel .kbj-kombij {
+	color: var(--kbj-wit);
+}
+
+.kbj-paginakop--beeld .kbj-paginakop__titel .kbj-kombij {
+	color: var(--kbj-glas);
+}
+
+.kbj-paginakop--beeld .kbj-paginakop__intro {
+	color: rgba(255, 255, 255, 0.88);
+}
+
+.kbj-paginakop--beeld .kbj-knop:not(.kbj-knop--rand) {
+	background: var(--kbj-wit);
+	border-color: var(--kbj-wit);
+	color: var(--kbj-nacht);
+}
+
+.kbj-paginakop--beeld .kbj-knop--rand {
+	border-color: rgba(255, 255, 255, 0.75);
+	color: var(--kbj-wit);
+	background: transparent;
+}
+
+.kbj-paginakop--beeld .kbj-plek {
+	background: rgba(255, 255, 255, 0.14);
+	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+	color: var(--kbj-wit);
+	backdrop-filter: blur(6px);
+}
+
+/* De tekening op de foto, in wit. */
+body:not(.home) .kbj-paginakop--beeld .kbj-raamlijn,
+.kbj-paginakop--beeld .kbj-illustratie {
+	z-index: 2 !important;
+	top: clamp(1.5rem, 4vw, 3.5rem) !important;
+	right: clamp(2rem, 7vw, 6rem) !important;
+	color: var(--kbj-wit) !important;
+	opacity: 0.4 !important;
+	-webkit-mask-image: none !important;
+	mask-image: none !important;
+}
+
+@media (max-width: 781px) {
+	.kbj-paginakop--beeld .kbj-paginakop__binnen {
+		min-height: 560px;
+		padding: 1.5rem 1.25rem;
+	}
+
+	.kbj-paginakop--beeld .kbj-paginakop__beeld .kbj-beeld__kader::after {
+		background: linear-gradient(180deg, rgba(10, 36, 68, 0.25) 0%, rgba(10, 36, 68, 0.85) 50%, rgba(10, 36, 68, 0.95) 100%);
+	}
+
+	body:not(.home) .kbj-paginakop--beeld .kbj-raamlijn,
+	.kbj-paginakop--beeld .kbj-illustratie {
+		top: 2rem !important;
+		right: 1.5rem !important;
+		height: 130px !important;
+		opacity: 0.35 !important;
+	}
+}
+
+/* --- De beeldband op de andere pagina's: dezelfde ruimte als op de home. */
+body:not(.home) .wp-block-post-content > .kbj-hl-band.kbj-sectie {
+	padding-top: var(--wp--preset--spacing--30) !important;
+	padding-bottom: 0 !important;
+	margin-bottom: clamp(1rem, 2vw, 1.5rem) !important;
+}
+
+/* --- Foto's in de secties: een zachte laag kerkblauw van onder. */
+.kbj-duo .kbj-beeld__kader::after,
+.kbj-familie2 > .kbj-beeld .kbj-beeld__kader::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	background: linear-gradient(180deg, rgba(27, 83, 129, 0) 45%, rgba(27, 83, 129, 0.45) 100%);
+	mix-blend-mode: multiply;
+}
+
+.kbj-duo .kbj-beeld__kader,
+.kbj-familie2 > .kbj-beeld .kbj-beeld__kader {
+	position: relative;
+}
+
+/* --- Kaartjes in afwisselende merkkleuren. */
+.kbj-regelingen li:nth-child(4n + 1) {
+	background: var(--kbj-ijs) !important;
+}
+
+.kbj-regelingen li:nth-child(4n + 2) {
+	background: var(--kbj-glas) !important;
+}
+
+.kbj-regelingen li:nth-child(4n + 3) {
+	background: var(--kbj-nacht) !important;
+}
+
+.kbj-regelingen li:nth-child(4n + 4) {
+	background: rgba(114, 182, 191, 0.35) !important;
+}
+
+.kbj-regelingen li:nth-child(4n + 3) strong,
+.kbj-regelingen li:nth-child(4n + 3) em,
+.kbj-regelingen li:nth-child(4n + 3) span,
+.kbj-regelingen li:nth-child(4n + 3) a {
+	color: var(--kbj-wit) !important;
+}
+
+.kbj-regelingen li:nth-child(4n + 3) span {
+	color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.kbj-regelingen li:nth-child(4n + 2) em,
+.kbj-regelingen li:nth-child(4n + 2) span,
+.kbj-regelingen li:nth-child(4n + 4) em,
+.kbj-regelingen li:nth-child(4n + 4) span {
+	color: var(--kbj-nacht) !important;
+}
+
+.kbj-regelingen li:nth-child(4n + 3) strong {
+	color: var(--kbj-glas) !important;
+}
+
+/* De stappen: de cijfers groot en in kleur. */
+@media (min-width: 782px) {
+	body:not(.home) .kbj-stappen li:nth-child(even) {
+		background: var(--kbj-glas);
+	}
+}
+
+/* --- De afsluiting op een foto met een lichte laag glasblauw. */
+.kbj-slot.kbj-paneel {
+	background-image:
+		linear-gradient(120deg, rgba(176, 225, 241, 0.9) 0%, rgba(176, 225, 241, 0.78) 50%, rgba(176, 225, 241, 0.5) 100%),
+		url("../foto/koffie.webp") !important;
+	background-size: cover !important;
+	background-position: 50% 40% !important;
+}
+
+@media (max-width: 781px) {
+	.kbj-hl-band .kbj-hl-band__zin {
+		font-size: clamp(1.45rem, 1rem + 2.6vw, 1.9rem) !important;
+	}
+
+	.kbj-hl-band__beeld .kbj-beeld__kader {
+		height: 420px !important;
+	}
+}
+
+@media (max-width: 781px) {
+	/* De stappen op de telefoon: een lijn met cijfers, zonder vlak erachter. */
+	body:not(.home) .kbj-stappen li {
+		background: transparent;
+	}
+}

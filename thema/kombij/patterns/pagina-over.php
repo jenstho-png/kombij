@@ -29,6 +29,8 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	array( 'klasse' => 'kbj-reveal' )
 );
 
+echo kbj_beeldband( 'kerk-silhouet.webp', 'Ruim 150 jaar kwam het dorp hier samen. <span class="kbj-hl-licht">Nu is het een thuis.</span>', 'nacht', '60% 55%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_sectiekop( 'Onze waarden', 'Waar wij voor staan', '', false )
 	. kbj_lijst(
@@ -56,7 +58,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 		array(
 			array(
 				'inhoud'  => kbj_groep(
-					kbj_foto( 'vanaf-orgel.webp', 'Het schip van de kerk, gezien vanaf het orgel, met gewelven en pilaren', array( 'vorm' => 'recht', 'verhouding' => '4/3', 'positie' => '50% 40%' ) )
+					kbj_foto( 'kerk-interieur.webp', 'De lichte gewelven en hoge ramen van het gebouw', array( 'vorm' => 'recht', 'verhouding' => '4/3', 'positie' => '50% 40%' ) )
 					. kbj_foto( 'schip.webp', 'Het lichte schip met de nieuwe tussenverdieping', array( 'verhouding' => '3/4' ) ),
 					'kbj-huis__beelden'
 				),

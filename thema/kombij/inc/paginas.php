@@ -88,8 +88,8 @@ function kbj_paginas() {
 			'kop'      => 'Wat kost zorg bij KomBij?',
 			'intro'    => 'De meeste zorg bij KomBij wordt vergoed. Welke regeling voor u geldt, hangt af van uw situatie. Hier leggen we het rustig uit.',
 			'zoek'     => 'Uitleg over WLZ, WMO, PGB en particulier betalen voor wonen, logeren en dagbesteding bij KomBij Maasbommel.',
-			'bestand'  => 'vanaf-orgel.webp',
-			'alt'      => 'Het schip van de kerk, gezien vanaf het orgel',
+			'bestand'  => 'kerk-luchtfoto.webp',
+			'alt'      => 'Het gebouw van KomBij in Maasbommel, van bovenaf gezien',
 			'patronen' => array( 'pagina-kosten' ),
 		),
 		array(

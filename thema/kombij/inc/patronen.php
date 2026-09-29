@@ -539,3 +539,29 @@ function kbj_hoofdstuk( $h ) {
 		)
 	);
 }
+
+/**
+ * Een brede foto met een laag merkkleur, en één grote zin eroverheen.
+ *
+ * Geeft een pagina lucht en leven tussen twee stukken tekst in.
+ *
+ * @param string $bestand Foto uit assets/foto.
+ * @param string $zin     De zin; het deel in een span wordt licht en blauw.
+ * @param string $tint    nacht, kerk, zee of helder.
+ * @param string $positie Brandpunt van de foto.
+ * @return string
+ */
+function kbj_beeldband( $bestand, $zin, $tint = 'nacht', $positie = '50% 50%' ) {
+	return kbj_sectie(
+		kbj_groep(
+			kbj_foto( $bestand, '', array( 'vorm' => 'recht', 'verhouding' => '21/9', 'positie' => $positie ) ),
+			'kbj-hl-foto kbj-hl-tint kbj-hl-tint--' . $tint . ' kbj-hl-band__beeld'
+		)
+		. kbj_p( $zin, 'kbj-hl-band__zin' ),
+		array(
+			'klasse' => 'kbj-hl kbj-hl-band',
+			'boven'  => '30',
+			'onder'  => '30',
+		)
+	);
+}
