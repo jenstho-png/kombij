@@ -390,9 +390,66 @@ function kbj_optie_scherm() {
 			</table>
 			<?php submit_button(); ?>
 		</form>
+
+		<hr>
+		<h2><?php esc_html_e( 'Pagina\'s opnieuw opbouwen', 'kombij' ); ?></h2>
+		<?php if ( isset( $_GET['kbj-herbouwd'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+			<div class="notice notice-success inline"><p><?php esc_html_e( 'Klaar: de pagina\'s zijn opnieuw opgebouwd met de nieuwste versie van het thema.', 'kombij' ); ?></p></div>
+		<?php endif; ?>
+		<p class="description" style="max-width:48rem">
+			<?php esc_html_e( 'Een nieuwe versie van het thema verandert pagina\'s die al bestaan niet. Klik hier om de startpagina en alle vaste pagina\'s opnieuw op te bouwen met de nieuwste opmaak. Let op: wat u zelf in die pagina\'s heeft veranderd, gaat dan verloren. Vacatures en gegevens blijven staan.', 'kombij' ); ?>
+		</p>
+		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" onsubmit="return confirm('<?php echo esc_js( __( 'Weet u het zeker? Eigen aanpassingen in de pagina\'s gaan verloren.', 'kombij' ) ); ?>');">
+			<input type="hidden" name="action" value="kbj_herbouw">
+			<?php wp_nonce_field( 'kbj_herbouw' ); ?>
+			<?php submit_button( __( 'Pagina\'s opnieuw opbouwen', 'kombij' ), 'secondary' ); ?>
+		</form>
 	</div>
 	<?php
 }
+
+/**
+ * Bouwt de startpagina en de vaste pagina's opnieuw op uit de patronen.
+ */
+function kbj_herbouw() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( esc_html__( 'Dat mag u niet.', 'kombij' ) );
+	}
+
+	check_admin_referer( 'kbj_herbouw' );
+
+	$voor = (int) get_option( 'page_on_front' );
+
+	if ( $voor ) {
+		wp_update_post(
+			array(
+				'ID'           => $voor,
+				'post_content' => kbj_startpagina_inhoud(),
+			)
+		);
+	}
+
+	foreach ( kbj_paginas() as $pagina ) {
+		$object = get_page_by_path( $pagina['slug'] );
+
+		if ( $object ) {
+			wp_update_post(
+				array(
+					'ID'           => $object->ID,
+					'post_content' => kbj_pagina_inhoud( $pagina ),
+				)
+			);
+		}
+	}
+
+	// Ontbrekende pagina's en het menu er meteen bij.
+	kbj_installatie_paginas();
+	kbj_installatie_menu();
+
+	wp_safe_redirect( admin_url( 'admin.php?page=kbj-gegevens&kbj-herbouwd=1' ) );
+	exit;
+}
+add_action( 'admin_post_kbj_herbouw', 'kbj_herbouw' );
 
 /**
  * Twee instellingen van WordPress zelf die de site onzichtbaar kunnen maken.

@@ -6871,3 +6871,38 @@ body:not(.home) .wp-block-post-content > .kbj-kort-sectie.kbj-sectie {
 		height: 100%;
 	}
 }
+
+/* De balk op een groot scherm over de volle breedte: logo helemaal links,
+ * het open/dicht-bordje helemaal rechts. */
+@media (min-width: 1200px) {
+	.kbj-menu {
+		max-width: none;
+		padding-left: clamp(1.25rem, 2.5vw, 2.5rem);
+		padding-right: clamp(1.25rem, 2.5vw, 2.5rem);
+	}
+
+	.kbj-menu__binnen {
+		flex: 1 1 auto;
+		display: flex;
+		align-items: center;
+	}
+
+	.kbj-menu__lijst--hoofd {
+		margin-inline: auto;
+	}
+
+	.kbj-menu__rechts {
+		margin-left: 0;
+	}
+
+	.kbj-menu__rechts .kbj-bordje {
+		margin-left: 0.75rem;
+	}
+}
+
+/* Pagina's die nog met een oudere versie zijn aangemaakt: daar stond het raam
+ * nog in de opening. Nu nergens meer bovenaan. */
+.kbj-hl-open__raam,
+.kbj-opening > .kbj-raamlijn {
+	display: none !important;
+}

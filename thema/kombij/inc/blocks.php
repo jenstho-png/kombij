@@ -705,7 +705,7 @@ function kbj_render_opening( $attrs ) {
 		. '</section>',
 		get_block_wrapper_attributes( array( 'class' => 'kbj-opening kbj-paneel' ) ),
 		$foto,
-		kbj_raamlijn( 'is-getekend-bij-laden' ),
+		'', // De raamtekening staat niet meer in de opening; die zit bij de familie.
 		esc_html( $kop ),
 		'' !== $glans ? ' <span class="kbj-glastekst">' . esc_html( $glans ) . '</span>' : '',
 		'' !== $tekst ? '<p class="kbj-opening__tekst">' . esc_html( $tekst ) . '</p>' : '',
