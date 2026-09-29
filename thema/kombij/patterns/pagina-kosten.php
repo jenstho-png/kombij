@@ -6,6 +6,8 @@
  * Description: Alle secties onder de kop van de pagina Kosten en financiering.
  */
 
+echo kbj_kort( array( array( '4', 'manieren om zorg te betalen' ), array( 'Vaak', 'grotendeels vergoed' ), array( '€ 985', 'per maand voor een kamer, vanaf' ), array( 'Hulp', 'bij uw aanvraag' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_sectiekop(
 		'De regelingen',

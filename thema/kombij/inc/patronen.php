@@ -565,3 +565,29 @@ function kbj_beeldband( $bestand, $zin, $tint = 'nacht', $positie = '50% 50%' ) 
 		)
 	);
 }
+
+/**
+ * In het kort: de vier belangrijkste feiten van een pagina, direct onder de kop.
+ *
+ * Voor wie niet alles leest. Elk feit is een groot woord of getal met een
+ * korte regel eronder.
+ *
+ * @param array $feiten Paren van [groot, klein].
+ * @return string
+ */
+function kbj_kort( $feiten ) {
+	$items = array();
+
+	foreach ( $feiten as $feit ) {
+		$items[] = '<strong>' . $feit[0] . '</strong><span>' . $feit[1] . '</span>';
+	}
+
+	return kbj_sectie(
+		kbj_lijst( $items, 'kbj-kort' ),
+		array(
+			'klasse' => 'kbj-kort-sectie',
+			'boven'  => '20',
+			'onder'  => '20',
+		)
+	);
+}

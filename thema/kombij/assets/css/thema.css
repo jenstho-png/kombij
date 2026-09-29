@@ -5847,3 +5847,88 @@ body:not(.home) .wp-block-post-content > .kbj-hl-band.kbj-sectie {
 		background: transparent;
 	}
 }
+
+/* ------------------------------------------------ in het kort */
+
+/* Vier feiten in een witte kaart, half over de onderkant van de fotokop. */
+body:not(.home) .wp-block-post-content > .kbj-kort-sectie.kbj-sectie {
+	position: relative;
+	z-index: 3;
+	padding-top: 0 !important;
+	padding-bottom: clamp(0.5rem, 2vw, 1.5rem) !important;
+}
+
+.kbj-kort {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	margin: calc(clamp(3rem, 6vw, 4.75rem) * -1) auto 0 !important;
+	padding: clamp(1.25rem, 2.5vw, 1.75rem) clamp(1rem, 2.5vw, 2rem);
+	list-style: none;
+	max-width: min(1100px, calc(100% - 2 * clamp(1rem, 4vw, 3rem))) !important;
+	background: var(--kbj-wit);
+	border-radius: clamp(20px, 2.4vw, 28px);
+	box-shadow: 0 30px 60px -30px rgba(10, 36, 68, 0.4), 0 2px 8px rgba(10, 36, 68, 0.06);
+}
+
+.kbj-kort li {
+	display: flex;
+	flex-direction: column;
+	gap: 0.2rem;
+	padding: 0.25rem clamp(0.75rem, 2vw, 1.5rem);
+	border-left: 1px solid var(--kbj-lijn);
+}
+
+.kbj-kort li:first-child {
+	border-left: 0;
+}
+
+.kbj-kort strong {
+	font-size: clamp(1.35rem, 1rem + 1.2vw, 1.9rem);
+	line-height: 1.1;
+	letter-spacing: -0.02em;
+	color: var(--kbj-kerk);
+}
+
+.kbj-kort span {
+	font-size: var(--wp--preset--font-size--small);
+	line-height: 1.4;
+	color: var(--kbj-leisteen);
+}
+
+/* Ruimte in de fotokop, zodat de kaart nooit over de knoppen valt. */
+.kbj-paginakop--beeld:has(+ .kbj-kort-sectie) .kbj-paginakop__binnen {
+	padding-bottom: calc(clamp(1.75rem, 5vw, 4.5rem) + clamp(3rem, 6vw, 4.75rem));
+}
+
+@media (max-width: 781px) {
+	.kbj-kort {
+		grid-template-columns: 1fr 1fr;
+		row-gap: 1rem;
+		margin-top: -2.5rem !important;
+		max-width: calc(100% - 1.5rem) !important;
+		padding: 1.1rem 0.5rem;
+	}
+
+	.kbj-kort li:nth-child(3) {
+		border-left: 0;
+	}
+
+	.kbj-paginakop--beeld:has(+ .kbj-kort-sectie) .kbj-paginakop__binnen {
+		padding-bottom: 4rem;
+	}
+}
+
+@media (max-width: 781px) {
+	/* De twee knoppen in de fotokop naast elkaar zolang dat past. */
+	.kbj-paginakop .kbj-acties {
+		flex-direction: row !important;
+		flex-wrap: wrap;
+		gap: 0.6rem;
+	}
+
+	.kbj-paginakop .kbj-acties .kbj-knop {
+		width: auto !important;
+		padding: 0.8rem 1.15rem;
+		font-size: 0.9375rem;
+	}
+}

@@ -6,6 +6,8 @@
  * Description: De zoutkamer als extra: hoe het gaat, de tarieven en reserveren. Zonder medische beloftes.
  */
 
+echo kbj_kort( array( array( '2', 'zoutkamers, voor 8 en voor 4' ), array( '50 min.', 'per sessie' ), array( '€ 25', 'voor een losse sessie' ), array( 'Ma t/m vr', 'van 9:00 tot 18:00' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
 $reserveren = kbj_optie( 'zoutkamer_link', 'https://www.supersaas.nl/schedule/Zoutkamer_Maasbommel/Zoutkamers' );
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
@@ -13,7 +15,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 		array(
 			array(
 				'inhoud'  => kbj_kop( 2, 'Even op adem komen' )
-					. kbj_p( 'Een zoutkamer bootst de lucht van een zoutgrot na. Een apparaat verdeelt heel fijn zout door de ruimte. U zit met uw kleding aan in een relaxstoel, met een plaid als u wilt, en luistert naar rustige muziek.' )
+					. kbj_p( 'Een zoutkamer bootst de lucht van een zoutgrot na. U zit met uw kleding aan in een relaxstoel, met een plaid als u wilt, en luistert naar rustige muziek.' )
 					. kbj_p( 'Een sessie duurt 50 minuten, voor kinderen 25 minuten. Voor bewoners, logés en gasten van de dagbesteding hoort de zoutkamer erbij. Iedereen anders kan een sessie reserveren.' )
 					. kbj_knoppen(
 						array(

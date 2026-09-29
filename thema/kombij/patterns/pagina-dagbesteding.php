@@ -6,9 +6,11 @@
  * Description: Alle secties onder de kop van de pagina Dagbesteding.
  */
 
+echo kbj_kort( array( array( 'Ma t/m vr', 'van 10:30 tot 16:30' ), array( '2 dagen', 'per week, u kiest welke' ), array( 'WMO', 'of WLZ, of particulier' ), array( 'Samen', 'koffie, lunch en activiteiten' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+
 $verhaal = kbj_kop( 2, 'Wat kunt u nog, en wat vindt u leuk?' )
-	. kbj_p( 'Misschien heeft u altijd hard gewerkt en kwam het er nooit van om hobby’s te hebben. Of misschien lukt wat u altijd deed niet meer. Samen zoeken we wat past bij wat u nog kunt en wat u fijn vindt.' )
-	. kbj_p( 'U ontmoet nieuwe mensen, ontdekt misschien een nieuwe hobby en krijgt aandacht voor uw verhaal. Wie even rust nodig heeft, zit heerlijk in een van onze relaxstoelen.' );
+	. kbj_p( 'Misschien kwam het er nooit van om hobby’s te hebben, of lukt wat u altijd deed niet meer. Samen zoeken we wat bij u past.' )
+	. kbj_p( 'Nieuwe mensen, een nieuwe hobby, aandacht voor uw verhaal. En wie rust nodig heeft, zit heerlijk in een relaxstoel.', 'kbj-nadruk' );
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_kolommen(
@@ -58,7 +60,8 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 );
 
 $voor_wie = kbj_kop( 2, 'Voor wie is de dagbesteding?' )
-	. kbj_p( 'Voor ouderen die zelfstandig wonen. Iedereen komt met een eigen reden. Omdat u moeilijk de deur uitkomt of zich eenzaam voelt. Omdat u wat vergeetachtig wordt. Of als aanvulling op de zorg van familie of thuiszorg.' )
+	. kbj_p( 'Voor ouderen die nog thuis wonen. Iedereen komt met een eigen reden:' )
+	. kbj_lijst( array( 'U komt moeilijk de deur uit of voelt zich eenzaam', 'U wordt wat vergeetachtig', 'Als aanvulling op de zorg van familie of thuiszorg' ), 'kbj-lijst' )
 	. kbj_kop( 3, 'Wie begeleidt u?' )
 	. kbj_p( 'Activiteitenbegeleiders, verzorgenden en verpleegkundigen. Zij werken samen met vrijwilligers en stagiaires.' );
 
@@ -96,7 +99,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	kbj_sectiekop(
 		'Kosten',
 		'Wat kost dagbesteding?',
-		'Dagbesteding bij KomBij wordt meestal vergoed via de WMO van uw gemeente, of via de WLZ. Zonder indicatie kunt u ook particulier komen. Wilt u weten wat voor u geldt? Bel ons, dan zoeken we het uit.',
+		'Meestal vergoed via de WMO van uw gemeente, of via de WLZ. Zonder indicatie kan het ook particulier. Bel ons, dan zoeken we uit wat voor u geldt.',
 		false
 	)
 	. kbj_p( '<a href="/kosten-en-financiering/">Meer over kosten en financiering</a>', 'kbj-verder' ),

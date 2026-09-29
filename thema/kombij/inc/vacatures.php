@@ -473,7 +473,7 @@ function kbj_render_vacature( $attrs ) {
 		'<article %1$s>'
 			. '<header class="kbj-paginakop kbj-ornament"><div class="kbj-paginakop__binnen"><div class="kbj-paginakop__tekst"><p class="kbj-boven">Vacature bij KomBij Maasbommel</p><h1 class="kbj-paginakop__titel">%2$s</h1>%3$s<div class="kbj-acties"><a class="kbj-knop" href="mailto:%4$s?subject=%5$s">Solliciteer direct</a><a class="kbj-knop kbj-knop--rand" href="%6$s">Alle vacatures</a></div></div></div></header>'
 			. '<div class="kbj-vacature__binnen"><div class="kbj-vacature__tekst">%7$s'
-			. '<h2>Werken bij KomBij</h2><p>Bij KomBij bieden we kleinschalige zorg in een veilige en huiselijke sfeer, in de oude kerk van Maasbommel. Samen met vrijwilligers en professionals zorgen we voor onze bewoners en gasten. Een tweede thuis maken, daar ben jij een belangrijk deel van.</p>'
+			. '<h2>Werken bij KomBij</h2><p>Kleinschalige zorg in een huiselijke sfeer, in een monument in Maasbommel. Een klein team, samen met vrijwilligers. Jij helpt er een tweede thuis van te maken.</p>'
 			. '<h2>Solliciteren</h2><p>Herken je jezelf hierin? Stuur je cv en een korte motivatie naar <a href="mailto:%4$s?subject=%5$s">%4$s</a>. Liever eerst even bellen? Dat kan op <a href="%8$s">%9$s</a>.</p>'
 			. '</div><aside class="kbj-vacature__kenmerken kbj-kader kbj-kader--ijs"><h2>In het kort</h2><ul class="kbj-tijden">%10$s</ul><a class="kbj-knop" href="mailto:%4$s?subject=%5$s">Solliciteer direct</a></aside></div>'
 		. '</article>',
