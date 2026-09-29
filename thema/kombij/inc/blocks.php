@@ -41,6 +41,7 @@ function kbj_register_blocks() {
 		'credit'           => 'kbj_render_credit',
 		'illustratie'      => 'kbj_render_illustratie',
 		'afsluiter'        => 'kbj_render_afsluiter',
+		'nietgevonden'     => 'kbj_render_nietgevonden',
 	);
 
 	foreach ( $blokken as $naam => $functie ) {
@@ -981,6 +982,66 @@ function kbj_render_afsluiter() {
 		esc_html( kbj_tekst( 'knop_bellen' ) ),
 		esc_html( kbj_tekst( 'afsluiter_bellen' ) ),
 		esc_html( kbj_tel_tekst() )
+	);
+}
+
+/**
+ * De pagina die een bezoeker ziet bij een link die niet (meer) bestaat.
+ *
+ * Een foto met een blauwe laag en de kop, daaronder vier fototegels naar de
+ * pagina's waar mensen meestal naar zoeken. Zo loopt niemand vast.
+ *
+ * @return string
+ */
+function kbj_render_nietgevonden() {
+	$tegels = array(
+		array( 'wonen-met-zorg', __( 'Wonen', 'kombij' ), __( 'Een vast thuis met zorg', 'kombij' ), 'slaapkamer.webp' ),
+		array( 'logeren-met-zorg', __( 'Logeren', 'kombij' ), __( 'Een paar dagen of weken', 'kombij' ), 'slaapkamer-raam.webp' ),
+		array( 'dagbesteding', __( 'Dagbesteding', 'kombij' ), __( 'Samen de dag door', 'kombij' ), 'dagbesteding.webp' ),
+		array( 'contact', __( 'Contact', 'kombij' ), __( 'Stel gerust uw vraag', 'kombij' ), 'koffie.webp' ),
+	);
+	$html   = '';
+
+	foreach ( $tegels as $tegel ) {
+		$pagina = get_page_by_path( $tegel[0] );
+		$html  .= sprintf(
+			'<a class="kbj-ng-tegel" href="%1$s">%2$s<span class="kbj-ng-tegel__tekst"><strong>%3$s</strong><span>%4$s</span></span></a>',
+			esc_url( $pagina ? get_permalink( $pagina ) : home_url( '/' . $tegel[0] . '/' ) ),
+			kbj_render_beeld(
+				array(
+					'bestand'    => $tegel[3],
+					'alt'        => '',
+					'vorm'       => 'recht',
+					'verhouding' => '4/3',
+				)
+			),
+			esc_html( $tegel[1] ),
+			esc_html( $tegel[2] )
+		);
+	}
+
+	return sprintf(
+		'<div %1$s>'
+			. '<header class="kbj-paginakop kbj-paginakop--beeld kbj-nietgevonden__kop"><div class="kbj-paginakop__binnen"><div class="kbj-paginakop__tekst"><h1 class="kbj-paginakop__titel">%2$s</h1><p class="kbj-paginakop__intro">%3$s</p><div class="kbj-acties"><a class="kbj-knop" href="%4$s">%5$s</a><a class="kbj-knop kbj-knop--rand" href="%6$s">%7$s</a></div></div><div class="kbj-paginakop__beeld">%8$s</div></div></header>'
+			. '<nav class="kbj-ng-tegels" aria-label="%9$s">%10$s</nav>'
+		. '</div>',
+		get_block_wrapper_attributes( array( 'class' => 'kbj-nietgevonden' ) ),
+		esc_html( kbj_tekst( 'nietgevonden_kop' ) ),
+		esc_html( kbj_tekst( 'nietgevonden_tekst' ) ),
+		esc_url( home_url( '/' ) ),
+		esc_html__( 'Naar de homepage', 'kombij' ),
+		esc_attr( kbj_tel_url() ),
+		esc_html( kbj_tekst( 'knop_bellen' ) ),
+		kbj_render_beeld(
+			array(
+				'bestand' => 'kerk-interieur.webp',
+				'alt'     => '',
+				'vorm'    => 'recht',
+				'eerst'   => true,
+			)
+		),
+		esc_attr__( 'Veelbezochte pagina\'s', 'kombij' ),
+		$html
 	);
 }
 

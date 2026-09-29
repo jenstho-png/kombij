@@ -7420,3 +7420,170 @@ body:not(.home) .wp-block-post-content > .kbj-kort-sectie.kbj-sectie {
 		background: linear-gradient(180deg, rgba(10, 36, 68, 0.2) 0%, rgba(10, 36, 68, 0.75) 60%) !important;
 	}
 }
+
+/*
+ * Pagina niet gevonden: dezelfde foto-kop als bij een vacature, met daaronder
+ * vier fototegels. Op de telefoon twee naast elkaar, zodat alles in beeld past.
+ */
+.kbj-nietgevonden__kop.kbj-paginakop--beeld {
+	padding: clamp(0.5rem, 1.2vw, 1rem) 0 0;
+	background: none !important;
+}
+
+.kbj-nietgevonden__kop .kbj-paginakop__binnen {
+	min-height: clamp(300px, 40vh, 400px) !important;
+}
+
+.kbj-nietgevonden__kop .kbj-paginakop__beeld .kbj-beeld__kader::after {
+	background: linear-gradient(100deg, rgba(10, 36, 68, 0.8) 0%, rgba(27, 83, 129, 0.52) 50%, rgba(30, 124, 178, 0.2) 100%) !important;
+}
+
+.kbj-ng-tegels {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: clamp(0.625rem, 1.5vw, 1.25rem);
+	max-width: var(--wp--style--global--wide-size, 1280px);
+	margin: clamp(1.5rem, 3vw, 2.5rem) auto clamp(2.5rem, 5vw, 4.5rem);
+	padding: 0 var(--wp--style--root--padding-right, 1rem);
+}
+
+.kbj-ng-tegel {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	border-radius: 18px;
+	color: #fff;
+	text-decoration: none;
+	isolation: isolate;
+}
+
+.kbj-ng-tegel {
+	aspect-ratio: 4 / 3;
+}
+
+.kbj-ng-tegel .kbj-beeld,
+.kbj-ng-tegel .kbj-beeld__kader {
+	position: absolute !important;
+	inset: 0;
+	width: 100% !important;
+	max-width: none !important;
+	height: 100% !important;
+	margin: 0 !important;
+	border-radius: 0 !important;
+	aspect-ratio: auto !important;
+	transform: none !important;
+	clip-path: none !important;
+	filter: none !important;
+	opacity: 1 !important;
+}
+
+.kbj-ng-tegel .kbj-beeld__kader::after {
+	display: none;
+}
+
+.kbj-ng-tegel img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform 0.6s ease;
+}
+
+.kbj-ng-tegel::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(180deg, rgba(10, 36, 68, 0) 35%, rgba(10, 36, 68, 0.82) 100%);
+	transition: background 0.3s ease;
+}
+
+.kbj-ng-tegel__tekst {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 0.125rem;
+	padding: clamp(0.75rem, 1.6vw, 1.25rem);
+}
+
+.kbj-ng-tegel__tekst strong {
+	font-size: clamp(1.0625rem, 1.6vw, 1.375rem);
+	line-height: 1.2;
+}
+
+.kbj-ng-tegel__tekst strong::after {
+	content: " \2192";
+	display: inline-block;
+	transition: transform 0.3s ease;
+}
+
+.kbj-ng-tegel__tekst span {
+	font-size: 0.875rem;
+	opacity: 0.9;
+}
+
+.kbj-ng-tegel:hover img,
+.kbj-ng-tegel:focus-visible img {
+	transform: scale(1.05);
+}
+
+.kbj-ng-tegel:hover .kbj-ng-tegel__tekst strong::after,
+.kbj-ng-tegel:focus-visible .kbj-ng-tegel__tekst strong::after {
+	transform: translateX(4px);
+}
+
+.kbj-ng-tegel:focus-visible {
+	outline: 3px solid #1e7cb2;
+	outline-offset: 3px;
+}
+
+@media (max-width: 781px) {
+	.kbj-nietgevonden__kop .kbj-paginakop__beeld .kbj-beeld__kader::after {
+		background: linear-gradient(180deg, rgba(10, 36, 68, 0.25) 0%, rgba(10, 36, 68, 0.8) 60%) !important;
+	}
+
+	.kbj-ng-tegels {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.kbj-ng-tegel__tekst span {
+		display: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.kbj-ng-tegel img,
+	.kbj-ng-tegel__tekst strong::after {
+		transition: none;
+	}
+}
+
+/* Vacature doorsturen via WhatsApp: vlak onder de sollicitatieknop. */
+.kbj-vacature__kenmerken .kbj-deel {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	margin-top: 0.625rem;
+}
+
+.kbj-deel__icoon {
+	flex: none;
+	color: #1f9e55;
+}
+
+.kbj-deel:hover .kbj-deel__icoon,
+.kbj-deel:focus-visible .kbj-deel__icoon {
+	color: currentColor;
+}
+
+.kbj-deel__uitleg {
+	margin: 0.625rem 0 0;
+	font-size: 0.875rem;
+	line-height: 1.45;
+	text-align: center;
+	opacity: 0.8;
+}

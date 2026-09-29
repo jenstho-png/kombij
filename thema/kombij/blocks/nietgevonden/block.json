@@ -1,0 +1,11 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "kbj/nietgevonden",
+	"title": "Pagina niet gevonden",
+	"category": "kombij",
+	"description": "Foto met kop en vier tegels naar Wonen, Logeren, Dagbesteding en Contact. De teksten staan onder KomBij, Teksten op elke pagina.",
+	"textdomain": "kombij",
+	"supports": { "html": false },
+	"attributes": {}
+}

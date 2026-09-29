@@ -165,6 +165,16 @@ function kbj_optie_velden_los() {
 			'hulp'  => __( 'Plak hier de link van een foto uit de mediabibliotheek (Media, klik op de foto, "URL kopiëren"). Leeg laten voor de standaardfoto.', 'kombij' ),
 			'type'  => 'url',
 		),
+		'nietgevonden_kop'   => array(
+			'label' => __( 'Kop', 'kombij' ),
+			'hulp'  => __( 'Ziet een bezoeker als hij op een link klikt die niet (meer) bestaat.', 'kombij' ),
+			'type'  => 'text',
+		),
+		'nietgevonden_tekst' => array(
+			'label' => __( 'Tekst', 'kombij' ),
+			'hulp'  => '',
+			'type'  => 'textarea',
+		),
 		'zoutkamer_site'     => array(
 			'label' => __( 'Website van de zoutkamer', 'kombij' ),
 			'hulp'  => __( 'De eigen site van de zoutkamer, met alle informatie voor wie los een sessie wil.', 'kombij' ),
@@ -278,6 +288,8 @@ function kbj_optie_standaard() {
 		'knop_bellen'       => 'Bel ons',
 		'vacature_over'     => 'Kleinschalige zorg in een huiselijke sfeer, in een monument in Maasbommel. Een klein team, samen met vrijwilligers. Jij helpt er een tweede thuis van te maken.',
 		'vacature_foto'     => 'samen-aan-tafel.webp',
+		'nietgevonden_kop'  => 'Deze pagina bestaat niet (meer)',
+		'nietgevonden_tekst' => 'Misschien is hij verhuisd, of stond er een tikfout in de link. Kies hieronder waar u naartoe wilt, of neem contact met ons op.',
 		'melding_aan'       => 'aan',
 		'melding_titel'     => 'Nog plekken vrij in de zoutkamer',
 		'melding_tekst'     => 'Deze week zijn er nog plekken vrij. Een sessie van 50 minuten kost € 25.',
@@ -375,8 +387,8 @@ function kbj_schermen() {
 		'kbj-teksten' => array(
 			'menu'   => __( 'Teksten op elke pagina', 'kombij' ),
 			'titel'  => __( 'Teksten op elke pagina', 'kombij' ),
-			'uitleg' => __( 'Teksten die op meerdere pagina\'s terugkomen: de knoppen, het blok onderaan elke pagina, de strook over werken bij KomBij, de vacatures en de zoutkamer. Eén keer aanpassen en het klopt overal.', 'kombij' ),
-			'blokken' => array( 'teksten', 'zoutkamer' ),
+			'uitleg' => __( 'Teksten die op meerdere pagina\'s terugkomen: de knoppen, het blok onderaan elke pagina, de strook over werken bij KomBij, de vacatures, de zoutkamer en de pagina die een bezoeker ziet bij een link die niet bestaat. Eén keer aanpassen en het klopt overal.', 'kombij' ),
+			'blokken' => array( 'teksten', 'zoutkamer', '404' ),
 		),
 	);
 }
@@ -1021,6 +1033,7 @@ function kbj_optie_velden( $alleen = array() ) {
 		'melding'   => array( __( 'Melding rechtsonder', 'kombij' ), array( 'melding_aan', 'melding_titel', 'melding_tekst', 'melding_knop', 'melding_link', 'melding_seconden' ) ),
 		'teksten'   => array( __( 'Teksten op elke pagina', 'kombij' ), array( 'knop_rondleiding', 'knop_bellen', 'afsluiter_kop', 'afsluiter_tekst', 'afsluiter_bellen', 'werken_kop', 'werken_tekst', 'werken_mail', 'vacature_over', 'vacature_foto_url' ) ),
 		'zoutkamer' => array( __( 'Zoutkamer', 'kombij' ), array( 'zoutkamer_site', 'zoutkamer_link' ) ),
+		'404'       => array( __( 'Pagina niet gevonden', 'kombij' ), array( 'nietgevonden_kop', 'nietgevonden_tekst' ) ),
 		'online'    => array( __( 'Sociale media en reviews', 'kombij' ), array( 'instagram', 'facebook', 'linkedin', 'youtube', 'review' ) ),
 		'kaart'     => array( __( 'Plek op de kaart (voor Google)', 'kombij' ), array( 'breedtegraad', 'lengtegraad' ) ),
 	);
@@ -1060,3 +1073,55 @@ function kbj_tekst( $sleutel ) {
 
 	return kbj_optie( $sleutel, isset( $standaard[ $sleutel ] ) ? (string) $standaard[ $sleutel ] : '' );
 }
+
+/**
+ * Het KomBij-paneel in de editor van een pagina: uitleg en knoppen, per pagina.
+ */
+function kbj_paginahulp() {
+	$post = get_post();
+
+	if ( ! $post || 'page' !== $post->post_type ) {
+		return;
+	}
+
+	$slug     = (int) get_option( 'page_on_front' ) === (int) $post->ID ? 'home' : $post->post_name;
+	$teksten  = array( __( 'Teksten op elke pagina', 'kombij' ), admin_url( 'admin.php?page=kbj-teksten' ) );
+	$contact  = array( __( 'Contact en bedrijf', 'kombij' ), admin_url( 'admin.php?page=kbj-contact' ) );
+	$tijden   = array( __( 'Openingstijden en plek vrij', 'kombij' ), admin_url( 'admin.php?page=kbj-tijden' ) );
+	$vacature = array( __( 'Vacatures', 'kombij' ), admin_url( 'edit.php?post_type=vacature' ) );
+	$zorg     = __( 'Het label "plek vrij" of "wachtlijst" zet u niet hier, maar onder Openingstijden en plek vrij. Dan klopt het op elke pagina tegelijk.', 'kombij' );
+
+	$per = array(
+		'home'                   => array( __( 'Dit is de startpagina. Het blok onderaan (kom langs) en de teksten op de knoppen staan onder Teksten op elke pagina.', 'kombij' ), array( $teksten, $tijden ) ),
+		'wonen-met-zorg'         => array( $zorg, array( $tijden, $teksten ) ),
+		'logeren-met-zorg'       => array( $zorg, array( $tijden, $teksten ) ),
+		'dagbesteding'           => array( __( 'De openingstijden op het bordje rechtsboven en het label "plek vrij" staan onder Openingstijden en plek vrij.', 'kombij' ), array( $tijden, $teksten ) ),
+		'kosten-en-financiering' => array( __( 'Bedragen en regelingen past u hier aan: klik op de tekst en typ.', 'kombij' ), array( $teksten ) ),
+		'over-ons'               => array( __( 'Het verhaal van KomBij. De knop naar de geschiedenis is een gewone knop: klik erop om de tekst te veranderen.', 'kombij' ), array( $teksten ) ),
+		'geschiedenis'           => array( __( 'Bij de oude foto\'s staat een bronvermelding. Laat die staan zolang de foto blijft staan; dat is een voorwaarde van de maker.', 'kombij' ), array( $teksten ) ),
+		'contact'                => array( __( 'Adres, telefoon en e-mail komen uit Contact en bedrijf. Berichten uit het formulier komen binnen op het e-mailadres dat daar staat.', 'kombij' ), array( $contact, $tijden ) ),
+		'werken-bij'             => array( __( 'De vacatures verschijnen hier vanzelf. Een vacature toevoegen of offline halen doet u onder Vacatures.', 'kombij' ), array( $vacature, $teksten ) ),
+		'zoutkamer'              => array( __( 'De link naar de website van de zoutkamer en de melding rechtsonder staan onder KomBij.', 'kombij' ), array( array( __( 'Zoutkamer-link', 'kombij' ), admin_url( 'admin.php?page=kbj-teksten#kop_zoutkamer' ) ), array( __( 'Melding rechtsonder', 'kombij' ), admin_url( 'admin.php?page=kbj-melding' ) ) ) ),
+		'bedankt'                => array( __( 'Deze pagina ziet iemand na het versturen van het contactformulier. Hij staat niet in het menu.', 'kombij' ), array() ),
+		'voorwaarden'            => array( __( 'Deze pagina staat onderaan elke pagina gelinkt, naast het copyright.', 'kombij' ), array() ),
+	);
+
+	$hier = isset( $per[ $slug ] ) ? $per[ $slug ] : array( '', array( $teksten ) );
+
+	$data = array(
+		'tip'       => $hier[0],
+		'stappen'   => array(
+			__( 'Tekst of kop: klik erop en typ.', 'kombij' ),
+			__( 'Foto: klik op de foto. Rechts onder "Blok" kiest u een andere foto.', 'kombij' ),
+			__( 'Knop: klik erop om de tekst te veranderen. De link past u aan met het kettingje.', 'kombij' ),
+			__( 'Klaar? Klik rechtsboven op Opslaan.', 'kombij' ),
+		),
+		'elders'    => $hier[1],
+		'bekijk'    => array( __( 'Bekijk de pagina', 'kombij' ), get_permalink( $post ), true ),
+		'overzicht' => array( __( 'Terug naar het KomBij-overzicht', 'kombij' ), admin_url( 'admin.php?page=kbj-gegevens' ) ),
+	);
+
+	wp_enqueue_script( 'kbj-paginahulp', KBJ_URI . '/assets/js/paginahulp.js', array( 'wp-plugins', 'wp-editor', 'wp-element', 'wp-components', 'wp-data', 'wp-dom-ready' ), KBJ_VERSION, true );
+	wp_add_inline_script( 'kbj-paginahulp', 'window.kbjHulp = ' . wp_json_encode( $data ) . ';', 'before' );
+}
+add_action( 'enqueue_block_editor_assets', 'kbj_paginahulp' );
