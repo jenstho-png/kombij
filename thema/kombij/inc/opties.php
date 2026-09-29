@@ -145,6 +145,26 @@ function kbj_optie_velden_los() {
 			'hulp'  => '',
 			'type'  => 'email',
 		),
+		'knop_rondleiding'   => array(
+			'label' => __( 'Knop: rondleiding', 'kombij' ),
+			'hulp'  => __( 'De tekst op de hoofdknop bovenaan elke pagina en in de afsluiter.', 'kombij' ),
+			'type'  => 'text',
+		),
+		'knop_bellen'        => array(
+			'label' => __( 'Knop: bellen', 'kombij' ),
+			'hulp'  => '',
+			'type'  => 'text',
+		),
+		'vacature_over'      => array(
+			'label' => __( 'Vacatures: stukje "Werken bij KomBij"', 'kombij' ),
+			'hulp'  => __( 'Staat onder elke vacature.', 'kombij' ),
+			'type'  => 'textarea',
+		),
+		'vacature_foto_url'  => array(
+			'label' => __( 'Vacatures: foto bovenaan', 'kombij' ),
+			'hulp'  => __( 'Plak hier de link van een foto uit de mediabibliotheek (Media, klik op de foto, "URL kopiëren"). Leeg laten voor de standaardfoto.', 'kombij' ),
+			'type'  => 'url',
+		),
 		'zoutkamer_site'     => array(
 			'label' => __( 'Website van de zoutkamer', 'kombij' ),
 			'hulp'  => __( 'De eigen site van de zoutkamer, met alle informatie voor wie los een sessie wil.', 'kombij' ),
@@ -254,6 +274,10 @@ function kbj_optie_standaard() {
 		'werken_kop'        => 'Hart voor zorg? KomBij ons werken.',
 		'werken_tekst'      => 'We zoeken regelmatig collega’s in de zorg, en vrijwilligers met een paar uur over. Een klein team, korte lijnen en een werkplek die je nergens anders vindt.',
 		'werken_mail'       => 'werkenbij@kombijmaasbommel.nl',
+		'knop_rondleiding'  => 'Plan een rondleiding',
+		'knop_bellen'       => 'Bel ons',
+		'vacature_over'     => 'Kleinschalige zorg in een huiselijke sfeer, in een monument in Maasbommel. Een klein team, samen met vrijwilligers. Jij helpt er een tweede thuis van te maken.',
+		'vacature_foto'     => 'samen-aan-tafel.webp',
 		'melding_aan'       => 'aan',
 		'melding_titel'     => 'Nog plekken vrij in de zoutkamer',
 		'melding_tekst'     => 'Deze week zijn er nog plekken vrij. Een sessie van 50 minuten kost € 25.',
@@ -291,14 +315,77 @@ function kbj_optie( $sleutel, $standaard = '' ) {
 function kbj_optie_menu() {
 	add_menu_page(
 		__( 'Gegevens van de site', 'kombij' ),
-		__( 'Gegevens', 'kombij' ),
+		__( 'KomBij', 'kombij' ),
 		'manage_options',
 		'kbj-gegevens',
 		'kbj_optie_scherm',
-		'dashicons-info-outline',
-		7
+		'dashicons-heart',
+		2
+	);
+
+	add_submenu_page( 'kbj-gegevens', __( 'Gegevens en teksten', 'kombij' ), __( 'Gegevens en teksten', 'kombij' ), 'manage_options', 'kbj-gegevens', 'kbj_optie_scherm' );
+	add_submenu_page( 'kbj-gegevens', __( 'Pagina\'s', 'kombij' ), __( 'Pagina\'s', 'kombij' ), 'edit_pages', 'edit.php?post_type=page' );
+	add_submenu_page( 'kbj-gegevens', __( 'Nieuwe vacature', 'kombij' ), __( 'Nieuwe vacature', 'kombij' ), 'edit_posts', 'post-new.php?post_type=vacature' );
+	add_submenu_page( 'kbj-gegevens', __( 'Foto\'s en bestanden', 'kombij' ), __( 'Foto\'s en bestanden', 'kombij' ), 'upload_files', 'upload.php' );
+	add_submenu_page( 'kbj-gegevens', __( 'Menu bovenaan', 'kombij' ), __( 'Menu bovenaan', 'kombij' ), 'edit_theme_options', 'site-editor.php?p=%2Fnavigation' );
+}
+
+/**
+ * Het beheermenu opruimen: wat de site niet gebruikt, gaat weg.
+ *
+ * Berichten en reacties gebruikt KomBij niet. Pagina's, foto's en vacatures
+ * staan onder KomBij, dus die hoeven niet nog een keer los in het menu.
+ */
+function kbj_menu_opruimen() {
+	remove_menu_page( 'edit.php' );
+	remove_menu_page( 'edit-comments.php' );
+	remove_menu_page( 'edit.php?post_type=page' );
+	remove_menu_page( 'upload.php' );
+
+	// Onder KomBij: eerst de gegevens, dan de vacatures, dan de rest.
+	global $submenu;
+
+	if ( empty( $submenu['kbj-gegevens'] ) ) {
+		return;
+	}
+
+	$volgorde = array( 'kbj-gegevens', 'edit.php?post_type=vacature', 'post-new.php?post_type=vacature', 'edit.php?post_type=page', 'upload.php', 'site-editor.php?p=%2Fnavigation' );
+
+	usort(
+		$submenu['kbj-gegevens'],
+		function ( $a, $b ) use ( $volgorde ) {
+			$pa = array_search( $a[2], $volgorde, true );
+			$pb = array_search( $b[2], $volgorde, true );
+
+			return ( false === $pa ? 99 : $pa ) - ( false === $pb ? 99 : $pb );
+		}
 	);
 }
+add_action( 'admin_menu', 'kbj_menu_opruimen', 999 );
+
+/**
+ * Reacties helemaal uit: geen formulier, geen spam.
+ */
+function kbj_reacties_uit() {
+	foreach ( array( 'post', 'page' ) as $soort ) {
+		remove_post_type_support( $soort, 'comments' );
+		remove_post_type_support( $soort, 'trackbacks' );
+	}
+}
+add_action( 'init', 'kbj_reacties_uit', 100 );
+add_filter( 'comments_open', '__return_false', 20 );
+add_filter( 'pings_open', '__return_false', 20 );
+
+/**
+ * Berichten en reacties ook uit de zwarte balk bovenaan.
+ *
+ * @param WP_Admin_Bar $balk De balk.
+ */
+function kbj_balk_opruimen( $balk ) {
+	$balk->remove_node( 'comments' );
+	$balk->remove_node( 'new-post' );
+}
+add_action( 'admin_bar_menu', 'kbj_balk_opruimen', 999 );
 add_action( 'admin_menu', 'kbj_optie_menu' );
 
 /**
@@ -598,7 +685,7 @@ function kbj_optie_velden() {
 		'tijden'    => array( __( 'Openingstijden dagbesteding', 'kombij' ), array( 'dagbesteding_open', 'dagbesteding_tijd' ) ),
 		'plek'      => array( __( 'Plek vrij of wachtlijst', 'kombij' ), array( 'plek_wonen', 'plek_logeren', 'plek_dagbesteding' ) ),
 		'melding'   => array( __( 'Melding rechtsonder', 'kombij' ), array( 'melding_aan', 'melding_titel', 'melding_tekst', 'melding_knop', 'melding_link', 'melding_seconden' ) ),
-		'teksten'   => array( __( 'Teksten op elke pagina', 'kombij' ), array( 'afsluiter_kop', 'afsluiter_tekst', 'afsluiter_bellen', 'werken_kop', 'werken_tekst', 'werken_mail' ) ),
+		'teksten'   => array( __( 'Teksten op elke pagina', 'kombij' ), array( 'knop_rondleiding', 'knop_bellen', 'afsluiter_kop', 'afsluiter_tekst', 'afsluiter_bellen', 'werken_kop', 'werken_tekst', 'werken_mail', 'vacature_over', 'vacature_foto_url' ) ),
 		'zoutkamer' => array( __( 'Zoutkamer', 'kombij' ), array( 'zoutkamer_site', 'zoutkamer_link' ) ),
 		'online'    => array( __( 'Sociale media en reviews', 'kombij' ), array( 'instagram', 'facebook', 'linkedin', 'youtube', 'review' ) ),
 		'kaart'     => array( __( 'Plek op de kaart (voor Google)', 'kombij' ), array( 'breedtegraad', 'lengtegraad' ) ),

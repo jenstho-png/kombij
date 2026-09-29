@@ -7400,3 +7400,23 @@ body:not(.home) .wp-block-post-content > .kbj-kort-sectie.kbj-sectie {
 		display: none;
 	}
 }
+
+/* De kop van een vacature: een foto met een doorschijnende laag blauw. */
+.kbj-vacature__kop.kbj-paginakop--beeld {
+	padding: clamp(0.5rem, 1.2vw, 1rem) 0 clamp(1rem, 2vw, 1.5rem);
+	background: none !important;
+}
+
+.kbj-vacature__kop .kbj-paginakop__binnen {
+	min-height: clamp(320px, 42vh, 420px) !important;
+}
+
+.kbj-vacature__kop .kbj-paginakop__beeld .kbj-beeld__kader::after {
+	background: linear-gradient(100deg, rgba(10, 36, 68, 0.78) 0%, rgba(27, 83, 129, 0.5) 50%, rgba(30, 124, 178, 0.18) 100%) !important;
+}
+
+@media (max-width: 781px) {
+	.kbj-vacature__kop .kbj-paginakop__beeld .kbj-beeld__kader::after {
+		background: linear-gradient(180deg, rgba(10, 36, 68, 0.2) 0%, rgba(10, 36, 68, 0.75) 60%) !important;
+	}
+}

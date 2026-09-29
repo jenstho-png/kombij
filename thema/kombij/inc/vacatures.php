@@ -118,11 +118,12 @@ function kbj_vacature_registreren() {
 				'search_items'       => 'Vacatures zoeken',
 				'not_found'          => 'Nog geen vacatures',
 				'not_found_in_trash' => 'Geen vacatures in de prullenbak',
-				'all_items'          => 'Alle vacatures',
+				'all_items'          => 'Vacatures',
 				'menu_name'          => 'Vacatures',
 			),
 			'public'          => true,
 			'has_archive'     => false,
+			'show_in_menu'    => 'kbj-gegevens',
 			'menu_position'   => 8,
 			'menu_icon'       => 'dashicons-groups',
 			'supports'        => array( 'title', 'revisions' ),
@@ -471,9 +472,9 @@ function kbj_render_vacature( $attrs ) {
 
 	return sprintf(
 		'<article %1$s>'
-			. '<header class="kbj-paginakop kbj-ornament"><div class="kbj-paginakop__binnen"><div class="kbj-paginakop__tekst"><p class="kbj-boven">Vacature bij KomBij Maasbommel</p><h1 class="kbj-paginakop__titel">%2$s</h1>%3$s<div class="kbj-acties"><a class="kbj-knop" href="mailto:%4$s?subject=%5$s">Solliciteer direct</a><a class="kbj-knop kbj-knop--rand" href="%6$s">Alle vacatures</a></div></div></div></header>'
+			. '<header class="kbj-paginakop kbj-paginakop--beeld kbj-vacature__kop"><div class="kbj-paginakop__binnen"><div class="kbj-paginakop__tekst"><h1 class="kbj-paginakop__titel">%2$s</h1>%3$s<div class="kbj-acties"><a class="kbj-knop" href="mailto:%4$s?subject=%5$s">Solliciteer direct</a><a class="kbj-knop kbj-knop--rand" href="%6$s">Alle vacatures</a></div></div><div class="kbj-paginakop__beeld">%11$s</div></div></header>'
 			. '<div class="kbj-vacature__binnen"><div class="kbj-vacature__tekst">%7$s'
-			. '<h2>Werken bij KomBij</h2><p>Kleinschalige zorg in een huiselijke sfeer, in een monument in Maasbommel. Een klein team, samen met vrijwilligers. Jij helpt er een tweede thuis van te maken.</p>'
+			. '<h2>Werken bij KomBij</h2><p>%12$s</p>'
 			. '<h2>Solliciteren</h2><p>Herken je jezelf hierin? Stuur je cv en een korte motivatie naar <a href="mailto:%4$s?subject=%5$s">%4$s</a>. Liever eerst even bellen? Dat kan op <a href="%8$s">%9$s</a>.</p>'
 			. '</div><aside class="kbj-vacature__kenmerken kbj-kader kbj-kader--ijs"><h2>In het kort</h2><ul class="kbj-tijden">%10$s</ul><a class="kbj-knop" href="mailto:%4$s?subject=%5$s">Solliciteer direct</a></aside></div>'
 		. '</article>',
@@ -486,7 +487,16 @@ function kbj_render_vacature( $attrs ) {
 		$blokken,
 		esc_attr( kbj_tel_url() ),
 		esc_html( kbj_tel_tekst() ),
-		$kenmerken
+		$kenmerken,
+		kbj_render_beeld(
+			array(
+				'bestand' => kbj_tekst( 'vacature_foto' ),
+				'url'     => kbj_tekst( 'vacature_foto_url' ),
+				'alt'     => '',
+				'vorm'    => 'recht',
+			)
+		),
+		esc_html( kbj_tekst( 'vacature_over' ) )
 	);
 }
 

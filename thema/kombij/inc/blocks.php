@@ -238,9 +238,9 @@ function kbj_render_paginakop( $attrs ) {
 		$acties = sprintf(
 			'<div class="kbj-acties"><a class="kbj-knop" href="%1$s">%2$s</a><a class="kbj-knop kbj-knop--rand" href="%3$s">%4$s</a></div>',
 			esc_url( $contact ? get_permalink( $contact ) : home_url( '/contact/' ) ),
-			esc_html__( 'Plan een rondleiding', 'kombij' ),
+			esc_html( kbj_tekst( 'knop_rondleiding' ) ),
 			esc_attr( kbj_tel_url() ),
-			esc_html__( 'Bel ons', 'kombij' )
+			esc_html( kbj_tekst( 'knop_bellen' ) )
 		);
 	}
 
@@ -714,7 +714,7 @@ function kbj_render_opening( $attrs ) {
 		'' !== $glans ? ' <span class="kbj-glastekst">' . esc_html( $glans ) . '</span>' : '',
 		'' !== $tekst ? '<p class="kbj-opening__tekst">' . esc_html( $tekst ) . '</p>' : '',
 		esc_url( $contact ? get_permalink( $contact ) : home_url( '/contact/' ) ),
-		esc_html__( 'Plan een rondleiding', 'kombij' ),
+		esc_html( kbj_tekst( 'knop_rondleiding' ) ),
 		esc_html__( 'Bekijk wat we doen', 'kombij' )
 	);
 }
@@ -976,9 +976,9 @@ function kbj_render_afsluiter() {
 		kbj_kombij( $kop ),
 		esc_html( kbj_tekst( 'afsluiter_tekst' ) ),
 		esc_url( $contact ? get_permalink( $contact ) : home_url( '/contact/' ) ),
-		esc_html__( 'Plan een rondleiding', 'kombij' ),
+		esc_html( kbj_tekst( 'knop_rondleiding' ) ),
 		esc_attr( kbj_tel_url() ),
-		esc_html__( 'Bel ons', 'kombij' ),
+		esc_html( kbj_tekst( 'knop_bellen' ) ),
 		esc_html( kbj_tekst( 'afsluiter_bellen' ) ),
 		esc_html( kbj_tel_tekst() )
 	);
