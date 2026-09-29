@@ -719,12 +719,14 @@ function kbj_render_vacaturestrook( $attrs ) {
 		return '';
 	}
 
-	// Een zin die altijd klopt, zodat niemand hem bij elke vacature hoeft aan te passen.
-	$zin = 'We zoeken regelmatig collega’s in de zorg, en vrijwilligers met een paar uur over';
+	// De teksten staan onder Gegevens, zodat de eigenaren ze zelf aanpassen.
+	$kop  = kbj_kombij( esc_html( kbj_tekst( 'werken_kop' ) ) );
+	$zin  = kbj_tekst( 'werken_tekst' );
+	$mail = kbj_tekst( 'werken_mail' );
 
 	if ( $sectie ) {
 		return sprintf(
-			'<section %1$s><div class="kbj-werken__binnen">' . kbj_illustratie( 'maas', 'kbj-tekening-maas' ) . '<div><h2 class="kbj-schuif">Hart voor zorg? <span class="kbj-kombij">KomBij</span> ons werken.</h2><p>%2$s. Een klein team, korte lijnen en een werkplek die je nergens anders vindt.</p><div class="kbj-acties"><a class="kbj-knop" href="%3$s">Bekijk de vacatures</a><a class="kbj-knop kbj-knop--rand" href="mailto:werkenbij@kombijmaasbommel.nl">Stuur een open sollicitatie</a></div></div>%4$s</div></section>',
+			'<section %1$s><div class="kbj-werken__binnen">' . kbj_illustratie( 'maas', 'kbj-tekening-maas' ) . '<div><h2 class="kbj-schuif">%5$s</h2><p>%2$s</p><div class="kbj-acties"><a class="kbj-knop" href="%3$s">Bekijk de vacatures</a><a class="kbj-knop kbj-knop--rand" href="mailto:%6$s">Stuur een open sollicitatie</a></div></div>%4$s</div></section>',
 			get_block_wrapper_attributes( array( 'class' => 'kbj-werken alignwide' ) ),
 			esc_html( $zin ),
 			esc_url( home_url( '/werken-bij/' ) ),
@@ -735,14 +737,17 @@ function kbj_render_vacaturestrook( $attrs ) {
 					'vorm'       => 'recht',
 					'verhouding' => '4/3',
 				)
-			)
+			),
+			$kop,
+			esc_attr( $mail )
 		);
 	}
 
 	return sprintf(
-		'<aside %1$s><div class="kbj-vacaturestrook__binnen"><p class="kbj-vacaturestrook__kop">Zin in ander werk? <span class="kbj-kombij">KomBij</span> ons werken.</p><p class="kbj-vacaturestrook__tekst">%2$s. Kijk wat er open staat.</p><a class="kbj-knop kbj-knop--wit" href="%3$s">Bekijk de vacatures</a></div></aside>',
+		'<aside %1$s><div class="kbj-vacaturestrook__binnen"><p class="kbj-vacaturestrook__kop">%4$s</p><p class="kbj-vacaturestrook__tekst">%2$s</p><a class="kbj-knop kbj-knop--wit" href="%3$s">Bekijk de vacatures</a></div></aside>',
 		get_block_wrapper_attributes( array( 'class' => 'kbj-vacaturestrook' ) ),
 		esc_html( $zin ),
-		esc_url( home_url( '/werken-bij/' ) )
+		esc_url( home_url( '/werken-bij/' ) ),
+		$kop
 	);
 }

@@ -115,6 +115,46 @@ function kbj_optie_velden() {
 			'hulp'  => __( 'Het reserveringssysteem van de zoutkamer, of later de eigen site van de zoutkamer.', 'kombij' ),
 			'type'  => 'url',
 		),
+		'kop_teksten'        => array(
+			'label' => __( 'Teksten op elke pagina', 'kombij' ),
+			'hulp'  => '',
+			'type'  => 'kop',
+		),
+		'afsluiter_kop'      => array(
+			'label' => __( 'Afsluiter onderaan: kop', 'kombij' ),
+			'hulp'  => __( 'Het blok onderaan elke pagina. "KomBij ons" krijgt vanzelf de lichte letter.', 'kombij' ),
+			'type'  => 'text',
+		),
+		'afsluiter_tekst'    => array(
+			'label' => __( 'Afsluiter onderaan: tekst', 'kombij' ),
+			'hulp'  => '',
+			'type'  => 'textarea',
+		),
+		'afsluiter_bellen'   => array(
+			'label' => __( 'Afsluiter onderaan: regel over bellen', 'kombij' ),
+			'hulp'  => __( 'Het telefoonnummer komt er vanzelf achter.', 'kombij' ),
+			'type'  => 'text',
+		),
+		'werken_kop'         => array(
+			'label' => __( 'Vacatures: kop', 'kombij' ),
+			'hulp'  => __( 'Staat op de home en boven de voet, zolang er vacatures open staan.', 'kombij' ),
+			'type'  => 'text',
+		),
+		'werken_tekst'       => array(
+			'label' => __( 'Vacatures: tekst', 'kombij' ),
+			'hulp'  => '',
+			'type'  => 'textarea',
+		),
+		'werken_mail'        => array(
+			'label' => __( 'Vacatures: e-mailadres voor open sollicitaties', 'kombij' ),
+			'hulp'  => '',
+			'type'  => 'email',
+		),
+		'kop_overig'         => array(
+			'label' => __( 'Overige instellingen', 'kombij' ),
+			'hulp'  => '',
+			'type'  => 'kop',
+		),
 		'zoutkamer_site'     => array(
 			'label' => __( 'Website van de zoutkamer', 'kombij' ),
 			'hulp'  => __( 'De eigen site van de zoutkamer, met alle informatie voor wie los een sessie wil.', 'kombij' ),
@@ -218,6 +258,12 @@ function kbj_optie_standaard() {
 		'dagbesteding_tijd' => '10:30-16:30',
 		'zoutkamer_link'    => 'https://www.supersaas.nl/schedule/Zoutkamer_Maasbommel/Zoutkamers',
 		'zoutkamer_site'    => 'https://www.zoutkamermaasbommel.nl/',
+		'afsluiter_kop'     => 'KomBij ons langs. De koffie staat klaar.',
+		'afsluiter_tekst'   => 'Zien is ervaren. Plan een rondleiding en voel zelf hoe het bij ons is.',
+		'afsluiter_bellen'  => 'Liever eerst even bellen? Dat kan altijd:',
+		'werken_kop'        => 'Hart voor zorg? KomBij ons werken.',
+		'werken_tekst'      => 'We zoeken regelmatig collega’s in de zorg, en vrijwilligers met een paar uur over. Een klein team, korte lijnen en een werkplek die je nergens anders vindt.',
+		'werken_mail'       => 'werkenbij@kombijmaasbommel.nl',
 		'melding_aan'       => 'aan',
 		'melding_titel'     => 'Nog plekken vrij in de zoutkamer',
 		'melding_tekst'     => 'Deze week zijn er nog plekken vrij. Een sessie van 50 minuten kost € 25.',
@@ -329,6 +375,13 @@ function kbj_optie_schoonmaken( $ruw ) {
 			 * er altijd een waarde binnen, en betekent "leeg" niet per ongeluk
 			 * "nog nooit ingevuld".
 			 */
+			case 'textarea':
+				$schoon[ $sleutel ] = sanitize_textarea_field( $waarde );
+				break;
+
+			case 'kop':
+				break;
+
 			case 'checkbox':
 				$schoon[ $sleutel ] = 'aan' === $waarde ? 'aan' : 'uit';
 				break;
@@ -360,16 +413,32 @@ function kbj_optie_scherm() {
 		</p>
 		<?php kbj_optie_waarschuwingen(); ?>
 
+		<div class="notice notice-info inline" style="max-width:48rem;padding:0.5rem 1rem">
+			<p><strong><?php esc_html_e( 'Waar past u wat aan?', 'kombij' ); ?></strong></p>
+			<ul style="list-style:disc;padding-left:1.25rem">
+				<li><?php esc_html_e( 'Teksten, koppen, foto\'s en knoppen op een pagina: via Pagina\'s, open de pagina en klik op wat u wilt veranderen. Bij een foto of eigen onderdeel staan de instellingen rechts onder "Blok".', 'kombij' ); ?></li>
+				<li><?php esc_html_e( 'Contactgegevens, openingstijden, plek vrij, de melding, de afsluiter onderaan en de vacaturetekst: hieronder, op deze pagina.', 'kombij' ); ?></li>
+				<li><?php esc_html_e( 'Vacatures: via Vacatures in het menu links. Elk veld heeft een eigen kopje.', 'kombij' ); ?></li>
+				<li><?php esc_html_e( 'Het menu: via Weergave, Editor, Navigatie.', 'kombij' ); ?></li>
+			</ul>
+		</div>
+
 		<form method="post" action="options.php">
 			<?php settings_fields( 'kbj_gegevens' ); ?>
 			<table class="form-table" role="presentation">
 				<?php foreach ( kbj_optie_velden() as $sleutel => $veld ) : ?>
+					<?php if ( 'kop' === $veld['type'] ) : ?>
+						<tr><th colspan="2" style="padding-top:2rem"><h2 style="margin:0"><?php echo esc_html( $veld['label'] ); ?></h2></th></tr>
+						<?php continue; ?>
+					<?php endif; ?>
 					<tr>
 						<th scope="row">
 							<label for="kbj-<?php echo esc_attr( $sleutel ); ?>"><?php echo esc_html( $veld['label'] ); ?></label>
 						</th>
 						<td>
-							<?php if ( 'checkbox' === $veld['type'] ) : ?>
+							<?php if ( 'textarea' === $veld['type'] ) : ?>
+								<textarea id="kbj-<?php echo esc_attr( $sleutel ); ?>" name="<?php echo esc_attr( KBJ_OPTIE . '[' . $sleutel . ']' ); ?>" rows="3" class="large-text"><?php echo esc_textarea( kbj_optie( $sleutel ) ); ?></textarea>
+							<?php elseif ( 'checkbox' === $veld['type'] ) : ?>
 								<input type="hidden" name="<?php echo esc_attr( KBJ_OPTIE . '[' . $sleutel . ']' ); ?>" value="uit">
 								<input type="checkbox" id="kbj-<?php echo esc_attr( $sleutel ); ?>" name="<?php echo esc_attr( KBJ_OPTIE . '[' . $sleutel . ']' ); ?>" value="aan" <?php checked( 'aan', kbj_optie( $sleutel, 'aan' ) ); ?>>
 							<?php else : ?>
@@ -504,4 +573,16 @@ function kbj_plek( $soort ) {
 	}
 
 	return $stand;
+}
+
+/**
+ * Een tekst uit Gegevens, met de standaardtekst als hij nog leeg is.
+ *
+ * @param string $sleutel Naam van het veld.
+ * @return string
+ */
+function kbj_tekst( $sleutel ) {
+	$standaard = kbj_optie_standaard();
+
+	return kbj_optie( $sleutel, isset( $standaard[ $sleutel ] ) ? (string) $standaard[ $sleutel ] : '' );
 }

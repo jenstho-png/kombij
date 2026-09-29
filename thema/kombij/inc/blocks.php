@@ -40,6 +40,7 @@ function kbj_register_blocks() {
 		'vacaturestrook'   => 'kbj_render_vacaturestrook',
 		'credit'           => 'kbj_render_credit',
 		'illustratie'      => 'kbj_render_illustratie',
+		'afsluiter'        => 'kbj_render_afsluiter',
 	);
 
 	foreach ( $blokken as $naam => $functie ) {
@@ -375,9 +376,12 @@ function kbj_render_contactgegevens( $attrs ) {
 		}
 
 		$sociaal[] = sprintf(
-			'<a href="%s" rel="me noopener" target="_blank">%s</a>',
+			'<a class="kbj-sociaal kbj-sociaal--%1$s" href="%2$s" rel="me noopener" target="_blank" aria-label="%3$s">%4$s</a>',
+			esc_attr( $kanaal ),
 			esc_url( $link ),
-			esc_html( ucfirst( $kanaal ) )
+			/* translators: %s: naam van het sociale medium. */
+			esc_attr( sprintf( __( 'KomBij op %s', 'kombij' ), ucfirst( $kanaal ) ) ),
+			kbj_icoon_sociaal( $kanaal )
 		);
 	}
 
@@ -389,7 +393,7 @@ function kbj_render_contactgegevens( $attrs ) {
 		'<div %1$s>%2$s%3$s</div>',
 		get_block_wrapper_attributes( array( 'class' => 'kbj-gegevens' ) ),
 		$regels ? '<p class="kbj-gegevens__regels">' . implode( '<br>', $regels ) . '</p>' : '',
-		$sociaal ? '<p class="kbj-gegevens__sociaal">' . implode( '<span aria-hidden="true"> / </span>', $sociaal ) . '</p>' : ''
+		$sociaal ? '<p class="kbj-gegevens__sociaal">' . implode( '', $sociaal ) . '</p>' : ''
 	);
 }
 
@@ -700,7 +704,7 @@ function kbj_render_opening( $attrs ) {
 				. '<li><strong>24 uur</strong>zorg, dag en nacht</li>'
 				. '<li><strong>6 plekken</strong>om te wonen</li>'
 				. '<li><strong>5 dagen</strong>dagbesteding per week</li>'
-				. '<li><strong>Vaak vergoed</strong>via WLZ, WMO of PGB</li>'
+				. '<li><strong>Vaak vergoed</strong>via de WLZ of WMO</li>'
 			. '</ul>'
 		. '</section>',
 		get_block_wrapper_attributes( array( 'class' => 'kbj-opening kbj-paneel' ) ),
@@ -920,3 +924,57 @@ function kbj_editor_blokken() {
 	wp_add_inline_script( 'kbj-editor', 'window.kbjBlokken = ' . wp_json_encode( $namen ) . ';', 'before' );
 }
 add_action( 'enqueue_block_editor_assets', 'kbj_editor_blokken' );
+
+/**
+ * Een klein icoon voor een sociaal medium, in de kleur van de tekst.
+ *
+ * @param string $kanaal instagram, facebook, linkedin of youtube.
+ * @return string
+ */
+function kbj_icoon_sociaal( $kanaal ) {
+	$paden = array(
+		'instagram' => '<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.2" fill="currentColor"/>',
+		'facebook'  => '<path fill="currentColor" d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.6-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.9v3h2.6V21z"/>',
+		'linkedin'  => '<path fill="currentColor" d="M5 8.5h3V19H5zM6.5 4a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5zM10.5 8.5h2.9v1.4c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.7V19h-3v-5.2c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V19h-2.8z"/>',
+		'youtube'   => '<path fill="currentColor" d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/>',
+	);
+
+	if ( ! isset( $paden[ $kanaal ] ) ) {
+		return esc_html( ucfirst( $kanaal ) );
+	}
+
+	return '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false">' . $paden[ $kanaal ] . '</svg>';
+}
+
+/**
+ * De afsluiter onderaan elke pagina, met de teksten uit Gegevens.
+ *
+ * @return string
+ */
+function kbj_render_afsluiter() {
+	$contact = get_page_by_path( 'contact' );
+	$kop     = kbj_tekst( 'afsluiter_kop' );
+
+	// Na een punt begint de kop op een nieuwe regel, zoals in het ontwerp.
+	$kop = preg_replace( '/\.\s+/u', '.<br>', esc_html( $kop ), 1 );
+
+	return sprintf(
+		'<div %1$s><h2 class="wp-block-heading has-text-align-center kbj-schuif">%2$s</h2>'
+			. '<p class="has-text-align-center kbj-intro">%3$s</p>'
+			. '<div class="wp-block-buttons kbj-acties is-content-justification-center is-layout-flex">'
+				. '<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="%4$s">%5$s</a></div>'
+				. '<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="%6$s">%7$s</a></div>'
+			. '</div>'
+			. '<p class="has-text-align-center kbj-bellen">%8$s <a href="%6$s">%9$s</a>.</p>'
+		. '</div>',
+		get_block_wrapper_attributes( array( 'class' => 'kbj-slot__binnen' ) ),
+		kbj_kombij( $kop ),
+		esc_html( kbj_tekst( 'afsluiter_tekst' ) ),
+		esc_url( $contact ? get_permalink( $contact ) : home_url( '/contact/' ) ),
+		esc_html__( 'Plan een rondleiding', 'kombij' ),
+		esc_attr( kbj_tel_url() ),
+		esc_html__( 'Bel ons', 'kombij' ),
+		esc_html( kbj_tekst( 'afsluiter_bellen' ) ),
+		esc_html( kbj_tel_tekst() )
+	);
+}

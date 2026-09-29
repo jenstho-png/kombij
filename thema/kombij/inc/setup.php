@@ -187,8 +187,9 @@ function kbj_css_met_paden() {
 	$map = KBJ_URI . '/assets/beeld/';
 
 	return sprintf(
-		':root{--kbj-ornament:url("%1$sornament-glasblauw.svg");--kbj-ornament-wit:url("%1$sornament-wit.svg");--kbj-ornament-kleur:url("%1$sornament.svg")}',
-		esc_url_raw( $map )
+		':root{--kbj-ornament:url("%1$sornament-glasblauw.svg");--kbj-ornament-wit:url("%1$sornament-wit.svg");--kbj-ornament-kleur:url("%1$sornament.svg");--kbj-foto-slot:url("%2$skoffie.webp");--kbj-foto-zin:url("%2$ssamen-aan-tafel.webp")}',
+		esc_url_raw( $map ),
+		esc_url_raw( KBJ_URI . '/assets/foto/' )
 	);
 }
 

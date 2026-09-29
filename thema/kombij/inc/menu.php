@@ -116,10 +116,11 @@ function kbj_menu_lijst( $items, $kant ) {
 		$huidig = untrailingslashit( $item['url'] ) === untrailingslashit( kbj_huidige_url() );
 
 		$html .= sprintf(
-			'<li><a href="%1$s"%2$s>%3$s</a></li>',
+			'<li><a href="%1$s"%2$s data-tekst="%4$s">%3$s</a></li>',
 			esc_url( $item['url'] ),
 			$huidig ? ' aria-current="page"' : '',
-			esc_html( $item['label'] )
+			esc_html( $item['label'] ),
+			esc_attr( $item['label'] )
 		);
 	}
 

@@ -58,6 +58,16 @@
 
 		var elementen = document.querySelectorAll( '.kbj-reveal' );
 
+		// Afwisseling: niet alles komt van onder. Secties vervagen in, komen
+		// van links of rechts, of groeien zacht aan.
+		var soorten = [ 'vervaag', 'links', 'zoom', 'rechts' ];
+
+		Array.prototype.forEach.call( elementen, function ( element, i ) {
+			if ( ! element.dataset.effect ) {
+				element.dataset.effect = soorten[ i % soorten.length ];
+			}
+		} );
+
 		elementen.forEach( function ( element, i ) {
 			/*
 			 * Wat al in beeld staat als de pagina opent, hoeft niet te wachten

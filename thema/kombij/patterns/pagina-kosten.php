@@ -6,16 +6,17 @@
  * Description: Alle secties onder de kop van de pagina Kosten en financiering.
  */
 
-echo kbj_kort( array( array( '4', 'manieren om zorg te betalen' ), array( 'Vaak', 'grotendeels vergoed' ), array( '€ 985', 'per maand voor een kamer, vanaf' ), array( 'Hulp', 'bij uw aanvraag' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo kbj_kort( array( array( '3', 'manieren om zorg te betalen' ), array( 'Vaak', 'grotendeels vergoed' ), array( '€ 985', 'per maand voor een kamer, vanaf' ), array( 'Hulp', 'bij uw aanvraag' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_sectiekop(
 		'De regelingen',
-		'Vier manieren om zorg te betalen',
-		'In Nederland zijn er vier manieren om zorg zoals bij KomBij te betalen. Hieronder staat per regeling wat het is en voor wie.',
+		'Drie manieren om zorg te betalen',
+		'Meestal loopt het via de WLZ of de WMO. Zonder indicatie kan het ook: dan betaalt u zelf.',
 		false
 	)
-	. kbj_lijst( kbj_regelingen(), 'kbj-regelingen' ),
+	. kbj_lijst( kbj_regelingen(), 'kbj-regelingen kbj-regelingen--drie' )
+	. kbj_p( 'Heeft u een persoonsgebonden budget (PGB)? Ook dan bent u welkom. Bel ons, dan kijken we samen hoe het werkt.', 'kbj-noot' ),
 	array( 'klasse' => 'kbj-reveal' )
 );
 
@@ -31,7 +32,7 @@ $aanbod = kbj_kolommen(
 		array(
 			'inhoud' => kbj_kader(
 				kbj_kop( 3, 'Logeren' )
-				. kbj_p( 'Via de WLZ, de WMO, een PGB of particulier. Met een PGB vanuit de WLZ kunt u tot 156 etmalen per jaar logeren.' )
+				. kbj_p( 'Via de WLZ, de WMO of particulier. Vaak wordt het grootste deel vergoed.' )
 				. kbj_p( '<a href="/logeren-met-zorg/">Meer over logeren</a>', 'kbj-verder' )
 			),
 		),
@@ -63,7 +64,6 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 		array(
 			'<strong>WLZ via het CIZ</strong><span>Heeft u blijvend 24 uur per dag zorg of toezicht nodig? Dan vraagt u een WLZ-indicatie aan bij het CIZ.</span>',
 			'<strong>WMO via de gemeente</strong><span>Woont u thuis en zoekt u dagbesteding of logeeropvang? Neem dan contact op met het WMO-loket van uw gemeente.</span>',
-			'<strong>Een PGB</strong><span>Met een indicatie kunt u kiezen voor een PGB. Dat regelt u via het zorgkantoor bij de WLZ, of via de gemeente bij de WMO.</span>',
 			'<strong>De eigen bijdrage</strong><span>Bij de WLZ en de WMO betaalt u een eigen bijdrage aan het CAK. Op cak.nl rekent u uit hoeveel.</span>',
 		),
 		'kbj-stappen',

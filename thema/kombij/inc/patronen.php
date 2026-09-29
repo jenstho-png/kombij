@@ -489,7 +489,7 @@ function kbj_mail_link() {
 }
 
 /**
- * De vier manieren om zorg te betalen, in gewone woorden.
+ * De drie gewone manieren om zorg te betalen. Een PGB kan ook, maar staat er als noot onder.
  *
  * Op één plek, want ze staan op de startpagina en op de pagina over kosten.
  *
@@ -499,7 +499,6 @@ function kbj_regelingen() {
 	return array(
 		'<strong>WLZ</strong><em>Wet langdurige zorg</em><span>Voor wie blijvend 24 uur per dag zorg of toezicht nodig heeft. Het CIZ beoordeelt dat. Geldt voor wonen, logeren en dagbesteding.</span>',
 		'<strong>WMO</strong><em>Wet maatschappelijke ondersteuning</em><span>Via uw gemeente, voor wie nog thuis woont. Vaak voor dagbesteding, soms voor logeren.</span>',
-		'<strong>PGB</strong><em>Persoonsgebonden budget</em><span>U krijgt zelf een budget voor zorg en kiest waar u die inkoopt. Dat kan ook bij KomBij.</span>',
 		'<strong>Particulier</strong><em>Zelf betalen</em><span>Zonder indicatie kan het ook. U betaalt dan zelf, en we spreken vooraf een duidelijke prijs af.</span>',
 	);
 }

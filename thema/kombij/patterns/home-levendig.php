@@ -76,7 +76,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 		kbj_groep(
 			kbj_kop( 2, 'Gebouwd in 1869. Nu weer vol leven.', 'kbj-schuif' )
 			. kbj_p( 'Waar het dorp vroeger samenkwam, wonen, logeren en lachen mensen nu samen. De hoge ramen en de gewelven bleven. De warmte kwam erbij.' )
-			. kbj_knoppen( array( array( 'tekst' => 'Ons verhaal', 'url' => '/over-ons/', 'rand' => true ) ) ),
+			. kbj_knoppen( array( array( 'tekst' => 'Bekijk de geschiedenis', 'url' => '/geschiedenis/' ), array( 'tekst' => 'Ons verhaal', 'url' => '/over-ons/', 'rand' => true ) ) ),
 			'kbj-hl-collage__tekst'
 		)
 		. $foto( 'kerk-luchtfoto.webp', 'Het gebouw van KomBij in Maasbommel, van bovenaf', 'kbj-hl-c1', '50% 35%', '4/3' )
@@ -100,7 +100,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	$foto( 'maas-avond.webp', '', 'kbj-hl-tint kbj-hl-tint--kerk kbj-hl-vlak__beeld', '50% 50%', '21/9' )
 	. kbj_groep(
 		kbj_kop( 2, 'Goed nieuws: het wordt meestal vergoed.', 'kbj-schuif' )
-		. kbj_p( 'Via de WLZ, de WMO of een PGB. Wij zoeken samen met u uit welke regeling voor u geldt, en helpen met de aanvraag.' )
+		. kbj_p( 'Meestal via de WLZ of de WMO. Wij zoeken samen met u uit welke regeling voor u geldt, en helpen met de aanvraag.' )
 		. kbj_knoppen( array( array( 'tekst' => 'Zo werkt de vergoeding', 'url' => '/kosten-en-financiering/' ) ) ),
 		'kbj-hl-vlak__tekst'
 	),

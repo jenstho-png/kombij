@@ -25,7 +25,6 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 			array(
 				'<strong>WLZ</strong><span>Wet langdurige zorg</span>',
 				'<strong>WMO</strong><span>Via uw gemeente</span>',
-				'<strong>PGB</strong><span>Uw eigen budget</span>',
 				'<strong>Zelf</strong><span>Zonder indicatie kan ook</span>',
 			),
 			'kbj-regels'

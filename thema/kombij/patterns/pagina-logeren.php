@@ -84,18 +84,18 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	kbj_sectiekop(
 		'Kosten',
 		'Wat kost logeren?',
-		'Logeren met zorg kan op vier manieren betaald worden. Vaak wordt het grootste deel vergoed.',
+		'Meestal via de WLZ of de WMO, en anders particulier. Vaak wordt het grootste deel vergoed.',
 		false
 	)
 	. kbj_lijst(
 		array(
 			'<strong>WLZ</strong><em>Met een WLZ-indicatie</em><span>Logeren is dan meestal vergoed. U betaalt wel een eigen bijdrage aan het CAK, die hangt af van uw inkomen.</span>',
 			'<strong>WMO</strong><em>Via uw gemeente</em><span>Voor logeren is de WMO vaak niet genoeg. U betaalt dan zelf een deel bij.</span>',
-			'<strong>PGB</strong><em>Uw eigen budget</em><span>Met een PGB vanuit de WLZ kunt u tot 156 etmalen per jaar logeren. U krijgt van ons een factuur die u indient bij de SVB.</span>',
 			'<strong>Particulier</strong><em>Zelf betalen</em><span>Zonder indicatie betaalt u zelf. U hoort vooraf wat het kost, en kunt betalen met een automatische incasso.</span>',
 		),
-		'kbj-regelingen'
+		'kbj-regelingen kbj-regelingen--drie'
 	)
+	. kbj_p( 'Heeft u een PGB vanuit de WLZ? Dan kunt u tot 156 etmalen per jaar bij ons logeren. Bel ons gerust.', 'kbj-noot' )
 	. kbj_p( '<a href="' . esc_url( KBJ_URI . '/assets/documenten/algemene-voorwaarden-logeren.pdf' ) . '">Lees de voorwaarden voor logeren (pdf)</a>', 'kbj-verder' ),
 	array(
 		'achtergrond' => 'ijs',

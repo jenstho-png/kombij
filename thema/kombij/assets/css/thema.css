@@ -5826,7 +5826,7 @@ body:not(.home) .wp-block-post-content > .kbj-hl-band.kbj-sectie {
 .kbj-slot.kbj-paneel {
 	background-image:
 		linear-gradient(120deg, rgba(176, 225, 241, 0.9) 0%, rgba(176, 225, 241, 0.78) 50%, rgba(176, 225, 241, 0.5) 100%),
-		url("../foto/koffie.webp") !important;
+		var(--kbj-foto-slot) !important;
 	background-size: cover !important;
 	background-position: 50% 40% !important;
 }
@@ -6905,4 +6905,431 @@ body:not(.home) .wp-block-post-content > .kbj-kort-sectie.kbj-sectie {
 .kbj-hl-open__raam,
 .kbj-opening > .kbj-raamlijn {
 	display: none !important;
+}
+
+/* Het menu: de pagina waar u bent staat vet en blauw, zonder streep eronder.
+ * Een onzichtbare vette kopie houdt de breedte vast, zodat niets verspringt. */
+.kbj-menu__lijst a,
+.kbj-menu__lijst a:hover,
+.kbj-menu__lijst a[aria-current="page"] {
+	background: none !important;
+}
+
+.kbj-menu__lijst a {
+	display: inline-grid;
+	align-items: center;
+}
+
+.kbj-menu__lijst a::after {
+	content: attr(data-tekst);
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+	font-weight: 800;
+	pointer-events: none;
+}
+
+.kbj-menu__lijst a:hover {
+	color: var(--kbj-kerk);
+}
+
+.kbj-menu__lijst a[aria-current="page"] {
+	color: var(--kbj-kerk);
+	font-weight: 800;
+}
+
+/* Sociale media als ronde icoontjes. */
+.kbj-gegevens__sociaal {
+	display: flex;
+	gap: 0.5rem;
+	margin-top: 0.75rem;
+}
+
+.kbj-sociaal {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	border-radius: 50%;
+	background: rgba(176, 225, 241, 0.12);
+	box-shadow: inset 0 0 0 1px rgba(176, 225, 241, 0.3);
+	color: inherit;
+	text-decoration: none !important;
+	transition: background-color var(--kbj-duur) var(--kbj-ease), color var(--kbj-duur) var(--kbj-ease);
+}
+
+.kbj-sociaal:hover {
+	background: var(--kbj-glas);
+	color: var(--kbj-nacht) !important;
+}
+
+:not(.kbj-footer) > .kbj-gegevens .kbj-sociaal {
+	background: var(--kbj-ijs);
+	box-shadow: none;
+	color: var(--kbj-kerk);
+}
+
+/* ================================================================
+ * De afsluiting: een foto met een doorschijnende laag blauw,
+ * de tekst in wit. Geen effen blauw vlak meer.
+ * ================================================================ */
+
+.kbj-slot.kbj-paneel {
+	background-image:
+		linear-gradient(115deg, rgba(10, 36, 68, 0.9) 0%, rgba(27, 83, 129, 0.72) 55%, rgba(30, 124, 178, 0.45) 100%),
+		var(--kbj-foto-slot) !important;
+	background-size: cover !important;
+	background-position: 50% 45% !important;
+	background-color: var(--kbj-nacht) !important;
+}
+
+.kbj-slot h2,
+.kbj-slot p,
+.kbj-slot .kbj-intro,
+.kbj-slot .kbj-bellen {
+	color: var(--kbj-wit) !important;
+}
+
+.kbj-slot .kbj-kombij {
+	color: var(--kbj-glas) !important;
+}
+
+.kbj-slot .kbj-bellen a {
+	color: var(--kbj-glas) !important;
+}
+
+.kbj-slot .wp-block-button:not(.is-style-outline) .wp-block-button__link {
+	background: var(--kbj-wit);
+	color: var(--kbj-nacht);
+}
+
+.kbj-slot .wp-block-button.is-style-outline .wp-block-button__link {
+	color: var(--kbj-wit);
+	border-color: rgba(255, 255, 255, 0.75);
+}
+
+.kbj-slot .kbj-raamlijn,
+.kbj-slot .kbj-illustratie {
+	color: var(--kbj-wit) !important;
+	opacity: 0.35 !important;
+}
+
+/* Ook vragen op pagina's die nog de oude opbouw hebben: als kaartjes. */
+.kbj-vragen .kbj-vraag {
+	margin-bottom: 0.7rem;
+	padding: 0 1.4rem;
+	border: 0 !important;
+	border-radius: 18px;
+	background: var(--kbj-ijs);
+}
+
+.kbj-vragen .kbj-vraag[open] {
+	background: var(--kbj-wit);
+	box-shadow: 0 24px 50px -30px rgba(10, 36, 68, 0.45), inset 0 0 0 1.5px var(--kbj-glas);
+}
+
+.kbj-vragen .kbj-vraag > summary {
+	padding-right: 3.5rem;
+	font-size: var(--wp--preset--font-size--medium);
+	background-image: radial-gradient(circle at calc(100% - 0.75rem - 6px) 50%, var(--kbj-kerk) 17px, transparent 18px);
+}
+
+.kbj-vragen .kbj-vraag > summary::before,
+.kbj-vragen .kbj-vraag > summary::after {
+	right: 0.75rem;
+	width: 12px;
+	background: var(--kbj-wit);
+	z-index: 1;
+}
+
+/* ================================================================
+ * Afwisselende effecten in plaats van steeds van onder naar boven.
+ * ================================================================ */
+
+.kbj-js .kbj-reveal[data-effect="vervaag"] {
+	transform: none;
+	filter: blur(8px);
+	transition: opacity 1.1s var(--kbj-ease), filter 1.1s var(--kbj-ease);
+}
+
+.kbj-js .kbj-reveal[data-effect="links"] {
+	transform: translateX(-36px);
+}
+
+.kbj-js .kbj-reveal[data-effect="rechts"] {
+	transform: translateX(36px);
+}
+
+.kbj-js .kbj-reveal[data-effect="zoom"] {
+	transform: scale(0.965);
+}
+
+.kbj-js .kbj-reveal[data-reveal="klaar"] {
+	filter: none;
+}
+
+/* Koppen: omhoog, uit een waas, of zacht kantelend. */
+.kbj-js .kbj-schuif[data-effect="waas"] .kbj-woord {
+	overflow: visible;
+}
+
+.kbj-js .kbj-schuif[data-effect="waas"] .kbj-woord > span {
+	transform: none;
+	opacity: 0;
+	filter: blur(10px);
+	transition: opacity 0.9s var(--kbj-ease), filter 0.9s var(--kbj-ease);
+	transition-delay: calc(var(--i, 0) * 70ms);
+}
+
+.kbj-js .kbj-schuif[data-effect="waas"].is-in .kbj-woord > span {
+	opacity: 1;
+	filter: none;
+}
+
+.kbj-js .kbj-schuif[data-effect="kantel"] .kbj-woord {
+	overflow: visible;
+	perspective: 600px;
+}
+
+.kbj-js .kbj-schuif[data-effect="kantel"] .kbj-woord > span {
+	opacity: 0;
+	transform: rotateX(-80deg);
+	transform-origin: 50% 100%;
+	transition: transform 1s var(--kbj-ease), opacity 0.8s var(--kbj-ease);
+	transition-delay: calc(var(--i, 0) * 60ms);
+}
+
+.kbj-js .kbj-schuif[data-effect="kantel"].is-in .kbj-woord > span {
+	opacity: 1;
+	transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.kbj-js .kbj-schuif .kbj-woord > span,
+	.kbj-js .kbj-reveal {
+		opacity: 1 !important;
+		transform: none !important;
+		filter: none !important;
+	}
+}
+
+/* ================================================================
+ * Kaarten met een knop: de knop staat altijd onderaan, op één lijn.
+ * ================================================================ */
+
+.kbj-drie.wp-block-columns > .wp-block-column {
+	display: flex;
+}
+
+.kbj-drie .kbj-kader {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.kbj-drie .kbj-kader > .kbj-verder,
+.kbj-drie .kbj-kader > .kbj-acties {
+	margin-top: auto !important;
+	padding-top: 1rem;
+}
+
+/* De regelingen: drie kaarten naast elkaar, de PGB als noot eronder. */
+.kbj-regelingen--drie {
+	grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.kbj-noot {
+	margin-top: 1rem;
+	font-size: var(--wp--preset--font-size--small);
+	color: var(--kbj-leisteen);
+}
+
+@media (max-width: 781px) {
+	.kbj-regelingen--drie {
+		grid-template-columns: 1fr !important;
+	}
+}
+
+/* ================================================================
+ * Foto met tekstkaart: compacter. De kaart ligt op de foto, naast
+ * het midden, in plaats van eronder uit te steken.
+ * ================================================================ */
+
+@media (min-width: 782px) {
+	.kbj-duo .kbj-beeld__kader,
+	.kbj-familie2 > .kbj-beeld .kbj-beeld__kader,
+	.kbj-werken__binnen > .kbj-beeld .kbj-beeld__kader {
+		aspect-ratio: auto !important;
+		height: clamp(380px, 34vw, 480px);
+	}
+
+	.kbj-duo .kbj-beeld__kader img,
+	.kbj-familie2 > .kbj-beeld .kbj-beeld__kader img,
+	.kbj-werken__binnen > .kbj-beeld .kbj-beeld__kader img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.kbj-duo > .wp-block-column:not(:has(.kbj-beeld)),
+	.kbj-familie2 > .wp-block-group,
+	.kbj-werken__binnen > div:not(.kbj-beeld) {
+		grid-row: 1 !important;
+		align-self: center;
+		margin: 0 !important;
+		padding: clamp(1.5rem, 2.5vw, 2.25rem);
+		grid-column: 7 / span 5;
+	}
+
+	.kbj-duo--omgekeerd > .wp-block-column:not(:has(.kbj-beeld)),
+	.kbj-werken__binnen > div:not(.kbj-beeld) {
+		grid-column: 2 / span 5 !important;
+	}
+
+	.kbj-duo h2,
+	.kbj-familie2 h2,
+	.kbj-werken h2 {
+		font-size: clamp(1.6rem, 1.1rem + 1.5vw, 2.4rem) !important;
+	}
+}
+
+/* ---------------------------------------------- het bordje: klein */
+
+.kbj-menu__rechts .kbj-bordje__plaat {
+	padding: 0.25rem 0.7rem 0.25rem 0.4rem !important;
+	column-gap: 0.45rem !important;
+	border-radius: 10px !important;
+}
+
+.kbj-menu__rechts .kbj-bordje__plaat::before {
+	width: 18px !important;
+	height: 18px !important;
+}
+
+.kbj-menu__rechts .kbj-bordje__plaat::after {
+	display: none;
+}
+
+.kbj-menu__rechts .kbj-bordje__stand {
+	font-size: 0.78125rem !important;
+	letter-spacing: 0.08em;
+	line-height: 1.2;
+}
+
+.kbj-menu__rechts .kbj-bordje__wanneer {
+	font-size: 0.78125rem !important;
+	line-height: 1.2;
+	opacity: 0.85;
+}
+
+/* ------------------------------ de drie kaarten: gelijk en mooier */
+
+.kbj-kaarten3 {
+	align-items: stretch !important;
+}
+
+.kbj-kaart3 {
+	position: relative;
+	display: flex !important;
+	flex-direction: column;
+	margin: 0 !important;
+	border-radius: 26px !important;
+	overflow: hidden;
+	background: var(--kbj-ijs);
+	transition: transform 0.6s var(--kbj-ease), box-shadow 0.6s var(--kbj-ease);
+}
+
+.kbj-kaart3:hover {
+	transform: translateY(-6px);
+	box-shadow: 0 30px 60px -30px rgba(10, 36, 68, 0.45);
+}
+
+.kbj-kaart3 > .kbj-beeld {
+	margin: 0 !important;
+}
+
+.kbj-kaart3 > .kbj-beeld .kbj-beeld__kader {
+	aspect-ratio: 4 / 3 !important;
+	border-radius: 0 !important;
+}
+
+.kbj-kaart3 > .kbj-beeld .kbj-beeld__kader::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(180deg, transparent 55%, rgba(10, 36, 68, 0.35) 100%);
+}
+
+.kbj-kaart3 > .kbj-plek {
+	position: absolute !important;
+	top: 1rem;
+	left: 1rem;
+	z-index: 3;
+	margin: 0 !important;
+}
+
+.kbj-kaart3__inhoud {
+	display: flex;
+	flex-direction: column;
+	flex: 1 1 auto;
+	padding: 1.6rem 1.6rem 1.75rem !important;
+}
+
+.kbj-kaart3__inhoud h3 {
+	margin-top: 0 !important;
+}
+
+.kbj-kaart3__inhoud .kbj-acties {
+	margin-top: auto !important;
+	padding-top: 1.25rem;
+}
+
+.kbj-kaart3:nth-child(2) {
+	background: var(--kbj-glas);
+}
+
+.kbj-kaart3:nth-child(3) {
+	background: var(--kbj-nacht);
+}
+
+.kbj-kaart3:nth-child(3) h3,
+.kbj-kaart3:nth-child(3) p {
+	color: var(--kbj-wit) !important;
+}
+
+.kbj-kaart3:nth-child(3) .wp-block-button__link,
+.kbj-kaart3:nth-child(3) .kbj-knop {
+	background: var(--kbj-wit);
+	color: var(--kbj-nacht);
+	border-color: var(--kbj-wit);
+}
+
+/* ------------------------- de grote zin: op een foto met witte laag */
+
+.kbj-strook-zin.kbj-sectie {
+	position: relative;
+	isolation: isolate;
+	margin: clamp(1rem, 2vw, 1.5rem) clamp(0.5rem, 1.2vw, 1rem) !important;
+	padding-top: clamp(2.5rem, 5vw, 4rem) !important;
+	padding-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+	border-radius: clamp(22px, 3vw, 36px);
+	overflow: hidden;
+	background-image:
+		linear-gradient(rgba(255, 255, 255, 0.8), rgba(241, 248, 251, 0.86)),
+		var(--kbj-foto-zin);
+	background-size: cover;
+	background-position: 50% 50%;
+}
+
+.kbj-strook-zin .kbj-oplicht {
+	font-size: clamp(1.6rem, 1rem + 2.4vw, 3rem) !important;
+	max-width: 26ch;
+}
+
+.kbj-kaart3 > .kbj-beeld,
+.kbj-kaart3 > .kbj-beeld .kbj-beeld__kader {
+	width: 100% !important;
+	max-width: none !important;
+	transform: none !important;
 }

@@ -16,7 +16,7 @@ $tekst = kbj_p( 'Waar het dorp vroeger samenkwam, wonen, logeren en lachen mense
 		),
 		'kbj-gebouw__feiten'
 	)
-	. kbj_p( '<a href="/over-ons/">Ons verhaal</a>', 'kbj-verder' );
+	. kbj_knoppen( array( array( 'tekst' => 'Bekijk de geschiedenis', 'url' => '/geschiedenis/' ), array( 'tekst' => 'Ons verhaal', 'url' => '/over-ons/', 'rand' => true ) ) );
 
 // De foto groot en breed bovenaan, de tekst eronder in twee kolommen.
 $beeld = kbj_foto( 'kerk-luchtfoto.webp', 'Het monumentale gebouw van KomBij in Maasbommel, van bovenaf gezien', array( 'vorm' => 'recht', 'verhouding' => '21/9', 'positie' => '50% 30%' ) );

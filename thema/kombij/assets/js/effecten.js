@@ -73,8 +73,13 @@
 		{ rootMargin: '0px 0px -10% 0px', threshold: 0.15 }
 	);
 
-	document.querySelectorAll( '.kbj-schuif' ).forEach( function ( kop ) {
+	// Niet elke kop hetzelfde: om en om schuift hij omhoog, komt hij scherp uit
+	// een waas, of kantelt hij zacht naar voren.
+	var soorten = [ 'omhoog', 'waas', 'kantel' ];
+
+	document.querySelectorAll( '.kbj-schuif' ).forEach( function ( kop, i ) {
 		splits( kop );
+		kop.dataset.effect = soorten[ i % soorten.length ];
 		wachter.observe( kop );
 	} );
 
