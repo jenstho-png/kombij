@@ -70,7 +70,12 @@ function kbj_menu_items() {
  * @return array[]
  */
 function kbj_menu_uit_paginas() {
-	$items     = array();
+	$items     = array(
+		array(
+			'label' => __( 'Home', 'kombij' ),
+			'url'   => home_url( '/' ),
+		),
+	);
 	$overslaan = array( 'home', 'privacyverklaring', 'algemene-voorwaarden', 'bedankt', 'sample-page' );
 
 	foreach ( kbj_paginas() as $pagina ) {

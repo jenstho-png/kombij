@@ -358,7 +358,12 @@ const KBJ_MENU_AFDRUK = 'kbj_menu_afdruk';
  * @return string Blokmarkering, leeg als de pagina's er nog niet zijn.
  */
 function kbj_menu_markering() {
-	$items  = '';
+	// Home staat altijd vooraan.
+	$items  = sprintf(
+		'<!-- wp:navigation-link {"label":"%s","url":"%s","kind":"custom","isTopLevelLink":true} /-->',
+		esc_attr__( 'Home', 'kombij' ),
+		esc_url( home_url( '/' ) )
+	);
 	$aantal = 0;
 
 	foreach ( kbj_paginas() as $pagina ) {
