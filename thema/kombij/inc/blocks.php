@@ -403,7 +403,8 @@ function kbj_render_footermenu( $attrs ) {
 	$items = array();
 
 	foreach ( kbj_paginas() as $pagina ) {
-		if ( 'bedankt' === $pagina['slug'] ) {
+		// De voorwaarden staan onderaan naast het copyright, niet in dit lijstje.
+		if ( in_array( $pagina['slug'], array( 'bedankt', 'voorwaarden' ), true ) ) {
 			continue;
 		}
 
@@ -483,6 +484,16 @@ function kbj_render_colofon( $attrs ) {
 	if ( '' !== $btw ) {
 		/* translators: %s: btw-nummer. */
 		$delen[] = esc_html( sprintf( __( 'Btw %s', 'kombij' ), $btw ) );
+	}
+
+	$voorwaarden = get_page_by_path( 'voorwaarden' );
+
+	if ( $voorwaarden ) {
+		$delen[] = sprintf(
+			'<a class="kbj-colofon__link" href="%1$s">%2$s</a>',
+			esc_url( get_permalink( $voorwaarden ) ),
+			esc_html__( 'Voorwaarden en reglementen', 'kombij' )
+		);
 	}
 
 	return sprintf(

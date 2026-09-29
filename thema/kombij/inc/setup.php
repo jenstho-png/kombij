@@ -363,3 +363,25 @@ function kbj_icoon() {
 	printf( "\n<meta name=\"theme-color\" content=\"%s\">\n", '#0a2444' );
 }
 add_action( 'wp_head', 'kbj_icoon', 2 );
+
+/**
+ * Een klasse met de naam van de pagina op de body.
+ *
+ * Zo kan elke pagina een eigen variant van de fotokop en de secties krijgen,
+ * zonder dat de klant daar iets voor hoeft in te stellen.
+ *
+ * @param string[] $klassen De klassen van WordPress.
+ * @return string[]
+ */
+function kbj_body_klasse( $klassen ) {
+	if ( is_page() && ! is_front_page() ) {
+		$pagina = get_queried_object();
+
+		if ( $pagina instanceof WP_Post ) {
+			$klassen[] = 'kbj-pagina-' . sanitize_html_class( $pagina->post_name );
+		}
+	}
+
+	return $klassen;
+}
+add_filter( 'body_class', 'kbj_body_klasse' );

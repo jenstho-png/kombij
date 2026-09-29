@@ -48,7 +48,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 		'kbj-lijst kbj-lijst--twee'
 	),
 	array(
-		'achtergrond' => 'ijs',
+		'achtergrond' => 'nachtblauw',
 		'klasse'      => 'kbj-reveal',
 	)
 );

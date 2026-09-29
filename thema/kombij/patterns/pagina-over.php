@@ -53,7 +53,8 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 
 $gebouw = kbj_kop( 2, 'De Lambertuskerk' )
 	. kbj_p( 'De kerk aan de Raadhuisdijk werd gebouwd in 1868 en 1869, in neogotische stijl. Het is een rijksmonument. Ruim 150 jaar kwam het dorp hier samen.' )
-	. kbj_p( 'Boven kwamen lichte kamers, beneden de huiskamer, het atelier en de dagbesteding.' );
+	. kbj_p( 'Boven kwamen lichte kamers, beneden de huiskamer, het atelier en de dagbesteding.' )
+	. kbj_knoppen( array( array( 'tekst' => 'Bekijk de geschiedenis', 'url' => '/geschiedenis/' ) ) );
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_kolommen(

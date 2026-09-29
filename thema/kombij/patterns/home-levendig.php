@@ -17,7 +17,6 @@ $foto = function ( $bestand, $alt, $klasse = '', $positie = '50% 50%', $verhoudi
 // 1. De opening: een grote foto met een laag kerkblauw, en twee kleine foto's die eroverheen zweven.
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	$foto( 'samen-aan-tafel.webp', 'Gasten en medewerkers samen aan de lange tafel bij KomBij', 'kbj-hl-tint kbj-hl-tint--nacht kbj-hl-open__achter', '55% 50%', '16/9' )
-	. '<!-- wp:kbj/raamlijn {"className":"kbj-hl-open__raam"} /-->' . "\n"
 	. kbj_groep(
 		kbj_kop( 1, 'Een warm thuis, voor als thuis niet meer gaat.', 'kbj-schuif' )
 		. kbj_p( 'Wonen, logeren en dagbesteding met zorg in een monumentaal gebouw in Maasbommel. Klein, huiselijk en dichtbij.', 'kbj-intro' )
@@ -113,7 +112,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	kbj_groep(
 		kbj_groep(
 			$foto( 'koffie.webp', 'Een kopje koffie wordt met een glimlach aangereikt', 'kbj-hl-f1', '50% 45%', '4/5' )
-			. $foto( 'kerk-groen.webp', 'Het gebouw tussen het groen', 'kbj-hl-f2 kbj-hl-tint kbj-hl-tint--zee', '50% 50%', '1/1' ),
+			. '<!-- wp:kbj/raamlijn {"className":"kbj-hl-familie__raam"} /-->',
 			'kbj-hl-familie__beelden'
 		)
 		. kbj_groep(

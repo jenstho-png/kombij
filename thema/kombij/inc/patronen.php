@@ -388,17 +388,26 @@ function kbj_vraag( $vraag, $antwoord ) {
  * @return string
  */
 function kbj_vragenblok( $titel, $vragen, $boven = 'Veelgestelde vragen' ) {
-	$inhoud = kbj_sectiekop( $boven, $titel );
+	unset( $boven );
+
+	$lijst = '';
 
 	foreach ( $vragen as $paar ) {
-		$inhoud .= kbj_vraag( $paar[0], $paar[1] );
+		$lijst .= kbj_vraag( $paar[0], $paar[1] );
 	}
 
+	// Links de kop met een uitweg, rechts de vragen als kaartjes.
+	$kop = kbj_groep(
+		kbj_kop( 2, $titel, 'kbj-schuif' )
+		. kbj_p( 'Staat uw vraag er niet bij? Bel of mail ons gerust, we denken graag met u mee.' )
+		. kbj_knoppen( array( kbj_tel_knop() ) ),
+		'kbj-vragen__kop'
+	);
+
 	return kbj_sectie(
-		$inhoud,
+		kbj_groep( $kop . kbj_groep( $lijst, 'kbj-vragen__lijst' ), 'kbj-vragen__binnen' ),
 		array(
 			'klasse' => 'kbj-vragen',
-			'breed'  => false,
 		)
 	);
 }

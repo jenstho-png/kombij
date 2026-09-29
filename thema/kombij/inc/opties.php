@@ -115,6 +115,11 @@ function kbj_optie_velden() {
 			'hulp'  => __( 'Het reserveringssysteem van de zoutkamer, of later de eigen site van de zoutkamer.', 'kombij' ),
 			'type'  => 'url',
 		),
+		'zoutkamer_site'     => array(
+			'label' => __( 'Website van de zoutkamer', 'kombij' ),
+			'hulp'  => __( 'De eigen site van de zoutkamer, met alle informatie voor wie los een sessie wil.', 'kombij' ),
+			'type'  => 'url',
+		),
 		'plek_wonen'         => array(
 			'label'  => __( 'Plek vrij: wonen', 'kombij' ),
 			'hulp'   => __( 'Staat dit op "Plek vrij", dan ziet iedereen dat op de site. Na 45 dagen zonder bijwerken verdwijnt het vanzelf, zodat er nooit oude informatie blijft staan.', 'kombij' ),
@@ -212,6 +217,7 @@ function kbj_optie_standaard() {
 		'dagbesteding_open' => 'maandag tot en met vrijdag',
 		'dagbesteding_tijd' => '10:30-16:30',
 		'zoutkamer_link'    => 'https://www.supersaas.nl/schedule/Zoutkamer_Maasbommel/Zoutkamers',
+		'zoutkamer_site'    => 'https://www.zoutkamermaasbommel.nl/',
 		'melding_aan'       => 'aan',
 		'melding_titel'     => 'Nog plekken vrij in de zoutkamer',
 		'melding_tekst'     => 'Deze week zijn er nog plekken vrij. Een sessie van 50 minuten kost € 25.',

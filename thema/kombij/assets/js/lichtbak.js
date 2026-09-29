@@ -10,7 +10,7 @@
 ( function () {
 	'use strict';
 
-	var KIES = '.wp-block-gallery img, .kbj-sfeerbeeld__beeld';
+	var KIES = '.wp-block-gallery img, .kbj-sfeerbeeld__beeld, .kbj-album img';
 
 	var doos = null;
 	var vorige = null;

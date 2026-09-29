@@ -60,7 +60,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 		'kbj-strook'
 	),
 	array(
-		'achtergrond' => 'ijs',
+		'achtergrond' => 'nachtblauw',
 		'klasse'      => 'kbj-reveal',
 	)
 );

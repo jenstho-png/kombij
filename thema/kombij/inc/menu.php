@@ -206,9 +206,9 @@ function kbj_render_header() {
 			. '</button></div>'
 			. '<div class="kbj-menu__binnen" id="kbj-menu-paneel">'
 				. '%6$s'
-				. '<div class="kbj-menu__rechts">%7$s%8$s</div>'
+				. '<div class="kbj-menu__rechts">%7$s%8$s%9$s</div>'
 			. '</div>'
-		. '</nav>%9$s</div>',
+		. '</nav></div>',
 		get_block_wrapper_attributes( array( 'class' => 'kbj-header' ) ),
 		esc_attr__( 'Hoofdmenu', 'kombij' ),
 		kbj_header_logo(),

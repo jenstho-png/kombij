@@ -54,7 +54,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	)
 	. kbj_p( 'Liever iets voor uzelf? Dat kan ook. En op vaste momenten kunt u de zoutkamer gebruiken.' ),
 	array(
-		'achtergrond' => 'ijs',
+		'achtergrond' => 'nachtblauw',
 		'klasse'      => 'kbj-reveal',
 	)
 );
