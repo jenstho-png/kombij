@@ -313,21 +313,113 @@ function kbj_optie( $sleutel, $standaard = '' ) {
  * scherm dat de klant echt nodig heeft, dus mag het gevonden worden.
  */
 function kbj_optie_menu() {
+	$aandacht = count( kbj_aandachtspunten() );
+	$bolletje = $aandacht ? sprintf( ' <span class="awaiting-mod count-%1$d"><span class="pending-count">%1$d</span></span>', $aandacht ) : '';
+
 	add_menu_page(
-		__( 'Gegevens van de site', 'kombij' ),
 		__( 'KomBij', 'kombij' ),
-		'manage_options',
+		__( 'KomBij', 'kombij' ) . $bolletje,
+		'edit_pages',
 		'kbj-gegevens',
-		'kbj_optie_scherm',
+		'kbj_overzicht_scherm',
 		'dashicons-heart',
 		2
 	);
 
-	add_submenu_page( 'kbj-gegevens', __( 'Gegevens en teksten', 'kombij' ), __( 'Gegevens en teksten', 'kombij' ), 'manage_options', 'kbj-gegevens', 'kbj_optie_scherm' );
+	add_submenu_page( 'kbj-gegevens', __( 'Overzicht', 'kombij' ), __( 'Overzicht', 'kombij' ), 'edit_pages', 'kbj-gegevens', 'kbj_overzicht_scherm' );
+
+	foreach ( kbj_schermen() as $slug => $scherm ) {
+		add_submenu_page(
+			'kbj-gegevens',
+			$scherm['titel'],
+			$scherm['menu'],
+			'manage_options',
+			$slug,
+			function () use ( $slug ) {
+				kbj_optie_scherm( $slug );
+			}
+		);
+	}
+
 	add_submenu_page( 'kbj-gegevens', __( 'Pagina\'s', 'kombij' ), __( 'Pagina\'s', 'kombij' ), 'edit_pages', 'edit.php?post_type=page' );
 	add_submenu_page( 'kbj-gegevens', __( 'Nieuwe vacature', 'kombij' ), __( 'Nieuwe vacature', 'kombij' ), 'edit_posts', 'post-new.php?post_type=vacature' );
 	add_submenu_page( 'kbj-gegevens', __( 'Foto\'s en bestanden', 'kombij' ), __( 'Foto\'s en bestanden', 'kombij' ), 'upload_files', 'upload.php' );
 	add_submenu_page( 'kbj-gegevens', __( 'Menu bovenaan', 'kombij' ), __( 'Menu bovenaan', 'kombij' ), 'edit_theme_options', 'site-editor.php?p=%2Fnavigation' );
+}
+
+/**
+ * De schermen met gegevens, elk met de blokken velden die erbij horen.
+ *
+ * @return array
+ */
+function kbj_schermen() {
+	return array(
+		'kbj-contact' => array(
+			'menu'   => __( 'Contact en bedrijf', 'kombij' ),
+			'titel'  => __( 'Contact en bedrijf', 'kombij' ),
+			'uitleg' => __( 'Naam, adres, telefoon, e-mail en sociale media. Deze gegevens staan in de footer, op de contactpagina en in de informatie die Google over KomBij uitleest. U past ze hier één keer aan en ze kloppen overal.', 'kombij' ),
+			'blokken' => array( 'bedrijf', 'online', 'kaart' ),
+		),
+		'kbj-tijden'  => array(
+			'menu'   => __( 'Openingstijden en plek vrij', 'kombij' ),
+			'titel'  => __( 'Openingstijden en plek vrij', 'kombij' ),
+			'uitleg' => __( 'De tijden van de dagbesteding staan op het bordje rechtsboven. Plek vrij of wachtlijst ziet de bezoeker bij wonen, logeren en dagbesteding. Werk dit af en toe bij: na 45 dagen zonder opslaan verdwijnt de melding vanzelf, zodat er nooit iets oud op de site staat.', 'kombij' ),
+			'blokken' => array( 'tijden', 'plek' ),
+		),
+		'kbj-melding' => array(
+			'menu'   => __( 'Melding rechtsonder', 'kombij' ),
+			'titel'  => __( 'Melding rechtsonder', 'kombij' ),
+			'uitleg' => __( 'Het kleine berichtje dat na een paar seconden rechtsonder op de site verschijnt, bijvoorbeeld over vrije plekken in de zoutkamer. Zet het vinkje uit om de melding te verbergen.', 'kombij' ),
+			'blokken' => array( 'melding' ),
+		),
+		'kbj-teksten' => array(
+			'menu'   => __( 'Teksten op elke pagina', 'kombij' ),
+			'titel'  => __( 'Teksten op elke pagina', 'kombij' ),
+			'uitleg' => __( 'Teksten die op meerdere pagina\'s terugkomen: de knoppen, het blok onderaan elke pagina, de strook over werken bij KomBij, de vacatures en de zoutkamer. Eén keer aanpassen en het klopt overal.', 'kombij' ),
+			'blokken' => array( 'teksten', 'zoutkamer' ),
+		),
+	);
+}
+
+/**
+ * Wat aandacht nodig heeft. Het aantal staat als bolletje bij KomBij in het menu.
+ *
+ * @return array Lijst met array( titel, uitleg, link, knoptekst ).
+ */
+function kbj_aandachtspunten() {
+	$punten = array();
+
+	if ( ! get_option( 'blog_public' ) ) {
+		$punten[] = array(
+			__( 'Zoekmachines worden tegengehouden.', 'kombij' ),
+			__( 'Zolang dit aanstaat komt de site niet in Google. Prima tijdens het bouwen, maar zet het uit zodra de site live gaat.', 'kombij' ),
+			admin_url( 'options-reading.php' ),
+			__( 'Naar die instelling', 'kombij' ),
+		);
+	}
+
+	if ( 0 !== strpos( strtolower( get_locale() ), 'nl' ) ) {
+		$punten[] = array(
+			__( 'WordPress staat niet op Nederlands.', 'kombij' ),
+			__( 'Datums, knoppen en het beheer blijven dan Engels.', 'kombij' ),
+			admin_url( 'options-general.php' ),
+			__( 'Naar die instelling', 'kombij' ),
+		);
+	}
+
+	$gezet = '' !== kbj_optie( 'plek_wonen' ) || '' !== kbj_optie( 'plek_logeren' ) || '' !== kbj_optie( 'plek_dagbesteding' );
+	$datum = kbj_optie( 'plek_datum' );
+
+	if ( $gezet && ( '' === $datum || strtotime( $datum ) < strtotime( '-45 days' ) ) ) {
+		$punten[] = array(
+			__( 'Plek vrij is langer dan 45 dagen niet bijgewerkt.', 'kombij' ),
+			__( 'Daarom staat het nu niet op de site. Kijk of het nog klopt en klik op Opslaan.', 'kombij' ),
+			admin_url( 'admin.php?page=kbj-tijden' ),
+			__( 'Bijwerken', 'kombij' ),
+		);
+	}
+
+	return $punten;
 }
 
 /**
@@ -342,14 +434,14 @@ function kbj_menu_opruimen() {
 	remove_menu_page( 'edit.php?post_type=page' );
 	remove_menu_page( 'upload.php' );
 
-	// Onder KomBij: eerst de gegevens, dan de vacatures, dan de rest.
+	// Onder KomBij: eerst het overzicht, dan de gegevens, dan pagina's en de rest.
 	global $submenu;
 
 	if ( empty( $submenu['kbj-gegevens'] ) ) {
 		return;
 	}
 
-	$volgorde = array( 'kbj-gegevens', 'edit.php?post_type=vacature', 'post-new.php?post_type=vacature', 'edit.php?post_type=page', 'upload.php', 'site-editor.php?p=%2Fnavigation' );
+	$volgorde = array_merge( array( 'kbj-gegevens' ), array_keys( kbj_schermen() ), array( 'edit.php?post_type=page', 'edit.php?post_type=vacature', 'post-new.php?post_type=vacature', 'upload.php', 'site-editor.php?p=%2Fnavigation' ) );
 
 	usort(
 		$submenu['kbj-gegevens'],
@@ -362,6 +454,67 @@ function kbj_menu_opruimen() {
 	);
 }
 add_action( 'admin_menu', 'kbj_menu_opruimen', 999 );
+
+/**
+ * Pagina's en foto's staan niet meer los in het menu. Zorg dat KomBij open
+ * blijft staan en het juiste item oplicht als u daar bent.
+ *
+ * @param string $ouder Het menu-item dat openstaat.
+ * @return string
+ */
+function kbj_menu_ouder( $ouder ) {
+	global $submenu_file;
+	$scherm = get_current_screen();
+
+	if ( ! $scherm ) {
+		return $ouder;
+	}
+
+	if ( 'page' === $scherm->post_type && in_array( $scherm->base, array( 'edit', 'post' ), true ) ) {
+		$submenu_file = 'edit.php?post_type=page'; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+
+		return 'kbj-gegevens';
+	}
+
+	if ( in_array( $scherm->base, array( 'upload', 'media', 'attachment' ), true ) ) {
+		$submenu_file = 'upload.php'; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+
+		return 'kbj-gegevens';
+	}
+
+	return $ouder;
+}
+add_filter( 'parent_file', 'kbj_menu_ouder' );
+
+/**
+ * Een korte uitleg bovenaan de lijsten van pagina's, vacatures en foto's, met
+ * de weg terug naar het overzicht.
+ */
+function kbj_lijst_uitleg() {
+	$scherm = get_current_screen();
+
+	if ( ! $scherm ) {
+		return;
+	}
+
+	$teksten = array(
+		'edit-page'     => __( 'Klik op de naam van een pagina om hem te openen. Klik daarna op een tekst of foto om die aan te passen, en op Opslaan rechtsboven.', 'kombij' ),
+		'edit-vacature' => __( 'Klik op een vacature om hem aan te passen, of maak een nieuwe. Een vacature offline halen: open hem en zet hem terug naar Concept.', 'kombij' ),
+		'upload'        => __( 'Sleep foto\'s hierheen om ze te uploaden. Gebruik liefst liggende foto\'s van minimaal 1600 pixels breed.', 'kombij' ),
+	);
+
+	if ( ! isset( $teksten[ $scherm->id ] ) ) {
+		return;
+	}
+
+	printf(
+		'<div class="notice notice-info"><p>%s <a href="%s">%s</a></p></div>',
+		esc_html( $teksten[ $scherm->id ] ),
+		esc_url( admin_url( 'admin.php?page=kbj-gegevens' ) ),
+		esc_html__( 'Terug naar het KomBij-overzicht', 'kombij' )
+	);
+}
+add_action( 'admin_notices', 'kbj_lijst_uitleg' );
 
 /**
  * Reacties helemaal uit: geen formulier, geen spam.
@@ -415,7 +568,12 @@ add_action( 'admin_init', 'kbj_optie_register' );
  * @return array
  */
 function kbj_optie_schoonmaken( $ruw ) {
-	$schoon = array();
+	/*
+	 * Elk scherm stuurt alleen zijn eigen velden mee. Daarom beginnen we bij wat
+	 * er al stond, anders wist opslaan op het ene scherm de velden van het andere.
+	 */
+	$schoon = get_option( KBJ_OPTIE, array() );
+	$schoon = is_array( $schoon ) ? $schoon : array();
 
 	if ( ! is_array( $ruw ) ) {
 		return $schoon;
@@ -476,51 +634,54 @@ function kbj_optie_schoonmaken( $ruw ) {
 }
 
 /**
- * Tekent het scherm.
+ * Tekent een scherm met gegevens: alleen de blokken die bij dat scherm horen.
+ *
+ * @param string $slug Welk scherm.
  */
-function kbj_optie_scherm() {
+function kbj_optie_scherm( $slug = 'kbj-contact' ) {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
+
+	$schermen = kbj_schermen();
+	$scherm   = isset( $schermen[ $slug ] ) ? $schermen[ $slug ] : reset( $schermen );
+	$velden   = kbj_optie_velden( $scherm['blokken'] );
+	$koppen   = array_filter(
+		$velden,
+		function ( $veld ) {
+			return 'kop' === $veld['type'];
+		}
+	);
 	?>
-	<div class="wrap">
-		<h1><?php esc_html_e( 'Gegevens van de site', 'kombij' ); ?></h1>
-		<p class="description" style="max-width:40rem;">
-			<?php esc_html_e( 'Deze gegevens komen terug in de footer, op de contactpagina en in de informatie die Google over het bedrijf uitleest. Eén plek, dus je hoeft ze niet op vier pagina\'s bij te werken.', 'kombij' ); ?>
-		</p>
-		<?php kbj_optie_waarschuwingen(); ?>
+	<div class="wrap kbj-beheer">
+		<?php kbj_beheer_stijl(); ?>
+		<p class="kbj-beheer__terug"><a href="<?php echo esc_url( admin_url( 'admin.php?page=kbj-gegevens' ) ); ?>">&larr; <?php esc_html_e( 'Terug naar het overzicht', 'kombij' ); ?></a></p>
+		<h1><?php echo esc_html( $scherm['titel'] ); ?></h1>
+		<?php if ( isset( $_GET['settings-updated'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
+			<div class="notice notice-success is-dismissible"><p><strong><?php esc_html_e( 'Opgeslagen. De website is bijgewerkt.', 'kombij' ); ?></strong></p></div>
+		<?php endif; ?>
+		<div class="notice notice-info inline kbj-beheer__uitleg"><p><?php echo esc_html( $scherm['uitleg'] ); ?></p></div>
 
-		<div class="notice notice-info inline" style="max-width:48rem;padding:0.5rem 1rem">
-			<p><strong><?php esc_html_e( 'Waar past u wat aan?', 'kombij' ); ?></strong></p>
-			<ul style="list-style:disc;padding-left:1.25rem">
-				<li><?php esc_html_e( 'Teksten, koppen, foto\'s en knoppen op een pagina: via Pagina\'s, open de pagina en klik op wat u wilt veranderen. Bij een foto of eigen onderdeel staan de instellingen rechts onder "Blok".', 'kombij' ); ?></li>
-				<li><?php esc_html_e( 'Contactgegevens, openingstijden, plek vrij, de melding, de afsluiter onderaan en de vacaturetekst: hieronder, op deze pagina.', 'kombij' ); ?></li>
-				<li><?php esc_html_e( 'Vacatures: via Vacatures in het menu links. Elk veld heeft een eigen kopje.', 'kombij' ); ?></li>
-				<li><?php esc_html_e( 'Het menu: via Weergave, Editor, Navigatie.', 'kombij' ); ?></li>
-			</ul>
-		</div>
-
-		<p style="margin:1.25rem 0 0">
-			<strong><?php esc_html_e( 'Ga naar:', 'kombij' ); ?></strong>
-			<?php
-			$eerste = true;
-			foreach ( kbj_optie_velden() as $sleutel => $veld ) {
-				if ( 'kop' !== $veld['type'] ) {
-					continue;
+		<?php if ( count( $koppen ) > 1 ) : ?>
+			<p class="kbj-beheer__naar">
+				<strong><?php esc_html_e( 'Op deze pagina:', 'kombij' ); ?></strong>
+				<?php
+				$eerste = true;
+				foreach ( $koppen as $sleutel => $veld ) {
+					echo $eerste ? ' ' : ' &middot; ';
+					printf( '<a href="#%s">%s</a>', esc_attr( $sleutel ), esc_html( $veld['label'] ) );
+					$eerste = false;
 				}
-				echo $eerste ? ' ' : ' &middot; ';
-				printf( '<a href="#%s">%s</a>', esc_attr( $sleutel ), esc_html( $veld['label'] ) );
-				$eerste = false;
-			}
-			?>
-		</p>
+				?>
+			</p>
+		<?php endif; ?>
 
 		<form method="post" action="options.php">
 			<?php settings_fields( 'kbj_gegevens' ); ?>
 			<table class="form-table" role="presentation">
-				<?php foreach ( kbj_optie_velden() as $sleutel => $veld ) : ?>
+				<?php foreach ( $velden as $sleutel => $veld ) : ?>
 					<?php if ( 'kop' === $veld['type'] ) : ?>
-						<tr id="<?php echo esc_attr( $sleutel ); ?>"><th colspan="2" style="padding-top:2.25rem;border-bottom:1px solid #dcdcde"><h2 style="margin:0"><?php echo esc_html( $veld['label'] ); ?></h2></th></tr>
+						<tr id="<?php echo esc_attr( $sleutel ); ?>"><th colspan="2" class="kbj-beheer__kop"><h2><?php echo esc_html( $veld['label'] ); ?></h2></th></tr>
 						<?php continue; ?>
 					<?php endif; ?>
 					<tr>
@@ -555,22 +716,224 @@ function kbj_optie_scherm() {
 					</tr>
 				<?php endforeach; ?>
 			</table>
-			<?php submit_button(); ?>
+			<?php submit_button( __( 'Opslaan', 'kombij' ) ); ?>
 		</form>
+	</div>
+	<?php
+}
 
-		<hr>
-		<h2><?php esc_html_e( 'Pagina\'s opnieuw opbouwen', 'kombij' ); ?></h2>
+/**
+ * Link naar een deel van de site in de site-editor.
+ *
+ * @param string $deel header, footer of navigation.
+ * @return string
+ */
+function kbj_editor_link( $deel ) {
+	if ( 'navigation' === $deel ) {
+		return admin_url( 'site-editor.php?p=%2Fnavigation' );
+	}
+
+	return admin_url( 'site-editor.php?p=' . rawurlencode( '/wp_template_part/' . get_stylesheet() . '//' . $deel ) . '&canvas=edit' );
+}
+
+/**
+ * De stijl van de KomBij-schermen in het beheer.
+ */
+function kbj_beheer_stijl() {
+	?>
+	<style>
+		.kbj-beheer{max-width:72rem}
+		.kbj-beheer h1{font-size:1.75rem;margin:.25rem 0 1rem}
+		.kbj-beheer__terug{margin:1rem 0 0}
+		.kbj-beheer__terug a{text-decoration:none}
+		.kbj-beheer__uitleg{max-width:48rem;padding:.25rem 1rem}
+		.kbj-beheer__uitleg p{font-size:14px}
+		.kbj-beheer__naar{margin:1.25rem 0 0}
+		.kbj-beheer__kop{padding-top:2rem!important;border-bottom:1px solid #dcdcde}
+		.kbj-beheer__kop h2{margin:0}
+		.kbj-welkom{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;background:#0a2444;color:#fff;border-radius:14px;padding:1.5rem 1.75rem;margin:1rem 0 1.25rem}
+		.kbj-welkom h1{color:#fff;margin:0 0 .35rem;padding:0}
+		.kbj-welkom p{color:#dbe7f3;margin:0;font-size:14px;max-width:40rem}
+		.kbj-welkom .button{background:#fff;color:#0a2444;border-color:#fff;border-radius:999px;padding:.35rem 1.1rem;min-height:40px;line-height:2}
+		.kbj-let{background:#fff8e5;border:1px solid #f0c33c;border-radius:12px;padding:.85rem 1.25rem;margin:0 0 1.25rem}
+		.kbj-let h2{margin:.2rem 0 .5rem;font-size:15px}
+		.kbj-let ul{margin:0}
+		.kbj-let li{margin:.35rem 0}
+		.kbj-tegels{display:grid;grid-template-columns:repeat(auto-fill,minmax(19rem,1fr));gap:1rem}
+		.kbj-tegel{background:#fff;border:1px solid #dcdcde;border-radius:14px;padding:1.1rem 1.25rem 1.25rem;display:flex;flex-direction:column}
+		.kbj-tegel h2{display:flex;align-items:center;gap:.5rem;font-size:16px;margin:0 0 .3rem}
+		.kbj-tegel h2 .dashicons{color:#1b5381}
+		.kbj-tegel>p{color:#50575e;margin:0 0 .85rem}
+		.kbj-knoppen{display:flex;flex-direction:column;gap:.4rem}
+		.kbj-knoppen a{display:flex;justify-content:space-between;align-items:center;gap:.5rem;text-decoration:none;border:1px solid #e0e6ec;background:#f6f9fc;border-radius:10px;padding:.55rem .8rem;min-height:28px;color:#0a2444;font-weight:600}
+		.kbj-knoppen a:hover,.kbj-knoppen a:focus{background:#e7f0f8;border-color:#1b5381;color:#0a2444}
+		.kbj-knoppen a small{font-weight:400;color:#646970;text-align:right}
+		.kbj-knoppen a::after{content:"\2192";color:#1b5381}
+		.kbj-knoppen button{width:100%;text-align:left;min-height:40px;border-radius:10px!important}
+		.kbj-tegel--breed{grid-column:1/-1}
+		.kbj-pagina-knoppen{display:grid;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));gap:.4rem}
+	</style>
+	<?php
+}
+
+/**
+ * Eén tegel op het overzicht.
+ *
+ * @param string $icoon  Dashicon zonder "dashicons-".
+ * @param string $titel  Kop.
+ * @param string $uitleg Korte zin.
+ * @param array  $knoppen Lijst met array( tekst, link, extra ).
+ * @param string $extra  Klasse voor de knoppenlijst.
+ */
+function kbj_tegel( $icoon, $titel, $uitleg, $knoppen, $extra = '' ) {
+	printf( '<section class="kbj-tegel%s">', $extra ? ' kbj-tegel--breed' : '' );
+	printf( '<h2><span class="dashicons dashicons-%s" aria-hidden="true"></span>%s</h2>', esc_attr( $icoon ), esc_html( $titel ) );
+	printf( '<p>%s</p>', esc_html( $uitleg ) );
+	printf( '<div class="kbj-knoppen %s">', esc_attr( $extra ) );
+
+	foreach ( $knoppen as $knop ) {
+		printf(
+			'<a href="%s">%s%s</a>',
+			esc_url( $knop[1] ),
+			'<span>' . esc_html( $knop[0] ) . '</span>',
+			! empty( $knop[2] ) ? '<small>' . esc_html( $knop[2] ) . '</small>' : ''
+		);
+	}
+
+	echo '</div></section>';
+}
+
+/**
+ * Het overzicht: de eerste pagina als u op KomBij klikt. Alles wat u kunt
+ * aanpassen, met een knop ernaartoe.
+ */
+function kbj_overzicht_scherm() {
+	if ( ! current_user_can( 'edit_pages' ) ) {
+		return;
+	}
+
+	// Pagina's in de volgorde van het menu, de startpagina eerst.
+	$paginas = array();
+	$voor    = (int) get_option( 'page_on_front' );
+
+	if ( $voor ) {
+		$paginas[] = array( __( 'Home', 'kombij' ), get_edit_post_link( $voor, 'raw' ) );
+	}
+
+	foreach ( kbj_paginas() as $pagina ) {
+		$object = get_page_by_path( $pagina['slug'] );
+
+		if ( $object ) {
+			$paginas[] = array( $pagina['titel'], get_edit_post_link( $object->ID, 'raw' ) );
+		}
+	}
+
+	$paginas[] = array( __( 'Alle pagina\'s', 'kombij' ), admin_url( 'edit.php?post_type=page' ) );
+
+	$vacatures = wp_count_posts( 'vacature' );
+	$open      = isset( $vacatures->publish ) ? (int) $vacatures->publish : 0;
+	$melding   = 'aan' === kbj_optie( 'melding_aan', 'aan' ) ? __( 'staat aan', 'kombij' ) : __( 'staat uit', 'kombij' );
+	$punten    = kbj_aandachtspunten();
+	?>
+	<div class="wrap kbj-beheer">
+		<?php kbj_beheer_stijl(); ?>
+
+		<div class="kbj-welkom">
+			<div>
+				<h1><?php esc_html_e( 'KomBij beheren', 'kombij' ); ?></h1>
+				<p><?php esc_html_e( 'Alles om de website aan te passen staat hier bij elkaar. Kies wat u wilt veranderen en klik op de knop.', 'kombij' ); ?></p>
+			</div>
+			<a class="button" href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Bekijk de website', 'kombij' ); ?></a>
+		</div>
+
 		<?php if ( isset( $_GET['kbj-herbouwd'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
 			<div class="notice notice-success inline"><p><?php esc_html_e( 'Klaar: de pagina\'s zijn opnieuw opgebouwd met de nieuwste versie van het thema.', 'kombij' ); ?></p></div>
 		<?php endif; ?>
-		<p class="description" style="max-width:48rem">
-			<?php esc_html_e( 'Een nieuwe versie van het thema verandert pagina\'s die al bestaan niet. Klik hier om de startpagina en alle vaste pagina\'s opnieuw op te bouwen met de nieuwste opmaak. Let op: wat u zelf in die pagina\'s heeft veranderd, gaat dan verloren. Vacatures en gegevens blijven staan.', 'kombij' ); ?>
-		</p>
-		<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" onsubmit="return confirm('<?php echo esc_js( __( 'Weet u het zeker? Eigen aanpassingen in de pagina\'s gaan verloren.', 'kombij' ) ); ?>');">
-			<input type="hidden" name="action" value="kbj_herbouw">
-			<?php wp_nonce_field( 'kbj_herbouw' ); ?>
-			<?php submit_button( __( 'Pagina\'s opnieuw opbouwen', 'kombij' ), 'secondary' ); ?>
-		</form>
+
+		<?php if ( $punten ) : ?>
+			<div class="kbj-let">
+				<h2><?php esc_html_e( 'Let op', 'kombij' ); ?></h2>
+				<ul>
+					<?php foreach ( $punten as $punt ) : ?>
+						<li><strong><?php echo esc_html( $punt[0] ); ?></strong> <?php echo esc_html( $punt[1] ); ?> <a href="<?php echo esc_url( $punt[2] ); ?>"><?php echo esc_html( $punt[3] ); ?></a></li>
+					<?php endforeach; ?>
+				</ul>
+			</div>
+		<?php endif; ?>
+
+		<div class="kbj-tegels">
+			<?php
+			kbj_tegel(
+				'admin-page',
+				__( 'Pagina\'s en teksten', 'kombij' ),
+				__( 'Teksten, koppen, foto\'s en knoppen op een pagina. Open de pagina en klik op wat u wilt veranderen.', 'kombij' ),
+				$paginas,
+				'kbj-pagina-knoppen'
+			);
+
+			if ( current_user_can( 'manage_options' ) ) {
+				kbj_tegel(
+					'id',
+					__( 'Gegevens', 'kombij' ),
+					__( 'Wat op meerdere plekken terugkomt. Eén keer aanpassen en het klopt overal.', 'kombij' ),
+					array(
+						array( __( 'Contact en bedrijf', 'kombij' ), admin_url( 'admin.php?page=kbj-contact' ), __( 'adres, telefoon, social', 'kombij' ) ),
+						array( __( 'Openingstijden en plek vrij', 'kombij' ), admin_url( 'admin.php?page=kbj-tijden' ), __( 'bordje, wachtlijst', 'kombij' ) ),
+						array( __( 'Melding rechtsonder', 'kombij' ), admin_url( 'admin.php?page=kbj-melding' ), $melding ),
+						array( __( 'Teksten op elke pagina', 'kombij' ), admin_url( 'admin.php?page=kbj-teksten' ), __( 'knoppen, blok onderaan', 'kombij' ) ),
+					)
+				);
+			}
+
+			kbj_tegel(
+				'groups',
+				__( 'Vacatures', 'kombij' ),
+				__( 'Een vacature zet u online met een paar velden. De opmaak doet de site zelf.', 'kombij' ),
+				array(
+					array( __( 'Alle vacatures', 'kombij' ), admin_url( 'edit.php?post_type=vacature' ), sprintf( /* translators: %d: aantal */ _n( '%d online', '%d online', $open, 'kombij' ), $open ) ),
+					array( __( 'Nieuwe vacature', 'kombij' ), admin_url( 'post-new.php?post_type=vacature' ) ),
+					array( __( 'Tekst en foto bij vacatures', 'kombij' ), admin_url( 'admin.php?page=kbj-teksten#kop_teksten' ) ),
+				)
+			);
+
+			kbj_tegel(
+				'format-image',
+				__( 'Foto\'s en bestanden', 'kombij' ),
+				__( 'Upload hier foto\'s. Daarna kiest u ze in een pagina bij de foto, rechts onder "Blok".', 'kombij' ),
+				array(
+					array( __( 'Alle foto\'s en bestanden', 'kombij' ), admin_url( 'upload.php' ) ),
+					array( __( 'Foto\'s uploaden', 'kombij' ), admin_url( 'media-new.php' ) ),
+				)
+			);
+
+			if ( current_user_can( 'edit_theme_options' ) ) {
+				kbj_tegel(
+					'menu',
+					__( 'Menu, bovenkant en onderkant', 'kombij' ),
+					__( 'Wat op elke pagina staat: het menu bovenaan en de footer onderaan.', 'kombij' ),
+					array(
+						array( __( 'Menu bovenaan', 'kombij' ), kbj_editor_link( 'navigation' ), __( 'pagina\'s in het menu', 'kombij' ) ),
+						array( __( 'Bovenkant van de site', 'kombij' ), kbj_editor_link( 'header' ), __( 'logo, knoppen', 'kombij' ) ),
+						array( __( 'Onderkant van de site', 'kombij' ), kbj_editor_link( 'footer' ), __( 'footer', 'kombij' ) ),
+					)
+				);
+			}
+
+			if ( current_user_can( 'manage_options' ) ) :
+				?>
+				<section class="kbj-tegel">
+					<h2><span class="dashicons dashicons-update" aria-hidden="true"></span><?php esc_html_e( 'Na een nieuwe versie van het thema', 'kombij' ); ?></h2>
+					<p><?php esc_html_e( 'Een nieuwe versie verandert pagina\'s die al bestaan niet. Met deze knop krijgen alle vaste pagina\'s de nieuwste opmaak. Let op: wat u zelf in die pagina\'s heeft veranderd, gaat dan verloren. Vacatures en gegevens blijven staan.', 'kombij' ); ?></p>
+					<form class="kbj-knoppen" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" onsubmit="return confirm('<?php echo esc_js( __( 'Weet u het zeker? Eigen aanpassingen in de pagina\'s gaan verloren.', 'kombij' ) ); ?>');">
+						<input type="hidden" name="action" value="kbj_herbouw">
+						<?php wp_nonce_field( 'kbj_herbouw' ); ?>
+						<button type="submit" class="button button-secondary"><?php esc_html_e( 'Pagina\'s opnieuw opbouwen', 'kombij' ); ?></button>
+					</form>
+				</section>
+				<?php
+			endif;
+			?>
+		</div>
 	</div>
 	<?php
 }
@@ -619,36 +982,6 @@ function kbj_herbouw() {
 add_action( 'admin_post_kbj_herbouw', 'kbj_herbouw' );
 
 /**
- * Twee instellingen van WordPress zelf die de site onzichtbaar kunnen maken.
- *
- * Ze staan ergens anders in WordPress, en juist daarom worden ze vergeten. De
- * eerste zet Google buiten de deur; dat hoort tijdens het bouwen ook zo, maar
- * niet als de site live gaat. De tweede zorgt dat de site zichzelf als Engels
- * aankondigt terwijl alles wat erop staat Nederlands is.
- */
-function kbj_optie_waarschuwingen() {
-	if ( ! get_option( 'blog_public' ) ) {
-		printf(
-			'<div class="notice notice-warning"><p><strong>%s</strong> %s <a href="%s">%s</a></p></div>',
-			esc_html__( 'Zoekmachines worden op dit moment tegengehouden.', 'kombij' ),
-			esc_html__( 'Zolang dat aanstaat komt de site niet in Google. Prima tijdens het bouwen, maar zet het uit voor je live gaat.', 'kombij' ),
-			esc_url( admin_url( 'options-reading.php' ) ),
-			esc_html__( 'Naar die instelling', 'kombij' )
-		);
-	}
-
-	if ( 0 !== strpos( strtolower( get_locale() ), 'nl' ) ) {
-		printf(
-			'<div class="notice notice-warning"><p><strong>%s</strong> %s <a href="%s">%s</a></p></div>',
-			esc_html__( 'De taal van WordPress staat niet op Nederlands.', 'kombij' ),
-			esc_html__( 'De site zegt zelf wel dat hij Nederlands is, dus Google leest hem goed. Maar de datums, de knoppen en het beheerscherm blijven Engels.', 'kombij' ),
-			esc_url( admin_url( 'options-general.php' ) ),
-			esc_html__( 'Naar die instelling', 'kombij' )
-		);
-	}
-}
-
-/**
  * Of er een plek vrij is, voor wonen, logeren of dagbesteding.
  *
  * Geeft 'vrij', 'wachtlijst' of een lege tekst. Een melding die langer dan 45
@@ -676,9 +1009,10 @@ function kbj_plek( $soort ) {
 /**
  * De velden in blokken met een kopje, in een logische volgorde.
  *
+ * @param array $alleen Alleen deze blokken; leeg is alles.
  * @return array
  */
-function kbj_optie_velden() {
+function kbj_optie_velden( $alleen = array() ) {
 	$los    = kbj_optie_velden_los();
 	$blokken = array(
 		'bedrijf'   => array( __( 'Bedrijf en contact', 'kombij' ), array( 'bedrijf', 'zin', 'email', 'telefoon', 'straat', 'postcode', 'plaats', 'werkgebied', 'kvk', 'btw' ) ),
@@ -691,6 +1025,10 @@ function kbj_optie_velden() {
 		'kaart'     => array( __( 'Plek op de kaart (voor Google)', 'kombij' ), array( 'breedtegraad', 'lengtegraad' ) ),
 	);
 	$velden = array();
+
+	if ( $alleen ) {
+		$blokken = array_intersect_key( $blokken, array_flip( $alleen ) );
+	}
 
 	foreach ( $blokken as $sleutel => $blok ) {
 		$velden[ 'kop_' . $sleutel ] = array(
@@ -708,7 +1046,7 @@ function kbj_optie_velden() {
 	}
 
 	// Wat nergens is ingedeeld, komt onderaan zodat het nooit verdwijnt.
-	return array_merge( $velden, $los );
+	return $alleen ? $velden : array_merge( $velden, $los );
 }
 
 /**

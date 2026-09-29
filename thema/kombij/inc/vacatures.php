@@ -727,7 +727,7 @@ function kbj_render_vacaturestrook( $attrs ) {
 
 	if ( ! $vacatures ) {
 		if ( function_exists( 'kbj_in_editor' ) && kbj_in_editor() ) {
-			return '<p class="kbj-editor-uitleg">' . esc_html__( 'Dit blok verschijnt vanzelf zodra er een vacature open staat. De teksten staan onder Gegevens.', 'kombij' ) . '</p>';
+			return '<p class="kbj-editor-uitleg">' . esc_html__( 'Dit blok verschijnt vanzelf zodra er een vacature open staat. De teksten past u aan onder KomBij, Teksten op elke pagina.', 'kombij' ) . '</p>';
 		}
 
 		return '';

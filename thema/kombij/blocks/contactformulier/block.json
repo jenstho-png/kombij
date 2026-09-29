@@ -4,7 +4,7 @@
 	"name": "kbj/contactformulier",
 	"title": "Contactformulier",
 	"category": "kombij",
-	"description": "Het formulier waarmee bezoekers een bericht sturen. Komt binnen op het adres onder Gegevens.",
+	"description": "Het formulier waarmee bezoekers een bericht sturen. Komt binnen op het adres onder KomBij, Contact en bedrijf.",
 	"textdomain": "kombij",
 	"supports": { "html": false, "multiple": false },
 	"attributes": {}

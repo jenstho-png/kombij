@@ -732,7 +732,7 @@ function kbj_render_plek( $attrs ) {
 	if ( '' === $stand ) {
 		// In de editor een uitleg, zodat niemand naar een leeg vlak kijkt.
 		if ( kbj_in_editor() ) {
-			return '<p class="kbj-editor-uitleg">' . esc_html__( 'Label "plek vrij" staat nu uit. Aanzetten onder Gegevens, bij "Plek vrij of wachtlijst".', 'kombij' ) . '</p>';
+			return '<p class="kbj-editor-uitleg">' . esc_html__( 'Label "plek vrij" staat nu uit. Aanzetten onder KomBij, Openingstijden en plek vrij.', 'kombij' ) . '</p>';
 		}
 
 		return '';

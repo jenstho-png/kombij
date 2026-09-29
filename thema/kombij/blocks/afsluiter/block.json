@@ -4,7 +4,7 @@
 	"name": "kbj/afsluiter",
 	"title": "Afsluiter: kom langs",
 	"category": "kombij",
-	"description": "De kop, tekst en knoppen onderaan de pagina. De teksten staan onder Gegevens, zodat ze op elke pagina tegelijk veranderen.",
+	"description": "De kop, tekst en knoppen onderaan de pagina. De teksten staan onder KomBij, Teksten op elke pagina, zodat ze op elke pagina tegelijk veranderen.",
 	"textdomain": "kombij",
 	"supports": { "html": false },
 	"attributes": {}

@@ -4,7 +4,7 @@
 	"name": "kbj/contactgegevens",
 	"title": "Contactgegevens",
 	"category": "kombij",
-	"description": "E-mail, telefoon, adres en de socials, zoals ze onder Gegevens staan.",
+	"description": "E-mail, telefoon, adres en de socials, zoals ze onder KomBij, Contact en bedrijf staan.",
 	"textdomain": "kombij",
 	"supports": { "html": false },
 	"attributes": {}

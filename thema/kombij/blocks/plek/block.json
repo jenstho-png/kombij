@@ -4,7 +4,7 @@
 	"name": "kbj/plek",
 	"title": "Plek vrij",
 	"category": "kombij",
-	"description": "Een label 'Nu een plek vrij' of 'Wachtlijst', zoals ingesteld onder Gegevens. Staat er niets ingesteld, dan is het label onzichtbaar.",
+	"description": "Een label 'Nu een plek vrij' of 'Wachtlijst', zoals ingesteld onder KomBij, Openingstijden en plek vrij. Staat er niets ingesteld, dan is het label onzichtbaar.",
 	"textdomain": "kombij",
 	"supports": { "html": false },
 	"attributes": {
