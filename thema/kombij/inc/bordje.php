@@ -33,7 +33,7 @@ function kbj_bordje() {
 	}
 
 	return sprintf(
-		'<div class="kbj-bordje" data-open="%1$s" data-dicht="%2$s" data-dagen="1,2,3,4,5">'
+		'<div class="kbj-bordje" data-open="%1$s" data-dicht="%2$s" data-dagen="1,2,3,4,5" tabindex="0">'
 			. '<span class="kbj-bordje__koord kbj-bordje__koord--links" aria-hidden="true"></span>'
 			. '<span class="kbj-bordje__koord kbj-bordje__koord--rechts" aria-hidden="true"></span>'
 			. '<p class="kbj-bordje__plaat" role="status">'
@@ -41,11 +41,13 @@ function kbj_bordje() {
 				. '<span class="kbj-bordje__stand" data-stand>%4$s</span>'
 				. '<span class="kbj-bordje__wanneer" data-wanneer>%5$s</span>'
 			. '</p>'
+			. '<span class="kbj-bordje__meer" data-meer>%6$s</span>'
 		. '</div>',
 		esc_attr( $treffer[1] ),
 		esc_attr( $treffer[2] ),
 		esc_html__( 'Dagbesteding', 'kombij' ),
 		esc_html__( 'Ma t/m vr', 'kombij' ),
-		esc_html( $treffer[1] . ' tot ' . $treffer[2] )
+		esc_html( $treffer[1] . ' tot ' . $treffer[2] ),
+		esc_html( 'Dagbesteding maandag tot en met vrijdag, van ' . $treffer[1] . ' tot ' . $treffer[2] . '.' )
 	);
 }

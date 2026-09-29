@@ -16,6 +16,18 @@
 
 	var stand = bordje.querySelector( '[data-stand]' );
 	var wanneer = bordje.querySelector( '[data-wanneer]' );
+	var meer = bordje.querySelector( '[data-meer]' );
+
+	// Kort op het bordje, het hele verhaal als je erop wijst.
+	function zet( kort, lang ) {
+		wanneer.textContent = kort;
+
+		if ( meer ) {
+			meer.textContent = lang;
+		}
+
+		bordje.setAttribute( 'aria-label', 'Dagbesteding: ' + lang );
+	}
 	var open = bordje.dataset.open;
 	var dicht = bordje.dataset.dicht;
 	var dagen = ( bordje.dataset.dagen || '' ).split( ',' ).map( Number );
@@ -62,7 +74,7 @@
 		if ( vandaagOpen && nu.minuut >= minuten( open ) && nu.minuut < minuten( dicht ) ) {
 			bordje.classList.add( 'is-open' );
 			stand.textContent = 'Open';
-			wanneer.textContent = 'tot ' + dicht;
+			zet( 'tot ' + dicht, 'Nu open, tot ' + dicht + '. Maandag tot en met vrijdag van ' + open + ' tot ' + dicht + '.' );
 			return;
 		}
 
@@ -70,7 +82,7 @@
 		stand.textContent = 'Gesloten';
 
 		if ( vandaagOpen && nu.minuut < minuten( open ) ) {
-			wanneer.textContent = 'opent om ' + open;
+			zet( 'opent ' + open, 'Gesloten. Vandaag open om ' + open + '. Maandag tot en met vrijdag van ' + open + ' tot ' + dicht + '.' );
 			return;
 		}
 
@@ -78,7 +90,7 @@
 			var volgende = ( nu.dag + i ) % 7;
 
 			if ( dagen.indexOf( volgende ) !== -1 ) {
-				wanneer.textContent = 'opent ' + ( 1 === i ? 'morgen' : DAGNAMEN[ volgende ] ) + ' om ' + open;
+				zet( 'opent ' + open, 'Gesloten. Opent ' + ( 1 === i ? 'morgen' : DAGNAMEN[ volgende ] ) + ' om ' + open + '. Maandag tot en met vrijdag van ' + open + ' tot ' + dicht + '.' );
 				return;
 			}
 		}

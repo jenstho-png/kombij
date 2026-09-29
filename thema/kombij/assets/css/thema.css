@@ -7333,3 +7333,70 @@ body:not(.home) .wp-block-post-content > .kbj-kort-sectie.kbj-sectie {
 	max-width: none !important;
 	transform: none !important;
 }
+
+/* ------------------------------ het bordje: hoger, kort, meer bij aanwijzen */
+
+.kbj-menu__rechts .kbj-bordje {
+	position: relative;
+	top: auto;
+	right: auto;
+	outline: none;
+}
+
+.kbj-menu__rechts .kbj-bordje__plaat {
+	min-height: 46px;
+	padding: 0.45rem 0.9rem 0.45rem 0.55rem !important;
+	column-gap: 0.55rem !important;
+	border-radius: 12px !important;
+	cursor: default;
+}
+
+.kbj-menu__rechts .kbj-bordje__plaat::before {
+	width: 24px !important;
+	height: 24px !important;
+}
+
+.kbj-menu__rechts .kbj-bordje__stand {
+	font-size: 0.8125rem !important;
+}
+
+.kbj-menu__rechts .kbj-bordje__wanneer {
+	font-size: 0.8125rem !important;
+	white-space: nowrap;
+}
+
+.kbj-bordje__meer {
+	position: absolute;
+	top: calc(100% + 10px);
+	right: 0;
+	z-index: 50;
+	width: 240px;
+	padding: 0.75rem 0.9rem;
+	border-radius: 12px;
+	background: var(--kbj-nacht);
+	color: var(--kbj-wit);
+	font-size: 0.875rem;
+	line-height: 1.45;
+	box-shadow: 0 20px 40px -20px rgba(10, 36, 68, 0.6);
+	opacity: 0;
+	transform: translateY(-4px);
+	pointer-events: none;
+	transition: opacity 0.25s var(--kbj-ease), transform 0.25s var(--kbj-ease);
+}
+
+.kbj-bordje:hover .kbj-bordje__meer,
+.kbj-bordje:focus-visible .kbj-bordje__meer {
+	opacity: 1;
+	transform: none;
+}
+
+.kbj-bordje:focus-visible .kbj-bordje__plaat {
+	box-shadow: 0 0 0 3px var(--kbj-glas);
+}
+
+/* Buiten de balk (in het uitklapmenu) blijft het extra tekstje weg. */
+@media (max-width: 1199px) {
+	.kbj-bordje__meer {
+		display: none;
+	}
+}
