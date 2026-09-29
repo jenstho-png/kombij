@@ -353,17 +353,19 @@ function kbj_installatie_paginas() {
 			continue;
 		}
 
-		$id = wp_insert_post(
+		$vers = kbj_sleutels_toevoegen( kbj_pagina_inhoud( $pagina ), $pagina['slug'] );
+		$id   = wp_insert_post(
 			array(
 				'post_title'   => $pagina['titel'],
 				'post_name'    => $pagina['slug'],
 				'post_type'    => 'page',
 				'post_status'  => 'publish',
-				'post_content' => kbj_pagina_inhoud( $pagina ),
+				'post_content' => wp_slash( $vers['inhoud'] ),
 			)
 		);
 
 		if ( $id && ! is_wp_error( $id ) ) {
+			update_post_meta( $id, KBJ_BLOKKEN_META, $vers['kaart'] );
 			kbj_afdruk_zetten( $id );
 		}
 	}

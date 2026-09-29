@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'KBJ_VERSION', '1.8.6' );
+define( 'KBJ_VERSION', '1.8.7' );
 define( 'KBJ_DIR', get_theme_file_path() );
 define( 'KBJ_URI', get_theme_file_uri() );
 
@@ -32,6 +32,7 @@ require_once KBJ_DIR . '/inc/patronen.php';
 require_once KBJ_DIR . '/inc/menu.php';
 require_once KBJ_DIR . '/inc/blocks.php';
 require_once KBJ_DIR . '/inc/paginas.php';
+require_once KBJ_DIR . '/inc/overnemen.php';
 require_once KBJ_DIR . '/inc/vacatures.php';
 require_once KBJ_DIR . '/inc/installatie.php';
 require_once KBJ_DIR . '/inc/formulier.php';

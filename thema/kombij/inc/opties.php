@@ -787,7 +787,9 @@ function kbj_beheer_stijl() {
 		.kbj-herbouw__rij{display:flex;align-items:center;gap:.6rem;border:1px solid #e0e6ec;background:#f6f9fc;border-radius:10px;padding:.55rem .8rem;min-height:28px;cursor:pointer}
 		.kbj-herbouw__rij span{font-weight:600;color:#0a2444}
 		.kbj-herbouw__stand{margin-left:auto;text-align:right;color:#646970}
-		.kbj-herbouw__stand--aangepast{color:#996800}
+		.kbj-herbouw__stand--aangepast{color:#1b5381}
+		.kbj-herbouw__stand--onbekend{color:#996800}
+		.kbj-verslag{margin:.5rem 0 0 1.1rem;list-style:disc}
 		.kbj-herbouw__knop{margin:.9rem 0 0}
 		.kbj-pagina-knoppen{display:grid;grid-template-columns:repeat(auto-fill,minmax(13rem,1fr));gap:.4rem}
 	</style>
@@ -866,6 +868,50 @@ function kbj_overzicht_scherm() {
 
 		<?php if ( isset( $_GET['kbj-herbouwd'] ) ) : // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?>
 			<div class="notice notice-success inline"><p><?php echo esc_html( sprintf( /* translators: %d: aantal pagina's */ _n( 'Klaar: %d pagina is opnieuw opgebouwd. De vorige versie staat in de revisies.', 'Klaar: %d pagina\'s zijn opnieuw opgebouwd. De vorige versies staan in de revisies.', absint( $_GET['kbj-herbouwd'] ), 'kombij' ), absint( $_GET['kbj-herbouwd'] ) ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended ?></p></div>
+			<?php
+			$verslag = get_transient( 'kbj_verslag_' . get_current_user_id() );
+
+			if ( is_array( $verslag ) ) :
+				delete_transient( 'kbj_verslag_' . get_current_user_id() );
+				$regels = array();
+
+				foreach ( $verslag as $pid => $staat ) {
+					$delen = array();
+
+					if ( $staat['overgenomen'] ) {
+						/* translators: %d: aantal */
+						$delen[] = sprintf( _n( '%d aanpassing meegenomen', '%d aanpassingen meegenomen', $staat['overgenomen'], 'kombij' ), $staat['overgenomen'] );
+					}
+
+					if ( $staat['weg'] ) {
+						/* translators: %d: aantal */
+						$delen[] = sprintf( _n( '%d weggehaald blok blijft weg', '%d weggehaalde blokken blijven weg', $staat['weg'], 'kombij' ), $staat['weg'] );
+					}
+
+					if ( $staat['eigen'] ) {
+						/* translators: %d: aantal */
+						$delen[] = sprintf( _n( '%d eigen blok', '%d eigen blokken', $staat['eigen'], 'kombij' ), $staat['eigen'] );
+					}
+
+					if ( $staat['niet_geplaatst'] > 0 ) {
+						/* translators: %d: aantal */
+						$delen[] = sprintf( _n( 'let op: %d aanpassing paste niet meer en staat alleen in de revisies', 'let op: %d aanpassingen pasten niet meer en staan alleen in de revisies', $staat['niet_geplaatst'], 'kombij' ), $staat['niet_geplaatst'] );
+					}
+
+					if ( ! $staat['bekend'] ) {
+						$delen[] = __( 'eerste keer met deze versie: vanaf nu gaan aanpassingen mee', 'kombij' );
+					}
+
+					if ( $delen ) {
+						$regels[] = '<li><a href="' . esc_url( get_edit_post_link( $pid ) ) . '">' . esc_html( get_the_title( $pid ) ) . '</a>: ' . esc_html( implode( ', ', $delen ) ) . '</li>';
+					}
+				}
+
+				if ( $regels ) {
+					echo '<div class="notice notice-info inline"><p><strong>' . esc_html__( 'Wat er per pagina gebeurde:', 'kombij' ) . '</strong></p><ul class="kbj-verslag">' . implode( '', $regels ) . '</ul></div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				}
+			endif;
+			?>
 		<?php endif; ?>
 
 		<?php if ( $punten ) : ?>
@@ -941,24 +987,27 @@ function kbj_overzicht_scherm() {
 				?>
 				<section class="kbj-tegel kbj-tegel--breed">
 					<h2><span class="dashicons dashicons-update" aria-hidden="true"></span><?php esc_html_e( 'Na een nieuwe versie van het thema', 'kombij' ); ?></h2>
-					<p><?php esc_html_e( 'Een nieuwe versie van het thema verandert pagina\'s die al bestaan niet. Hier kiest u welke pagina\'s de nieuwste opmaak krijgen. Pagina\'s die u zelf heeft aangepast staan standaard uit, zodat uw werk blijft staan. De vorige versie van elke pagina wordt altijd eerst bewaard: terugzetten kan via Revisies in de editor.', 'kombij' ); ?></p>
+					<p><?php esc_html_e( 'Een nieuwe versie van het thema verandert pagina\'s die al bestaan niet. Hier kiest u welke pagina\'s de nieuwste opmaak krijgen. Wat u zelf heeft aangepast gaat mee: veranderde teksten, knoppen en foto\'s komen op dezelfde plek terug, weggehaalde blokken blijven weg en eigen blokken komen achter hetzelfde blok als eerst. De vorige versie wordt altijd eerst bewaard in de revisies.', 'kombij' ); ?></p>
 					<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 						<input type="hidden" name="action" value="kbj_herbouw">
 						<?php wp_nonce_field( 'kbj_herbouw' ); ?>
 						<div class="kbj-herbouw">
 							<?php foreach ( kbj_herbouw_paginas() as $id => $naam ) : ?>
-								<?php $stand = kbj_pagina_stand( $id ); ?>
+								<?php
+								$stand = kbj_pagina_stand( $id );
+								$mee   = (bool) get_post_meta( $id, KBJ_BLOKKEN_META, true );
+								?>
 								<label class="kbj-herbouw__rij">
-									<input type="checkbox" name="kbj_paginas[]" value="<?php echo esc_attr( $id ); ?>" <?php checked( 'origineel', $stand ); ?>>
+									<input type="checkbox" name="kbj_paginas[]" value="<?php echo esc_attr( $id ); ?>" <?php checked( $mee || 'origineel' === $stand ); ?>>
 									<span><?php echo esc_html( $naam ); ?></span>
-									<small class="kbj-herbouw__stand kbj-herbouw__stand--<?php echo esc_attr( $stand ); ?>">
+									<small class="kbj-herbouw__stand kbj-herbouw__stand--<?php echo esc_attr( 'origineel' === $stand ? 'origineel' : ( $mee ? 'aangepast' : 'onbekend' ) ); ?>">
 										<?php
 										if ( 'origineel' === $stand ) {
 											esc_html_e( 'niet aangepast', 'kombij' );
-										} elseif ( 'aangepast' === $stand ) {
-											esc_html_e( 'door u aangepast', 'kombij' );
+										} elseif ( $mee ) {
+											esc_html_e( 'aangepast, gaat mee', 'kombij' );
 										} else {
-											esc_html_e( 'onbekend, misschien aangepast', 'kombij' );
+											esc_html_e( 'aanpassingen gaan niet mee', 'kombij' );
 										}
 										?>
 									</small>
@@ -999,6 +1048,21 @@ function kbj_afdruk_zetten( $id ) {
  * @return string origineel, aangepast of onbekend.
  */
 function kbj_pagina_stand( $id ) {
+	// Met kenmerken per blok: kijk blok voor blok of er iets anders is.
+	$kaart = get_post_meta( $id, KBJ_BLOKKEN_META, true );
+
+	if ( is_array( $kaart ) && $kaart ) {
+		$oud    = array(
+			'gezien' => array(),
+			'anders' => array(),
+			'eigen'  => array(),
+		);
+		$vorige = '';
+		kbj_oud_lezen( parse_blocks( (string) get_post_field( 'post_content', $id, 'raw' ) ), $kaart, $oud, $vorige );
+
+		return $oud['anders'] || $oud['eigen'] || array_diff_key( $kaart, $oud['gezien'] ) ? 'aangepast' : 'origineel';
+	}
+
 	$afdruk = (string) get_post_meta( $id, KBJ_AFDRUK_META, true );
 
 	if ( '' !== $afdruk ) {
@@ -1050,6 +1114,7 @@ function kbj_herbouw() {
 	$voor    = (int) get_option( 'page_on_front' );
 	$slugs   = array();
 	$aantal  = 0;
+	$verslag = array();
 
 	foreach ( kbj_paginas() as $pagina ) {
 		$slugs[ $pagina['slug'] ] = $pagina;
@@ -1074,19 +1139,15 @@ function kbj_herbouw() {
 
 		// Eerst de huidige versie bewaren, dan pas vervangen.
 		wp_save_post_revision( $id );
-		wp_update_post(
-			array(
-				'ID'           => $id,
-				'post_content' => $inhoud,
-			)
-		);
-		kbj_afdruk_zetten( $id );
+		$verslag[ $id ] = kbj_opnieuw_met_aanpassingen( $id, $inhoud, $id === $voor ? 'home' : $slug );
 		++$aantal;
 	}
 
 	// Ontbrekende pagina's en het menu er meteen bij.
 	kbj_installatie_paginas();
 	kbj_installatie_menu();
+
+	set_transient( 'kbj_verslag_' . get_current_user_id(), $verslag, HOUR_IN_SECONDS );
 
 	wp_safe_redirect( admin_url( 'admin.php?page=kbj-gegevens&kbj-herbouwd=' . $aantal ) );
 	exit;

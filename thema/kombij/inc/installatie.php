@@ -97,17 +97,19 @@ function kbj_installatie_startpagina() {
 	if ( $bestaand ) {
 		$pagina_id = $bestaand->ID;
 	} else {
+		$vers      = kbj_sleutels_toevoegen( kbj_startpagina_inhoud(), 'home' );
 		$pagina_id = wp_insert_post(
 			array(
 				'post_title'   => __( 'Home', 'kombij' ),
 				'post_name'    => 'home',
 				'post_type'    => 'page',
 				'post_status'  => 'publish',
-				'post_content' => kbj_startpagina_inhoud(),
+				'post_content' => wp_slash( $vers['inhoud'] ),
 			)
 		);
 
 		if ( $pagina_id && ! is_wp_error( $pagina_id ) ) {
+			update_post_meta( $pagina_id, KBJ_BLOKKEN_META, $vers['kaart'] );
 			kbj_afdruk_zetten( $pagina_id );
 		}
 	}
