@@ -41,3 +41,4 @@ require_once KBJ_DIR . '/inc/beveiliging.php';
 require_once KBJ_DIR . '/inc/melding.php';
 require_once KBJ_DIR . '/inc/bordje.php';
 require_once KBJ_DIR . '/inc/inloggen.php';
+require_once KBJ_DIR . '/inc/doorsturen.php';
