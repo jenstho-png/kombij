@@ -299,14 +299,15 @@ function kbj_inkorten( $tekst, $lengte = 160 ) {
 		return $tekst;
 	}
 
-	$kort = mb_substr( $tekst, 0, $lengte );
+	// Ruimte houden voor het weglatingsteken, zodat het totaal binnen $lengte blijft.
+	$kort = mb_substr( $tekst, 0, $lengte - 1 );
 	$stop = mb_strrpos( $kort, ' ' );
 
 	if ( false !== $stop && $stop > 40 ) {
 		$kort = mb_substr( $kort, 0, $stop );
 	}
 
-	return rtrim( $kort, " ,.;:-" ) . '...';
+	return rtrim( $kort, " ,.;:-" ) . '…';
 }
 
 /**

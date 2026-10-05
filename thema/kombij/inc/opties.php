@@ -419,6 +419,36 @@ function kbj_aandachtspunten() {
 		);
 	}
 
+	// Gegevens die bij de livegang ingevuld moeten zijn.
+	$ontbreekt = array();
+
+	if ( '' === kbj_optie( 'kvk' ) ) {
+		$ontbreekt[] = __( 'KvK-nummer', 'kombij' );
+	}
+
+	if ( '' === kbj_optie( 'btw' ) ) {
+		$ontbreekt[] = __( 'btw-nummer', 'kombij' );
+	}
+
+	if ( $ontbreekt ) {
+		$punten[] = array(
+			/* translators: %s: wat er ontbreekt */
+			sprintf( __( 'Nog invullen: %s.', 'kombij' ), implode( __( ' en ', 'kombij' ), $ontbreekt ) ),
+			__( 'Die staan onderaan de site en in de gegevens voor Google.', 'kombij' ),
+			admin_url( 'admin.php?page=kbj-contact#kop_bedrijf' ),
+			__( 'Invullen', 'kombij' ),
+		);
+	}
+
+	if ( '' === kbj_optie( 'review' ) ) {
+		$punten[] = array(
+			__( 'Nog invullen: de link voor een Google-review.', 'kombij' ),
+			__( 'Dan kunnen tevreden families en bewoners makkelijk een review achterlaten. De link vindt u in uw Google-bedrijfsprofiel, bij "Vraag om reviews".', 'kombij' ),
+			admin_url( 'admin.php?page=kbj-contact#kop_online' ),
+			__( 'Invullen', 'kombij' ),
+		);
+	}
+
 	$gezet = '' !== kbj_optie( 'plek_wonen' ) || '' !== kbj_optie( 'plek_logeren' ) || '' !== kbj_optie( 'plek_dagbesteding' );
 	$datum = kbj_optie( 'plek_datum' );
 

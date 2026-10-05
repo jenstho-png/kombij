@@ -78,13 +78,13 @@ function kbj_omschrijving() {
  */
 function kbj_omschrijving_basis() {
 	if ( is_front_page() ) {
-		return kbj_inkorten( kbj_standaardzin(), 160 );
+		return kbj_inkorten( kbj_standaardzin(), 155 );
 	}
 
 	$pagina = kbj_huidige_pagina();
 
 	if ( $pagina && ! empty( $pagina['zoek'] ) && '' === trim( (string) get_post_field( 'post_excerpt', get_queried_object_id() ) ) ) {
-		return kbj_inkorten( $pagina['zoek'], 160 );
+		return kbj_inkorten( $pagina['zoek'], 155 );
 	}
 
 	if ( is_singular() ) {
@@ -93,7 +93,7 @@ function kbj_omschrijving_basis() {
 		$kort = get_post_field( 'post_excerpt', $id );
 
 		if ( '' !== trim( (string) $kort ) ) {
-			return kbj_inkorten( $kort, 160 );
+			return kbj_inkorten( $kort, 155 );
 		}
 
 		/*
@@ -116,7 +116,7 @@ function kbj_omschrijving_basis() {
 		$tekst = preg_replace( '/\s+/u', ' ', $tekst );
 
 		if ( '' !== $tekst && mb_strlen( $tekst ) > 60 ) {
-			return kbj_inkorten( $tekst, 160 );
+			return kbj_inkorten( $tekst, 155 );
 		}
 	}
 
@@ -125,7 +125,7 @@ function kbj_omschrijving_basis() {
 		return sprintf( __( 'Zoekresultaten voor %s.', 'kombij' ), get_search_query() );
 	}
 
-	return kbj_inkorten( kbj_standaardzin(), 160 );
+	return kbj_inkorten( kbj_standaardzin(), 155 );
 }
 
 /**
@@ -703,6 +703,41 @@ function kbj_sitemap_uitdunnen( $aanbieder, $naam ) {
 	return in_array( $naam, array( 'users', 'taxonomies' ), true ) ? false : $aanbieder;
 }
 add_filter( 'wp_sitemaps_add_provider', 'kbj_sitemap_uitdunnen', 10, 2 );
+
+/**
+ * De bedanktpagina hoort niet in Google: niemand zoekt erop, en wie er via Google
+ * binnenkomt denkt dat er een bericht is verstuurd.
+ *
+ * @param array $regels De robots-regels.
+ * @return array
+ */
+function kbj_bedankt_niet_indexeren( $regels ) {
+	if ( is_page( 'bedankt' ) ) {
+		$regels['noindex'] = true;
+		$regels['follow']  = true;
+	}
+
+	return $regels;
+}
+add_filter( 'wp_robots', 'kbj_bedankt_niet_indexeren' );
+
+/**
+ * En daarom ook niet in de sitemap.
+ *
+ * @param array  $args      Zoekopdracht voor de sitemap.
+ * @param string $soort     Het berichttype.
+ * @return array
+ */
+function kbj_bedankt_uit_sitemap( $args, $soort ) {
+	$bedankt = 'page' === $soort ? get_page_by_path( 'bedankt' ) : null;
+
+	if ( $bedankt ) {
+		$args['post__not_in'] = array_merge( isset( $args['post__not_in'] ) ? (array) $args['post__not_in'] : array(), array( $bedankt->ID ) );
+	}
+
+	return $args;
+}
+add_filter( 'wp_sitemaps_posts_query_args', 'kbj_bedankt_uit_sitemap', 10, 2 );
 
 /**
  * /llms.txt: een korte gids voor taalmodellen.

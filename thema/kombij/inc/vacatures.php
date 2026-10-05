@@ -679,6 +679,11 @@ function kbj_vacature_titel( $delen ) {
 	$id   = get_queried_object_id();
 	$uren = kbj_vacature_veld( $id, 'uren' );
 
+	// Midden in de titel: "Minimaal 24 uur" wordt "minimaal 24 uur".
+	if ( '' !== $uren ) {
+		$uren = mb_strtolower( mb_substr( $uren, 0, 1 ) ) . mb_substr( $uren, 1 );
+	}
+
 	$delen['title'] = sprintf(
 		'Vacature %1$s in %2$s%3$s',
 		get_the_title( $id ),
@@ -704,7 +709,7 @@ function kbj_vacature_omschrijving( $omschrijving ) {
 
 	$intro = kbj_vacature_veld( get_queried_object_id(), 'intro' );
 
-	return '' !== $intro ? kbj_inkorten( 'Vacature bij KomBij in Maasbommel. ' . $intro, 160 ) : $omschrijving;
+	return '' !== $intro ? kbj_inkorten( 'Vacature bij KomBij in Maasbommel. ' . $intro, 155 ) : $omschrijving;
 }
 add_filter( 'kbj_omschrijving', 'kbj_vacature_omschrijving' );
 

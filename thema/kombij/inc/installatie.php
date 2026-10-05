@@ -43,6 +43,24 @@ function kbj_installatie() {
 add_action( 'after_switch_theme', 'kbj_installatie', 20 );
 
 /**
+ * De pagina Voorwaarden is ook de privacypagina. WordPress gebruikt die voor de
+ * link naar het privacybeleid, onder meer op het inlogscherm. Alleen als er nog
+ * niets is aangewezen: een eigen keuze blijft staan.
+ */
+function kbj_privacypagina() {
+	if ( (int) get_option( 'wp_page_for_privacy_policy' ) ) {
+		return;
+	}
+
+	$pagina = get_page_by_path( 'voorwaarden' );
+
+	if ( $pagina && 'publish' === $pagina->post_status ) {
+		update_option( 'wp_page_for_privacy_policy', $pagina->ID );
+	}
+}
+add_action( 'admin_init', 'kbj_privacypagina' );
+
+/**
  * Nieuwe pagina's aanmaken na een update van het thema.
  *
  * Komt er in een nieuwe versie een pagina bij, dan werd die alleen aangemaakt

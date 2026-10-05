@@ -93,6 +93,18 @@ de beste sites in de zorg laten hun cijfer zien.
 - **Openingstijden van de dagbesteding:** ga naar *Gegevens*. Het bordje onder
   de menubalk leest die tijden automatisch.
 
+## Nog invullen voor de livegang
+
+Dit staat ook als "Nog invullen" bovenaan het KomBij-overzicht, tot het is
+ingevuld.
+
+- [ ] **KvK-nummer en btw-nummer:** ga naar *KomBij*, *Contact en bedrijf*.
+      Ze staan onderaan de site en in de gegevens voor Google.
+- [ ] **Link voor een Google-review:** zelfde scherm, bij *Sociale media en
+      reviews*. De link vindt u in uw Google-bedrijfsprofiel, bij "Vraag om
+      reviews". Dan kunnen tevreden families en bewoners makkelijk een review
+      achterlaten.
+
 ## 5. Ideeën voor later
 
 1. **Een checklist om te downloaden:** "Is het tijd voor meer zorg? Waar let u
