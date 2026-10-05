@@ -5147,7 +5147,8 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 .kbj-hl-open__zweef {
 	position: absolute;
 	z-index: 2;
-	right: clamp(1.5rem, 4vw, 3.5rem);
+	/* Gelijk aan de rechterrand van de grote foto, ook als die op een breed scherm in het midden staat. */
+	right: calc(max(var(--kbj-zijkant), (100% - var(--kbj-breed)) / 2) - var(--kbj-zijkant) + clamp(1.5rem, 4vw, 3.5rem));
 	bottom: clamp(-2.5rem, -3vw, -1rem);
 	width: min(34%, 380px);
 	height: 72%;
@@ -5548,10 +5549,14 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 	}
 }
 
-/* Levendig: tekst op een foto houdt altijd ruimte tot de rand van de foto. */
+/*
+ * Levendig: tekst op een foto houdt altijd ruimte tot de rand van de foto.
+ * Op een breed scherm wordt de foto niet breder dan --kbj-breed en staat hij in
+ * het midden; de tekst schuift dan mee, anders valt hij naast de foto.
+ */
 .kbj-hl-open__tekst,
 .kbj-hl-vlak__tekst {
-	left: calc(var(--kbj-zijkant) + clamp(1.5rem, 4.5vw, 4rem));
+	left: calc(max(var(--kbj-zijkant), (100% - var(--kbj-breed)) / 2) + clamp(1.5rem, 4.5vw, 4rem));
 }
 
 .kbj-hl-band .kbj-hl-band__zin {
