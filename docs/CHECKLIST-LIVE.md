@@ -56,6 +56,23 @@ vergeten.
 - [ ] Foto's als webp, in de maat waarin ze getoond worden.
 - [ ] Lighthouse gedraaid: SEO en toegankelijkheid op 100, snelheid boven de 90.
 - [ ] HTTPS staat aan en `http` stuurt door naar `https`.
+- [ ] De stylesheet, scripts, fonts en foto's krijgen een lange cache-header.
+      Controleer met `curl -I .../assets/css/thema.min.css`: er hoort
+      `Cache-Control: max-age=31536000` (of een `Expires` ver in de toekomst)
+      te staan. Veilig, want elk bestand krijgt een nieuwe `?ver=` als het
+      verandert. Staat het er niet en draait de host Apache, zet dan in
+      `.htaccess`:
+
+      ```
+      <IfModule mod_expires.c>
+        ExpiresActive On
+        ExpiresByType text/css "access plus 1 year"
+        ExpiresByType application/javascript "access plus 1 year"
+        ExpiresByType font/woff2 "access plus 1 year"
+        ExpiresByType image/webp "access plus 1 year"
+        ExpiresByType image/svg+xml "access plus 1 year"
+      </IfModule>
+      ```
 - [ ] `www` en zonder `www` komen op dezelfde plek uit.
 
 ## Na de livegang
@@ -64,7 +81,14 @@ vergeten.
 - [ ] Statistieken aanzetten, als de klant dat wil.
 - [ ] Automatische back-up instellen.
 - [ ] Updates: kernupdates automatisch, thema en plugins met de hand.
-- [ ] De oude site doorsturen naar de nieuwe, pagina voor pagina. Niet alles naar
-      de startpagina: dan verlies je de posities die die pagina's hadden.
+- [x] De oude site doorsturen naar de nieuwe, pagina voor pagina. Zit in het
+      thema (`inc/doorsturen.php`): de vier oude pagina's en acht pdf's van
+      kombijmaasbommel.nl sturen blijvend (301) door.
+- [ ] Komt de nieuwe site in dezelfde WordPress als de oude? Zet dan de oude
+      pagina's (Zorgeloos wonen, Zorgeloos logeren, Werken in de zorg,
+      Openingstijden) op concept of verwijder ze. Het doorsturen werkt ook als
+      ze blijven staan, maar dan staan ze dubbel in het beheer.
+- [ ] Na de livegang de oude adressen één keer zelf openen en kijken of ze op de
+      goede pagina uitkomen.
 - [ ] Korte handleiding naar de klant.
 - [ ] Factuur.

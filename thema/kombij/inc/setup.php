@@ -111,30 +111,19 @@ function kbj_scripts() {
  */
 function kbj_assets() {
 	/*
-	 * De stylesheet gaat mee in de pagina zelf en niet als een apart bestand.
+	 * De stylesheet als los bestand, met de datum van het bestand als versie.
 	 *
-	 * Een los bestand betekent dat de browser eerst de pagina ophaalt, daarin de
-	 * verwijzing vindt, en dan nog een keer op pad moet voordat hij iets mag
-	 * tekenen. Op een telefoon met een matige verbinding is dat een halve
-	 * seconde leeg scherm. Zo staat de opmaak er bij de eerste byte.
-	 *
-	 * Het kost wat: de opmaak zit in elke pagina in plaats van één keer in de
-	 * cache. Ingepakt is dat zo'n twintig kilobyte, minder dan één foto.
-	 *
-	 * Lukt het lezen niet, dan gaat het gewoon weer als bestand. Beter een
-	 * trage pagina dan een pagina zonder opmaak.
+	 * Eerder ging hij mee in elke pagina. Dat scheelde bij het allereerste
+	 * bezoek één verzoek, maar dan reisde bij elke volgende pagina opnieuw
+	 * 127 kilobyte opmaak mee. Bezoekers van een zorgsite kijken bijna altijd
+	 * meerdere pagina's: wonen, kosten, contact. Als los bestand haalt de
+	 * browser hem één keer op en onthoudt hem; elke volgende pagina is dan
+	 * alleen nog de tekst. Verandert het bestand, dan verandert de versie en
+	 * haalt de browser vanzelf de nieuwe.
 	 */
-	$pad   = kbj_klein( '/assets/css/thema.css' );
-	$stijl = is_readable( KBJ_DIR . $pad ) ? file_get_contents( KBJ_DIR . $pad ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+	$pad = kbj_klein( '/assets/css/thema.css' );
 
-	if ( is_string( $stijl ) && '' !== $stijl ) {
-		// Zonder bron drukt WordPress alleen de inline regels af, geen <link>.
-		wp_register_style( 'kbj-thema', false, array(), KBJ_VERSION );
-		wp_enqueue_style( 'kbj-thema' );
-		wp_add_inline_style( 'kbj-thema', $stijl );
-	} else {
-		wp_enqueue_style( 'kbj-thema', KBJ_URI . $pad, array(), kbj_versie( $pad ) );
-	}
+	wp_enqueue_style( 'kbj-thema', KBJ_URI . $pad, array(), kbj_versie( $pad ) );
 
 	foreach ( kbj_scripts() as $naam ) {
 		$script = kbj_klein( '/assets/js/' . $naam . '.js' );
@@ -177,9 +166,9 @@ add_action( 'wp_head', 'kbj_beweging_klasse', 0 );
 /**
  * De regels die een bestand uit het thema nodig hebben.
  *
- * De stylesheet staat in de pagina zelf, en dan wijst een relatief pad naar de
- * verkeerde map. Het ornament en de spitsboog komen daarom hier binnen, met het
- * volledige adres erbij.
+ * Ook in de editor staat de opmaak in de pagina zelf, en dan wijst een relatief
+ * pad naar de verkeerde map. Het ornament en de spitsboog komen daarom hier
+ * binnen, met het volledige adres erbij.
  *
  * @return string
  */
