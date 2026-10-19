@@ -5099,7 +5099,7 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 
 /* Donker onder de tekst, rechts helder: daar komt het glas-in-lood door. */
 .kbj-hl-open__achter.kbj-hl-tint--nacht .kbj-beeld__kader::after {
-	background: linear-gradient(100deg, rgba(10, 36, 68, 0.9) 0%, rgba(10, 36, 68, 0.66) 36%, rgba(10, 36, 68, 0.14) 68%, rgba(10, 36, 68, 0) 100%);
+	background: linear-gradient(100deg, rgba(10, 36, 68, 0.9) 0%, rgba(10, 36, 68, 0.66) 36%, rgba(10, 36, 68, 0.3) 66%, rgba(10, 36, 68, 0.38) 100%);
 }
 
 .kbj-hl-open__raam {
@@ -5153,11 +5153,10 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 .kbj-hl-open__glas {
 	position: absolute;
 	z-index: 2;
-	/* Gelijk aan de rechterrand van de grote foto, ook als die op een breed scherm in het midden staat. */
-	right: calc(max(var(--kbj-zijkant), (100% - var(--kbj-breed)) / 2) - var(--kbj-zijkant) + clamp(2.5rem, 6vw, 6rem));
-	top: 50%;
-	width: clamp(200px, 25vw, 380px);
-	translate: 0 -50%;
+	/* Spiegelt de tekst: even ver van de rechterrand als de tekst van de linkerrand, en onderaan gelijk met de knoppen. */
+	right: calc(max(var(--kbj-zijkant), (100% - var(--kbj-breed)) / 2) + clamp(1.5rem, 4.5vw, 4rem));
+	bottom: clamp(2rem, 6vw, 5rem);
+	width: clamp(220px, 60vw - 360px, 460px);
 	pointer-events: none;
 }
 
@@ -5176,6 +5175,18 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 	background: radial-gradient(closest-side, rgba(176, 225, 241, 0.42), rgba(176, 225, 241, 0.12) 55%, transparent);
 	opacity: 0;
 	animation: kbj-logoraam-gloed 2.4s ease-out 1.2s forwards;
+}
+
+/* Een dunne ring eromheen, als de lijst van een roosvenster. */
+.kbj-logoraam::after {
+	content: "";
+	position: absolute;
+	inset: -7%;
+	border: 1px solid rgba(255, 255, 255, 0.4);
+	border-radius: 50%;
+	opacity: 0;
+	scale: 0.9;
+	animation: kbj-logoraam-ring 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) 1.8s forwards;
 }
 
 .kbj-logoraam svg {
@@ -5255,6 +5266,13 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 	}
 }
 
+@keyframes kbj-logoraam-ring {
+	to {
+		opacity: 1;
+		scale: 1;
+	}
+}
+
 @keyframes kbj-logoraam-gloed {
 	to {
 		opacity: 1;
@@ -5275,14 +5293,17 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 @media (prefers-reduced-motion: reduce) {
 	.kbj-logoraam,
 	.kbj-logoraam::before,
+	.kbj-logoraam::after,
 	.kbj-logoraam__lood,
 	.kbj-logoraam__glas,
 	.kbj-logoraam__glans {
 		animation: none !important;
 	}
 
-	.kbj-logoraam::before {
+	.kbj-logoraam::before,
+	.kbj-logoraam::after {
 		opacity: 1;
+		scale: 1;
 	}
 
 	.kbj-logoraam__lood {
@@ -5549,11 +5570,14 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 		max-width: 80%;
 	}
 
+	/* Op een smal scherm als embleem in het midden, boven de tekst. */
 	.kbj-hl-open__glas {
-		top: clamp(2.25rem, 7vw, 3rem);
-		right: calc(var(--kbj-zijkant) + 1.5rem);
-		width: clamp(110px, 30vw, 170px);
-		translate: none;
+		top: clamp(2rem, 7vw, 3rem);
+		right: auto;
+		bottom: auto;
+		left: 50%;
+		width: clamp(104px, 34vw, 160px);
+		translate: -50% 0;
 	}
 
 	.kbj-hl-collage__tekst {
@@ -5587,6 +5611,13 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 	}
 }
 
+/* Op een smalle telefoon loopt de tekst langer door: iets meer ruimte voor het raam erboven. */
+@media (max-width: 360px) {
+	.kbj-hl-open .kbj-hl-open__achter .kbj-beeld__kader {
+		height: 720px;
+	}
+}
+
 @media (max-width: 781px) {
 	.kbj-hl-open__achter .kbj-beeld__kader {
 		height: 640px;
@@ -5594,7 +5625,7 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 
 	.kbj-hl-open__achter .kbj-beeld__kader::after,
 	.kbj-hl-open__achter.kbj-hl-tint--nacht .kbj-beeld__kader::after {
-		background: linear-gradient(180deg, rgba(10, 36, 68, 0.05) 0%, rgba(10, 36, 68, 0.2) 25%, rgba(10, 36, 68, 0.88) 55%, rgba(10, 36, 68, 0.95) 100%);
+		background: linear-gradient(180deg, rgba(10, 36, 68, 0.35) 0%, rgba(10, 36, 68, 0.45) 28%, rgba(10, 36, 68, 0.9) 55%, rgba(10, 36, 68, 0.95) 100%);
 	}
 
 	.kbj-hl-open__raam {
