@@ -995,10 +995,10 @@ function kbj_render_afsluiter() {
  */
 function kbj_render_nietgevonden() {
 	$tegels = array(
-		array( 'wonen-met-zorg', __( 'Wonen', 'kombij' ), __( 'Een vast thuis met zorg', 'kombij' ), 'slaapkamer.webp' ),
-		array( 'logeren-met-zorg', __( 'Logeren', 'kombij' ), __( 'Een paar dagen of weken', 'kombij' ), 'slaapkamer-raam.webp' ),
-		array( 'dagbesteding', __( 'Dagbesteding', 'kombij' ), __( 'Samen de dag door', 'kombij' ), 'dagbesteding.webp' ),
-		array( 'contact', __( 'Contact', 'kombij' ), __( 'Stel gerust uw vraag', 'kombij' ), 'koffie.webp' ),
+		array( 'wonen-met-zorg', __( 'Wonen', 'kombij' ), __( 'Een vast thuis met zorg', 'kombij' ), 'shoot-kamer-raam.webp' ),
+		array( 'logeren-met-zorg', __( 'Logeren', 'kombij' ), __( 'Een paar dagen of weken', 'kombij' ), 'shoot-lezen.webp' ),
+		array( 'dagbesteding', __( 'Dagbesteding', 'kombij' ), __( 'Samen de dag door', 'kombij' ), 'shoot-spel-handen.webp' ),
+		array( 'contact', __( 'Contact', 'kombij' ), __( 'Stel gerust uw vraag', 'kombij' ), 'shoot-koffie-taart.webp' ),
 	);
 	$html   = '';
 
@@ -1034,9 +1034,10 @@ function kbj_render_nietgevonden() {
 		esc_html( kbj_tekst( 'knop_bellen' ) ),
 		kbj_render_beeld(
 			array(
-				'bestand' => 'kerk-interieur.webp',
+				'bestand' => 'shoot-terras.webp',
 				'alt'     => '',
 				'vorm'    => 'recht',
+				'positie' => '50% 60%',
 				'eerst'   => true,
 			)
 		),

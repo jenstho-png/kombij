@@ -20,7 +20,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 				'breedte' => '55%',
 			),
 			array(
-				'inhoud'  => kbj_foto( 'slaapkamer.webp', 'Een zit-slaapkamer met een bed, twee stoelen en een glas-in-loodraam onder een gewelf' ),
+				'inhoud'  => kbj_foto( 'shoot-zorg-kamer.webp', 'Een medewerker helpt een bewoner op haar kamer' ),
 				'breedte' => '45%',
 			),
 		),
@@ -53,8 +53,8 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 		'kbj-lijst kbj-lijst--twee'
 	)
 	. kbj_groep(
-		kbj_foto( 'samen-aan-tafel.webp', 'Bewoners en gasten samen aan de lange tafel in de huiskamer', array( 'vorm' => 'recht', 'verhouding' => '3/4', 'positie' => '60% 50%' ) )
-		. kbj_foto( 'zitplek.webp', 'Een fauteuil en een ronde tafel met bloemen', array( 'vorm' => 'recht', 'verhouding' => '3/4' ) )
+		kbj_foto( 'shoot-keuken-raam.webp', 'De keuken en eettafel onder een hoog raam', array( 'vorm' => 'recht', 'verhouding' => '3/4', 'positie' => '50% 60%' ) )
+		. kbj_foto( 'shoot-kamer-stoel.webp', 'Een fauteuil bij het raam in een van de kamers', array( 'vorm' => 'recht', 'verhouding' => '3/4' ) )
 		. kbj_foto( 'schip.webp', 'Het schip van de kerk met de nieuwe tussenverdieping', array( 'vorm' => 'recht', 'verhouding' => '3/4' ) )
 		. kbj_foto( 'kerk-interieur.webp', 'De gewelven en ramen van de kerk', array( 'vorm' => 'recht', 'verhouding' => '3/4', 'positie' => '80% 50%' ) ),
 		'kbj-strook'

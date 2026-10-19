@@ -16,7 +16,7 @@ $foto = function ( $bestand, $alt, $klasse = '', $positie = '50% 50%', $verhoudi
 
 // 1. De opening: een grote foto met een laag kerkblauw, en twee kleine foto's die eroverheen zweven.
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	$foto( 'samen-aan-tafel.webp', 'Gasten en medewerkers samen aan de lange tafel bij KomBij', 'kbj-hl-tint kbj-hl-tint--nacht kbj-hl-open__achter', '55% 50%', '16/9' )
+	$foto( 'shoot-schip.webp', 'Het lichte schip van KomBij met de tussenverdieping onder de gewelven', 'kbj-hl-tint kbj-hl-tint--nacht kbj-hl-open__achter', '50% 50%', '16/9' )
 	. kbj_groep(
 		kbj_kop( 1, 'Een warm thuis, voor als thuis niet meer gaat.', 'kbj-schuif' )
 		. kbj_p( 'Wonen, logeren en dagbesteding met zorg in een monumentaal gebouw in Maasbommel. Klein, huiselijk en dichtbij.', 'kbj-intro' )
@@ -29,8 +29,8 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 		'kbj-hl-open__tekst'
 	)
 	. kbj_groep(
-		$foto( 'kerk-bloesem.webp', 'Het gebouw met een bloeiende boom ervoor', 'kbj-hl-zweef kbj-hl-zweef--een', '50% 60%', '1/1' )
-		. $foto( 'slaapkamer.webp', 'Een kamer onder een bakstenen gewelf', 'kbj-hl-zweef kbj-hl-zweef--twee', '50% 50%', '3/4' ),
+		$foto( 'shoot-koffie-taart.webp', 'Koffie met appeltaart op het terras', 'kbj-hl-zweef kbj-hl-zweef--een', '50% 60%', '1/1' )
+		. $foto( 'shoot-terras-lach.webp', 'Een gast lacht op het terras bij een stuk taart', 'kbj-hl-zweef kbj-hl-zweef--twee', '50% 40%', '3/4' ),
 		'kbj-hl-open__zweef'
 	),
 	array( 'klasse' => 'kbj-hl kbj-hl-open', 'boven' => '30', 'onder' => '30' )
@@ -55,9 +55,9 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	kbj_kop( 2, 'Wat zoekt u voor uw naaste?', 'kbj-schuif', true )
 	. kbj_p( 'Drie manieren om bij ons te zijn. Hetzelfde huis, hetzelfde vertrouwde team.', 'kbj-intro', true )
 	. kbj_groep(
-		$kaart( 'kerk', 'slaapkamer-raam.webp', 'Een hoog glas-in-loodraam met gordijnen', 'Een nieuw thuis', 'Een eigen kamer, met dag en nacht zorg dichtbij.', '/wonen-met-zorg/', 'Wonen met zorg', 'wonen' )
-		. $kaart( 'zee', 'zitplek.webp', 'Een fauteuil met bloemen op tafel', 'Even op adem komen', 'Uw naaste logeert een paar nachten bij ons. U rust uit, wij zorgen.', '/logeren-met-zorg/', 'Logeren met zorg', 'logeren' )
-		. $kaart( 'helder', 'dagbesteding.webp', 'Gasten en een begeleider lachen aan tafel', 'Nooit meer de hele dag alleen', 'Koffie, bewegen en samen lunchen. Maandag tot en met vrijdag.', '/dagbesteding/', 'Dagbesteding', 'dagbesteding' ),
+		$kaart( 'kerk', 'shoot-kamer-raam.webp', 'Een kamer met een hoog glas-in-loodraam en een bed', 'Een nieuw thuis', 'Een eigen kamer, met dag en nacht zorg dichtbij.', '/wonen-met-zorg/', 'Wonen met zorg', 'wonen' )
+		. $kaart( 'zee', 'shoot-lezen.webp', 'Een gast leest een tijdschrift in een fauteuil', 'Even op adem komen', 'Uw naaste logeert een paar nachten bij ons. U rust uit, wij zorgen.', '/logeren-met-zorg/', 'Logeren met zorg', 'logeren' )
+		. $kaart( 'helder', 'shoot-spel-handen.webp', 'Handen aan tafel tijdens een potje rummikub', 'Nooit meer de hele dag alleen', 'Koffie, bewegen en samen lunchen. Maandag tot en met vrijdag.', '/dagbesteding/', 'Dagbesteding', 'dagbesteding' ),
 		'kbj-hl-kaarten'
 	),
 	array( 'klasse' => 'kbj-hl kbj-hl-aanbod', 'anker' => 'aanbod', 'boven' => '60', 'onder' => '50' )
@@ -65,7 +65,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 
 // 3. De zin, groot over een foto met een laag nachtblauw.
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	$foto( 'kerk-interieur.webp', '', 'kbj-hl-tint kbj-hl-tint--nacht kbj-hl-band__beeld', '50% 45%', '21/9' )
+	$foto( 'shoot-vide-overzicht.webp', '', 'kbj-hl-tint kbj-hl-tint--nacht kbj-hl-band__beeld', '50% 45%', '21/9' )
 	. kbj_p( 'Een eigen kamer. Vaste gezichten. Koffie als u wakker bent. En <span class="kbj-hl-licht">altijd iemand dichtbij.</span>', 'kbj-hl-band__zin' ),
 	array( 'klasse' => 'kbj-hl kbj-hl-band', 'boven' => '30', 'onder' => '30' )
 );
@@ -80,9 +80,9 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 			'kbj-hl-collage__tekst'
 		)
 		. $foto( 'kerk-luchtfoto.webp', 'Het gebouw van KomBij in Maasbommel, van bovenaf', 'kbj-hl-c1', '50% 35%', '4/3' )
-		. $foto( 'kerk-silhouet.webp', 'Het gebouw in de ochtendzon, gezien over de velden', 'kbj-hl-c2 kbj-hl-tint kbj-hl-tint--glas', '55% 50%', '3/4' )
+		. $foto( 'shoot-toren.webp', 'De toren van het gebouw, van onderaf gezien', 'kbj-hl-c2 kbj-hl-tint kbj-hl-tint--glas', '50% 40%', '3/4' )
 		. $foto( 'zoutkamer.webp', 'De zoutkamer met ligstoelen', 'kbj-hl-c3', '50% 50%', '1/1' )
-		. $foto( 'schip.webp', 'Het lichte schip met de tussenverdieping', 'kbj-hl-c4', '50% 50%', '4/3' )
+		. $foto( 'shoot-vide-kamers.webp', 'De tussenverdieping met de deuren van de kamers', 'kbj-hl-c4', '50% 60%', '4/3' )
 		. kbj_lijst(
 			array(
 				'<strong>24/7</strong><span>zorg, dag en nacht</span>',
@@ -111,7 +111,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_groep(
 		kbj_groep(
-			$foto( 'koffie.webp', 'Een kopje koffie wordt met een glimlach aangereikt', 'kbj-hl-f1', '50% 45%', '4/5' )
+			$foto( 'shoot-terras-medewerker.webp', 'Een medewerker lacht aan tafel op het terras', 'kbj-hl-f1', '50% 40%', '4/5' )
 			. '<!-- wp:kbj/raamlijn {"className":"kbj-hl-familie__raam"} /-->',
 			'kbj-hl-familie__beelden'
 		)

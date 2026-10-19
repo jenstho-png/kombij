@@ -43,8 +43,9 @@ function kbj_paginas() {
 			'kop'      => 'KomBij ons wonen',
 			'intro'    => 'Gaat thuis wonen niet meer? Bij KomBij woont u in een kleine groep, in een eigen kamer, met 24 uur per dag zorg dichtbij.',
 			'zoek'     => 'Kleinschalig wonen met 24 uur zorg in Maasbommel, voor zes bewoners met een WLZ-indicatie. Ook bij dementie of intensieve verpleging.',
-			'bestand'  => 'slaapkamer-raam.webp',
-			'alt'      => 'Een hoog glas-in-loodraam met gordijnen in een van de kamers',
+			'bestand'  => 'shoot-kamer-raam.webp',
+			'alt'      => 'Een kamer met een hoog glas-in-loodraam, een lamp en een bed',
+			'positie'  => '50% 30%',
 			'patronen' => array( 'pagina-wonen' ),
 		),
 		array(
@@ -58,8 +59,9 @@ function kbj_paginas() {
 			'kop'      => 'KomBij ons logeren',
 			'intro'    => 'Even niet zorgen. Uw naaste logeert een paar nachten bij ons, met 24 uur per dag zorg. U komt op adem, en weet dat het goed geregeld is.',
 			'zoek'     => 'Logeeropvang met 24 uur zorg in Maasbommel om mantelzorgers te ontlasten. Vanaf 2 nachten, via WLZ, WMO, PGB of particulier.',
-			'bestand'  => 'zitplek.webp',
-			'alt'      => 'Een fauteuil en een ronde tafel met bloemen in een logeerkamer',
+			'bestand'  => 'shoot-kamer-stoel.webp',
+			'alt'      => 'Een fauteuil bij een hoog glas-in-loodraam onder een bakstenen gewelf',
+			'positie'  => '50% 55%',
 			'patronen' => array( 'pagina-logeren' ),
 		),
 		array(
@@ -73,8 +75,9 @@ function kbj_paginas() {
 			'kop'      => 'KomBij ons de dag doorbrengen',
 			'intro'    => 'Een fijne dag met structuur en gezelligheid. Van maandag tot en met vrijdag, van 10:30 tot 16:30, in een warme en veilige omgeving.',
 			'zoek'     => 'Dagbesteding voor ouderen in Maasbommel, West Maas en Waal. Maandag tot en met vrijdag van 10:30 tot 16:30, via WMO, WLZ of particulier.',
-			'bestand'  => 'dagbesteding.webp',
-			'alt'      => 'Gasten en een begeleider aan de lange tafel in de kerk',
+			'bestand'  => 'shoot-spel-handen.webp',
+			'alt'      => 'Handen schuiven stenen tijdens een potje rummikub',
+			'positie'  => '50% 55%',
 			'patronen' => array( 'pagina-dagbesteding' ),
 		),
 		array(
@@ -88,8 +91,9 @@ function kbj_paginas() {
 			'kop'      => 'Wat kost zorg bij KomBij?',
 			'intro'    => 'De meeste zorg bij KomBij wordt vergoed. Welke regeling voor u geldt, hangt af van uw situatie. Hier leggen we het rustig uit.',
 			'zoek'     => 'Uitleg over WLZ, WMO, PGB en particulier betalen voor wonen, logeren en dagbesteding bij KomBij Maasbommel.',
-			'bestand'  => 'kerk-luchtfoto.webp',
-			'alt'      => 'Het gebouw van KomBij in Maasbommel, van bovenaf gezien',
+			'bestand'  => 'shoot-toren-boom.webp',
+			'alt'      => 'Het gebouw van KomBij met de toren, van onderaf gezien',
+			'positie'  => '50% 30%',
 			'patronen' => array( 'pagina-kosten' ),
 		),
 		array(
@@ -102,8 +106,9 @@ function kbj_paginas() {
 			'kop'      => 'Een familie, een monument en zorg vanuit ons hart',
 			'intro'    => 'KomBij is een initiatief van Corrie Roelofsen, haar dochter Chantal en schoonzoon Edwin. Samen gaven ze een monumentaal gebouw in Maasbommel een nieuwe bestemming.',
 			'zoek'     => 'Het verhaal van KomBij: een familie die de monumentale Lambertuskerk in Maasbommel verbouwde tot een kleinschalige zorglocatie.',
-			'bestand'  => 'kerk-groen.webp',
-			'alt'      => 'De toren van de Lambertuskerk tussen het groen',
+			'bestand'  => 'shoot-gewelf-raam.webp',
+			'alt'      => 'Een hoog raam onder een bakstenen gewelf',
+			'positie'  => '50% 55%',
 			'patronen' => array( 'pagina-over' ),
 		),
 		array(
@@ -131,8 +136,9 @@ function kbj_paginas() {
 			'kop'      => 'KomBij ons langs',
 			'intro'    => 'Wilt u een rondleiding, heeft u een vraag over zorg of kosten, of wilt u zich aanmelden? Bel, mail of stuur een bericht.',
 			'zoek'     => 'Adres, telefoonnummer en openingstijden van KomBij, Raadhuisdijk 44 in Maasbommel. Plan een rondleiding.',
-			'bestand'  => 'koffie.webp',
-			'alt'      => 'Een kopje koffie wordt aangereikt',
+			'bestand'  => 'shoot-koffie-kaart.webp',
+			'alt'      => 'Koffie met appeltaart op het terras',
+			'positie'  => '50% 66%',
 			'knop'     => false,
 			'patronen' => array( 'contact' ),
 		),
@@ -147,8 +153,9 @@ function kbj_paginas() {
 			'kop'      => 'KomBij ons werken',
 			'intro'    => 'We zoeken collega’s en vrijwilligers voor wie persoonlijke aandacht vanzelf spreekt. In een warm team, in een monumentaal gebouw aan de Maas.',
 			'zoek'     => 'Vacatures voor verzorgende IG, verpleegkundige, helpende plus en nachtdienst bij KomBij in Maasbommel. Ook vrijwilligers welkom.',
-			'bestand'  => 'schip.webp',
-			'alt'      => 'Het schip van de kerk met de nieuwe tussenverdieping',
+			'bestand'  => 'shoot-zorg-kamer.webp',
+			'alt'      => 'Een medewerker helpt een bewoner met de bediening van het bed',
+			'positie'  => '50% 40%',
 			'knop'     => false,
 			'patronen' => array( 'pagina-werken' ),
 		),
@@ -311,6 +318,10 @@ function kbj_pagina_inhoud( $pagina ) {
 		if ( ! empty( $pagina['bestand'] ) ) {
 			$attrs['bestand'] = $pagina['bestand'];
 			$attrs['alt']     = isset( $pagina['alt'] ) ? $pagina['alt'] : '';
+
+			if ( ! empty( $pagina['positie'] ) ) {
+				$attrs['positie'] = $pagina['positie'];
+			}
 		}
 
 		if ( ! empty( $pagina['plek'] ) ) {

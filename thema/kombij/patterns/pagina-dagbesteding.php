@@ -20,7 +20,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 				'breedte' => '55%',
 			),
 			array(
-				'inhoud'  => kbj_foto( 'koffie.webp', 'Een kopje koffie op een schoteltje wordt aangereikt', array( 'positie' => '50% 40%' ) ),
+				'inhoud'  => kbj_foto( 'shoot-man-lacht.webp', 'Een gast lacht aan tafel tijdens de dagbesteding', array( 'positie' => '50% 30%' ) ),
 				'breedte' => '45%',
 			),
 		),
@@ -30,7 +30,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	array( 'klasse' => 'kbj-reveal' )
 );
 
-echo kbj_beeldband( 'samen-aan-tafel.webp', 'Samen koffie. Samen lunchen. <span class="kbj-hl-licht">Samen de dag door.</span>', 'nacht', '55% 50%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo kbj_beeldband( 'shoot-spel-groep.webp', 'Samen koffie. Samen lunchen. <span class="kbj-hl-licht">Samen de dag door.</span>', 'nacht', '55% 50%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_sectiekop(

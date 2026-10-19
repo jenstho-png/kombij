@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
  */
 function kbj_inloggen_stijl() {
 	$fonts = function_exists( 'kbj_font_face_css' ) ? kbj_font_face_css() : '';
-	$foto  = KBJ_URI . '/assets/foto/kerk-interieur.webp';
+	$foto  = KBJ_URI . '/assets/foto/shoot-schip.webp';
 	$logo  = KBJ_URI . '/assets/beeld/logo-staand-wit.svg';
 	?>
 	<style>

@@ -21,7 +21,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 				'breedte' => '55%',
 			),
 			array(
-				'inhoud'  => kbj_foto( 'samen-aan-tafel.webp', 'Gasten en medewerkers aan de lange tafel in de kerk', array( 'positie' => '45% 50%' ) ),
+				'inhoud'  => kbj_foto( 'shoot-terras-medewerker.webp', 'Een medewerker lacht aan tafel op het terras', array( 'positie' => '50% 40%' ) ),
 				'breedte' => '45%',
 			),
 		),
@@ -61,8 +61,8 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 		array(
 			array(
 				'inhoud'  => kbj_groep(
-					kbj_foto( 'kerk-interieur.webp', 'De lichte gewelven en hoge ramen van het gebouw', array( 'vorm' => 'recht', 'verhouding' => '4/3', 'positie' => '50% 40%' ) )
-					. kbj_foto( 'schip.webp', 'Het lichte schip met de nieuwe tussenverdieping', array( 'verhouding' => '3/4' ) ),
+					kbj_foto( 'shoot-vide-overzicht.webp', 'De lichte gewelven en de tussenverdieping van het gebouw', array( 'vorm' => 'recht', 'verhouding' => '4/3', 'positie' => '50% 50%' ) )
+					. kbj_foto( 'shoot-gewelf-schip.webp', 'Het schip met de gewelven, gezien vanaf de tussenverdieping', array( 'verhouding' => '3/4' ) ),
 					'kbj-huis__beelden'
 				),
 				'breedte' => '52%',

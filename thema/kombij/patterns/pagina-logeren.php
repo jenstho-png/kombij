@@ -20,7 +20,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 				'breedte' => '55%',
 			),
 			array(
-				'inhoud'  => kbj_foto( 'slaapkamer.webp', 'Een logeerkamer met een bed, twee stoelen en een glas-in-loodraam' ),
+				'inhoud'  => kbj_foto( 'shoot-lezen.webp', 'Een gast leest een tijdschrift in een fauteuil' ),
 				'breedte' => '45%',
 			),
 		),

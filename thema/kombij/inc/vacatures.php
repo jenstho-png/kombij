@@ -494,6 +494,7 @@ function kbj_render_vacature( $attrs ) {
 				'url'     => kbj_tekst( 'vacature_foto_url' ),
 				'alt'     => '',
 				'vorm'    => 'recht',
+				'positie' => '50% 38%',
 			)
 		),
 		esc_html( kbj_tekst( 'vacature_over' ) ),
@@ -753,8 +754,8 @@ function kbj_render_vacaturestrook( $attrs ) {
 			esc_url( home_url( '/werken-bij/' ) ),
 			kbj_render_beeld(
 				array(
-					'bestand'    => 'schip.webp',
-					'alt'        => 'De lichte ruimte met de nieuwe tussenverdieping',
+					'bestand'    => 'shoot-terras-medewerker.webp',
+					'alt'        => 'Een medewerker lacht aan tafel op het terras',
 					'vorm'       => 'recht',
 					'verhouding' => '4/3',
 				)

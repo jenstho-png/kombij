@@ -287,7 +287,7 @@ function kbj_optie_standaard() {
 		'knop_rondleiding'  => 'Plan een rondleiding',
 		'knop_bellen'       => 'Bel ons',
 		'vacature_over'     => 'Kleinschalige zorg in een huiselijke sfeer, in een monument in Maasbommel. Een klein team, samen met vrijwilligers. Jij helpt er een tweede thuis van te maken.',
-		'vacature_foto'     => 'samen-aan-tafel.webp',
+		'vacature_foto'     => 'shoot-terras-medewerker.webp',
 		'nietgevonden_kop'  => 'Deze pagina bestaat niet (meer)',
 		'nietgevonden_tekst' => 'Misschien is hij verhuisd, of stond er een tikfout in de link. Kies hieronder waar u naartoe wilt, of neem contact met ons op.',
 		'melding_aan'       => 'aan',
