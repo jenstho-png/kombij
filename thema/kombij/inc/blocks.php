@@ -888,6 +888,86 @@ function kbj_illustratie( $naam, $klasse = '' ) {
 }
 
 /**
+ * Het glas-in-lood uit het logo, dat zich opbouwt.
+ *
+ * Eerst verschijnt het lood vanuit het midden, daarna valt het glas er stukje
+ * voor stukje in, van binnen naar buiten. Daarna blijft er licht doorheen
+ * gaan: de ruitjes gloeien zacht op en er glijdt af en toe een glans over.
+ * Met "minder beweging" staat het raam meteen af.
+ *
+ * @param string $klasse Extra klasse.
+ * @return string
+ */
+function kbj_logoraam( $klasse = '' ) {
+	static $nummer = 0;
+	++$nummer;
+
+	$bestand = KBJ_DIR . '/assets/beeld/icoon.svg';
+
+	if ( ! file_exists( $bestand ) ) {
+		return '';
+	}
+
+	preg_match_all( '#<path d="([^"]+)" fill="([^"]+)"/>#', (string) file_get_contents( $bestand ), $paden, PREG_SET_ORDER ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+
+	$soorten = array(
+		'#72B6BE' => 'zee',
+		'#B0E1F1' => 'licht',
+		'#1E7CB3' => 'blauw',
+	);
+
+	$lood = '';
+	$glas = array();
+
+	foreach ( $paden as $pad ) {
+		$kleur = strtoupper( $pad[2] );
+
+		if ( ! isset( $soorten[ $kleur ] ) ) {
+			$lood .= $pad[1];
+			continue;
+		}
+
+		// Het midden van het ruitje, om ze van binnen naar buiten te laten vallen.
+		preg_match_all( '#(-?[\d.]+)[ ,](-?[\d.]+)#', $pad[1], $punten );
+		$x = array_sum( array_map( 'floatval', $punten[1] ) ) / max( 1, count( $punten[1] ) );
+		$y = array_sum( array_map( 'floatval', $punten[2] ) ) / max( 1, count( $punten[2] ) );
+
+		$glas[] = array(
+			'd'       => $pad[1],
+			'soort'   => $soorten[ $kleur ],
+			'afstand' => hypot( $x - 114.5, $y - 115.6 ),
+		);
+	}
+
+	$volgorde = $glas;
+	usort(
+		$volgorde,
+		function ( $a, $b ) {
+			return $a['afstand'] <=> $b['afstand'];
+		}
+	);
+
+	$ruiten = '';
+	$vorm   = '';
+
+	foreach ( $volgorde as $i => $ruit ) {
+		$ruiten .= sprintf( '<path class="kbj-logoraam__glas kbj-logoraam__glas--%1$s" d="%2$s" style="--i:%3$d"/>', $ruit['soort'], $ruit['d'], $i );
+		$vorm   .= $ruit['d'];
+	}
+
+	$id = 'kbj-logoraam-' . $nummer;
+
+	return sprintf(
+		'<div class="kbj-logoraam %1$s" aria-hidden="true"><svg viewBox="0 0 229.09 231.16" focusable="false"><defs><clipPath id="%2$s"><path d="%3$s"/></clipPath><linearGradient id="%2$s-glans" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs><g class="kbj-logoraam__ruiten">%4$s</g><g clip-path="url(#%2$s)"><rect class="kbj-logoraam__glans" x="-90" y="-40" width="70" height="320" fill="url(#%2$s-glans)" transform="rotate(20 114.5 115.6)"/></g><path class="kbj-logoraam__lood" d="%5$s"/></svg></div>',
+		esc_attr( $klasse ),
+		esc_attr( $id ),
+		$vorm,
+		$ruiten,
+		$lood
+	);
+}
+
+/**
  * Een tekening als blok.
  *
  * @param array $attrs Blokinstellingen.
@@ -898,6 +978,10 @@ function kbj_render_illustratie( $attrs ) {
 
 	if ( 'raam' === $naam ) {
 		return kbj_raamlijn( isset( $attrs['className'] ) ? (string) $attrs['className'] : '' );
+	}
+
+	if ( 'logoraam' === $naam ) {
+		return kbj_logoraam( isset( $attrs['className'] ) ? (string) $attrs['className'] : '' );
 	}
 
 	return kbj_illustratie( $naam, isset( $attrs['className'] ) ? (string) $attrs['className'] : '' );

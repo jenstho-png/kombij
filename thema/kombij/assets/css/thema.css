@@ -5149,41 +5149,119 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 	color: var(--kbj-wit);
 }
 
-.kbj-hl-open__zweef {
+/* Het glas-in-lood uit het logo, rechts in de opening. */
+.kbj-hl-open__glas {
 	position: absolute;
 	z-index: 2;
 	/* Gelijk aan de rechterrand van de grote foto, ook als die op een breed scherm in het midden staat. */
-	right: calc(max(var(--kbj-zijkant), (100% - var(--kbj-breed)) / 2) - var(--kbj-zijkant) + clamp(1.5rem, 4vw, 3.5rem));
-	bottom: clamp(-2.5rem, -3vw, -1rem);
-	width: min(34%, 380px);
-	height: 72%;
+	right: calc(max(var(--kbj-zijkant), (100% - var(--kbj-breed)) / 2) - var(--kbj-zijkant) + clamp(2.5rem, 6vw, 6rem));
+	top: 50%;
+	width: clamp(200px, 25vw, 380px);
+	translate: 0 -50%;
+	pointer-events: none;
 }
 
-.kbj-hl-zweef {
+.kbj-logoraam {
+	position: relative;
+	aspect-ratio: 229 / 231;
+	animation: kbj-logoraam-zweef 12s ease-in-out 3s infinite;
+}
+
+/* Een zachte gloed erachter, alsof er licht door het raam valt. */
+.kbj-logoraam::before {
+	content: "";
 	position: absolute;
-	box-shadow: 0 40px 70px -30px rgba(10, 36, 68, 0.6);
-	border-radius: clamp(18px, 2.4vw, 30px);
+	inset: -18%;
+	border-radius: 50%;
+	background: radial-gradient(closest-side, rgba(176, 225, 241, 0.42), rgba(176, 225, 241, 0.12) 55%, transparent);
+	opacity: 0;
+	animation: kbj-logoraam-gloed 2.4s ease-out 1.2s forwards;
 }
 
-.kbj-hl-zweef--twee {
-	right: 0;
-	top: 0;
-	width: 62%;
-	transform: rotate(3deg);
-	animation: kbj-zweef 9s ease-in-out infinite;
+.kbj-logoraam svg {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+	filter: drop-shadow(0 12px 30px rgba(10, 36, 68, 0.35));
 }
 
-.kbj-hl-zweef--een {
-	left: 0;
-	bottom: 0;
-	width: 52%;
-	transform: rotate(-4deg);
-	border: 6px solid var(--kbj-wit);
-	border-radius: clamp(22px, 2.6vw, 34px);
-	animation: kbj-zweef 11s ease-in-out -3s infinite;
+.kbj-logoraam__lood {
+	fill: var(--kbj-wit);
+	clip-path: circle(0% at 50% 50%);
+	animation: kbj-logoraam-lood 1.5s cubic-bezier(0.65, 0, 0.35, 1) 0.2s forwards;
 }
 
-@keyframes kbj-zweef {
+.kbj-logoraam__glas {
+	opacity: 0;
+	transform-box: fill-box;
+	transform-origin: center;
+	scale: 0.6;
+	animation:
+		kbj-logoraam-glas 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) calc(0.9s + var(--i) * 45ms) forwards,
+		kbj-logoraam-licht 7s ease-in-out calc(3.5s + var(--i) * -0.31s) infinite;
+}
+
+.kbj-logoraam__glas--zee {
+	fill: #72b6be;
+}
+
+.kbj-logoraam__glas--licht {
+	fill: #b0e1f1;
+}
+
+.kbj-logoraam__glas--blauw {
+	fill: #1e7cb3;
+}
+
+.kbj-logoraam__glans {
+	opacity: 0.9;
+	animation: kbj-logoraam-glans 9s ease-in-out 3s infinite;
+}
+
+@keyframes kbj-logoraam-lood {
+	to {
+		clip-path: circle(75% at 50% 50%);
+	}
+}
+
+@keyframes kbj-logoraam-glas {
+	to {
+		opacity: 0.94;
+		scale: 1;
+	}
+}
+
+@keyframes kbj-logoraam-licht {
+	0%,
+	100% {
+		filter: brightness(1);
+	}
+
+	50% {
+		filter: brightness(1.18);
+	}
+}
+
+@keyframes kbj-logoraam-glans {
+	0% {
+		translate: 0 0;
+	}
+
+	35%,
+	100% {
+		translate: 330px 0;
+	}
+}
+
+@keyframes kbj-logoraam-gloed {
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes kbj-logoraam-zweef {
 	0%,
 	100% {
 		translate: 0 0;
@@ -5191,6 +5269,33 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 
 	50% {
 		translate: 0 -10px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.kbj-logoraam,
+	.kbj-logoraam::before,
+	.kbj-logoraam__lood,
+	.kbj-logoraam__glas,
+	.kbj-logoraam__glans {
+		animation: none !important;
+	}
+
+	.kbj-logoraam::before {
+		opacity: 1;
+	}
+
+	.kbj-logoraam__lood {
+		clip-path: none;
+	}
+
+	.kbj-logoraam__glas {
+		opacity: 0.94;
+		scale: 1;
+	}
+
+	.kbj-logoraam__glans {
+		display: none;
 	}
 }
 
@@ -5439,19 +5544,16 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 	margin-top: 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
-	.kbj-hl-zweef {
-		animation: none !important;
-	}
-}
-
 @media (max-width: 900px) {
 	.kbj-hl-open__tekst {
 		max-width: 80%;
 	}
 
-	.kbj-hl-open__zweef {
-		display: none;
+	.kbj-hl-open__glas {
+		top: clamp(2.25rem, 7vw, 3rem);
+		right: calc(var(--kbj-zijkant) + 1.5rem);
+		width: clamp(110px, 30vw, 170px);
+		translate: none;
 	}
 
 	.kbj-hl-collage__tekst {

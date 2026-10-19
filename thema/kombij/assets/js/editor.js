@@ -62,6 +62,7 @@
 		logeren: 'Logeren',
 		dagbesteding: 'Dagbesteding',
 		raam: 'Raam',
+		logoraam: 'Glas-in-lood uit het logo',
 		toren: 'Toren',
 		gewelf: 'Gewelven',
 		koffie: 'Koffiekopje',

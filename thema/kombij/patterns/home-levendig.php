@@ -29,9 +29,8 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 		'kbj-hl-open__tekst'
 	)
 	. kbj_groep(
-		$foto( 'shoot-koffie-taart.webp', 'Koffie met appeltaart op het terras', 'kbj-hl-zweef kbj-hl-zweef--een', '50% 60%', '1/1' )
-		. $foto( 'shoot-terras-lach.webp', 'Een gast lacht op het terras bij een stuk taart', 'kbj-hl-zweef kbj-hl-zweef--twee', '50% 40%', '3/4' ),
-		'kbj-hl-open__zweef'
+		'<!-- wp:kbj/illustratie {"naam":"logoraam"} /-->',
+		'kbj-hl-open__glas'
 	),
 	array( 'klasse' => 'kbj-hl kbj-hl-open', 'boven' => '30', 'onder' => '30' )
 );

@@ -4,10 +4,10 @@
 	"name": "kbj/illustratie",
 	"title": "Tekening",
 	"category": "kombij",
-	"description": "Een lijntekening uit het gebouw of de omgeving, die zich zet als hij in beeld komt: het raam, de toren, de gewelven, een kopje koffie of de Maas.",
+	"description": "Een lijntekening uit het gebouw of de omgeving, die zich zet als hij in beeld komt: het raam, het glas-in-lood uit het logo, de toren, de gewelven, een kopje koffie of de Maas.",
 	"textdomain": "kombij",
 	"supports": { "html": false, "className": true },
 	"attributes": {
-		"naam": { "type": "string", "default": "toren", "enum": [ "raam", "toren", "gewelf", "koffie", "maas" ] }
+		"naam": { "type": "string", "default": "toren", "enum": [ "raam", "logoraam", "toren", "gewelf", "koffie", "maas" ] }
 	}
 }
