@@ -14,11 +14,11 @@ $foto = function ( $bestand, $alt, $klasse = '', $positie = '50% 50%', $verhoudi
 	return kbj_groep( kbj_foto( $bestand, $alt, array( 'vorm' => 'recht', 'verhouding' => $verhouding, 'positie' => $positie ) ), 'kbj-hl-foto ' . $klasse );
 };
 
-// 1. De opening: een grote foto met een laag kerkblauw, en twee kleine foto's die eroverheen zweven.
+// 1. De opening: een grote foto met een laag kerkblauw, en de kop met het licht van het glas erin.
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	$foto( 'shoot-kerk-glas.webp', 'De gewelven en de hoge ramen van glas-in-lood in het gebouw van KomBij', 'kbj-hl-tint kbj-hl-tint--nacht kbj-hl-open__achter', '50% 50%', '16/9' )
 	. kbj_groep(
-		kbj_kop( 1, 'Een warm thuis, voor als thuis niet meer gaat.', 'kbj-schuif' )
+		kbj_kop( 1, 'Een <span class="kbj-glanstekst">warm thuis,</span> voor als thuis niet meer gaat.', 'kbj-schuif' )
 		. kbj_p( 'Wonen, logeren en dagbesteding met zorg in een monumentaal gebouw in Maasbommel. Klein, huiselijk en dichtbij.', 'kbj-intro' )
 		. kbj_knoppen(
 			array(
@@ -27,10 +27,6 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 			)
 		),
 		'kbj-hl-open__tekst'
-	)
-	. kbj_groep(
-		'<!-- wp:kbj/illustratie {"naam":"logoraam"} /-->',
-		'kbj-hl-open__glas'
 	),
 	array( 'klasse' => 'kbj-hl kbj-hl-open', 'boven' => '30', 'onder' => '30' )
 );

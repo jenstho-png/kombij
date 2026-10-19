@@ -153,13 +153,16 @@ add_action( 'wp_enqueue_scripts', 'kbj_assets' );
  * Het vangnet: komt het script om wat voor reden ook niet binnen, bijvoorbeeld
  * omdat een streng webfilter het tegenhoudt, dan gaat de klasse er na twee en
  * een halve seconde weer af. Dan staat alles gewoon in beeld, zonder beweging.
+ *
+ * Ook onthoudt het of het logo zich deze keer al heeft opgebouwd. Zo gebeurt
+ * dat één keer per bezoek, niet op elke pagina opnieuw.
  */
 function kbj_beweging_klasse() {
 	if ( is_admin() ) {
 		return;
 	}
 
-	echo "<script>(function(d,w){if(!w.matchMedia||w.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in w))return;d.documentElement.classList.add('kbj-js');setTimeout(function(){if(!w.kbjReveal||!w.kbjEffecten)d.documentElement.classList.remove('kbj-js');},2500);})(document,window);</script>\n";
+	echo "<script>(function(d,w){try{if(w.sessionStorage.getItem('kbjLogo'))d.documentElement.classList.add('kbj-logo-gezien');else w.sessionStorage.setItem('kbjLogo','1');}catch(e){}if(!w.matchMedia||w.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in w))return;d.documentElement.classList.add('kbj-js');setTimeout(function(){if(!w.kbjReveal||!w.kbjEffecten)d.documentElement.classList.remove('kbj-js');},2500);})(document,window);</script>\n";
 }
 add_action( 'wp_head', 'kbj_beweging_klasse', 0 );
 

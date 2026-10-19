@@ -132,17 +132,73 @@ function kbj_menu_lijst( $items, $kant ) {
  *
  * Het staande logo uit het merkboek is te hoog voor een balk van 76 pixels.
  * Daarom staat hier een liggende versie, samengesteld uit dezelfde vormen: het
- * glas-in-loodicoon en het woordmerk KomBij, in de originele merkkleuren. Het is
- * een afbeelding en geen ingevoegde SVG, want het logo mag niet meekleuren.
+ * glas-in-loodicoon en het woordmerk KomBij, in de originele merkkleuren.
+ *
+ * Het staat als SVG in de pagina, zodat het glas zich kan opbouwen (zie de CSS
+ * onder .kbj-menu__logo). De kleuren staan vast in de vormen: het logo kleurt
+ * niet mee met de tekst eromheen.
  *
  * @return string
  */
 function kbj_header_logo() {
+	$naam    = kbj_optie( 'bedrijf', (string) get_bloginfo( 'name' ) );
+	$bestand = KBJ_DIR . '/assets/beeld/logo-balk.svg';
+	$svg     = is_readable( $bestand ) ? (string) file_get_contents( $bestand ) : ''; // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+
+	if ( '' === $svg ) {
+		return sprintf(
+			'<a class="kbj-menu__logo" href="%1$s" rel="home">%2$s</a>',
+			esc_url( home_url( '/' ) ),
+			esc_html( $naam )
+		);
+	}
+
+	// Het glas van binnen naar buiten laten vallen: volgorde op afstand tot het midden van het icoon.
+	$afstand = array();
+
+	preg_match_all( '#<path d="([^"]+)" fill="(\#(?:72B6BE|B0E1F1|1E7CB3))"/>#i', $svg, $glas, PREG_SET_ORDER );
+
+	foreach ( $glas as $nummer => $ruit ) {
+		preg_match_all( '#(-?[\d.]+)[ ,](-?[\d.]+)#', $ruit[1], $punten );
+		$x = array_sum( array_map( 'floatval', $punten[1] ) ) / max( 1, count( $punten[1] ) );
+		$y = array_sum( array_map( 'floatval', $punten[2] ) ) / max( 1, count( $punten[2] ) );
+
+		$afstand[ $nummer ] = hypot( $x - 118.4, $y - 115.6 );
+	}
+
+	asort( $afstand );
+	$volgorde = array_flip( array_keys( $afstand ) );
+	$teller   = 0;
+
+	$svg = preg_replace_callback(
+		'#<path d="([^"]+)" fill="(\#(?:72B6BE|B0E1F1|1E7CB3))"/>#i',
+		function ( $m ) use ( $volgorde, &$teller ) {
+			return sprintf( '<path class="kbj-logoraam__glas" style="--i:%1$d" d="%2$s" fill="%3$s"/>', $volgorde[ $teller++ ], $m[1], $m[2] );
+		},
+		$svg
+	);
+
+	// Het lood, en het woordmerk als eigen groep.
+	$svg = preg_replace( '#<path (d="[^"]+" fill="\#0A2444"/>)#i', '<path class="kbj-logoraam__lood" $1', $svg, 1 );
+	$svg = str_replace( '<g transform=', '<g class="kbj-logo__woord" transform=', $svg );
+
+	// Een glans die één keer over het icoon glijdt, binnen de vorm van het icoon.
+	$vorm = '';
+
+	foreach ( $glas as $ruit ) {
+		$vorm .= $ruit[1];
+	}
+
+	$glans = '<defs><clipPath id="kbj-logo-vorm"><path d="' . $vorm . '"/></clipPath><linearGradient id="kbj-logo-glans" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="0.5" stop-color="#fff" stop-opacity="0.8"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient></defs>'
+		. '<g clip-path="url(#kbj-logo-vorm)"><rect class="kbj-logoraam__glans" x="-90" y="-40" width="70" height="320" fill="url(#kbj-logo-glans)" transform="rotate(20 118 116)"/></g>';
+
+	$svg = preg_replace( '#</svg>\s*$#', $glans . '</svg>', trim( $svg ) );
+	$svg = preg_replace( '#<svg\b#', '<svg class="kbj-logo" role="img" aria-label="' . esc_attr( $naam ) . '" focusable="false"', $svg, 1 );
+
 	return sprintf(
-		'<a class="kbj-menu__logo" href="%1$s" rel="home"><img src="%2$s" alt="%3$s" width="618" height="232" decoding="async" fetchpriority="high"></a>',
+		'<a class="kbj-menu__logo" href="%1$s" rel="home">%2$s</a>',
 		esc_url( home_url( '/' ) ),
-		esc_url( KBJ_URI . '/assets/beeld/logo-balk.svg' ),
-		esc_attr( kbj_optie( 'bedrijf', (string) get_bloginfo( 'name' ) ) )
+		$svg
 	);
 }
 

@@ -322,7 +322,7 @@ a.kbj-verder:hover::after {
 	line-height: 0;
 }
 
-.kbj-menu__logo img {
+.kbj-menu__logo .kbj-logo {
 	width: auto;
 	height: 48px;
 }
@@ -493,7 +493,7 @@ a.kbj-verder:hover::after {
 		padding-block: 0.6rem;
 	}
 
-	.kbj-menu__logo img {
+	.kbj-menu__logo .kbj-logo {
 		height: 42px;
 	}
 
@@ -561,7 +561,7 @@ a.kbj-verder:hover::after {
 }
 
 @media (max-width: 380px) {
-	.kbj-menu__logo img {
+	.kbj-menu__logo .kbj-logo {
 		height: 36px;
 	}
 }
@@ -1832,12 +1832,12 @@ kbj-video-facade {
 	box-shadow: 0 10px 30px -18px rgba(10, 36, 68, 0.35);
 }
 
-.kbj-menu__logo img {
+.kbj-menu__logo .kbj-logo {
 	transition: height var(--kbj-duur) var(--kbj-ease);
 }
 
 @media (min-width: 1200px) {
-	.kbj-header.is-gescrold .kbj-menu__logo img {
+	.kbj-header.is-gescrold .kbj-menu__logo .kbj-logo {
 		height: 40px;
 	}
 }
@@ -5097,9 +5097,9 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 	border-radius: clamp(24px, 3vw, 40px);
 }
 
-/* Donker onder de tekst, rechts helder: daar komt het glas-in-lood door. */
+/* Donker onder de tekst, rechts helder: daar komt het glas-in-lood van de foto door. */
 .kbj-hl-open__achter.kbj-hl-tint--nacht .kbj-beeld__kader::after {
-	background: linear-gradient(100deg, rgba(10, 36, 68, 0.9) 0%, rgba(10, 36, 68, 0.66) 36%, rgba(10, 36, 68, 0.3) 66%, rgba(10, 36, 68, 0.38) 100%);
+	background: linear-gradient(100deg, rgba(10, 36, 68, 0.9) 0%, rgba(10, 36, 68, 0.66) 36%, rgba(10, 36, 68, 0.14) 68%, rgba(10, 36, 68, 0) 100%);
 }
 
 .kbj-hl-open__raam {
@@ -5147,17 +5147,6 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 
 .kbj-hl-open .wp-block-button.is-style-outline .wp-block-button__link {
 	color: var(--kbj-wit);
-}
-
-/* Het glas-in-lood uit het logo, rechts in de opening. */
-.kbj-hl-open__glas {
-	position: absolute;
-	z-index: 2;
-	/* Spiegelt de tekst: even ver van de rechterrand als de tekst van de linkerrand, en onderaan gelijk met de knoppen. */
-	right: calc(max(var(--kbj-zijkant), (100% - var(--kbj-breed)) / 2) + clamp(1.5rem, 4.5vw, 4rem));
-	bottom: clamp(2rem, 6vw, 5rem);
-	width: clamp(220px, 60vw - 360px, 460px);
-	pointer-events: none;
 }
 
 .kbj-logoraam {
@@ -5320,6 +5309,34 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 	}
 }
 
+/* De kop van de opening: "warm thuis" in het licht van het glas, dat er langzaam doorheen schuift. */
+.kbj-hl-open h1 .kbj-glanstekst {
+	background: linear-gradient(100deg, #b0e1f1 0%, #72b6be 28%, #ffffff 50%, #72b6be 72%, #b0e1f1 100%);
+	background-size: 220% 100%;
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent;
+	-webkit-text-fill-color: transparent;
+	animation: kbj-glanstekst 9s ease-in-out infinite alternate;
+}
+
+@keyframes kbj-glanstekst {
+	from {
+		background-position: 100% 0;
+	}
+
+	to {
+		background-position: 0% 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.kbj-hl-open h1 .kbj-glanstekst {
+		animation: none;
+		background-position: 50% 0;
+	}
+}
+
 /* 2. Het aanbod: drie foto's met elk een eigen kleur. */
 .kbj-hl-aanbod .kbj-intro {
 	margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem);
@@ -5331,15 +5348,16 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 	gap: clamp(0.9rem, 2vw, 1.5rem);
 }
 
+/* Alle drie even hoog en op één lijn: geen tussenruimte van WordPress boven de tweede en derde. */
+.kbj-hl-kaarten > .kbj-hl-kaart {
+	margin-block: 0 !important;
+}
+
 .kbj-hl-kaart {
 	position: relative;
 	isolation: isolate;
 	overflow: hidden;
 	border-radius: clamp(20px, 2.6vw, 32px);
-}
-
-.kbj-hl-kaart:nth-child(2) {
-	transform: translateY(clamp(1rem, 3vw, 2.5rem));
 }
 
 .kbj-hl-kaart .kbj-beeld__kader {
@@ -5570,15 +5588,6 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 		max-width: 80%;
 	}
 
-	/* Op een smal scherm als embleem in het midden, boven de tekst. */
-	.kbj-hl-open__glas {
-		top: clamp(2rem, 7vw, 3rem);
-		right: auto;
-		bottom: auto;
-		left: 50%;
-		width: clamp(104px, 34vw, 160px);
-		translate: -50% 0;
-	}
 
 	.kbj-hl-collage__tekst {
 		grid-column: 1 / -1;
@@ -5611,13 +5620,6 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 	}
 }
 
-/* Op een smalle telefoon loopt de tekst langer door: iets meer ruimte voor het raam erboven. */
-@media (max-width: 360px) {
-	.kbj-hl-open .kbj-hl-open__achter .kbj-beeld__kader {
-		height: 720px;
-	}
-}
-
 @media (max-width: 781px) {
 	.kbj-hl-open__achter .kbj-beeld__kader {
 		height: 640px;
@@ -5625,7 +5627,7 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 
 	.kbj-hl-open__achter .kbj-beeld__kader::after,
 	.kbj-hl-open__achter.kbj-hl-tint--nacht .kbj-beeld__kader::after {
-		background: linear-gradient(180deg, rgba(10, 36, 68, 0.35) 0%, rgba(10, 36, 68, 0.45) 28%, rgba(10, 36, 68, 0.9) 55%, rgba(10, 36, 68, 0.95) 100%);
+		background: linear-gradient(180deg, rgba(10, 36, 68, 0.05) 0%, rgba(10, 36, 68, 0.2) 25%, rgba(10, 36, 68, 0.88) 55%, rgba(10, 36, 68, 0.95) 100%);
 	}
 
 	.kbj-hl-open__raam {
@@ -5662,10 +5664,6 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 	.kbj-hl-kaart {
 		flex: 0 0 80%;
 		scroll-snap-align: start;
-	}
-
-	.kbj-hl-kaart:nth-child(2) {
-		transform: none;
 	}
 
 	.kbj-hl-band__beeld .kbj-beeld__kader {
@@ -7737,4 +7735,97 @@ body:not(.home) .wp-block-post-content > .kbj-kort-sectie.kbj-sectie {
 	line-height: 1.45;
 	text-align: center;
 	opacity: 0.8;
+}
+
+/*
+ * Het logo in de balk bouwt zich op: eerst het lood, dan valt het glas er
+ * stukje voor stukje in en glijdt er een glans over. Eén keer per bezoek; op
+ * volgende pagina's staat het logo meteen. Met de muis erop licht het glas op.
+ */
+.kbj-menu__logo svg {
+	display: block;
+	width: auto;
+	overflow: visible;
+}
+
+.kbj-menu__logo .kbj-logoraam__lood {
+	fill: #0a2444;
+}
+
+.kbj-menu__logo .kbj-logoraam__glas {
+	transition: filter 0.4s var(--kbj-ease);
+}
+
+.kbj-menu__logo:hover .kbj-logoraam__glas,
+.kbj-menu__logo:focus-visible .kbj-logoraam__glas {
+	filter: brightness(1.12) saturate(1.1);
+}
+
+.kbj-menu__logo .kbj-logoraam__glans {
+	opacity: 0;
+}
+
+html:not(.kbj-logo-gezien) .kbj-menu__logo .kbj-logoraam__lood {
+	clip-path: circle(0% at 19% 50%);
+	animation: kbj-logo-lood 0.9s cubic-bezier(0.65, 0, 0.35, 1) 0.15s forwards;
+}
+
+html:not(.kbj-logo-gezien) .kbj-menu__logo .kbj-logoraam__glas {
+	opacity: 0;
+	transform-box: fill-box;
+	transform-origin: center;
+	scale: 0.5;
+	animation: kbj-logoraam-glas 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) calc(0.55s + var(--i) * 28ms) forwards;
+}
+
+html:not(.kbj-logo-gezien) .kbj-menu__logo .kbj-logo__woord {
+	opacity: 0;
+	translate: -8px 0;
+	animation: kbj-logo-woord 0.7s var(--kbj-ease) 1.2s forwards;
+}
+
+html:not(.kbj-logo-gezien) .kbj-menu__logo .kbj-logoraam__glans {
+	animation: kbj-logo-glans 1.4s ease-in-out 1.9s forwards;
+}
+
+@keyframes kbj-logo-lood {
+	to {
+		clip-path: circle(60% at 19% 50%);
+	}
+}
+
+@keyframes kbj-logo-woord {
+	to {
+		opacity: 1;
+		translate: 0 0;
+	}
+}
+
+@keyframes kbj-logo-glans {
+	0% {
+		opacity: 0.9;
+		translate: 0 0;
+	}
+
+	100% {
+		opacity: 0.9;
+		translate: 330px 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html:not(.kbj-logo-gezien) .kbj-menu__logo .kbj-logoraam__lood,
+	html:not(.kbj-logo-gezien) .kbj-menu__logo .kbj-logoraam__glas,
+	html:not(.kbj-logo-gezien) .kbj-menu__logo .kbj-logo__woord,
+	html:not(.kbj-logo-gezien) .kbj-menu__logo .kbj-logoraam__glans {
+		animation: none;
+		clip-path: none;
+		opacity: 1;
+		scale: 1;
+		translate: none;
+	}
+
+	.kbj-menu__logo .kbj-logoraam__glans {
+		opacity: 0 !important;
+	}
 }
