@@ -7829,3 +7829,361 @@ html:not(.kbj-logo-gezien) .kbj-menu__logo .kbj-logoraam__glans {
 		opacity: 0 !important;
 	}
 }
+
+/* ================================================================
+ * Telefoon: compact, zoals op de computer.
+ *
+ * Minder onder elkaar en minder scrollen: kleinere tussenruimtes, rustiger
+ * tekst, en wat op de computer naast elkaar staat, staat hier ook naast
+ * elkaar of schuift opzij (de dag, de tijdlijn, de routes).
+ * ================================================================ */
+@media (max-width: 781px) {
+	:root {
+		--wp--preset--spacing--60: 2.75rem;
+		--wp--preset--spacing--50: 2.25rem;
+		--wp--preset--spacing--40: 1.5rem;
+	}
+
+	/* Tekst: iets kleiner en strakker, zodat een alinea minder regels hoog wordt. */
+	.entry-content p,
+	.entry-content li,
+	.kbj-vacature p,
+	.kbj-vacature li {
+		line-height: 1.55;
+	}
+
+	.entry-content .kbj-sectie p:not(.kbj-tijd__jaar):not(.kbj-hl-band__zin) {
+		font-size: 1rem;
+	}
+
+	.kbj-sectie h2.wp-block-heading {
+		font-size: clamp(1.55rem, 1.15rem + 2.4vw, 1.9rem);
+		line-height: 1.12;
+	}
+
+	.kbj-sectiekop {
+		margin-bottom: 1.25rem;
+	}
+
+	.kbj-sectie .wp-block-buttons {
+		gap: 0.5rem;
+	}
+
+	/* Home: de opening en het vergoed-vlak iets lager. */
+	.kbj-hl-open__achter .kbj-beeld__kader {
+		height: 560px !important;
+	}
+
+	.kbj-hl-vlak__beeld .kbj-beeld__kader {
+		height: 440px !important;
+	}
+
+	/* Home, het gebouw: de foto's als één rij van drie, de cijfers ernaast. */
+	.kbj-hl-collage {
+		display: grid !important;
+		grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+		gap: 0.5rem !important;
+	}
+
+	.kbj-hl-collage > * {
+		grid-column: auto !important;
+		grid-row: auto !important;
+		margin: 0 !important;
+	}
+
+	.kbj-hl-collage .kbj-hl-collage__tekst,
+	.kbj-hl-collage .kbj-hl-cijfers {
+		grid-column: 1 / -1 !important;
+	}
+
+	.kbj-hl-collage .kbj-hl-collage__tekst {
+		margin-bottom: 0.75rem !important;
+	}
+
+	.kbj-hl-collage .kbj-hl-foto .kbj-beeld__kader {
+		aspect-ratio: 3 / 4 !important;
+		height: auto !important;
+		border-radius: 14px;
+	}
+
+	.kbj-hl-collage .kbj-hl-c4 {
+		display: none !important;
+	}
+
+	.kbj-hl-collage .kbj-hl-cijfers {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.5rem;
+		margin-top: 0.25rem !important;
+	}
+
+	.kbj-hl-collage .kbj-hl-cijfers li {
+		min-height: 0;
+		padding: 0.75rem 0.9rem;
+	}
+
+	/* Home, de familie: foto en tekst naast elkaar. */
+	.kbj-hl-familie {
+		display: grid !important;
+		grid-template-columns: 40% 1fr !important;
+		gap: 1rem !important;
+		align-items: center;
+	}
+
+	.kbj-hl-familie > * {
+		margin: 0 !important;
+	}
+
+	.kbj-hl-familie__beelden {
+		padding: 0 !important;
+	}
+
+	.kbj-hl-familie__beelden .kbj-hl-f1 {
+		width: 100% !important;
+	}
+
+	.kbj-hl-familie__beelden .kbj-beeld__kader {
+		aspect-ratio: 3 / 4 !important;
+	}
+
+	.kbj-hl-familie__beelden svg,
+	.kbj-hl-familie__raam {
+		display: none !important;
+	}
+
+	.kbj-hl-familie h2.wp-block-heading {
+		font-size: 1.4rem;
+	}
+
+	.kbj-hl-familie .wp-block-button__link {
+		padding: 0.7rem 1rem;
+		font-size: 0.9rem;
+	}
+
+	/* Een dag bij KomBij: de vijf momenten naast elkaar, opzij te vegen. */
+	.kbj-dag {
+		display: flex !important;
+		gap: 0.75rem !important;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+		margin-left: calc(var(--kbj-zijkant) * -1) !important;
+		margin-right: calc(var(--kbj-zijkant) * -1) !important;
+		padding: 0 var(--kbj-zijkant) 0.25rem !important;
+		scroll-padding-inline: var(--kbj-zijkant);
+	}
+
+	.kbj-dag::-webkit-scrollbar {
+		display: none;
+	}
+
+	.kbj-dag li {
+		flex: 0 0 58%;
+		padding: 2.25rem 0 0 0 !important;
+		scroll-snap-align: start;
+	}
+
+	.kbj-dag {
+		padding-top: 4px !important;
+	}
+
+	.kbj-dag li::before,
+	.kbj-dag li:last-child::before {
+		top: 0.55rem !important;
+		bottom: auto !important;
+		left: 0 !important;
+		right: -0.75rem !important;
+		width: auto !important;
+		height: 2px !important;
+	}
+
+	.kbj-dag li:last-child::before {
+		right: 0 !important;
+	}
+
+	/* De tijdlijn: de momenten naast elkaar, opzij te vegen. */
+	.kbj-tijdlijn {
+		display: flex !important;
+		gap: 0.75rem;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+		margin-left: calc(var(--kbj-zijkant) * -1) !important;
+		margin-right: calc(var(--kbj-zijkant) * -1) !important;
+		padding: 14px var(--kbj-zijkant) 0.5rem;
+		scroll-padding-inline: var(--kbj-zijkant);
+		max-width: none;
+		align-items: start;
+	}
+
+	.kbj-tijdlijn::-webkit-scrollbar {
+		display: none;
+	}
+
+	.kbj-tijdlijn::before {
+		display: none;
+	}
+
+	.kbj-tijd {
+		flex: 0 0 78%;
+		display: block !important;
+		margin: 0 !important;
+		padding: 2.25rem 0 0 !important;
+		scroll-snap-align: start;
+		border-top: 2px solid rgba(176, 225, 241, 0.35);
+	}
+
+	.kbj-tijd::before {
+		top: -10px !important;
+		left: 0 !important;
+		transform: none !important;
+	}
+
+	.kbj-tijd__jaar {
+		font-size: 1.5rem !important;
+		margin-bottom: 0.25rem !important;
+	}
+
+	.kbj-tijd__inhoud,
+	.kbj-tijd__inhoud > * {
+		max-width: none !important;
+		width: auto !important;
+	}
+
+	.kbj-tijd__inhoud .kbj-beeld {
+		width: 100% !important;
+		margin-top: 0.75rem;
+	}
+
+	.kbj-tijd__inhoud .kbj-beeld__kader {
+		aspect-ratio: 4 / 3 !important;
+	}
+
+	/* Het album: de eerste foto groot, de rest er klein omheen, zonder gaten. */
+	.kbj-album {
+		grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+		grid-auto-flow: dense;
+		gap: 0.4rem !important;
+	}
+
+	.kbj-album > .kbj-beeld {
+		grid-column: auto !important;
+		grid-row: auto !important;
+	}
+
+	.kbj-album > .kbj-beeld .kbj-beeld__kader {
+		aspect-ratio: 1 / 1 !important;
+		height: auto !important;
+		border-radius: 10px;
+	}
+
+	.kbj-album > .kbj-beeld:nth-child(1) {
+		grid-column: span 2 !important;
+		grid-row: span 2 !important;
+	}
+
+	.kbj-album > .kbj-beeld:nth-child(1) .kbj-beeld__kader {
+		aspect-ratio: auto !important;
+		height: 100% !important;
+	}
+
+	.kbj-album:has(> .kbj-beeld:nth-child(5):last-child) > .kbj-beeld:nth-child(5) {
+		grid-column: span 2 !important;
+	}
+
+	.kbj-album:has(> .kbj-beeld:nth-child(5):last-child) > .kbj-beeld:nth-child(5) .kbj-beeld__kader {
+		aspect-ratio: 2.04 / 1 !important;
+		height: auto !important;
+	}
+
+	.kbj-album:has(> .kbj-beeld:nth-child(6):last-child) > .kbj-beeld:nth-child(6) {
+		grid-column: auto !important;
+	}
+
+	.kbj-album:has(> .kbj-beeld:nth-child(6):last-child) > .kbj-beeld:nth-child(6) .kbj-beeld__kader {
+		aspect-ratio: 1 / 1 !important;
+		height: auto !important;
+	}
+
+	/* De routes naar de zoutkamer naast elkaar, opzij te vegen. */
+	.kbj-routes {
+		display: flex !important;
+		gap: 0.6rem !important;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+		margin-left: calc(var(--kbj-zijkant) * -1) !important;
+		margin-right: calc(var(--kbj-zijkant) * -1) !important;
+		padding: 0 var(--kbj-zijkant) !important;
+		scroll-padding-inline: var(--kbj-zijkant);
+	}
+
+	.kbj-routes::-webkit-scrollbar {
+		display: none;
+	}
+
+	.kbj-routes li {
+		flex: 0 0 82%;
+		margin: 0 !important;
+		padding: 1.1rem 1.1rem !important;
+		scroll-snap-align: start;
+	}
+
+	.kbj-routes li span {
+		font-size: 0.9rem;
+		line-height: 1.5;
+	}
+
+	/* WLZ, WMO en particulier: naast elkaar, opzij te vegen. */
+	.kbj-regelingen {
+		display: flex !important;
+		gap: 0.6rem !important;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+		margin-left: calc(var(--kbj-zijkant) * -1) !important;
+		margin-right: calc(var(--kbj-zijkant) * -1) !important;
+		padding: 0 var(--kbj-zijkant) !important;
+		scroll-padding-inline: var(--kbj-zijkant);
+	}
+
+	.kbj-regelingen::-webkit-scrollbar {
+		display: none;
+	}
+
+	.kbj-regelingen li {
+		flex: 0 0 72%;
+		margin: 0 !important;
+		scroll-snap-align: start;
+	}
+
+	/* Vragen: de kop compact, de knop staat al in de balk. */
+	.kbj-vragen__kop .wp-block-buttons {
+		display: none;
+	}
+
+	.kbj-vragen__kop {
+		margin-bottom: 0.75rem !important;
+	}
+
+	.kbj-vraag summary {
+		padding-top: 0.85rem !important;
+		padding-bottom: 0.85rem !important;
+	}
+
+	/* Werken bij op de home: een lage foto boven de kaart. */
+	.kbj-werken .kbj-beeld__kader {
+		aspect-ratio: 16 / 9 !important;
+		max-height: 190px;
+	}
+
+	/* Het blok onderaan: minder hoog. */
+	.kbj-slot {
+		padding-top: 2.25rem !important;
+		padding-bottom: 2.25rem !important;
+	}
+
+	.kbj-slot .kbj-bellen {
+		display: none;
+	}
+}
