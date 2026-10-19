@@ -88,12 +88,11 @@ Meer over waarom het zo in elkaar zit: `ARCHITECTUUR.md` in het startpakket.
 
 ## Speciaal voor KomBij
 
-- **Foto's vervangen**: de tijdelijke foto's staan in `assets/foto`. Zet een
-  nieuwe foto neer met dezelfde bestandsnaam (webp, liefst niet breder dan
-  1800 pixels) en hij staat meteen overal goed. De namen: `altaar`,
-  `slaapkamer`, `slaapkamer-raam`, `zitplek`, `dagbesteding`, `koffie`,
-  `samen-aan-tafel`, `kerk-interieur`, `kerk-bloesem`, `kerk-groen`,
-  `maas-avond`, `vanaf-orgel`, `schip`, `zoutkamer`.
+- **Foto's vervangen**: de foto's staan in `assets/foto`. Ze komen uit de
+  fotoshoot van september 2026 (beginnen met `shoot-`), plus de historische
+  beelden voor de geschiedenis (`historie-`). Zet een nieuwe foto neer met
+  dezelfde bestandsnaam (webp, liefst niet breder dan 2400 pixels) en hij
+  staat meteen overal goed.
 - **Vacatures**: onder *Vacatures* in de zijbalk. Titel is de functie, de
   rest is een formulier. Na de sluitingsdatum verdwijnt een vacature vanzelf.
   Google krijgt ze mee als JobPosting (Google Jobs).

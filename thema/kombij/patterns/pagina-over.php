@@ -31,7 +31,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	array( 'klasse' => 'kbj-reveal' )
 );
 
-echo kbj_beeldband( 'kerk-silhouet.webp', 'Ruim 150 jaar kwam het dorp hier samen. <span class="kbj-hl-licht">Nu is het een thuis.</span>', 'nacht', '60% 55%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo kbj_beeldband( 'shoot-toren-boom.webp', 'Ruim 150 jaar kwam het dorp hier samen. <span class="kbj-hl-licht">Nu is het een thuis.</span>', 'nacht', '50% 40%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_sectiekop( 'Onze waarden', 'Waar wij voor staan', '', false )

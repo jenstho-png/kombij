@@ -7,10 +7,10 @@
  */
 
 $plekken = array(
-	array( 'zitplek.webp', 'Een fauteuil met een kussen en bloesem op tafel', 'Een rustig plekje', 'Voor een kop koffie of een dutje.' ),
-	array( 'slaapkamer.webp', 'Een slaapkamer onder een bakstenen gewelf met een glas-in-loodraam', 'Uw eigen kamer', 'Onder de oude gewelven.' ),
-	array( 'samen-aan-tafel.webp', 'Bewoners aan tafel met een begeleider', 'Samen aan tafel', 'Eten, kletsen, een spelletje.' ),
-	array( 'zoutkamer.webp', 'De zoutkamer met ligstoelen', 'De zoutkamer', 'Even rustig ademhalen.' ),
+	array( 'shoot-kamer-stoel.webp', 'Een fauteuil bij een hoog raam onder het gewelf', 'Een rustig plekje', 'Voor een kop koffie of een dutje.' ),
+	array( 'shoot-kamer-raam.webp', 'Een slaapkamer onder een bakstenen gewelf met een glas-in-loodraam', 'Uw eigen kamer', 'Onder de oude gewelven.' ),
+	array( 'shoot-spel-lachen.webp', 'Twee gasten lachen samen aan tafel', 'Samen aan tafel', 'Eten, kletsen, een spelletje.' ),
+	array( 'shoot-huiskamer.webp', 'De huiskamer met de lange tafel en hoge ramen', 'De huiskamer', 'Samen koffie, samen eten.' ),
 );
 
 $kaarten = '';

@@ -11,7 +11,7 @@
 		"kop": { "type": "string", "default": "", "role": "content" },
 		"glans": { "type": "string", "default": "", "role": "content" },
 		"tekst": { "type": "string", "default": "", "role": "content" },
-		"bestand": { "type": "string", "default": "samen-aan-tafel.webp" },
+		"bestand": { "type": "string", "default": "shoot-spel-lachen.webp" },
 		"alt": { "type": "string", "default": "", "role": "content" },
 		"positie": { "type": "string", "default": "50% 50%" },
 		"align": { "type": "string", "default": "full" }

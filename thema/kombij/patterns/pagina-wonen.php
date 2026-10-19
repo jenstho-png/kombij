@@ -30,7 +30,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	array( 'klasse' => 'kbj-reveal' )
 );
 
-echo kbj_beeldband( 'kerk-bloesem.webp', 'Uw eigen plek in een monument. <span class="kbj-hl-licht">Met zorg die dag en nacht dichtbij is.</span>', 'nacht', '50% 40%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo kbj_beeldband( 'shoot-lamp-vide.webp', 'Uw eigen plek in een monument. <span class="kbj-hl-licht">Met zorg die dag en nacht dichtbij is.</span>', 'nacht', '50% 40%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_sectiekop(
@@ -55,8 +55,8 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	. kbj_groep(
 		kbj_foto( 'shoot-keuken-raam.webp', 'De keuken en eettafel onder een hoog raam', array( 'vorm' => 'recht', 'verhouding' => '3/4', 'positie' => '50% 60%' ) )
 		. kbj_foto( 'shoot-kamer-stoel.webp', 'Een fauteuil bij het raam in een van de kamers', array( 'vorm' => 'recht', 'verhouding' => '3/4' ) )
-		. kbj_foto( 'schip.webp', 'Het schip van de kerk met de nieuwe tussenverdieping', array( 'vorm' => 'recht', 'verhouding' => '3/4' ) )
-		. kbj_foto( 'kerk-interieur.webp', 'De gewelven en ramen van de kerk', array( 'vorm' => 'recht', 'verhouding' => '3/4', 'positie' => '80% 50%' ) ),
+		. kbj_foto( 'shoot-badkamer-hout.webp', 'Een lichte badkamer met marmer en goudkleurige kraan', array( 'vorm' => 'recht', 'verhouding' => '3/4' ) )
+		. kbj_foto( 'shoot-glas-lampen.webp', 'De gewelven en ramen van glas-in-lood, gezien vanaf de tussenverdieping', array( 'vorm' => 'recht', 'verhouding' => '3/4', 'positie' => '80% 50%' ) ),
 		'kbj-strook'
 	),
 	array(

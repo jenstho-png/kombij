@@ -30,7 +30,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	array( 'klasse' => 'kbj-reveal' )
 );
 
-echo kbj_beeldband( 'maas-avond.webp', 'U mag even niets. <span class="kbj-hl-licht">Wij zorgen voor uw naaste.</span>', 'kerk', '50% 50%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo kbj_beeldband( 'shoot-raam-detail.webp', 'U mag even niets. <span class="kbj-hl-licht">Wij zorgen voor uw naaste.</span>', 'kerk', '50% 45%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_sectiekop( 'Waarom logeren', 'Wat logeren u kan opleveren', '', false )

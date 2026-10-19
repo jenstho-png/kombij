@@ -16,7 +16,7 @@ $foto = function ( $bestand, $alt, $klasse = '', $positie = '50% 50%', $verhoudi
 
 // 1. De opening: een grote foto met een laag kerkblauw, en twee kleine foto's die eroverheen zweven.
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	$foto( 'shoot-schip.webp', 'Het lichte schip van KomBij met de tussenverdieping onder de gewelven', 'kbj-hl-tint kbj-hl-tint--nacht kbj-hl-open__achter', '50% 50%', '16/9' )
+	$foto( 'shoot-kerk-glas.webp', 'De gewelven en de hoge ramen van glas-in-lood in het gebouw van KomBij', 'kbj-hl-tint kbj-hl-tint--nacht kbj-hl-open__achter', '50% 50%', '16/9' )
 	. kbj_groep(
 		kbj_kop( 1, 'Een warm thuis, voor als thuis niet meer gaat.', 'kbj-schuif' )
 		. kbj_p( 'Wonen, logeren en dagbesteding met zorg in een monumentaal gebouw in Maasbommel. Klein, huiselijk en dichtbij.', 'kbj-intro' )
@@ -79,9 +79,9 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 			. kbj_knoppen( array( array( 'tekst' => 'Bekijk de geschiedenis', 'url' => '/geschiedenis/' ), array( 'tekst' => 'Ons verhaal', 'url' => '/over-ons/', 'rand' => true ) ) ),
 			'kbj-hl-collage__tekst'
 		)
-		. $foto( 'kerk-luchtfoto.webp', 'Het gebouw van KomBij in Maasbommel, van bovenaf', 'kbj-hl-c1', '50% 35%', '4/3' )
+		. $foto( 'shoot-gewelf-raam.webp', 'De gewelven en een hoog raam van het gebouw', 'kbj-hl-c1', '50% 50%', '4/3' )
 		. $foto( 'shoot-toren.webp', 'De toren van het gebouw, van onderaf gezien', 'kbj-hl-c2 kbj-hl-tint kbj-hl-tint--glas', '50% 40%', '3/4' )
-		. $foto( 'zoutkamer.webp', 'De zoutkamer met ligstoelen', 'kbj-hl-c3', '50% 50%', '1/1' )
+		. $foto( 'shoot-raam-detail.webp', 'Het glas-in-lood bovenin een raam', 'kbj-hl-c3', '50% 50%', '1/1' )
 		. $foto( 'shoot-vide-kamers.webp', 'De tussenverdieping met de deuren van de kamers', 'kbj-hl-c4', '50% 60%', '4/3' )
 		. kbj_lijst(
 			array(
@@ -97,7 +97,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 
 // 5. Vergoed, op een foto met een laag zeegroen.
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-	$foto( 'maas-avond.webp', '', 'kbj-hl-tint kbj-hl-tint--kerk kbj-hl-vlak__beeld', '50% 50%', '21/9' )
+	$foto( 'shoot-gewelf-lamp.webp', '', 'kbj-hl-tint kbj-hl-tint--kerk kbj-hl-vlak__beeld', '50% 50%', '21/9' )
 	. kbj_groep(
 		kbj_kop( 2, 'Goed nieuws: het wordt meestal vergoed.', 'kbj-schuif' )
 		. kbj_p( 'Meestal via de WLZ of de WMO. Wij zoeken samen met u uit welke regeling voor u geldt, en helpen met de aanvraag.' )

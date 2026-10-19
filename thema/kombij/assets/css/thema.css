@@ -5097,6 +5097,11 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 	border-radius: clamp(24px, 3vw, 40px);
 }
 
+/* Donker onder de tekst, rechts helder: daar komt het glas-in-lood door. */
+.kbj-hl-open__achter.kbj-hl-tint--nacht .kbj-beeld__kader::after {
+	background: linear-gradient(100deg, rgba(10, 36, 68, 0.9) 0%, rgba(10, 36, 68, 0.66) 36%, rgba(10, 36, 68, 0.14) 68%, rgba(10, 36, 68, 0) 100%);
+}
+
 .kbj-hl-open__raam {
 	z-index: 1 !important;
 	right: 30%;
@@ -5485,8 +5490,9 @@ body:not(.home) .kbj-paginakop .kbj-raamlijn,
 		height: 640px;
 	}
 
-	.kbj-hl-open__achter .kbj-beeld__kader::after {
-		background: linear-gradient(180deg, rgba(10, 36, 68, 0.35) 0%, rgba(10, 36, 68, 0.9) 60%, rgba(10, 36, 68, 0.95) 100%);
+	.kbj-hl-open__achter .kbj-beeld__kader::after,
+	.kbj-hl-open__achter.kbj-hl-tint--nacht .kbj-beeld__kader::after {
+		background: linear-gradient(180deg, rgba(10, 36, 68, 0.05) 0%, rgba(10, 36, 68, 0.2) 25%, rgba(10, 36, 68, 0.88) 55%, rgba(10, 36, 68, 0.95) 100%);
 	}
 
 	.kbj-hl-open__raam {
