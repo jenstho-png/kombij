@@ -7831,6 +7831,39 @@ html:not(.kbj-logo-gezien) .kbj-menu__logo .kbj-logoraam__glans {
 }
 
 /* ================================================================
+ * Niet alles een blok. De fotobanden, het vergoed-vlak op de home en de
+ * donkerblauwe vlakken lopen van rand tot rand, zonder ronde hoeken. De
+ * opening, de kaarten en het blok onderaan blijven afgerond. Zo wisselt het:
+ * open vlakken en losse blokken.
+ * ================================================================ */
+.kbj-hl-band.alignfull,
+.kbj-hl-vlak.alignfull {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+.kbj-hl-band .kbj-hl-band__beeld,
+.kbj-hl-vlak .kbj-hl-vlak__beeld {
+	width: 100% !important;
+	max-width: none !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+.kbj-hl-band .kbj-hl-band__beeld .kbj-beeld,
+.kbj-hl-band .kbj-hl-band__beeld .kbj-beeld__kader,
+.kbj-hl-vlak .kbj-hl-vlak__beeld .kbj-beeld,
+.kbj-hl-vlak .kbj-hl-vlak__beeld .kbj-beeld__kader {
+	border-radius: 0 !important;
+}
+
+.wp-site-blocks main .wp-block-group.alignfull.kbj-paneel.has-nachtblauw-background-color:not(.kbj-slot) {
+	margin-left: calc(var(--wp--style--root--padding-left, 0px) * -1) !important;
+	margin-right: calc(var(--wp--style--root--padding-right, 0px) * -1) !important;
+	border-radius: 0 !important;
+}
+
+/* ================================================================
  * Telefoon: compact, zoals op de computer.
  *
  * Minder onder elkaar en minder scrollen: kleinere tussenruimtes, rustiger
