@@ -39,9 +39,8 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 		array(
 			'<strong>Persoonlijke aandacht</strong><span>We kennen iedereen bij naam, en weten wat iemand fijn vindt.</span>',
 			'<strong>Huiselijkheid</strong><span>Samen koffie, samen eten, samen aan tafel. Zoals thuis.</span>',
-			'<strong>Zelf bepalen</strong><span>U bepaalt hoe uw dag eruitziet. Wij kijken wat daarbij nodig is.</span>',
+			'<strong>Zelf bepalen</strong><span>U bepaalt hoe uw dag eruitziet. Samen met u en uw familie kijken we wat daarbij nodig is.</span>',
 			'<strong>Rust en veiligheid</strong><span>Een vaste dag, vaste gezichten en 24 uur per dag zorg dichtbij.</span>',
-			'<strong>Samen kijken wat past</strong><span>Met u en uw familie zoeken we wat bij u past. Nu, en als het verandert.</span>',
 		),
 		'kbj-regelingen kbj-regelingen--vrij'
 	),

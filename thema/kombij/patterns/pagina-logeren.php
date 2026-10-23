@@ -40,10 +40,8 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 			'Uw naaste kan langer thuis blijven wonen',
 			'Een vast logeermoment om naar uit te kijken',
 			'Een rustige overgang als verhuizen later nodig is',
-			'Een brug naar een plek in het verpleeghuis',
 			'Hulp tijdens het herstel van uw partner',
 			'Zorgeloos op vakantie, want de zorg is geregeld',
-			'In overleg logeert u samen met uw partner',
 		),
 		'kbj-lijst kbj-lijst--twee'
 	),

@@ -8168,7 +8168,7 @@ html:not(.kbj-logo-gezien) .kbj-menu__logo .kbj-logoraam__glans {
 	}
 
 	/* WLZ, WMO en particulier: naast elkaar, opzij te vegen. */
-	.kbj-regelingen {
+	.kbj-regelingen:not(.kbj-regelingen--vrij) {
 		display: flex !important;
 		gap: 0.6rem !important;
 		overflow-x: auto;
@@ -8180,11 +8180,11 @@ html:not(.kbj-logo-gezien) .kbj-menu__logo .kbj-logoraam__glans {
 		scroll-padding-inline: var(--kbj-zijkant);
 	}
 
-	.kbj-regelingen::-webkit-scrollbar {
+	.kbj-regelingen:not(.kbj-regelingen--vrij)::-webkit-scrollbar {
 		display: none;
 	}
 
-	.kbj-regelingen li {
+	.kbj-regelingen:not(.kbj-regelingen--vrij) li {
 		flex: 0 0 72%;
 		margin: 0 !important;
 		scroll-snap-align: start;

@@ -6,7 +6,7 @@
  * Description: Alle secties onder de kop van de pagina Wonen met zorg.
  */
 
-echo kbj_kort( array( array( '6', 'bewoners, een klein huis' ), array( '24 uur', 'zorg, dag en nacht dichtbij' ), array( '€ 985', 'per maand voor de kamer, vanaf' ), array( 'WLZ', 'met een WLZ-indicatie' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo kbj_kort( array( array( '6', 'bewoners, een klein huis' ), array( '24 uur', 'zorg, dag en nacht dichtbij' ), array( 'Vanaf € 985', 'per maand voor de kamer' ), array( 'WLZ', 'met een WLZ-indicatie' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 $verhaal = kbj_kop( 2, 'Leven zoals u gewend bent' )
 	. kbj_p( 'U wilt zelf bepalen hoe uw dag eruitziet, ook als dat lastiger wordt. Wij kijken met u mee en regelen wat niet meer lukt.' )

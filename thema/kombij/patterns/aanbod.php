@@ -36,7 +36,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	. kbj_groep(
 		$kaart( 'shoot-kamer-raam.webp', 'Een lichte kamer met een hoog glas-in-loodraam', 'Een nieuw thuis', 'Een eigen kamer in een huis voor zes bewoners, met dag en nacht zorg dichtbij.', '/wonen-met-zorg/', 'Wonen met zorg', 'wonen' )
 		. $kaart( 'shoot-lezen.webp', 'Een gast leest een tijdschrift in een fauteuil', 'Even op adem komen', 'Uw naaste logeert een paar nachten bij ons. U rust uit, wij zorgen.', '/logeren-met-zorg/', 'Logeren met zorg', 'logeren' )
-		. $kaart( 'shoot-spel-handen.webp', 'Handen aan tafel tijdens een potje rummikub', 'Nooit meer de hele dag alleen', 'Koffie, bewegen, schilderen en samen lunchen. Maandag tot en met vrijdag.', '/dagbesteding/', 'Dagbesteding', 'dagbesteding' ),
+		. $kaart( 'shoot-spel-handen.webp', 'Handen aan tafel tijdens een potje rummikub', 'Gezellig de dag door', 'Koffie, bewegen, schilderen en samen lunchen. Maandag tot en met vrijdag.', '/dagbesteding/', 'Dagbesteding', 'dagbesteding' ),
 		'kbj-kaarten3'
 	),
 	array(

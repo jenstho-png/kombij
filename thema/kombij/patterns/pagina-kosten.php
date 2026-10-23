@@ -6,7 +6,7 @@
  * Description: Alle secties onder de kop van de pagina Kosten en financiering.
  */
 
-echo kbj_kort( array( array( '3', 'manieren om zorg te betalen' ), array( 'Vaak', 'grotendeels vergoed' ), array( '€ 985', 'per maand voor een kamer, vanaf' ), array( 'Hulp', 'bij uw aanvraag' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo kbj_kort( array( array( '3', 'manieren om zorg te betalen' ), array( 'Vaak', 'grotendeels vergoed' ), array( 'Vanaf € 985', 'per maand voor een kamer' ), array( 'Hulp', 'bij uw aanvraag' ) ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_sectiekop(
@@ -47,7 +47,7 @@ $aanbod = kbj_kolommen(
 	'kbj-drie'
 );
 
-echo kbj_beeldband( 'shoot-terras.webp', 'Zorg bij KomBij wordt meestal vergoed. <span class="kbj-hl-licht">Wij helpen u met de aanvraag.</span>', 'kerk', '50% 60%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo kbj_beeldband( 'shoot-terras.webp', 'U hoeft het niet alleen uit te zoeken. <span class="kbj-hl-licht">Wij helpen u met de aanvraag.</span>', 'kerk', '50% 60%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_sectiekop( 'Per onderdeel', 'Wat geldt voor wonen, logeren en dagbesteding?', '', false )
