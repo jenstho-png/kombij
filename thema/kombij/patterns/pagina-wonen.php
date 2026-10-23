@@ -54,7 +54,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	)
 	. kbj_groep(
 		kbj_foto( 'shoot-keuken-raam.webp', 'De keuken en eettafel onder een hoog raam', array( 'vorm' => 'recht', 'verhouding' => '3/4', 'positie' => '50% 60%' ) )
-		. kbj_foto( 'shoot-kamer-stoel.webp', 'Een fauteuil bij het raam in een van de kamers', array( 'vorm' => 'recht', 'verhouding' => '3/4' ) )
+		. kbj_foto( 'lynn-kamer-wastafel2.webp', 'Een fauteuil bij het raam in een van de kamers', array( 'vorm' => 'recht', 'verhouding' => '3/4' ) )
 		. kbj_foto( 'shoot-badkamer-hout.webp', 'Een lichte badkamer met marmer en goudkleurige kraan', array( 'vorm' => 'recht', 'verhouding' => '3/4' ) )
 		. kbj_foto( 'shoot-glas-lampen.webp', 'De gewelven en ramen van glas-in-lood, gezien vanaf de tussenverdieping', array( 'vorm' => 'recht', 'verhouding' => '3/4', 'positie' => '80% 50%' ) ),
 		'kbj-strook'

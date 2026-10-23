@@ -45,7 +45,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 		. $moment( '2023', 'Op zoek naar een nieuwe bestemming', 'Het gebouw is niet langer in gebruik als kerk. Het komt leeg te staan, en de vraag is wat ermee gebeurt.' )
 		. $moment( 'De verbouwing', 'Een familie ziet er een thuis in', 'Corrie Roelofsen, haar dochter Chantal en schoonzoon Edwin beginnen KomBij. Edwin neemt de verbouwing op zich. In de zijbeuken komt een tussenverdieping met lichte kamers, en er komen twee zoutkamers met wanden van zoutsteen.' )
 		. $moment( '29 nov. 2025', 'De officiële opening', 'Wethouder Marieke van den Boom knipt het lint door. KomBij is officieel geopend.' )
-		. $moment( '2026', 'Weer vol leven', 'Vanaf januari wonen, logeren en komen er mensen voor de dagbesteding. Het dorp komt er weer samen.', 'shoot-spel-lachen.webp', 'Gasten lachen samen tijdens een spelletje aan tafel' ),
+		. $moment( '2026', 'Weer vol leven', 'Vanaf januari wonen, logeren en komen er mensen voor de dagbesteding. Het dorp komt er weer samen.', 'lynn-tafel-groep.webp', 'Gasten en Corrie lachen samen aan de lange tafel' ),
 		'kbj-tijdlijn'
 	),
 	array(
@@ -54,7 +54,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	)
 );
 
-echo kbj_beeldband( 'shoot-schip.webp', 'Waar het dorp altijd samenkwam, <span class="kbj-hl-licht">is het nu weer thuis.</span>', 'kerk', '50% 60%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo kbj_beeldband( 'lynn-huiskamer.webp', 'Waar het dorp altijd samenkwam, <span class="kbj-hl-licht">is het nu weer thuis.</span>', 'kerk', '50% 60%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 $vroeger = array(
 	array( 'historie-tekening-1750.webp', 'Potloodtekening van het middeleeuwse gebouw, rond 1750' ),
@@ -65,12 +65,12 @@ $vroeger = array(
 );
 
 $nu = array(
-	array( 'shoot-kerk-glas.webp', 'De gewelven met de hoge ramen van glas-in-lood' ),
-	array( 'shoot-toren-boom.webp', 'De toren van het gebouw met een boom ervoor' ),
+	array( 'shoot-schip-vide.webp', 'Het schip met de tussenverdieping, na de verbouwing' ),
+	array( 'lynn-huiskamer-ramen.webp', 'De huiskamer onder de hoge ramen' ),
 	array( 'shoot-terras-deur.webp', 'Het terras naast het gebouw, bij de rode deur' ),
-	array( 'shoot-schip.webp', 'Het schip met de gewelven en de tussenverdieping, na de verbouwing' ),
-	array( 'shoot-vide-kamers.webp', 'De tussenverdieping met de deuren van de kamers' ),
-	array( 'shoot-kamer-raam.webp', 'Een kamer onder een bakstenen gewelf, met een hoog raam' ),
+	array( 'lynn-tafel-ramen.webp', 'Samen koffie aan de grote tafel' ),
+	array( 'lynn-tafel-lachen.webp', 'Corrie maakt een grapje aan tafel' ),
+	array( 'lynn-kamer-wastafel.webp', 'Een kamer met een eigen wastafel' ),
 );
 
 $album = function ( $fotos ) {

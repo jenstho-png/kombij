@@ -754,8 +754,8 @@ function kbj_render_vacaturestrook( $attrs ) {
 			esc_url( home_url( '/werken-bij/' ) ),
 			kbj_render_beeld(
 				array(
-					'bestand'    => 'shoot-terras-medewerker.webp',
-					'alt'        => 'Een medewerker lacht aan tafel op het terras',
+					'bestand'    => 'lynn-koffie-medewerker.webp',
+					'alt'        => 'Een medewerker drinkt thee met de gasten aan tafel',
 					'vorm'       => 'recht',
 					'verhouding' => '4/3',
 				)

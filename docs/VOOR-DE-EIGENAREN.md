@@ -71,10 +71,7 @@ de beste sites in de zorg laten hun cijfer zien.
       onder het logo in de voet nog "Zoutkamer".
 - [ ] **Het café.** Openingstijden en wat er te krijgen is.
 - [ ] **Toestemming** van de bewoners, gasten en medewerkers die herkenbaar
-      op de foto's van de fotoshoot staan.
-- [ ] **Foto van de zoutkamer.** In de fotoshoot zit geen foto van de
-      zoutkamer. Nu staat er een raam van glas-in-lood. Een goede foto van
-      de zoutkamer met de relaxstoelen maakt die pagina sterker.
+      op de foto's van de fotoshoots (van Jens en van Lynn Brands) staan.
 - [ ] **Tikfout** in de pdf van de nachtdienstvacature: `werkbij@` moet
       `werkenbij@` zijn.
 - [ ] **Keurmerken of lidmaatschappen**, bijvoorbeeld van een

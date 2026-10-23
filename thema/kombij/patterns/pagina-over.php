@@ -21,7 +21,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 				'breedte' => '55%',
 			),
 			array(
-				'inhoud'  => kbj_foto( 'shoot-terras-medewerker.webp', 'Een medewerker lacht aan tafel op het terras', array( 'positie' => '50% 40%' ) ),
+				'inhoud'  => kbj_foto( 'lynn-koffiebar.webp', 'Edwin reikt een kopje koffie aan over de bar', array( 'positie' => '50% 35%' ) ),
 				'breedte' => '45%',
 			),
 		),
@@ -31,7 +31,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	array( 'klasse' => 'kbj-reveal' )
 );
 
-echo kbj_beeldband( 'shoot-toren-boom.webp', 'Ruim 150 jaar kwam het dorp hier samen. <span class="kbj-hl-licht">Nu is het een thuis.</span>', 'nacht', '50% 40%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo kbj_beeldband( 'lynn-tafel-schip.webp', 'Ruim 150 jaar kwam het dorp hier samen. <span class="kbj-hl-licht">Nu is het een thuis.</span>', 'nacht', '50% 40%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_sectiekop( 'Onze waarden', 'Waar wij voor staan', '', false )
@@ -60,7 +60,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 		array(
 			array(
 				'inhoud'  => kbj_groep(
-					kbj_foto( 'shoot-vide-overzicht.webp', 'De lichte gewelven en de tussenverdieping van het gebouw', array( 'vorm' => 'recht', 'verhouding' => '4/3', 'positie' => '50% 50%' ) )
+					kbj_foto( 'lynn-schip-vide.webp', 'De gewelven en de tussenverdieping, met de huiskamer beneden', array( 'vorm' => 'recht', 'verhouding' => '4/3', 'positie' => '50% 50%' ) )
 					. kbj_foto( 'shoot-gewelf-schip.webp', 'Het schip met de gewelven, gezien vanaf de tussenverdieping', array( 'verhouding' => '3/4' ) ),
 					'kbj-huis__beelden'
 				),
@@ -83,6 +83,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_sectiekop( 'De mensen', 'De familie achter KomBij', 'Samen met een team van verzorgenden, verpleegkundigen, activiteitenbegeleiders en vrijwilligers.', false )
+	. kbj_foto( 'lynn-familie.webp', 'Edwin, Chantal en Corrie, de familie achter KomBij', array( 'vorm' => 'recht', 'verhouding' => '21/9', 'positie' => '50% 35%' ) )
 	. kbj_lijst(
 		array(
 			'<strong>Corrie Roelofsen</strong><em>Oprichter</em><span>Voor vragen, aanmeldingen en rondleidingen spreekt u meestal eerst Corrie.</span>',

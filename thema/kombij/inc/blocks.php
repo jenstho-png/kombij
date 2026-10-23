@@ -1079,9 +1079,9 @@ function kbj_render_afsluiter() {
  */
 function kbj_render_nietgevonden() {
 	$tegels = array(
-		array( 'wonen-met-zorg', __( 'Wonen', 'kombij' ), __( 'Een vast thuis met zorg', 'kombij' ), 'shoot-kamer-raam.webp' ),
-		array( 'logeren-met-zorg', __( 'Logeren', 'kombij' ), __( 'Een paar dagen of weken', 'kombij' ), 'shoot-lezen.webp' ),
-		array( 'dagbesteding', __( 'Dagbesteding', 'kombij' ), __( 'Samen de dag door', 'kombij' ), 'shoot-spel-handen.webp' ),
+		array( 'wonen-met-zorg', __( 'Wonen', 'kombij' ), __( 'Een vast thuis met zorg', 'kombij' ), 'shoot-zorg-bed.webp' ),
+		array( 'logeren-met-zorg', __( 'Logeren', 'kombij' ), __( 'Een paar dagen of weken', 'kombij' ), 'shoot-vrouw-sap.webp' ),
+		array( 'dagbesteding', __( 'Dagbesteding', 'kombij' ), __( 'Samen de dag door', 'kombij' ), 'shoot-spel-rek.webp' ),
 		array( 'contact', __( 'Contact', 'kombij' ), __( 'Stel gerust uw vraag', 'kombij' ), 'shoot-koffie-taart.webp' ),
 	);
 	$html   = '';
@@ -1118,7 +1118,7 @@ function kbj_render_nietgevonden() {
 		esc_html( kbj_tekst( 'knop_bellen' ) ),
 		kbj_render_beeld(
 			array(
-				'bestand' => 'shoot-terras.webp',
+				'bestand' => 'shoot-terras-lach.webp',
 				'alt'     => '',
 				'vorm'    => 'recht',
 				'positie' => '50% 60%',

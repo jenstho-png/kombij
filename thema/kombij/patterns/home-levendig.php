@@ -50,9 +50,9 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	kbj_kop( 2, 'Wat zoekt u voor uw naaste?', 'kbj-schuif', true )
 	. kbj_p( 'Drie manieren om bij ons te zijn. Hetzelfde huis, hetzelfde vertrouwde team.', 'kbj-intro', true )
 	. kbj_groep(
-		$kaart( 'kerk', 'shoot-kamer-raam.webp', 'Een kamer met een hoog glas-in-loodraam en een bed', 'Een nieuw thuis', 'Een eigen kamer, met dag en nacht zorg dichtbij.', '/wonen-met-zorg/', 'Wonen met zorg', 'wonen' )
-		. $kaart( 'zee', 'shoot-lezen.webp', 'Een gast leest een tijdschrift in een fauteuil', 'Even op adem komen', 'Uw naaste logeert een paar nachten bij ons. U rust uit, wij zorgen.', '/logeren-met-zorg/', 'Logeren met zorg', 'logeren' )
-		. $kaart( 'helder', 'shoot-spel-handen.webp', 'Handen aan tafel tijdens een potje rummikub', 'Gezellig de dag door', 'Koffie, bewegen en samen lunchen. Maandag tot en met vrijdag.', '/dagbesteding/', 'Dagbesteding', 'dagbesteding' ),
+		$kaart( 'kerk', 'lynn-kamer-bed.webp', 'Een lichte kamer met een bed en een hoog raam met glas-in-lood', 'Een nieuw thuis', 'Een eigen kamer, met dag en nacht zorg dichtbij.', '/wonen-met-zorg/', 'Wonen met zorg', 'wonen' )
+		. $kaart( 'zee', 'lynn-kamer-fauteuil.webp', 'Een rustige logeerkamer met een fauteuil bij het raam', 'Even op adem komen', 'Uw naaste logeert een paar nachten bij ons. U rust uit, wij zorgen.', '/logeren-met-zorg/', 'Logeren met zorg', 'logeren' )
+		. $kaart( 'helder', 'lynn-sjoelen.webp', 'Gasten lachen samen bij het sjoelen', 'Gezellig de dag door', 'Koffie, bewegen en samen lunchen. Maandag tot en met vrijdag.', '/dagbesteding/', 'Dagbesteding', 'dagbesteding' ),
 		'kbj-hl-kaarten'
 	),
 	array( 'klasse' => 'kbj-hl kbj-hl-aanbod', 'anker' => 'aanbod', 'boven' => '60', 'onder' => '50' )
@@ -106,7 +106,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_groep(
 		kbj_groep(
-			$foto( 'shoot-terras-medewerker.webp', 'Een medewerker lacht aan tafel op het terras', 'kbj-hl-f1', '50% 40%', '4/5' )
+			$foto( 'lynn-familie-vide.webp', 'Corrie, Chantal en Edwin op de tussenverdieping, onder de gewelven', 'kbj-hl-f1', '50% 60%', '4/5' )
 			. '<!-- wp:kbj/raamlijn {"className":"kbj-hl-familie__raam"} /-->',
 			'kbj-hl-familie__beelden'
 		)

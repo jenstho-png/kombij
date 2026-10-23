@@ -65,7 +65,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 				'breedte' => '55%',
 			),
 			array(
-				'inhoud'  => kbj_foto( 'shoot-kamer-stoel.webp', 'Een fauteuil met een kussen, om na een sessie rustig bij te komen', array( 'verhouding' => '4/5', 'positie' => '40% 50%' ) ),
+				'inhoud'  => kbj_foto( 'lynn-zoutkamer-lach.webp', 'Een fauteuil met een kussen, om na een sessie rustig bij te komen', array( 'verhouding' => '4/5', 'positie' => '40% 50%' ) ),
 				'breedte' => '45%',
 			),
 		),
@@ -75,7 +75,7 @@ echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscape
 	array( 'klasse' => 'kbj-reveal' )
 );
 
-echo kbj_beeldband( 'shoot-raam-zwart.webp', 'Even rustig ademhalen. <span class="kbj-hl-licht">Midden in Maasbommel.</span>', 'nacht', '50% 50%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+echo kbj_beeldband( 'lynn-zoutsteen.webp', 'Even rustig ademhalen. <span class="kbj-hl-licht">Midden in Maasbommel.</span>', 'nacht', '50% 50%' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
 echo kbj_sectie( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	kbj_sectiekop( 'Tarieven', 'Wat kost een sessie?', 'Open van maandag tot en met vrijdag, van 9:00 tot 18:00. Een sessie voor kinderen reserveert u telefonisch. De actuele tarieven staan altijd op ' . esc_html( $site_naam ) . '.', false )
